@@ -313,7 +313,7 @@ const HeroSection = () => {
           {/* Buttons */}
           <div className="flex flex-wrap gap-10 mt-6 justify-center">
             <a
-              href="/CSR"
+              href="/csr"
               className="bg-emerald-600 text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl transition-transform transform hover:-translate-y-1 inline-block text-center"
             >
               Partner With Us (CSR)

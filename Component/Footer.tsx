@@ -87,8 +87,8 @@ export default function Footer() {
                 {[
                   { label: "Home",       href: "/" },
                   { label: "Awards",     href: "/awards" },
-                  { label: "About Us",   href: "/about" },
-                  { label: "Gallery",    href: "/gallery" },
+                  { label: "About Us",   href: "/about-us" },
+                  { label: "Gallery",    href: "/photos" },
                   { label: "Contact Us", href: "/contact" },
                 ].map(({ label, href }) => (
                   <li key={label}>
@@ -135,9 +135,9 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3 mb-8">
                 {[
-                  { label: "Make a Donation",  href: "/donation"           },
+                  { label: "Make a Donation",  href: "/donate"           },
                   { label: "Volunteer",        href: "/team"               },
-                  { label: "Corporate / CSR",  href: "/partner-with-us-csr"},
+                  { label: "Corporate / CSR",  href: "/csr"},
                 ].map(({ label, href }) => (
                   <li key={label}>
                     <Link
