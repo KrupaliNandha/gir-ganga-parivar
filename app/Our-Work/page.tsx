@@ -1,32 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
+import { useState, useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
-import type * as LeafletType from "leaflet";
-import SmoothScroll from "../../Component/SmothScrolling";
+import { MapPin, Waves, Search, Eye, EyeOff, Award, Quote } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Droplets, Sprout, Users, Building2, ArrowUpRight } from "lucide-react";
+import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 
-// Dynamic Import (Next.js SSR Fix)
-const MapContainer = dynamic(
-  () => import("react-leaflet").then((m) => m.MapContainer),
-  { ssr: false },
-);
-
-const TileLayer = dynamic(
-  () => import("react-leaflet").then((m) => m.TileLayer),
-  { ssr: false },
-);
-
-const Marker = dynamic(() => import("react-leaflet").then((m) => m.Marker), {
-  ssr: false,
-});
-
-const Popup = dynamic(() => import("react-leaflet").then((m) => m.Popup), {
-  ssr: false,
-});
-
-// DATA
-
+// ── Data ─────────────────────────────────────────────────────────────────────
 const LAKES = [
   { id: 1, lat: 22.32, lng: 70.68, name: "Aji Dam Lake" },
   { id: 2, lat: 22.48, lng: 70.62, name: "Nyari Lake" },
@@ -48,150 +30,771 @@ const CHECK_DAMS = [
   { id: 4, lat: 22.32, lng: 70.77, name: "Check Dam 4" },
 ];
 
-export default function GirgangaMap() {
-  const [L, setL] = useState<typeof LeafletType | null>(null);
-  const [showCategories, setShowCategories] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
+// ── Stats data ────────────────────────────────────────────────────────────────
+const STATS = [
+  {
+    icon: Droplets,
+    number: 8354,
+    suffix: "+",
+    label: "Water structures developed",
+    accent: "#10b981",
+    bg: "from-emerald-50 to-white",
+    border: "border-emerald-100",
+    iconBg: "bg-emerald-100",
+    iconColor: "text-emerald-600",
+  },
+  {
+    icon: Sprout,
+    number: 429000,
+    suffix: "+",
+    label: "Acres farmland rejuvenated",
+    accent: "#059669",
+    bg: "from-teal-50 to-white",
+    border: "border-teal-100",
+    iconBg: "bg-teal-100",
+    iconColor: "text-teal-600",
+  },
+  {
+    icon: Users,
+    number: 151000,
+    suffix: "+",
+    label: "Farmers benefited",
+    accent: "#047857",
+    bg: "from-green-50 to-white",
+    border: "border-green-100",
+    iconBg: "bg-green-100",
+    iconColor: "text-green-700",
+  },
+  {
+    icon: Building2,
+    number: 580,
+    suffix: "+",
+    label: "Gram Panchayats engaged",
+    accent: "#065f46",
+    bg: "from-emerald-50 to-white",
+    border: "border-emerald-200",
+    iconBg: "bg-emerald-200",
+    iconColor: "text-emerald-800",
+  },
+];
 
+// ── Typed marker extension ────────────────────────────────────────────────────
+type GGPTMarker = LeafletMarker & {
+  _ggptType: "lake" | "dam";
+  _ggptName: string;
+};
+
+// ── Count-up hook ─────────────────────────────────────────────────────────────
+function useCountUp(target: number, duration = 2000, start = false) {
+  const [count, setCount] = useState(0);
   useEffect(() => {
-    import("leaflet").then((leaflet) => {
-      const leafletLib = leaflet.default;
+    if (!start) return;
+    let startTime: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target, duration, start]);
+  return count;
+}
 
-      // Default Marker Fix
+// ── StatCard ──────────────────────────────────────────────────────────────────
+function StatCard({
+  stat,
+  index,
+  inView,
+}: {
+  stat: (typeof STATS)[0];
+  index: number;
+  inView: boolean;
+}) {
+  const count = useCountUp(stat.number, 2000, inView);
+  const formatted =
+    stat.number >= 1000 ? count.toLocaleString("en-IN") : count.toString();
 
-      const DefaultIcon = leafletLib.icon({
-        iconRetinaUrl:
-          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  return (
+    <div
+      className={`relative group bg-gradient-to-br ${stat.bg} border-2 ${stat.border} rounded-tr-4xl rounded-bl-4xl p-8 overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1`}
+      style={{
+        transitionDelay: `${index * 80}ms`,
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(32px)",
+      }}
+    >
+      <div
+        className="absolute top-0 right-0 w-24 h-24 rounded-bl-full opacity-5"
+        style={{ backgroundColor: stat.accent }}
+      />
+      <div className="flex items-start mb-6">
+        <div
+          className={`w-12 h-12 ${stat.iconBg} rounded-xl flex items-center justify-center`}
+        >
+          <stat.icon size={22} className={stat.iconColor} strokeWidth={1.8} />
+        </div>
+      </div>
+      <div className="mb-2">
+        <span
+          className="text-4xl font-black tracking-tight"
+          style={{ color: stat.accent }}
+        >
+          {formatted}
+          <span className="text-3xl">{stat.suffix}</span>
+        </span>
+      </div>
+      <p className="text-gray-500 text-sm font-medium leading-snug">
+        {stat.label}
+      </p>
+      <div className="mt-6 h-0.5 bg-gray-100 rounded-full overflow-hidden">
+        <div
+          className="h-full rounded-full transition-all duration-[2s] ease-out"
+          style={{
+            width: inView ? "100%" : "0%",
+            backgroundColor: stat.accent,
+            transitionDelay: `${index * 80 + 300}ms`,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
-        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+// ── Main Page ─────────────────────────────────────────────────────────────────
+export default function OurWorkPage() {
+  const [showLakes, setShowLakes] = useState(true);
+  const [showDams, setShowDams] = useState(true);
+  const [showPanel, setShowPanel] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
 
-        shadowUrl:
-          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<LeafletMap | null>(null);
+  const markersRef = useRef<GGPTMarker[]>([]);
 
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-      });
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-      leafletLib.Marker.prototype.options.icon = DefaultIcon;
-
-      setL(leafletLib);
-    });
+  // Step 1: mark client ready
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
-  if (!L) {
-    return (
-      <div className="h-[560px] flex items-center justify-center">
-        Loading Map...
-      </div>
-    );
-  }
+  // Step 2: init Leaflet after mount
+  useEffect(() => {
+    if (!mounted || !mapContainerRef.current) return;
+    if (mapInstanceRef.current) return;
 
-  // Custom Flag Icon
+    (async () => {
+      const L = (await import("leaflet")).default;
 
-  const createFlagIcon = (color = "red") => {
-    return L.divIcon({
-      html: `
+      delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)
+        ._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl:
+          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        shadowUrl:
+          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+      });
 
-<svg width="24" height="32">
+      const makeFlagIcon = (color: string) =>
+        L.divIcon({
+          html: `<svg width="24" height="32" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="0" width="3" height="32" fill="${color}" rx="1.5"/>
+            <polygon points="5,2 22,9 5,16" fill="${color}"/>
+          </svg>`,
+          iconSize: [24, 32],
+          iconAnchor: [2, 32],
+          className: "",
+        });
 
-<rect x="2" y="0" width="3" height="32" fill="${color}" />
+      const LAKE_ICON = makeFlagIcon("#059669");
+      const DAM_ICON = makeFlagIcon("#047857");
 
-<polygon points="5,1 20,7 5,13" fill="${color}" />
+      const map = L.map(mapContainerRef.current!).setView([22.35, 70.65], 10);
+      mapInstanceRef.current = map;
 
-</svg>
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
 
-`,
+      LAKES.forEach((lake) => {
+        const marker = L.marker([lake.lat, lake.lng], { icon: LAKE_ICON })
+          .bindPopup(
+            `
+          <div style="font-family:sans-serif;min-width:140px">
+            <p style="font-weight:700;color:#059669;font-size:13px;margin:0 0 4px">${lake.name}</p>
+            <p style="color:#9ca3af;font-size:11px;margin:0">Lake · GGPT Structure</p>
+          </div>
+        `,
+          )
+          .addTo(map);
+        const ggptMarker = marker as GGPTMarker;
+        ggptMarker._ggptType = "lake";
+        ggptMarker._ggptName = lake.name.toLowerCase();
+        markersRef.current.push(ggptMarker);
+      });
 
-      iconSize: [24, 32],
-      iconAnchor: [2, 32],
+      CHECK_DAMS.forEach((dam) => {
+        const marker = L.marker([dam.lat, dam.lng], { icon: DAM_ICON })
+          .bindPopup(
+            `
+          <div style="font-family:sans-serif;min-width:140px">
+            <p style="font-weight:700;color:#059669;font-size:13px;margin:0 0 4px">${dam.name}</p>
+            <p style="color:#9ca3af;font-size:11px;margin:0">Check Dam · GGPT Structure</p>
+          </div>
+        `,
+          )
+          .addTo(map);
+        const ggptMarker = marker as GGPTMarker;
+        ggptMarker._ggptType = "dam";
+        ggptMarker._ggptName = dam.name.toLowerCase();
+        markersRef.current.push(ggptMarker);
+      });
+    })();
+
+    return () => {
+      mapInstanceRef.current?.remove();
+      mapInstanceRef.current = null;
+      markersRef.current = [];
+    };
+  }, [mounted]);
+
+  // Step 3: toggle markers on filter change
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    markersRef.current.forEach((marker) => {
+      const matchesSearch =
+        !searchQuery || marker._ggptName.includes(searchQuery.toLowerCase());
+      const shouldShow =
+        matchesSearch &&
+        ((marker._ggptType === "lake" && showLakes) ||
+          (marker._ggptType === "dam" && showDams));
+
+      if (shouldShow) {
+        if (!map.hasLayer(marker)) marker.addTo(map);
+      } else {
+        if (map.hasLayer(marker)) marker.remove();
+      }
     });
-  };
+  }, [showLakes, showDams, searchQuery]);
 
-  const lakeIcon = createFlagIcon("#8B1A1A");
-  const damIcon = createFlagIcon("#6B0F0F");
+  // IntersectionObserver for stats
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.2 },
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const filteredCount = mounted
+    ? markersRef.current.filter(
+        (m) =>
+          m._ggptName.includes(searchQuery.toLowerCase()) &&
+          ((m._ggptType === "lake" && showLakes) ||
+            (m._ggptType === "dam" && showDams)),
+      ).length
+    : 0;
+
+  // Section - 3 logic........
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const o = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setInView(true);
+      },
+      { threshold: 0.1 },
+    );
+    if (ref.current) o.observe(ref.current);
+    return () => o.disconnect();
+  }, []);
+
+  const STORIES = [
+    {
+      quote:
+        "Before Girganga Parivar Trust came to our village, we struggled every year with water shortage. Now, with the check dam and recharge borewells, our wells have water throughout the year. My crop yield has doubled.",
+      name: "Ramesh Patel",
+      role: "Farmer",
+      location: "Morbi District",
+      initials: "RP",
+      num: "01",
+    },
+    {
+      quote:
+        "The PPP model is revolutionary. Instead of waiting for government projects that might take years, we partnered with Girganga Parivar Trust and completed our water conservation project in just six months.",
+      name: "Meera Ben",
+      role: "Village Sarpanch",
+      location: "Rajkot",
+      initials: "MB",
+      num: "02",
+    },
+    {
+      quote:
+        "I have worked in this region for over 20 years, and I have never seen such systematic and effective water conservation work. The impact on agricultural productivity has been remarkable.",
+      name: "Dr. Suresh Kumar",
+      role: "Agricultural Extension Officer",
+      location: "Gujarat",
+      initials: "SK",
+      num: "03",
+    },
+  ];
 
   return (
     <>
-      <SmoothScroll>
-        <div className="flex flex-col items-center bg-white min-h-screen p-4">
-          <h1 className="text-5xl font-bold text-emerald-600 mb-4">
-            Structures Created by Girganga Parivar Trust
+      {/* Section - 1 */}
+      <section className="container mx-auto">
+        <div className="text-center mb-10">
+          <p className="inline-flex items-center gap-2 border border-emerald-600/25 bg-emerald-600/5 text-emerald-600 text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+            Map
+          </p>
+          <h1 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
+            Structures Created by{" "}
+            <span className="text-emerald-500 italic">
+              Girganga Parivar Trust
+            </span>
           </h1>
+        </div>
 
-          <div className="relative w-full max-w-6xl h-[560px] border rounded shadow">
-            <MapContainer
-              center={[22.35, 70.65]}
-              zoom={10}
-              className="h-full w-full"
-            >
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {/* Toolbar */}
+        <div className="flex flex-wrap items-center gap-3 mb-5">
+          <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-2.5 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors flex-1 max-w-xs">
+            <Search size={15} className="text-emerald-600 shrink-0" />
+            <input
+              type="text"
+              placeholder="Search structures..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="flex-1 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
+            />
+          </div>
 
-              {/* Lakes */}
+          <button
+            onClick={() => setShowLakes((v) => !v)}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
+              showLakes
+                ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+                : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
+            }`}
+          >
+            <Waves size={15} strokeWidth={1.5} />
+            Lakes ({LAKES.length})
+          </button>
 
-              {LAKES.map((lake) => (
-                <Marker
-                  key={lake.id}
-                  position={[lake.lat, lake.lng]}
-                  icon={lakeIcon}
-                >
-                  <Popup>{lake.name}</Popup>
-                </Marker>
-              ))}
+          <button
+            onClick={() => setShowDams((v) => !v)}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
+              showDams
+                ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+                : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
+            }`}
+          >
+            <MapPin size={15} strokeWidth={1.5} />
+            Check Dams ({CHECK_DAMS.length})
+          </button>
 
-              {/* Checkdams */}
+          <button
+            onClick={() => setShowPanel((v) => !v)}
+            className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-emerald-600 text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
+          >
+            {showPanel ? <EyeOff size={15} /> : <Eye size={15} />}
+            {showPanel ? "Hide Panel" : "Show Panel"}
+          </button>
+        </div>
 
-              {CHECK_DAMS.map((dam) => (
-                <Marker
-                  key={dam.id}
-                  position={[dam.lat, dam.lng]}
-                  icon={damIcon}
-                >
-                  <Popup>{dam.name}</Popup>
-                </Marker>
-              ))}
-            </MapContainer>
-
-            {/* Search */}
-
-            <div className="absolute top-3 left-12 z-[1000]">
-              <input
-                type="text"
-                placeholder="Type here..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-3 py-2 border rounded bg-white"
-              />
+        {/* Map wrapper */}
+        <div className="relative rounded-3xl overflow-hidden border-2 border-emerald-600/15 shadow-2xl shadow-emerald-600/10">
+          {!mounted && (
+            <div className="h-[580px] flex flex-col items-center justify-center bg-emerald-50">
+              <div className="w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mb-3" />
+              <p className="text-emerald-600 text-sm font-medium">
+                Loading map…
+              </p>
             </div>
+          )}
+          <div
+            ref={mapContainerRef}
+            className="h-[580px] w-full"
+            style={{ display: mounted ? "block" : "none" }}
+          />
 
-            {/* Categories */}
-
-            {showCategories && (
-              <div className="absolute top-3 right-3 z-[1000] bg-white shadow rounded w-56">
-                <div className="bg-sky-400 text-white text-center py-2">
+          {/* Floating side panel */}
+          {mounted && showPanel && (
+            <div className="absolute top-4 right-4 z-[1000] w-56 bg-white rounded-2xl shadow-xl border border-emerald-600/15 overflow-hidden">
+              <div className="bg-emerald-600 px-4 py-3 flex items-center gap-2">
+                <MapPin size={14} className="text-white" strokeWidth={1.5} />
+                <p className="text-white text-xs font-bold uppercase tracking-widest">
                   Categories
-                </div>
-
-                <div className="flex justify-between px-4 py-3 border-b">
-                  Lake (11) 🚩
-                </div>
-
-                <div className="flex justify-between px-4 py-3">
-                  Check Dam (4) 🚩
-                </div>
-
-                <div className="text-center py-2">
-                  <button
-                    onClick={() => setShowCategories(false)}
-                    className="bg-black text-white px-4 py-1 rounded"
-                  >
-                    Hide
-                  </button>
-                </div>
+                </p>
               </div>
-            )}
+              <div
+                onClick={() => setShowLakes((v) => !v)}
+                className={`flex items-center justify-between px-4 py-3.5 border-b border-emerald-600/10 cursor-pointer transition-colors ${showLakes ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Waves
+                    size={14}
+                    className="text-emerald-600"
+                    strokeWidth={1.5}
+                  />
+                  <span className="text-sm font-semibold text-gray-700">
+                    Lake ({LAKES.length})
+                  </span>
+                </div>
+                <span
+                  className={`w-3 h-3 rounded-full border-2 transition-colors ${showLakes ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
+                />
+              </div>
+              <div
+                onClick={() => setShowDams((v) => !v)}
+                className={`flex items-center justify-between px-4 py-3.5 cursor-pointer transition-colors ${showDams ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <MapPin
+                    size={14}
+                    className="text-emerald-600"
+                    strokeWidth={1.5}
+                  />
+                  <span className="text-sm font-semibold text-gray-700">
+                    Check Dam ({CHECK_DAMS.length})
+                  </span>
+                </div>
+                <span
+                  className={`w-3 h-3 rounded-full border-2 transition-colors ${showDams ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
+                />
+              </div>
+              <div className="px-4 py-2.5 bg-emerald-600/5 border-t border-emerald-600/10">
+                <p className="text-[10px] text-emerald-600/60 font-bold uppercase tracking-widest text-center">
+                  GGPT · Gujarat, India
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Search badge */}
+          {mounted && searchQuery && (
+            <div className="absolute bottom-4 left-4 z-[1000] bg-white border border-emerald-600/20 rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2">
+              <Search size={13} className="text-emerald-600" />
+              <span className="text-xs text-gray-600 font-medium">
+                {filteredCount} result(s) for{" "}
+                <span className="text-emerald-600 font-bold">
+                  {searchQuery}
+                </span>
+              </span>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/*Section - 2 */}
+      <section
+        ref={sectionRef}
+        className="container relative bg-white overflow-hidden"
+      >
+        <div></div>
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(#059669 1px, transparent 1px), linear-gradient(90deg, #059669 1px, transparent 1px)`,
+            backgroundSize: "48px 48px",
+          }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto">
+          <div
+            className="text-center mb-16 transition-all duration-700"
+            style={{
+              opacity: inView ? 1 : 0,
+              transform: inView ? "translateY(0)" : "translateY(20px)",
+            }}
+          >
+            <div className="inline-flex items-center gap-2 mb-5">
+              <span className="w-6 h-px bg-emerald-400" />
+              <span className="text-emerald-600 text-xs font-bold tracking-[0.2em] uppercase">
+                Proven Impact
+              </span>
+              <span className="w-6 h-px bg-emerald-400" />
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 leading-tight mb-4">
+              Measurable transformation
+              <span className="block text-emerald-600 italic font-black">
+                across Gujarat, India
+              </span>
+            </h2>
+            <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
+              Every number tells a story of communities revived, land restored,
+              and futures secured through water conservation.
+            </p>
+            <div className="mt-8">
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:-translate-y-0.5"
+              >
+                Explore Our Impact
+                <ArrowUpRight size={15} />
+              </a>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {STATS.map((stat, i) => (
+              <StatCard
+                key={stat.label}
+                stat={stat}
+                index={i}
+                inView={inView}
+              />
+            ))}
           </div>
         </div>
-      </SmoothScroll>
+      </section>
+
+      {/* Section - 3 */}
+      <section ref={ref} className="container bg-white py-24 px-4 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          {/* ── Header ── */}
+          <div
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 transition-all duration-700"
+            style={{
+              opacity: inView ? 1 : 0,
+              transform: inView ? "translateY(0)" : "translateY(24px)",
+            }}
+          >
+            <div>
+              <p className="text-emerald-600 text-xs font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2">
+                <span className="w-8 h-px bg-emerald-400 inline-block" />
+                What People Say
+              </p>
+              <h2 className="text-5xl font-black text-gray-900 leading-none">
+                Success
+                <br />
+                <span className="text-emerald-600 italic">Stories</span>
+              </h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs leading-relaxed md:text-right">
+              Real voices from communities transformed by Girganga Parivar Trust
+              water conservation work.
+            </p>
+          </div>
+
+          {/* ── Main layout: left selector + right big card ── */}
+          <div className="grid md:grid-cols-[280px_1fr] gap-6 items-stretch">
+            {/* Left — number list selector */}
+            <div className="flex flex-col gap-3">
+              {STORIES.map((s, i) => (
+                <button
+                  key={s.name}
+                  onClick={() => setActive(i)}
+                  className={`group text-left rounded-2xl px-6 py-5 border-2 transition-all duration-300 ${
+                    active === i
+                      ? "bg-emerald-600 border-emerald-600 shadow-lg shadow-emerald-600/25"
+                      : "bg-white border-gray-100 hover:border-emerald-600/30 hover:bg-emerald-50/50"
+                  }`}
+                  style={{
+                    opacity: inView ? 1 : 0,
+                    transform: inView ? "translateX(0)" : "translateX(-24px)",
+                    transitionDelay: `${i * 100 + 100}ms`,
+                    transition:
+                      "opacity 600ms, transform 600ms, background 300ms, border 300ms, box-shadow 300ms",
+                  }}
+                >
+                  <div
+                    className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-white/30" : "text-emerald-600/20"}`}
+                  >
+                    {s.num}
+                  </div>
+                  <p
+                    className={`font-black text-sm transition-colors ${active === i ? "text-white" : "text-gray-800"}`}
+                  >
+                    {s.name}
+                  </p>
+                  <p
+                    className={`text-xs mt-0.5 transition-colors ${active === i ? "text-white/60" : "text-gray-400"}`}
+                  >
+                    {s.role}
+                  </p>
+                </button>
+              ))}
+            </div>
+
+            {/* Right — big active card */}
+            <div
+              className="relative bg-emerald-900 rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateX(0)" : "translateX(24px)",
+                transitionDelay: "300ms",
+                transitionDuration: "700ms",
+                transition: "opacity 700ms, transform 700ms",
+              }}
+            >
+              {/* Background decorations */}
+              <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-700/30 rounded-full blur-2xl pointer-events-none" />
+              {/* Big number watermark */}
+              <span className="absolute right-8 top-6 text-[8rem] font-black text-white/[0.04] leading-none select-none pointer-events-none">
+                {STORIES[active].num}
+              </span>
+
+              {/* Large open-quote */}
+              <div className="relative z-10">
+                <div className="text-emerald-400 text-7xl font-black leading-none mb-4 font-serif">
+                  &ldquo;
+                </div>
+                <p className="text-white text-xl font-medium leading-relaxed max-w-xl transition-all duration-300">
+                  {STORIES[active].quote}
+                </p>
+              </div>
+
+              {/* Author row */}
+              <div className="relative z-10 flex flex-wrap items-center gap-4 mt-10 pt-8 border-t border-white/10">
+                <div className="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-black text-sm shrink-0">
+                  {STORIES[active].initials}
+                </div>
+                <div>
+                  <p className="text-white font-black">
+                    {STORIES[active].name}
+                  </p>
+                  <p className="text-emerald-400 text-xs mt-0.5">
+                    {STORIES[active].role} · {STORIES[active].location}
+                  </p>
+                </div>
+                {/* Dot indicators */}
+                <div className="ml-auto flex gap-2">
+                  {STORIES.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActive(i)}
+                      className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2 bg-emerald-400" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Bottom featured strip ── */}
+          <div
+            className="mt-6 bg-emerald-50 border border-emerald-100 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
+            style={{
+              opacity: inView ? 1 : 0,
+              transform: inView ? "translateY(0)" : "translateY(20px)",
+              transitionDelay: "600ms",
+            }}
+          >
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0 text-lg font-black">
+                &ldquo;
+              </div>
+              <p className="text-gray-700 text-sm italic leading-relaxed max-w-xl">
+                After deepening the check dam, water stayed till summer. Our
+                borewells revived, and migration stopped.
+                <span className="block text-emerald-700 font-black not-italic mt-1">
+                  — Chhaganbhai Patel, Rajkot
+                </span>
+              </p>
+            </div>
+            <a
+              href="/donate"
+              className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-7 py-3 rounded-xl shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
+            >
+              Contribute Now →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Section - 4 */}
+      <section className="container overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="inline-flex items-center gap-3 text-emerald-600 text-xs font-bold tracking-[0.18em] uppercase mb-4">
+              <span className="w-8 h-px bg-emerald-600/40" />
+              Explore More
+              <span className="w-8 h-px bg-emerald-600/40" />
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
+              Know More{" "}
+              <span className="text-emerald-500 italic">About Us</span>
+            </h2>
+            <p className="text-gray-500 text-base font-light mt-4 max-w-lg mx-auto leading-relaxed">
+              Repairing, deepening, and raising check dams. A Rainwater
+              harvesting initiative.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                img: "/image/support-structure-1.jpg",
+                label: "Awards",
+                Icon: Award,
+                href: "/awards",
+                desc: "Honoring the recognitions and milestones achieved through impactful rural water conservation work.",
+              },
+              {
+                img: "/image/our-work-2.jpg",
+                label: "Mission",
+                Icon: MapPin,
+                href: "/about-us",
+                desc: "Our commitment to sustainable water conservation, rural development, and community empowerment.",
+              },
+              {
+                img: "/image/our-work-3.jpg",
+                label: "Check Dams",
+                Icon: Waves,
+                href: "/check-dam-creat",
+                desc: "Building and mapping check dams to recharge groundwater across drought-prone regions of Gujarat.",
+              },
+            ].map(({ img, label, Icon, href, desc }) => (
+              <Link key={label} href={href}>
+                <div className="group relative bg-white border-2 border-emerald-600/15 rounded-3xl overflow-hidden hover:border-emerald-600 hover:shadow-xl hover:shadow-emerald-600/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-emerald-100">
+                    <Image
+                      src={img}
+                      alt={label}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-600/50 via-transparent to-transparent" />
+                    <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
+                      <Icon
+                        className="text-emerald-600"
+                        size={18}
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-emerald-700 font-black text-lg mb-2">
+                      {label}
+                    </h3>
+                    <p className="text-gray-500 text-sm font-light leading-relaxed">
+                      {desc}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-emerald-600 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                      Explore →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }
