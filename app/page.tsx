@@ -325,14 +325,14 @@ const HeroSection = () => {
           <div className="flex flex-wrap gap-10 mt-10 justify-center">
             <a
               href="/csr"
-              className="bg-emerald-600 text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl transition-transform transform hover:-translate-y-1 inline-block text-center"
+              className="bg-emerald-600 text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl select-none transition-transform transform hover:-translate-y-1 inline-block text-center"
             >
               Partner With Us (CSR)
             </a>
 
             <a
               href="/support-a-structure"
-              className="bg-emerald-600 text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl transition-transform transform hover:-translate-y-1 inline-block text-center"
+              className="bg-emerald-600 text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl select-none  ransition-transform transform hover:-translate-y-1 inline-block text-center"
             >
               Support A Structure
             </a>
