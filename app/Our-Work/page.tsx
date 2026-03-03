@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
-import { MapPin, Waves, Search, Eye, EyeOff, Award, Quote } from "lucide-react";
+import { MapPin, Waves, Search, Eye, EyeOff, Award } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Droplets, Sprout, Users, Building2, ArrowUpRight } from "lucide-react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
+import SmoothScroll from "../../Component/SmothScrolling";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const LAKES = [
@@ -117,48 +118,56 @@ function StatCard({
     stat.number >= 1000 ? count.toLocaleString("en-IN") : count.toString();
 
   return (
-    <div
-      className={`relative group bg-gradient-to-br ${stat.bg} border-2 ${stat.border} rounded-tr-4xl rounded-bl-4xl p-8 overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1`}
-      style={{
-        transitionDelay: `${index * 80}ms`,
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(32px)",
-      }}
-    >
-      <div
-        className="absolute top-0 right-0 w-24 h-24 rounded-bl-full opacity-5"
-        style={{ backgroundColor: stat.accent }}
-      />
-      <div className="flex items-start mb-6">
+    <>
+      <SmoothScroll>
         <div
-          className={`w-12 h-12 ${stat.iconBg} rounded-xl flex items-center justify-center`}
-        >
-          <stat.icon size={22} className={stat.iconColor} strokeWidth={1.8} />
-        </div>
-      </div>
-      <div className="mb-2">
-        <span
-          className="text-4xl font-black tracking-tight"
-          style={{ color: stat.accent }}
-        >
-          {formatted}
-          <span className="text-3xl">{stat.suffix}</span>
-        </span>
-      </div>
-      <p className="text-gray-500 text-sm font-medium leading-snug">
-        {stat.label}
-      </p>
-      <div className="mt-6 h-0.5 bg-gray-100 rounded-full overflow-hidden">
-        <div
-          className="h-full rounded-full transition-all duration-[2s] ease-out"
+          className={`relative group bg-gradient-to-br ${stat.bg} border-2 ${stat.border} rounded-tr-4xl rounded-bl-4xl p-8 overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1`}
           style={{
-            width: inView ? "100%" : "0%",
-            backgroundColor: stat.accent,
-            transitionDelay: `${index * 80 + 300}ms`,
+            transitionDelay: `${index * 80}ms`,
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0)" : "translateY(32px)",
           }}
-        />
-      </div>
-    </div>
+        >
+          <div
+            className="absolute top-0 right-0 w-24 h-24 rounded-bl-full opacity-5"
+            style={{ backgroundColor: stat.accent }}
+          />
+          <div className="flex items-start mb-6">
+            <div
+              className={`w-12 h-12 ${stat.iconBg} rounded-xl flex items-center justify-center`}
+            >
+              <stat.icon
+                size={22}
+                className={stat.iconColor}
+                strokeWidth={1.8}
+              />
+            </div>
+          </div>
+          <div className="mb-2">
+            <span
+              className="text-4xl font-black tracking-tight"
+              style={{ color: stat.accent }}
+            >
+              {formatted}
+              <span className="text-3xl">{stat.suffix}</span>
+            </span>
+          </div>
+          <p className="text-gray-500 text-sm font-medium leading-snug">
+            {stat.label}
+          </p>
+          <div className="mt-6 h-0.5 bg-gray-100 rounded-full overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-[2s] ease-out"
+              style={{
+                width: inView ? "100%" : "0%",
+                backgroundColor: stat.accent,
+                transitionDelay: `${index * 80 + 300}ms`,
+              }}
+            />
+          </div>
+        </div>
+      </SmoothScroll>
+    </>
   );
 }
 
@@ -353,448 +362,453 @@ export default function OurWorkPage() {
 
   return (
     <>
-      {/* Section - 1 */}
-      <section className="container mx-auto">
-        <div className="text-center mb-10">
-          <p className="inline-flex items-center gap-2 border border-emerald-600/25 bg-emerald-600/5 text-emerald-600 text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-            Map
-          </p>
-          <h1 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
-            Structures Created by{" "}
-            <span className="text-emerald-500 italic">
-              Girganga Parivar Trust
-            </span>
-          </h1>
-        </div>
-
-        {/* Toolbar */}
-        <div className="flex flex-wrap items-center gap-3 mb-5">
-          <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-2.5 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors flex-1 max-w-xs">
-            <Search size={15} className="text-emerald-600 shrink-0" />
-            <input
-              type="text"
-              placeholder="Search structures..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
-            />
+      <SmoothScroll>
+        {/* Section - 1 */}
+        <section className="container mx-auto">
+          <div className="text-center mb-10">
+            <p className="inline-flex items-center gap-2 border border-emerald-600/25 bg-emerald-600/5 text-emerald-600 text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+              Map
+            </p>
+            <h1 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
+              Structures Created by{" "}
+              <span className="text-emerald-500 italic">
+                Girganga Parivar Trust
+              </span>
+            </h1>
           </div>
 
-          <button
-            onClick={() => setShowLakes((v) => !v)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
-              showLakes
-                ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
-                : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
-            }`}
-          >
-            <Waves size={15} strokeWidth={1.5} />
-            Lakes ({LAKES.length})
-          </button>
+          {/* Toolbar */}
+          <div className="flex flex-wrap items-center gap-3 mb-5">
+            <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-2.5 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors flex-1 max-w-xs">
+              <Search size={15} className="text-emerald-600 shrink-0" />
+              <input
+                type="text"
+                placeholder="Search structures..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
+              />
+            </div>
 
-          <button
-            onClick={() => setShowDams((v) => !v)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
-              showDams
-                ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
-                : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
-            }`}
-          >
-            <MapPin size={15} strokeWidth={1.5} />
-            Check Dams ({CHECK_DAMS.length})
-          </button>
+            <button
+              onClick={() => setShowLakes((v) => !v)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
+                showLakes
+                  ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+                  : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
+              }`}
+            >
+              <Waves size={15} strokeWidth={1.5} />
+              Lakes ({LAKES.length})
+            </button>
 
-          <button
-            onClick={() => setShowPanel((v) => !v)}
-            className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-emerald-600 text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
-          >
-            {showPanel ? <EyeOff size={15} /> : <Eye size={15} />}
-            {showPanel ? "Hide Panel" : "Show Panel"}
-          </button>
-        </div>
+            <button
+              onClick={() => setShowDams((v) => !v)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
+                showDams
+                  ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+                  : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
+              }`}
+            >
+              <MapPin size={15} strokeWidth={1.5} />
+              Check Dams ({CHECK_DAMS.length})
+            </button>
 
-        {/* Map wrapper */}
-        <div className="relative rounded-3xl overflow-hidden border-2 border-emerald-600/15 shadow-2xl shadow-emerald-600/10">
-          {!mounted && (
-            <div className="h-[580px] flex flex-col items-center justify-center bg-emerald-50">
-              <div className="w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mb-3" />
-              <p className="text-emerald-600 text-sm font-medium">
-                Loading map…
+            <button
+              onClick={() => setShowPanel((v) => !v)}
+              className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-emerald-600 text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
+            >
+              {showPanel ? <EyeOff size={15} /> : <Eye size={15} />}
+              {showPanel ? "Hide Panel" : "Show Panel"}
+            </button>
+          </div>
+
+          {/* Map wrapper */}
+          <div className="relative rounded-3xl overflow-hidden border-2 border-emerald-600/15 shadow-2xl shadow-emerald-600/10">
+            {!mounted && (
+              <div className="h-[580px] flex flex-col items-center justify-center bg-emerald-50">
+                <div className="w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mb-3" />
+                <p className="text-emerald-600 text-sm font-medium">
+                  Loading map…
+                </p>
+              </div>
+            )}
+            <div
+              ref={mapContainerRef}
+              className="h-[580px] w-full"
+              style={{ display: mounted ? "block" : "none" }}
+            />
+
+            {/* Floating side panel */}
+            {mounted && showPanel && (
+              <div className="absolute top-4 right-4 z-[1000] w-56 bg-white rounded-2xl shadow-xl border border-emerald-600/15 overflow-hidden">
+                <div className="bg-emerald-600 px-4 py-3 flex items-center gap-2">
+                  <MapPin size={14} className="text-white" strokeWidth={1.5} />
+                  <p className="text-white text-xs font-bold uppercase tracking-widest">
+                    Categories
+                  </p>
+                </div>
+                <div
+                  onClick={() => setShowLakes((v) => !v)}
+                  className={`flex items-center justify-between px-4 py-3.5 border-b border-emerald-600/10 cursor-pointer transition-colors ${showLakes ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Waves
+                      size={14}
+                      className="text-emerald-600"
+                      strokeWidth={1.5}
+                    />
+                    <span className="text-sm font-semibold text-gray-700">
+                      Lake ({LAKES.length})
+                    </span>
+                  </div>
+                  <span
+                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showLakes ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
+                  />
+                </div>
+                <div
+                  onClick={() => setShowDams((v) => !v)}
+                  className={`flex items-center justify-between px-4 py-3.5 cursor-pointer transition-colors ${showDams ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <MapPin
+                      size={14}
+                      className="text-emerald-600"
+                      strokeWidth={1.5}
+                    />
+                    <span className="text-sm font-semibold text-gray-700">
+                      Check Dam ({CHECK_DAMS.length})
+                    </span>
+                  </div>
+                  <span
+                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showDams ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
+                  />
+                </div>
+                <div className="px-4 py-2.5 bg-emerald-600/5 border-t border-emerald-600/10">
+                  <p className="text-[10px] text-emerald-600/60 font-bold uppercase tracking-widest text-center">
+                    GGPT · Gujarat, India
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Search badge */}
+            {mounted && searchQuery && (
+              <div className="absolute bottom-4 left-4 z-[1000] bg-white border border-emerald-600/20 rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2">
+                <Search size={13} className="text-emerald-600" />
+                <span className="text-xs text-gray-600 font-medium">
+                  {filteredCount} result(s) for{" "}
+                  <span className="text-emerald-600 font-bold">
+                    {searchQuery}
+                  </span>
+                </span>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/*Section - 2 */}
+        <section
+          ref={sectionRef}
+          className="container relative bg-white overflow-hidden"
+        >
+          <div></div>
+          <div
+            className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `linear-gradient(#059669 1px, transparent 1px), linear-gradient(90deg, #059669 1px, transparent 1px)`,
+              backgroundSize: "48px 48px",
+            }}
+          />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative max-w-6xl mx-auto">
+            <div
+              className="text-center mb-16 transition-all duration-700"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(20px)",
+              }}
+            >
+              <div className="inline-flex items-center gap-2 mb-5">
+                <span className="w-6 h-px bg-emerald-400" />
+                <span className="text-emerald-600 text-xs font-bold tracking-[0.2em] uppercase">
+                  Proven Impact
+                </span>
+                <span className="w-6 h-px bg-emerald-400" />
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-black text-gray-900 leading-tight mb-4">
+                Measurable transformation
+                <span className="block text-emerald-600 italic font-black">
+                  across Gujarat, India
+                </span>
+              </h2>
+              <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
+                Every number tells a story of communities revived, land
+                restored, and futures secured through water conservation.
+              </p>
+              <div className="mt-8">
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:-translate-y-0.5"
+                >
+                  Explore Our Impact
+                  <ArrowUpRight size={15} />
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {STATS.map((stat, i) => (
+                <StatCard
+                  key={stat.label}
+                  stat={stat}
+                  index={i}
+                  inView={inView}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section - 3 */}
+        <section
+          ref={ref}
+          className="container bg-white py-24 px-4 overflow-hidden"
+        >
+          <div className="max-w-6xl mx-auto">
+            {/* ── Header ── */}
+            <div
+              className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 transition-all duration-700"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(24px)",
+              }}
+            >
+              <div>
+                <p className="text-emerald-600 text-xs font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2">
+                  <span className="w-8 h-px bg-emerald-400 inline-block" />
+                  What People Say
+                </p>
+                <h2 className="text-5xl font-black text-gray-900 leading-none">
+                  Success
+                  <br />
+                  <span className="text-emerald-600 italic">Stories</span>
+                </h2>
+              </div>
+              <p className="text-gray-400 text-sm max-w-xs leading-relaxed md:text-right">
+                Real voices from communities transformed by Girganga Parivar
+                Trust water conservation work.
               </p>
             </div>
-          )}
-          <div
-            ref={mapContainerRef}
-            className="h-[580px] w-full"
-            style={{ display: mounted ? "block" : "none" }}
-          />
 
-          {/* Floating side panel */}
-          {mounted && showPanel && (
-            <div className="absolute top-4 right-4 z-[1000] w-56 bg-white rounded-2xl shadow-xl border border-emerald-600/15 overflow-hidden">
-              <div className="bg-emerald-600 px-4 py-3 flex items-center gap-2">
-                <MapPin size={14} className="text-white" strokeWidth={1.5} />
-                <p className="text-white text-xs font-bold uppercase tracking-widest">
-                  Categories
-                </p>
+            {/* ── Main layout: left selector + right big card ── */}
+            <div className="grid md:grid-cols-[280px_1fr] gap-6 items-stretch">
+              {/* Left — number list selector */}
+              <div className="flex flex-col gap-3">
+                {STORIES.map((s, i) => (
+                  <button
+                    key={s.name}
+                    onClick={() => setActive(i)}
+                    className={`group text-left rounded-2xl px-6 py-5 border-2 transition-all duration-300 ${
+                      active === i
+                        ? "bg-emerald-600 border-emerald-600 shadow-lg shadow-emerald-600/25"
+                        : "bg-white border-gray-100 hover:border-emerald-600/30 hover:bg-emerald-50/50"
+                    }`}
+                    style={{
+                      opacity: inView ? 1 : 0,
+                      transform: inView ? "translateX(0)" : "translateX(-24px)",
+                      transitionDelay: `${i * 100 + 100}ms`,
+                      transition:
+                        "opacity 600ms, transform 600ms, background 300ms, border 300ms, box-shadow 300ms",
+                    }}
+                  >
+                    <div
+                      className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-white/30" : "text-emerald-600/20"}`}
+                    >
+                      {s.num}
+                    </div>
+                    <p
+                      className={`font-black text-sm transition-colors ${active === i ? "text-white" : "text-gray-800"}`}
+                    >
+                      {s.name}
+                    </p>
+                    <p
+                      className={`text-xs mt-0.5 transition-colors ${active === i ? "text-white/60" : "text-gray-400"}`}
+                    >
+                      {s.role}
+                    </p>
+                  </button>
+                ))}
               </div>
-              <div
-                onClick={() => setShowLakes((v) => !v)}
-                className={`flex items-center justify-between px-4 py-3.5 border-b border-emerald-600/10 cursor-pointer transition-colors ${showLakes ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <Waves
-                    size={14}
-                    className="text-emerald-600"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-sm font-semibold text-gray-700">
-                    Lake ({LAKES.length})
-                  </span>
-                </div>
-                <span
-                  className={`w-3 h-3 rounded-full border-2 transition-colors ${showLakes ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
-                />
-              </div>
-              <div
-                onClick={() => setShowDams((v) => !v)}
-                className={`flex items-center justify-between px-4 py-3.5 cursor-pointer transition-colors ${showDams ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <MapPin
-                    size={14}
-                    className="text-emerald-600"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-sm font-semibold text-gray-700">
-                    Check Dam ({CHECK_DAMS.length})
-                  </span>
-                </div>
-                <span
-                  className={`w-3 h-3 rounded-full border-2 transition-colors ${showDams ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
-                />
-              </div>
-              <div className="px-4 py-2.5 bg-emerald-600/5 border-t border-emerald-600/10">
-                <p className="text-[10px] text-emerald-600/60 font-bold uppercase tracking-widest text-center">
-                  GGPT · Gujarat, India
-                </p>
-              </div>
-            </div>
-          )}
 
-          {/* Search badge */}
-          {mounted && searchQuery && (
-            <div className="absolute bottom-4 left-4 z-[1000] bg-white border border-emerald-600/20 rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2">
-              <Search size={13} className="text-emerald-600" />
-              <span className="text-xs text-gray-600 font-medium">
-                {filteredCount} result(s) for{" "}
-                <span className="text-emerald-600 font-bold">
-                  {searchQuery}
+              {/* Right — big active card */}
+              <div
+                className="relative bg-emerald-900 rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
+                style={{
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? "translateX(0)" : "translateX(24px)",
+                  transitionDelay: "300ms",
+                  transitionDuration: "700ms",
+                  transition: "opacity 700ms, transform 700ms",
+                }}
+              >
+                {/* Background decorations */}
+                <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-700/30 rounded-full blur-2xl pointer-events-none" />
+                {/* Big number watermark */}
+                <span className="absolute right-8 top-6 text-[8rem] font-black text-white/[0.04] leading-none select-none pointer-events-none">
+                  {STORIES[active].num}
                 </span>
-              </span>
-            </div>
-          )}
-        </div>
-      </section>
 
-      {/*Section - 2 */}
-      <section
-        ref={sectionRef}
-        className="container relative bg-white overflow-hidden"
-      >
-        <div></div>
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(#059669 1px, transparent 1px), linear-gradient(90deg, #059669 1px, transparent 1px)`,
-            backgroundSize: "48px 48px",
-          }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />
+                {/* Large open-quote */}
+                <div className="relative z-10">
+                  <div className="text-emerald-400 text-7xl font-black leading-none mb-4 font-serif">
+                    &ldquo;
+                  </div>
+                  <p className="text-white text-xl font-medium leading-relaxed max-w-xl transition-all duration-300">
+                    {STORIES[active].quote}
+                  </p>
+                </div>
 
-        <div className="relative max-w-6xl mx-auto">
-          <div
-            className="text-center mb-16 transition-all duration-700"
-            style={{
-              opacity: inView ? 1 : 0,
-              transform: inView ? "translateY(0)" : "translateY(20px)",
-            }}
-          >
-            <div className="inline-flex items-center gap-2 mb-5">
-              <span className="w-6 h-px bg-emerald-400" />
-              <span className="text-emerald-600 text-xs font-bold tracking-[0.2em] uppercase">
-                Proven Impact
-              </span>
-              <span className="w-6 h-px bg-emerald-400" />
+                {/* Author row */}
+                <div className="relative z-10 flex flex-wrap items-center gap-4 mt-10 pt-8 border-t border-white/10">
+                  <div className="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-black text-sm shrink-0">
+                    {STORIES[active].initials}
+                  </div>
+                  <div>
+                    <p className="text-white font-black">
+                      {STORIES[active].name}
+                    </p>
+                    <p className="text-emerald-400 text-xs mt-0.5">
+                      {STORIES[active].role} · {STORIES[active].location}
+                    </p>
+                  </div>
+                  {/* Dot indicators */}
+                  <div className="ml-auto flex gap-2">
+                    {STORIES.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActive(i)}
+                        className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2 bg-emerald-400" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 leading-tight mb-4">
-              Measurable transformation
-              <span className="block text-emerald-600 italic font-black">
-                across Gujarat, India
-              </span>
-            </h2>
-            <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
-              Every number tells a story of communities revived, land restored,
-              and futures secured through water conservation.
-            </p>
-            <div className="mt-8">
+
+            {/* ── Bottom featured strip ── */}
+            <div
+              className="mt-6 bg-emerald-50 border border-emerald-100 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(20px)",
+                transitionDelay: "600ms",
+              }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0 text-lg font-black">
+                  &ldquo;
+                </div>
+                <p className="text-gray-700 text-sm italic leading-relaxed max-w-xl">
+                  After deepening the check dam, water stayed till summer. Our
+                  borewells revived, and migration stopped.
+                  <span className="block text-emerald-700 font-black not-italic mt-1">
+                    — Chhaganbhai Patel, Rajkot
+                  </span>
+                </p>
+              </div>
               <a
-                href="#"
-                className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:-translate-y-0.5"
+                href="/donate"
+                className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-7 py-3 rounded-xl shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
               >
-                Explore Our Impact
-                <ArrowUpRight size={15} />
+                Contribute Now →
               </a>
             </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {STATS.map((stat, i) => (
-              <StatCard
-                key={stat.label}
-                stat={stat}
-                index={i}
-                inView={inView}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section - 3 */}
-      <section ref={ref} className="container bg-white py-24 px-4 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          {/* ── Header ── */}
-          <div
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 transition-all duration-700"
-            style={{
-              opacity: inView ? 1 : 0,
-              transform: inView ? "translateY(0)" : "translateY(24px)",
-            }}
-          >
-            <div>
-              <p className="text-emerald-600 text-xs font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2">
-                <span className="w-8 h-px bg-emerald-400 inline-block" />
-                What People Say
+        {/* Section - 4 */}
+        <section className="container overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-14">
+              <p className="inline-flex items-center gap-3 text-emerald-600 text-xs font-bold tracking-[0.18em] uppercase mb-4">
+                <span className="w-8 h-px bg-emerald-600/40" />
+                Explore More
+                <span className="w-8 h-px bg-emerald-600/40" />
               </p>
-              <h2 className="text-5xl font-black text-gray-900 leading-none">
-                Success
-                <br />
-                <span className="text-emerald-600 italic">Stories</span>
+              <h2 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
+                Know More{" "}
+                <span className="text-emerald-500 italic">About Us</span>
               </h2>
-            </div>
-            <p className="text-gray-400 text-sm max-w-xs leading-relaxed md:text-right">
-              Real voices from communities transformed by Girganga Parivar Trust
-              water conservation work.
-            </p>
-          </div>
-
-          {/* ── Main layout: left selector + right big card ── */}
-          <div className="grid md:grid-cols-[280px_1fr] gap-6 items-stretch">
-            {/* Left — number list selector */}
-            <div className="flex flex-col gap-3">
-              {STORIES.map((s, i) => (
-                <button
-                  key={s.name}
-                  onClick={() => setActive(i)}
-                  className={`group text-left rounded-2xl px-6 py-5 border-2 transition-all duration-300 ${
-                    active === i
-                      ? "bg-emerald-600 border-emerald-600 shadow-lg shadow-emerald-600/25"
-                      : "bg-white border-gray-100 hover:border-emerald-600/30 hover:bg-emerald-50/50"
-                  }`}
-                  style={{
-                    opacity: inView ? 1 : 0,
-                    transform: inView ? "translateX(0)" : "translateX(-24px)",
-                    transitionDelay: `${i * 100 + 100}ms`,
-                    transition:
-                      "opacity 600ms, transform 600ms, background 300ms, border 300ms, box-shadow 300ms",
-                  }}
-                >
-                  <div
-                    className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-white/30" : "text-emerald-600/20"}`}
-                  >
-                    {s.num}
-                  </div>
-                  <p
-                    className={`font-black text-sm transition-colors ${active === i ? "text-white" : "text-gray-800"}`}
-                  >
-                    {s.name}
-                  </p>
-                  <p
-                    className={`text-xs mt-0.5 transition-colors ${active === i ? "text-white/60" : "text-gray-400"}`}
-                  >
-                    {s.role}
-                  </p>
-                </button>
-              ))}
-            </div>
-
-            {/* Right — big active card */}
-            <div
-              className="relative bg-emerald-900 rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
-              style={{
-                opacity: inView ? 1 : 0,
-                transform: inView ? "translateX(0)" : "translateX(24px)",
-                transitionDelay: "300ms",
-                transitionDuration: "700ms",
-                transition: "opacity 700ms, transform 700ms",
-              }}
-            >
-              {/* Background decorations */}
-              <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-700/30 rounded-full blur-2xl pointer-events-none" />
-              {/* Big number watermark */}
-              <span className="absolute right-8 top-6 text-[8rem] font-black text-white/[0.04] leading-none select-none pointer-events-none">
-                {STORIES[active].num}
-              </span>
-
-              {/* Large open-quote */}
-              <div className="relative z-10">
-                <div className="text-emerald-400 text-7xl font-black leading-none mb-4 font-serif">
-                  &ldquo;
-                </div>
-                <p className="text-white text-xl font-medium leading-relaxed max-w-xl transition-all duration-300">
-                  {STORIES[active].quote}
-                </p>
-              </div>
-
-              {/* Author row */}
-              <div className="relative z-10 flex flex-wrap items-center gap-4 mt-10 pt-8 border-t border-white/10">
-                <div className="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-black text-sm shrink-0">
-                  {STORIES[active].initials}
-                </div>
-                <div>
-                  <p className="text-white font-black">
-                    {STORIES[active].name}
-                  </p>
-                  <p className="text-emerald-400 text-xs mt-0.5">
-                    {STORIES[active].role} · {STORIES[active].location}
-                  </p>
-                </div>
-                {/* Dot indicators */}
-                <div className="ml-auto flex gap-2">
-                  {STORIES.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActive(i)}
-                      className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2 bg-emerald-400" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ── Bottom featured strip ── */}
-          <div
-            className="mt-6 bg-emerald-50 border border-emerald-100 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
-            style={{
-              opacity: inView ? 1 : 0,
-              transform: inView ? "translateY(0)" : "translateY(20px)",
-              transitionDelay: "600ms",
-            }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0 text-lg font-black">
-                &ldquo;
-              </div>
-              <p className="text-gray-700 text-sm italic leading-relaxed max-w-xl">
-                After deepening the check dam, water stayed till summer. Our
-                borewells revived, and migration stopped.
-                <span className="block text-emerald-700 font-black not-italic mt-1">
-                  — Chhaganbhai Patel, Rajkot
-                </span>
+              <p className="text-gray-500 text-base font-light mt-4 max-w-lg mx-auto leading-relaxed">
+                Repairing, deepening, and raising check dams. A Rainwater
+                harvesting initiative.
               </p>
             </div>
-            <a
-              href="/donate"
-              className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-7 py-3 rounded-xl shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
-            >
-              Contribute Now →
-            </a>
-          </div>
-        </div>
-      </section>
 
-      {/* Section - 4 */}
-      <section className="container overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="inline-flex items-center gap-3 text-emerald-600 text-xs font-bold tracking-[0.18em] uppercase mb-4">
-              <span className="w-8 h-px bg-emerald-600/40" />
-              Explore More
-              <span className="w-8 h-px bg-emerald-600/40" />
-            </p>
-            <h2 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
-              Know More{" "}
-              <span className="text-emerald-500 italic">About Us</span>
-            </h2>
-            <p className="text-gray-500 text-base font-light mt-4 max-w-lg mx-auto leading-relaxed">
-              Repairing, deepening, and raising check dams. A Rainwater
-              harvesting initiative.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                img: "/image/support-structure-1.jpg",
-                label: "Awards",
-                Icon: Award,
-                href: "/awards",
-                desc: "Honoring the recognitions and milestones achieved through impactful rural water conservation work.",
-              },
-              {
-                img: "/image/our-work-2.jpg",
-                label: "Mission",
-                Icon: MapPin,
-                href: "/about-us",
-                desc: "Our commitment to sustainable water conservation, rural development, and community empowerment.",
-              },
-              {
-                img: "/image/our-work-3.jpg",
-                label: "Check Dams",
-                Icon: Waves,
-                href: "/check-dam-creat",
-                desc: "Building and mapping check dams to recharge groundwater across drought-prone regions of Gujarat.",
-              },
-            ].map(({ img, label, Icon, href, desc }) => (
-              <Link key={label} href={href}>
-                <div className="group relative bg-white border-2 border-emerald-600/15 rounded-3xl overflow-hidden hover:border-emerald-600 hover:shadow-xl hover:shadow-emerald-600/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-emerald-100">
-                    <Image
-                      src={img}
-                      alt={label}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-600/50 via-transparent to-transparent" />
-                    <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
-                      <Icon
-                        className="text-emerald-600"
-                        size={18}
-                        strokeWidth={1.5}
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  img: "/image/support-structure-1.jpg",
+                  label: "Awards",
+                  Icon: Award,
+                  href: "/awards",
+                  desc: "Honoring the recognitions and milestones achieved through impactful rural water conservation work.",
+                },
+                {
+                  img: "/image/our-work-2.jpg",
+                  label: "Mission",
+                  Icon: MapPin,
+                  href: "/about-us",
+                  desc: "Our commitment to sustainable water conservation, rural development, and community empowerment.",
+                },
+                {
+                  img: "/image/our-work-3.jpg",
+                  label: "Check Dams",
+                  Icon: Waves,
+                  href: "/check-dam-creat",
+                  desc: "Building and mapping check dams to recharge groundwater across drought-prone regions of Gujarat.",
+                },
+              ].map(({ img, label, Icon, href, desc }) => (
+                <Link key={label} href={href}>
+                  <div className="group relative bg-white border-2 border-emerald-600/15 rounded-3xl overflow-hidden hover:border-emerald-600 hover:shadow-xl hover:shadow-emerald-600/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-emerald-100">
+                      <Image
+                        src={img}
+                        alt={label}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-600/50 via-transparent to-transparent" />
+                      <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
+                        <Icon
+                          className="text-emerald-600"
+                          size={18}
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-emerald-700 font-black text-lg mb-2">
+                        {label}
+                      </h3>
+                      <p className="text-gray-500 text-sm font-light leading-relaxed">
+                        {desc}
+                      </p>
+                      <span className="mt-4 inline-flex items-center gap-1 text-emerald-600 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                        Explore →
+                      </span>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-emerald-700 font-black text-lg mb-2">
-                      {label}
-                    </h3>
-                    <p className="text-gray-500 text-sm font-light leading-relaxed">
-                      {desc}
-                    </p>
-                    <span className="mt-4 inline-flex items-center gap-1 text-emerald-600 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                      Explore →
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SmoothScroll>
     </>
   );
 }
