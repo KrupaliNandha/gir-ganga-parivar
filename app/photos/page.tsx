@@ -100,7 +100,7 @@ export default function Products() {
         {/* Section - 1 */}
         <section className="container">
           <div>
-            <h1 className="text-emerald-600 text-center text-7xl font-bold select-none">
+            <h1 className="text-emerald-600 text-center text-4xl sm:text-5xl md:text-6xl ld:text-7xl font-bold select-none">
               Photos
             </h1>
           </div>

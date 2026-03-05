@@ -35,7 +35,7 @@ const HeroSection = () => {
     <>
       <SmoothScroll>
         {/* Section - 1 */}
-        <section className="relative  overflow-hidden font-sans">
+        <section className="relative container overflow-hidden font-sans">
           {/* Right */}
           <div className="relative min-h-[90vh] flex items-center overflow-hidden">
             {/* Top-right dot pattern */}
@@ -62,7 +62,7 @@ const HeroSection = () => {
               style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 0)" }}
             />
 
-            <div className="relative z-10 container mx-auto px-6 lg:px-16 py-28 w-full grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative z-10 container mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
               {/* LEFT — headline */}
               <div className="space-y-7 text-center lg:text-left">
                 {/* pill */}
@@ -72,7 +72,7 @@ const HeroSection = () => {
                 </span>
 
                 {/* headline */}
-                <h1 className="text-5xl lg:text-6xl xl:text-8xl font-black  italic leading-[1.0] text-black tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-8xl font-black  italic leading-[1.0] text-black tracking-tight">
                   Reviving <br />
                   <span className="text-primary italic font-black">
                     {" "}
@@ -125,7 +125,7 @@ const HeroSection = () => {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.8 }}
-                    className="absolute bottom-5 left-5 right-5 md:right-auto bg-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-emerald-200/10"
+                    className="hidden md:block absolute bottom-5 left-5 right-5 md:right-auto bg-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-emerald-200/10"
                   >
                     <div className="w-11 h-11 bg-emerald-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-emerald-600/30">
                       <Droplets className="text-white w-5 h-5" />
@@ -190,13 +190,13 @@ const HeroSection = () => {
                       0{idx + 1}
                     </span>
 
-                    <span className="text-4xl font-black text-emerald-600 leading-none block mb-2">
+                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-emerald-600 leading-none block mb-2">
                       <CountUp value={stat.val} suffix={stat.suf} />
                     </span>
-                    <p className="text-gray-800 font-bold text-sm mb-1">
+                    <p className="text-gray-800 font-bold text-xs sm:text-sm text-center mb-1">
                       {stat.label}
                     </p>
-                    <p className="text-gray-400 text-xs font-light">
+                    <p className="text-gray-400 text-sm font-light">
                       {stat.desc}
                     </p>
                   </div>
@@ -324,7 +324,7 @@ const HeroSection = () => {
           {/* Buttons */}
           <div className="flex flex-wrap gap-10 mt-10 justify-center">
             <a
-              href="/csr"
+              href="/partner-with-us-csr"
               className="bg-emerald-600 text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl select-none transition-transform transform hover:-translate-y-1 inline-block text-center"
             >
               Partner With Us (CSR)

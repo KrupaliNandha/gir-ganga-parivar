@@ -231,10 +231,10 @@ export default function AboutSection() {
               {/* Left Content */}
               <div className="space-y-8 text-gray-700 leading-relaxed text-lg">
                 <div>
-                  <h3 className="text-2xl font-semibold text-emerald-700 mb-3">
+                  <h3 className="text-2xl font-semibold text-emerald-700 mb-3 text-center lg:text-start">
                     Who We Are
                   </h3>
-                  <p>
+                  <p className="text-center lg:text-start">
                     Girganga Parivar Trust is a not-for-profit organization
                     working for sustainable water security in Gujarat,
                     especially the drought-prone Saurashtra region. The Trust
@@ -244,10 +244,10 @@ export default function AboutSection() {
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold text-emerald-700 mb-3">
+                  <h3 className="text-2xl font-semibold text-emerald-700 mb-3 text-center lg:text-start">
                     Our Mission
                   </h3>
-                  <p>
+                  <p className="text-center lg:text-start">
                     We are committed to revitalizing India’s water
                     infrastructure through strategic repair, deepening, and
                     strengthening of check dams. Our goal is to enhance water
@@ -257,10 +257,10 @@ export default function AboutSection() {
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold text-emerald-700 mb-3">
+                  <h3 className="text-2xl font-semibold text-emerald-700 mb-3 text-center lg:text-start">
                     Our Journey
                   </h3>
-                  <p>
+                  <p className="text-center lg:text-start">
                     Founded under the leadership of Shri Dilip Sakhiya,
                     popularly known as the “Waterman of Gujarat”, GGPT has
                     evolved into one of India’s largest grassroots water
@@ -271,21 +271,21 @@ export default function AboutSection() {
 
               {/* Right Highlight Card */}
               <div className="bg-white shadow-xl rounded-2xl p-10 border border-emerald-100">
-                <h3 className="text-2xl font-bold text-emerald-700 mb-4">
+                <h3 className="text-2xl font-bold text-emerald-700 mb-4 text-center lg:text-start">
                   Our Impact Vision
                 </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 mb-6 leading-relaxed text-center lg:text-start">
                   Transforming water conservation into a mass movement by
                   empowering communities, restoring rivers, and ensuring
                   long-term sustainability for future generations.
                 </p>
 
                 <div className="border-t pt-6">
-                  <p className="text-lg font-semibold text-gray-800">
+                  <p className="text-lg font-semibold text-gray-800 text-center lg:text-start">
                     “Water conservation is not a project, it is a
                     responsibility.”
                   </p>
-                  <p className="text-emerald-600 mt-2 font-medium">
+                  <p className="text-emerald-600 mt-2 font-medium text-center lg:text-start">
                     – Shri Dilip Sakhiya
                   </p>
                 </div>
@@ -365,16 +365,16 @@ export default function AboutSection() {
               }}
             >
               <div>
-                <p className="text-emerald-600 text-xs font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2">
-                  <span className="w-8 h-px bg-emerald-400 inline-block" />
+                <p className="text-emerald-600 text-xs font-bold tracking-[0.25em] uppercase mb-3 flex items-center justify-center md:justify-start gap-2">
+                  <span className="w-8 h-px bg-emerald-400 inline-block " />
                   What People Say
                 </p>
-                <h2 className="text-5xl font-black text-gray-900 leading-none">
+                <h2 className="text-5xl font-black text-gray-900 leading-none text-center md:text-start">
                   Success
                   <span className="text-emerald-600 italic"> Stories</span>
                 </h2>
               </div>
-              <p className="text-gray-400 text-sm max-w-3xl leading-relaxed md:text-right">
+              <p className="text-gray-400 text-sm max-w-3xl leading-relaxed md:text-right text-center md:text-start">
                 Real voices from communities whose lives have been transformed
                 through sustainable water conservation initiatives led by
                 Girganga Parivar Trust. From drought-prone villages to thriving

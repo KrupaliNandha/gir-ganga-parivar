@@ -57,8 +57,8 @@ export default function AwardsSection() {
         <section className="container bg-slate-50 py-16">
           <div className="mx-auto px-4">
             {/* Section Heading */}
-            <div className="text-center mb-12 space-y-5">
-              <h2 className="text-6xl font-bold text-emerald-700">
+            <div className="text-center mb-12 space-y-5 mx-auto">
+              <h2 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-700 mx-auto">
                 Awards Received by Girganga Parivar
               </h2>
               <p className=" text-2xl mt-3">
@@ -75,17 +75,17 @@ export default function AwardsSection() {
             </div>
 
             {/* Thumbnail Grid */}
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
               {awards.map((award, index) => (
                 <div key={award.id} className="group cursor-pointer">
                   {/* Image Card */}
-                  <div className="relative overflow-hidden rounded-xl shadow-lg">
+                  <div className="group relative w-full h-auto sm:h-[350px] lg:h-[400px] overflow-hidden rounded-xl">
                     <Image
                       src={award.image}
                       alt={award.title}
                       width={500}
                       height={300}
-                      className="object-cover w-full h-auto transition duration-500 group-hover:scale-110"
+                      className="object-fix w-full h-full transition-transform duration-500 group-hover:scale-110"
                     />
 
                     {/* Hover Overlay */}

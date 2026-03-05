@@ -20,7 +20,7 @@ export default function HeroWithVideo() {
         <section className="container w-full bg-gray-50">
           <div className="max-w-[80%] mx-auto space-y-10">
             <div>
-              <h1 className="text-emerald-600 text-center text-7xl font-bold select-none">
+              <h1 className="text-emerald-600 text-center text-4xl sm:text-5xl md:text-6xl ld:text-7xl font-bold select-none">
                 Grow Up Humanity
               </h1>
             </div>

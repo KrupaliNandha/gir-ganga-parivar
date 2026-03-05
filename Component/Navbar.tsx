@@ -157,39 +157,6 @@ export default function Navbar() {
               <FiPhone size={12} className="text-emerald-600" />
               +91 94096 92693
             </a>
-            <span className="hidden md:block text-slate-300">|</span>
-            <button
-              type="button"
-              onClick={() => setSearchOpen(!searchOpen)}
-              aria-label="Search"
-              title="Search"
-              className="hover:text-emerald-600 transition-colors"
-            >
-              <FiSearch size={14} />
-            </button>
-          </div>
-        </div>
-
-        {/* Slide-down search bar */}
-        <div
-          className={`overflow-hidden transition-all duration-300 bg-white border-t border-slate-100 ${searchOpen ? "max-h-14" : "max-h-0"}`}
-        >
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-2 flex items-center gap-3">
-            <FiSearch size={15} className="text-slate-400 flex-shrink-0" />
-            <input
-              autoFocus={searchOpen}
-              type="text"
-              placeholder="Search…"
-              className="flex-1 text-sm text-slate-700 placeholder-slate-400 outline-none bg-transparent"
-            />
-            <button
-              type="button"
-              onClick={() => setSearchOpen(false)}
-              aria-label="Close search"
-              className="text-slate-400 hover:text-slate-700"
-            >
-              <FiX size={15} />
-            </button>
           </div>
         </div>
       </div>

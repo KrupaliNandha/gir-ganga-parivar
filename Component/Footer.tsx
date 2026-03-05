@@ -137,7 +137,7 @@ export default function Footer() {
                 {[
                   { label: "Make a Donation",  href: "/donate"           },
                   { label: "Volunteer",        href: "/team"               },
-                  { label: "Corporate / CSR",  href: "/csr"},
+                  { label: "Corporate / CSR",  href: "/partner-with-us-csr"},
                 ].map(({ label, href }) => (
                   <li key={label}>
                     <Link
