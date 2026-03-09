@@ -410,10 +410,7 @@ export default function Donate() {
       </section>
 
       {/* Section - 6 */}
-      <section className="container py-20 px-4 overflow-hidden bg-white">
-        {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-72 h-72 rounded-full opacity-10 bg-primary blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-10 bg-emerald-400 blur-3xl translate-y-1/2 -translate-x-1/2" />
+      <section className="container overflow-hidden bg-white">
 
         <div className="relative z-10 max-w-3xl mx-auto">
           {/* Header */}
