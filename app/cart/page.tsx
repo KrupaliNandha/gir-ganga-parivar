@@ -34,8 +34,8 @@ export default function CartPage() {
     );
   }
 
-  // amount string માંથી number કાઢો (commas remove)
-  const rawAmount = Number(item.amount.replace(/,/g, ""));
+  // amount
+  const rawAmount = Number(String(item.amount).replace(/[,₹\s]/g, ""));
   const subtotal = rawAmount * qty;
   const formatted = (n: number) => "₹" + n.toLocaleString("en-IN");
 
@@ -44,14 +44,8 @@ export default function CartPage() {
     setItem(null);
   };
 
-  const handleUpdate = () => {
-    const updated = { ...item, quantity: qty };
-    sessionStorage.setItem("cartItem", JSON.stringify(updated));
-  };
-
   return (
     <div className="container py-10 space-y-10">
-
       {/* ── Cart Table ── */}
       <div className="border border-gray-200 rounded-2xl overflow-hidden">
         {/* Header */}
@@ -121,13 +115,17 @@ export default function CartPage() {
           {/* Subtotal row */}
           <div className="flex justify-between items-center px-8 py-4 border-b border-gray-100">
             <span className="text-gray-500 text-sm">Subtotal</span>
-            <span className="text-gray-800 font-medium">{formatted(subtotal)}</span>
+            <span className="text-gray-800 font-medium">
+              {formatted(subtotal)}
+            </span>
           </div>
 
           {/* Total row */}
           <div className="flex justify-between items-center px-8 py-4 border-b border-gray-100">
             <span className="text-gray-700 font-semibold">Total</span>
-            <span className="text-gray-900 font-bold text-lg">{formatted(subtotal)}</span>
+            <span className="text-gray-900 font-bold text-lg">
+              {formatted(subtotal)}
+            </span>
           </div>
 
           {/* Proceed button */}
@@ -140,7 +138,6 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

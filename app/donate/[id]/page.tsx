@@ -109,61 +109,80 @@ export default function DonateDetail({
   if (project) {
     return (
       <>
-        <section className="container space-y-5">
-          <h1 className="text-center text-4xl text-emerald-600 font-bold">
-            Donation to Create Checkdam
-          </h1>
+        <section className="container mx-auto space-y-8 py-10">
+          {/* Heading */}
+          <div className="text-center mb-10">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-primary">
+              Donation to Create Checkdam
+            </h1>
 
-          <div className="border border-gray-100 p-3 sm:p-5 rounded-2xl bg-emerald-50">
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-5">
-              <div className="bg-white rounded-2xl shadow-sm border p-7">
-                <h1 className="text-3xl font-extrabold text-emerald-600">
-                  {project.title}
-                </h1>
-
-                <p className="text-lg text-gray-400 mt-2">{project.dec}</p>
-
-                <div className="flex items-center gap-5 mt-5">
-                  <p>Your Contribution *</p>
-
-                  <div className="flex items-center border rounded-lg">
-                    <span className="bg-gray-100 px-4 py-3 font-semibold">
-                      ₹
-                    </span>
-
-                    <p className="px-6 py-3 font-semibold">{project.amount}</p>
-                  </div>
+            <p className="text-gray-500 mt-3 text-lg">
+              Support the construction of checkdams to conserve water and help
+              communities across Gujarat.
+            </p>
+          </div>  
+          {/* Card Wrapper */}
+          <div className="border border-gray-100 p-4 sm:p-6 rounded-2xl bg-emerald-50 flex justify-center">
+            <div className="max-w-4xl w-full">
+              <div className="bg-white rounded-2xl shadow-sm border p-6 md:p-8 space-y-5 grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Image */}
+                <div>
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="w-full object-cover rounded-xl"
+                  />
                 </div>
 
-                <a href="/cart">
-                  <button
-                    onClick={() => {
-                      const cartItem = {
-                        id: project.id,
-                        title: project.title,
-                        amount: project.amount,
-                        img: project.img,
-                        quantity: 1,
-                      };
-                      sessionStorage.setItem(
-                        "cartItem",
-                        JSON.stringify(cartItem),
-                      );
-                      window.location.href = "/cart";
-                    }}
-                    className="bg-emerald-600 text-white font-bold px-6 py-2 rounded-lg hover:bg-emerald-700 transition cursor-pointer"
-                  >
-                    Donate ⇢
-                  </button>
-                </a>
-              </div>
+                <div>
+                  {/* Title */}
+                  <h1 className="text-2xl md:text-3xl font-extrabold text-emerald-600">
+                    {project.title}
+                  </h1>
 
-              <div className="bg-white rounded-2xl shadow-sm border p-4">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  className="w-full object-cover rounded-xl"
-                />
+                  {/* Description */}
+                  <p className="text-gray-500 leading-relaxed">{project.dec}</p>
+
+                  {/* Contribution */}
+                  <div className="flex flex-wrap items-center gap-4 mt-4">
+                    <p className="font-medium">Your Contribution *</p>
+
+                    <div className="flex items-center border rounded-lg overflow-hidden">
+                      <span className="bg-gray-100 px-4 py-2 font-semibold">
+                        ₹
+                      </span>
+
+                      <p className="px-6 py-2 font-semibold">
+                        {project.amount}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Button */}
+                  <div className="pt-3">
+                    <button
+                      onClick={() => {
+                        const cartItem = {
+                          id: project.id,
+                          title: project.title,
+                          amount: project.amount,
+                          img: project.img,
+                          quantity: 1,
+                        };
+
+                        sessionStorage.setItem(
+                          "cartItem",
+                          JSON.stringify(cartItem),
+                        );
+
+                        window.location.href = "/cart";
+                      }}
+                      className="bg-emerald-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-emerald-700 transition"
+                    >
+                      Donate ⇢
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -217,65 +236,82 @@ export default function DonateDetail({
   if (maintaindata) {
     return (
       <>
-        <section className="container space-y-5">
-          <h1 className="text-center text-4xl text-emerald-600 font-bold">
-            Donation to Maintain Checkdam
-          </h1>
+        <section className="container mx-auto space-y-8 py-10">
+          {/* Heading */}
+          <div className="text-center mb-10">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-primary">
+              Maintain Checkdam
+            </h1>
 
-          <div className="border border-gray-100 p-3 sm:p-5 rounded-2xl bg-emerald-50">
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-5">
-              <div className="bg-white rounded-2xl shadow-sm border p-7">
-                <h1 className="text-3xl font-extrabold text-emerald-600">
-                  {maintaindata.title}
-                </h1>
+            <p className="text-gray-500 mt-3 text-lg">
+              Help us maintain water conservation structures across Gujarat
+            </p>
+          </div>
 
-                <p className="text-lg text-gray-400 mt-2">
-                  {maintaindata.desc}
-                </p>
-
-                <div className="flex items-center gap-5 mt-5">
-                  <p>Your Contribution *</p>
-
-                  <div className="flex items-center border rounded-lg">
-                    <span className="bg-gray-100 px-4 py-3 font-semibold">
-                      ₹
-                    </span>
-
-                    <p className="px-6 py-3 font-semibold">
-                      {maintaindata.amount}
-                    </p>
-                  </div>
+          {/* Card Wrapper */}
+          <div className="border border-gray-100 p-4 sm:p-6 rounded-2xl bg-emerald-50 flex justify-center">
+            <div className="max-w-4xl w-full">
+              <div className="bg-white rounded-2xl shadow-sm border p-6 md:p-8 space-y-5 grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Image */}
+                <div>
+                  <img
+                    src={maintaindata.img}
+                    alt={maintaindata.title}
+                    className="w-full object-cover rounded-xl"
+                  />
                 </div>
 
-                <a href="/cart">
-                  <button
-                    onClick={() => {
-                      const cartItem = {
-                        id: maintaindata.id,
-                        title: maintaindata.title,
-                        amount: maintaindata.amount,
-                        img: maintaindata.img,
-                        quantity: 1,
-                      };
-                      sessionStorage.setItem(
-                        "cartItem",
-                        JSON.stringify(cartItem),
-                      );
-                      window.location.href = "/cart";
-                    }}
-                    className="bg-emerald-600 text-white font-bold px-6 py-2 rounded-lg hover:bg-emerald-700 transition cursor-pointer"
-                  >
-                    Donate ⇢
-                  </button>
-                </a>
-              </div>
+                <div>
+                  {/* Title */}
+                  <h1 className="text-2xl md:text-3xl font-extrabold text-emerald-600">
+                    {maintaindata.title}
+                  </h1>
 
-              <div className="bg-white rounded-2xl shadow-sm border p-4">
-                <img
-                  src={maintaindata.img}
-                  alt={maintaindata.title}
-                  className="w-full object-cover rounded-xl"
-                />
+                  {/* Description */}
+                  <p className="text-gray-500 leading-relaxed">
+                    {maintaindata.desc}
+                  </p>
+
+                  {/* Contribution */}
+                  <div className="flex flex-wrap items-center gap-4 mt-4">
+                    <p className="font-medium">Your Contribution *</p>
+
+                    <div className="flex items-center border rounded-lg overflow-hidden">
+                      <span className="bg-gray-100 px-4 py-2 font-semibold">
+                        ₹
+                      </span>
+
+                      <p className="px-6 py-2 font-semibold">
+                        {maintaindata.amount}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Button */}
+                  <div className="pt-3">
+                    <button
+                      onClick={() => {
+                        const cartItem = {
+                          id: maintaindata.id,
+                          title: maintaindata.title,
+                          amount: maintaindata.amount,
+                          img: maintaindata.img,
+                          quantity: 1,
+                        };
+
+                        sessionStorage.setItem(
+                          "cartItem",
+                          JSON.stringify(cartItem),
+                        );
+
+                        window.location.href = "/cart";
+                      }}
+                      className="bg-emerald-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-emerald-700 transition"
+                    >
+                      Donate ⇢
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
