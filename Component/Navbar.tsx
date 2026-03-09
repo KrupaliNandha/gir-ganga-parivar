@@ -54,7 +54,7 @@ export default function Navbar() {
   /* Animated underline that grows from left */
   const underline = (active: boolean, hoverGroup = true) =>
     [
-      "absolute bottom-0 left-3 right-3 h-[2px] bg-emerald-500 transition-all duration-300 origin-left",
+      "absolute bottom-0 left-3 right-3 h-[2px] bg-greenish transition-all duration-300 origin-left",
       active ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0",
       !active && hoverGroup
         ? "group-hover:scale-x-100 group-hover:opacity-100"
@@ -67,8 +67,8 @@ export default function Navbar() {
       "relative inline-flex items-center px-3 xl:px-4 py-5",
       "text-[12.5px] xl:text-[13px] font-semibold uppercase tracking-[0.1em] transition-colors group",
       isActive(path)
-        ? "text-emerald-600"
-        : "text-slate-700 hover:text-emerald-600",
+        ? "text-greenish"
+        : "text-slate-700 hover:text-greenish",
     ].join(" ");
 
   /* Dropdown item */
@@ -76,8 +76,8 @@ export default function Navbar() {
     [
       "block px-5 py-2.5 text-[12px] font-semibold uppercase tracking-wider transition-colors",
       isActive(path)
-        ? "text-emerald-600 bg-emerald-50"
-        : "text-slate-600 hover:text-emerald-600 hover:bg-slate-50",
+        ? "text-greenish bg-white"
+        : "text-slate-600 hover:text-greenish hover:bg-slate-50",
     ].join(" ");
 
   /* Centred dropdown panel */
@@ -132,7 +132,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="hover:text-emerald-600 transition-colors"
+                  className="hover:text-greenish transition-colors"
                 >
                   {icon}
                 </a>
@@ -144,17 +144,17 @@ export default function Navbar() {
           <div className="flex items-center gap-4 text-[12px] text-slate-500 font-medium">
             <a
               href="mailto:info@girgangaparivartrust.com"
-              className="hidden md:flex items-center gap-1.5 hover:text-emerald-600 transition-colors"
+              className="hidden md:flex items-center gap-1.5 hover:text-greenish transition-colors"
             >
-              <FiMail size={12} className="text-emerald-600" />
+              <FiMail size={15} className="text-yell" />
               info@girgangaparivartrust.com
             </a>
             <span className="hidden md:block text-slate-300">|</span>
             <a
               href="tel:+919409692693"
-              className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors"
+              className="flex items-center gap-1.5 hover:text-greenish transition-colors"
             >
-              <FiPhone size={12} className="text-emerald-600" />
+              <FiPhone size={15} className="text-yell" />
               +91 94096 92693
             </a>
           </div>
@@ -224,7 +224,8 @@ export default function Navbar() {
               </button>
               <div className={dropPanel(workOpen)}>
                 {/* notch arrow */}
-                <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
+                <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3
+                 bg-white border-l border-t border-slate-100 rotate-45" />
                 {[{ label: "Impact", href: "/impact" }].map(
                   ({ label, href }) => (
                     <Link
@@ -308,8 +309,8 @@ export default function Navbar() {
               <Link
                 href="/donate"
                 className="text-[11px] font-extrabold uppercase tracking-[0.15em] px-5 py-2
-                           border border-emerald-600 text-emerald-700
-                           hover:bg-emerald-600 hover:text-white
+                           border border-greenish text-greenish
+                           hover:bg-yell hover:border-none hover:text-white
                            rounded-sm transition-all duration-200"
               >
                 Donate
@@ -339,7 +340,7 @@ export default function Navbar() {
             <path
               d="M0,6 C150,0 300,12 450,6 C600,0 750,12 900,6 C1050,0 1200,12 1200,6 L1200,12 L0,12 Z"
               fill="#10b981"
-              className="fill-emerald-500"
+              className="fill-greenish"
             />
           </svg>
         </div>
@@ -379,7 +380,7 @@ export default function Navbar() {
             type="button"
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
-            className="text-slate-600 hover:text-emerald-600"
+            className="text-slate-600 hover:text-greenish"
           >
             <FiX size={28} />
           </button>
@@ -397,7 +398,7 @@ export default function Navbar() {
               <Link
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isActive(href) ? "text-emerald-600" : "text-slate-800"}`}
+                className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isActive(href) ? "text-greenish" : "text-slate-800"}`}
               >
                 {label}
               </Link>
@@ -409,7 +410,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setWorkOpen(!workOpen)}
-              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isWorkActive ? "text-emerald-600" : "text-slate-800"}`}
+              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isWorkActive ? "text-greenish" : "text-slate-800"}`}
             >
               Our Work
               <FiChevronDown
@@ -419,14 +420,14 @@ export default function Navbar() {
             <div
               className={`overflow-hidden transition-all ${workOpen ? "max-h-36 py-2" : "max-h-0"}`}
             >
-              <ul className="pl-5 space-y-3 border-l-2 border-emerald-100 mt-1">
+              <ul className="pl-5 space-y-3 border-l-2 border-greenish mt-1">
                 {[{ label: "Impact", href: "/impact" }].map(
                   ({ label, href }) => (
                     <li key={href}>
                       <Link
                         href={href}
                         onClick={() => setMenuOpen(false)}
-                        className={`text-[15px] font-semibold ${isActive(href) ? "text-emerald-600" : "text-slate-500"}`}
+                        className={`text-[15px] font-semibold ${isActive(href) ? "text-greenish" : "text-slate-500"}`}
                       >
                         {label}
                       </Link>
@@ -442,7 +443,8 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMediaOpen(!mediaOpen)}
-              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isMediaActive ? "text-emerald-600" : "text-slate-800"}`}
+              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold
+                 border-b border-slate-50 tracking-wide ${isMediaActive ? "text-greenish" : "text-slate-800"}`}
             >
               Media
               <FiChevronDown
@@ -452,7 +454,7 @@ export default function Navbar() {
             <div
               className={`overflow-hidden transition-all ${mediaOpen ? "max-h-52 py-2" : "max-h-0"}`}
             >
-              <ul className="pl-5 space-y-3 border-l-2 border-emerald-100 mt-1">
+              <ul className="pl-5 space-y-3 border-l-2 border-greenish mt-1">
                 {[
                   { label: "Photos", href: "/photos" },
                   { label: "Press Release", href: "/press-release" },
@@ -462,7 +464,7 @@ export default function Navbar() {
                     <Link
                       href={href}
                       onClick={() => setMenuOpen(false)}
-                      className={`text-[15px] font-semibold ${isActive(href) ? "text-emerald-600" : "text-slate-500"}`}
+                      className={`text-[15px] font-semibold ${isActive(href) ? "text-greenish" : "text-slate-500"}`}
                     >
                       {label}
                     </Link>
@@ -479,7 +481,7 @@ export default function Navbar() {
             href="tel:+919409692693"
             className="flex items-center gap-3 text-slate-700 font-semibold text-sm"
           >
-            <span className="bg-emerald-100 text-emerald-700 p-2 rounded-lg">
+            <span className="bg-emerald-100 text-greenish p-2 rounded-lg">
               <FiPhone size={15} />
             </span>
             +91 94096 92693
@@ -488,7 +490,7 @@ export default function Navbar() {
             href="mailto:info@girgangaparivartrust.com"
             className="flex items-center gap-3 text-slate-700 font-semibold text-sm"
           >
-            <span className="bg-emerald-100 text-emerald-700 p-2 rounded-lg">
+            <span className="bg-greenish text-greenish p-2 rounded-lg">
               <FiMail size={15} />
             </span>
             info@girgangaparivartrust.com
@@ -496,8 +498,8 @@ export default function Navbar() {
           <Link
             href="/donate"
             onClick={() => setMenuOpen(false)}
-            className="mt-2 w-full block text-center border border-emerald-600 text-emerald-700
-                       hover:bg-emerald-600 hover:text-white font-extrabold py-3
+            className="mt-2 w-full block text-center border border-greenish text-greenish
+                       hover:bg-greenish hover:text-white font-extrabold py-3
                        uppercase tracking-[0.15em] text-sm transition-colors rounded-sm"
           >
             Donate
