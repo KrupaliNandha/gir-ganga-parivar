@@ -12,7 +12,11 @@ interface BeforeAfterProps {
   after: string;
   useNextImage?: boolean;
 }
-const BeforeAfterImage = ({ before, after, useNextImage = false }: BeforeAfterProps) => {
+const BeforeAfterImage = ({
+  before,
+  after,
+  useNextImage = false,
+}: BeforeAfterProps) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -31,7 +35,11 @@ const BeforeAfterImage = ({ before, after, useNextImage = false }: BeforeAfterPr
         {useNextImage ? (
           <Image src={before} alt="Before" fill className="object-cover" />
         ) : (
-          <img src={before} alt="Before" className="w-full h-full object-cover" />
+          <img
+            src={before}
+            alt="Before"
+            className="w-full h-full object-cover"
+          />
         )}
       </div>
 
@@ -76,66 +84,86 @@ interface SectionBlockProps {
   useNextImage?: boolean;
 }
 const SectionBlock = ({
-  eyebrow, title, subtitle, body,
-  before, after, reverse = false, dark = false, useNextImage = false,
+  eyebrow,
+  title,
+  subtitle,
+  body,
+  before,
+  after,
+  reverse = false,
+  dark = false,
+  useNextImage = false,
 }: SectionBlockProps) => (
-  <section className={`${dark ? "bg-[var(--bg-grn)]" : "bg-[var(--bg-grn)]"} py-16 sm:py-24 px-4 sm:px-8 `}>
+  <section className={`${dark ? "bg-[var(--bg-grn)]" : "bg-[var(--bg-grn)]"} `}>
     <div className="max-w-7xl mx-auto">
-      <div className={`flex flex-col ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-center`}>
+      <div className="container">
+        <div
+          className={`flex flex-col ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-center`}
+        >
+          {/* Text side */}
+          <div className="w-full lg:w-[42%] space-y-5">
+            {/* eyebrow */}
+            <div className="flex items-center justify-center lg:justify-start gap-3">
+              <span className="w-8 h-px bg-yell" />
+              <span className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase ">
+                {eyebrow}
+              </span>
+            </div>
 
-        {/* Text side */}
-        <div className="w-full lg:w-[42%] space-y-5">
-          {/* eyebrow */}
-          <div className="flex items-center gap-3">
-            <span className="w-8 h-px bg-yell" />
-            <span className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase">
-              {eyebrow}
-            </span>
+            <h2
+              className="text-black text-3xl sm:text-4xl font-bold leading-snug text-center lg:text-start"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
+              {title}
+            </h2>
+
+            <p className="text-greenish text-sm font-medium text-center lg:text-start">
+              {subtitle}
+            </p>
+
+            <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
+              {body}
+            </p>
+
+            <div className="flex justify-self-center lg:justify-self-start">
+              <Link
+                href="/donate"
+                className="inline-flex items-center gap-2 text-yell border p-4 text-xs font-bold uppercase tracking-widest group mt-2"
+              >
+                <span>Donate Now</span>
+                <span className="w-8 h-px bg-yell group-hover:w-14 transition-all duration-300" />
+              </Link>
+            </div>
           </div>
 
-          <h2 className="text-black text-3xl sm:text-4xl font-bold leading-snug">
-            {title}
-          </h2>
+          {/* Image side */}
+          <div className="w-full lg:w-[58%]">
+            <div
+              className={`relative overflow-hidden shadow-2xl shadow-black/50 ${reverse ? "rounded-tl-[4rem] rounded-br-[4rem]" : "rounded-tr-[4rem] rounded-bl-[4rem]"}`}
+              style={{ aspectRatio: "16/10" }}
+            >
+              <BeforeAfterImage
+                before={before}
+                after={after}
+                useNextImage={useNextImage}
+              />
+            </div>
 
-          <p className="text-greenish text-sm font-medium">{subtitle}</p>
-
-          <p className="text-gray-400 text-sm leading-relaxed">{body}</p>
-
-          <a
-            href="/donate"
-            className="inline-flex items-center gap-2 text-yell border p-4 text-xs font-bold uppercase tracking-widest group mt-2"
-          >
-            <span>Donate Now</span>
-            <span className="w-8 h-px bg-yell group-hover:w-14 transition-all duration-300" />
-          </a>
-        </div>
-
-        {/* Image side */}
-        <div className="w-full lg:w-[58%]">
-          <div
-            className={`relative overflow-hidden shadow-2xl shadow-black/50 ${reverse ? "rounded-tl-[4rem] rounded-br-[4rem]" : "rounded-tr-[4rem] rounded-bl-[4rem]"}`}
-            style={{ aspectRatio: "16/10" }}
-          >
-            <BeforeAfterImage before={before} after={after} useNextImage={useNextImage} />
+            {/* "Hover to see transformation" hint */}
+            <p className="text-gray-600 text-[10px] tracking-widest uppercase text-right mt-2 pr-2">
+              Hover image to see transformation
+            </p>
           </div>
-
-          {/* "Hover to see transformation" hint */}
-          <p className="text-gray-600 text-[10px] tracking-widest uppercase text-right mt-2 pr-2">
-            Hover image to see transformation
-          </p>
         </div>
-
       </div>
     </div>
   </section>
 );
 
-
 export default function JalMandirSection() {
   return (
     <>
-     <SmoothScroll>
-
+      <SmoothScroll>
         {/* ── PAGE HERO ── */}
         <div className="bg-[var(--bg-grn)] pt-16 pb-6 px-4 text-center">
           <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
@@ -143,12 +171,17 @@ export default function JalMandirSection() {
             Our Impact
             <span className="w-8 h-px bg-yell" />
           </p>
-          <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
-            Transforming <span className="text-greenish">Water-Scarce</span><br />
+          <h1
+            className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          >
+            Transforming <span className="text-greenish">Water-Scarce</span>
+            <br />
             Regions of Gujarat
           </h1>
           <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
-            Real before & after stories from the ground — hover each image to witness the change.
+            Real before & after stories from the ground — hover each image to
+            witness the change.
           </p>
           {/* thin emerald divider */}
           <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
@@ -181,44 +214,46 @@ export default function JalMandirSection() {
 
         {/* ── CTA STRIP ── */}
         <div className=" py-16 px-4 text-center">
-          <p className="text-gray-500 text-xs tracking-[0.2em] uppercase mb-3">Make a difference today</p>
+          <p className="text-gray-500 text-xs tracking-[0.2em] uppercase mb-3">
+            Make a difference today
+          </p>
           <h3
             className=" text-2xl sm:text-3xl font-bold mb-8 leading-snug"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
-            Each Donation Helps Secure<br />
+            Each Donation Helps Secure
+            <br />
             <span className="text-greenish">A Water-Safe Future</span>
           </h3>
-          <a href="/donate">
+          <Link href="/donate">
             <button className="group relative bg-greenish text-white font-semibold px-10 py-4 rounded-lg overflow-hidden hover:-translate-y-0.5 transition-transform duration-300 inline-flex items-center gap-3 shadow-xl">
               <span className="relative z-10">Donate Now</span>
               <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               <span className="absolute inset-0 bg-yell translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </button>
-          </a>
+          </Link>
         </div>
 
         {/* ── SECTION 3 — Know More About Us ── */}
-        <section className=" py-20 px-4">
+        <section className="container">
           <div className="max-w-7xl mx-auto">
-
             {/* Heading */}
             <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div>
-                <p className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3">
+                <p className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
                   <span className="w-8 h-px bg-greenish" />
                   Explore More
                 </p>
                 <h2
-                  className="text-black text-4xl sm:text-5xl font-bold leading-tight"
+                  className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
-                  Know More{" "}
-                  <span className="text-greenish">About Us</span>
+                  Know More <span className="text-greenish">About Us</span>
                 </h2>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
-                Repairing, deepening, and raising check dams. A rainwater harvesting initiative.
+              <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start lg:max-w-xs">
+                Repairing, deepening, and raising check dams. A rainwater
+                harvesting initiative.
               </p>
             </div>
 
@@ -248,21 +283,27 @@ export default function JalMandirSection() {
                 },
               ].map(({ img, label, Icon, href, desc }) => (
                 <Link key={label} href={href}>
-                  <div className="group relative bg-[#111815] rounded-2xl overflow-hidden
-                     transition-all duration-300 cursor-pointer">
+                  <div
+                    className="group relative bg-[#111815] rounded-2xl overflow-hidden
+                     transition-all duration-300 cursor-pointer"
+                  >
                     {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={img}
                         alt={label}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-75"
+                        className="object-cover h-auto group-hover:scale-105 transition-transform duration-500 brightness-75"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}
                       <div className="absolute top-4 right-4 w-9 h-9 bg-greenish rounded-lg flex items-center justify-center shadow-md">
-                        <Icon className="text-white" size={16} strokeWidth={1.5} />
+                        <Icon
+                          className="text-white"
+                          size={16}
+                          strokeWidth={1.5}
+                        />
                       </div>
                     </div>
 
@@ -270,11 +311,15 @@ export default function JalMandirSection() {
                     <div className="p-5">
                       <h3
                         className="text-white font-bold text-lg mb-2"
-                        style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                        style={{
+                          fontFamily: "'Playfair Display', Georgia, serif",
+                        }}
                       >
                         {label}
                       </h3>
-                      <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                      <p className="text-gray-500 text-xs leading-relaxed">
+                        {desc}
+                      </p>
 
                       <span className="mt-4 inline-flex items-center gap-2 text-yell text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Explore
@@ -285,10 +330,8 @@ export default function JalMandirSection() {
                 </Link>
               ))}
             </div>
-
           </div>
         </section>
-
       </SmoothScroll>
     </>
   );

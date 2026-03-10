@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { HandCoins, Heart, Building2 } from "lucide-react";
+import {
+  HandCoins,
+  Heart,
+  Building2,
+  User,
+  MessageSquare,
+  Mail,
+} from "lucide-react";
 import SmoothScroll from "../../Component/SmothScrolling";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +22,7 @@ import {
   FileText,
   Tv2,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const structures = [
   {
@@ -117,62 +125,73 @@ export default function SupportAStructure() {
 
   return (
     <SmoothScroll>
-      <section className="font-sans bg-white overflow-x-hidden">
+      <section className=" overflow-x-hidden">
         {/* Section - 1 */}
-        <section className="container bg-white pt-15 overflow-hidden">
+        <section className="bg-[var(--bg-grn)] p-15 overflow-hidden">
+          <div className="container">
+            <div className="relative z-10 max-w-7xl mx-auto justify-center items-center flex flex-col text-center">
+              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-yell" />
+                Water for Farms, Families, and the Future
+                <span className="w-8 h-px bg-yell" />
+              </p>
+              <h1
+                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                One Structure. <br />{" "}
+                <span className="text-greenish">
+                  {" "}
+                  Multiple Generations Benefit.
+                </span>
+              </h1>
+              <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
+                Water scarcity affects farmers, livestock, women, and children
+                every day. By supporting a single conservation structure, you
+                help secure drinking water, agriculture, and livelihoods for an
+                entire village.
+              </p>
+              {/* thin emerald divider */}
+              <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
 
-          <div className="relative z-10 max-w-7xl mx-auto justify-center items-center flex flex-col text-center">
-            <p className="inline-flex items-center gap-2 border border-emerald-600/25 bg-emerald-600/5 text-emerald-600 text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-              Water for Farms, Families, and the Future
-            </p>
-
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-emerald-600 leading-tight mb-6 max-w-6xl">
-              One Structure.{" "} <br/>
-              <span className="italic text-emerald-600/70">
-                Multiple Generations Benefit.
-              </span>
-            </h1>
-
-            <p className="text-gray-500 text-lg font-light leading-relaxed max-w-2xl">
-              Water scarcity affects farmers, livestock, women, and children
-              every day. By supporting a single conservation structure, you help
-              secure drinking water, agriculture, and livelihoods for an entire
-              village.
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-emerald-600/10 pt-8">
-              {[
-                { num: "1,200+", label: "Structures Built" },
-                { num: "3.5 Lakh", label: "Farmers Benefited" },
-                { num: "22 Years", label: "Of Work" },
-              ].map((s) => (
-                <div
-                  key={s.num}
-                  className="flex items-center gap-3 bg-emerald-600/5 border border-emerald-600/15 rounded-full px-5 py-2.5"
-                >
-                  <span className="text-xl font-black text-emerald-600">
-                    {s.num}
-                  </span>
-                  <span className="text-gray-500 text-sm">{s.label}</span>
-                </div>
-              ))}
+              <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-emerald-600/10 pt-8">
+                {[
+                  { num: "1,200+", label: "Structures Built" },
+                  { num: "3.5 Lakh", label: "Farmers Benefited" },
+                  { num: "22 Years", label: "Of Work" },
+                ].map((s) => (
+                  <div
+                    key={s.num}
+                    className="flex items-center gap-3 bg-white border border-emerald-600/15 rounded-full px-5 py-2.5"
+                  >
+                    <span className="text-xl font-black text-greenish">
+                      {s.num}
+                    </span>
+                    <span className="text-gray-500 text-sm">{s.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Section - 2 */}
-        <section className="container bg-white overflow-hidden">
+        <section className="container overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-end mb-16">
               <div>
-                <p className="flex items-center justify-center lg:justify-start gap-3 text-emerald-600 text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+                <p className="flex items-center justify-center lg:justify-start gap-3 text-yell text-xs font-semibold tracking-[0.18em] uppercase mb-4">
                   About Structures
-                  <span className="flex-1 max-w-[40px] h-px bg-emerald-600/40" />
+                  <span className="flex-1 max-w-[40px] h-px bg-yell" />
                 </p>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-emerald-600 leading-tight text-center lg:text-left">
+                <h2
+                  className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-center lg:text-left"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
                   What is a{" "}
-                  <span className="italic">&ldquo;Structure&rdquo;?</span>
+                  <span className="italic text-greenish">
+                    &ldquo;Structure&rdquo;?
+                  </span>
                 </h2>
               </div>
               <p className="text-gray-500 text-lg font-light leading-relaxed lg:pb-1 text-center lg:text-left ">
@@ -182,14 +201,14 @@ export default function SupportAStructure() {
               </p>
             </div>
 
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-emerald-600/20 aspect-[16/7]">
+            <div className="relative rounded-3xl overflow-hidden shadow-md aspect-[5/2]">
               <Image
                 src="/image/Suport-image.png"
                 alt="Water Conservation Structures"
                 fill
-                className="object-cover"
+                className="object-cover w-full h-auto"
               />
-              <div className="absolute bottom-6 left-6 bg-emerald-600/90 backdrop-blur-sm text-white text-sm font-medium px-5 py-2 rounded-full border border-white/20">
+              <div className="absolute bottom-6 left-6 bg-yell backdrop-blur-sm text-black text-sm font-medium px-5 py-2 rounded-full border border-white/20">
                 GGPT Field Operations — Gujarat, India
               </div>
             </div>
@@ -200,13 +219,16 @@ export default function SupportAStructure() {
         <section className="container bg-white overflow-hidden">
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="mb-16">
-              <p className="flex items-center justify-center lg:justify-start gap-3 text-emerald-600 text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+              <p className="flex items-center justify-center lg:justify-start gap-3 text-yell text-xs font-semibold tracking-[0.18em] uppercase mb-4">
                 Structure Types
-                <span className="flex-1 max-w-[40px] h-px bg-emerald-600/40" />
+                <span className="flex-1 max-w-[40px] h-px bg-yell" />
               </p>
-              <h2 className="text-4xl lg:text-5xl font-black text-emerald-600 leading-tight max-w-4xl text-center lg:text-left">
+              <h2
+                className="text-4xl lg:text-5xl font-black text-black leading-tight max-w-4xl text-center lg:text-left"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
                 Structures Supported{" "}
-                <span className="italic text-emerald-600/70">by GGPT</span>
+                <span className="text-greenish">by GGPT</span>
               </h2>
             </div>
 
@@ -214,9 +236,9 @@ export default function SupportAStructure() {
               {structures.map((s) => (
                 <div
                   key={s.number}
-                  className="group relative bg-white hover:bg-emerald-600/5 transition-colors p-10 flex flex-col gap-6"
+                  className="group relative bg-white hover:bg-greenish/20 transition-colors p-10 flex flex-col gap-6"
                 >
-                  <span className="absolute top-6 right-8 text-6xl font-black text-emerald-100 leading-none pointer-events-none select-none group-hover:text-emerald-200 transition-colors">
+                  <span className="absolute top-6 right-8 text-6xl font-black text-greenish leading-none pointer-events-none select-none transition-colors">
                     {s.number}
                   </span>
                   <div className="w-14 h-14 bg-emerald-600/10 border border-emerald-600/20 rounded-2xl flex items-center justify-center group-hover:bg-emerald-600/20 transition-colors">
@@ -229,16 +251,13 @@ export default function SupportAStructure() {
                     />
                   </div>
                   <div>
-                    <h3 className="text-emerald-600 text-xl font-bold leading-snug mb-2">
+                    <h3 className="text-greenish text-xl font-bold leading-snug mb-2">
                       {s.title}
                     </h3>
                     <p className="text-gray-500 text-sm leading-relaxed font-light">
                       {s.desc}
                     </p>
                   </div>
-                  <span className="text-emerald-600 text-xl opacity-0 group-hover:opacity-100 transition-opacity mt-auto self-end">
-                    →
-                  </span>
                 </div>
               ))}
             </div>
@@ -247,428 +266,586 @@ export default function SupportAStructure() {
 
         {/* Section - 4 */}
         <section className="container bg-white overflow-hidden">
-      
           <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="lg:max-w-2xl mb-14 text-center lg:text-left">
-              <p className="inline-flex items-center  gap-2 border border-emerald-600/25 bg-emerald-600/5 text-emerald-600 text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+            <div className="mb-14 text-center">
+              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-yell" />
                 The Ground Reality
+                <span className="w-8 h-px bg-yell" />
               </p>
-              <h2 className="text-4xl lg:text-5xl font-black text-emerald-600 leading-tight text-center lg:text-left">
-                Why Your <span className="italic">Support Matters</span>
-              </h2>
+              <h1
+                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                Why Your{" "}
+                <span className="text-greenish w-full">Support Matters</span>
+              </h1>
+              {/* thin emerald divider */}
+              <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* LEFT PROBLEMS */}
               <div className="flex flex-col gap-4">
                 {problems.map((p, i) => (
-                  <div
+                  <motion.div
                     key={i}
-                    className="flex items-center justify-center lg:justify-start gap-4 bg-white border-2 border-emerald-600/10 rounded-2xl px-6 py-5 hover:border-emerald-600/30 hover:shadow-md hover:shadow-emerald-600/5 transition-all"
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.15 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.03 }}
+                    className="flex items-start gap-5 border-l-4 border-[var(--color-yell)] bg-white px-6 py-5 shadow-sm hover:shadow-md transition"
                   >
-                    <span className="w-8 h-8 bg-emerald-600/10 border border-emerald-600/20 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-emerald-600 text-xs font-black">
+                    <span className="text-[var(--color-greenish)] font-bold text-lg w-8">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-gray-600 text-base leading-relaxed font-light">
+
+                    <p className="text-gray-700 text-base leading-relaxed font-medium">
                       {p}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
-              <div className="relative bg-emerald-600 rounded-3xl p-10 overflow-hidden flex flex-col gap-6">
-                <div
-                  className="absolute top-0 right-0 w-48 h-48 opacity-20 pointer-events-none"
-                  style={{
-                    backgroundImage: `radial-gradient(circle, white 1.5px, transparent 1.5px)`,
-                    backgroundSize: "16px 16px",
-                  }}
-                />
-                <span className="text-5xl">💧</span>
-                <div>
-                  <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-3">
-                    Key Impact Fact
-                  </p>
-                  <h3 className="text-3xl lg:text-4xl font-black text-white leading-tight">
-                    One structure can benefit{" "}
-                    <span className="italic text-white/80">
-                      200–500 families
-                    </span>{" "}
-                    for many years.
-                  </h3>
+              {/* RIGHT IMPACT CARD */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02 }}
+                className="relative bg-[var(--color-greenish)] p-10 shadow-xl"
+              >
+                <div className="flex flex-col gap-6">
+                  <div>
+                    <p className="text-[var(--color-yell)] text-xs font-bold uppercase tracking-[0.25em] mb-3">
+                      Impact Insight
+                    </p>
+
+                    <h3 className="text-3xl lg:text-4xl font-black text-white leading-tight">
+                      One water structure can support
+                      <span className="block text-[var(--color-yell)] mt-2">
+                        200 – 500 Families
+                      </span>
+                      for many years.
+                    </h3>
+                  </div>
+
+                  {/* TAGS */}
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      "Drinking Water",
+                      "Agriculture",
+                      "Livestock",
+                      "Livelihoods",
+                    ].map((tag, i) => (
+                      <motion.span
+                        key={tag}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="border border-white/30 text-white text-xs font-semibold px-4 py-1.5"
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-                <div className="mt-2 flex flex-wrap gap-3">
-                  {[
-                    "Drinking Water",
-                    "Agriculture",
-                    "Livestock",
-                    "Livelihoods",
-                  ].map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-white/15 border border-white/25 text-white text-xs font-semibold px-4 py-1.5 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* Section - 5 */}
         <section className="container bg-white overflow-hidden">
-          <div className="absolute left-0 top-12 bottom-12 w-1 bg-emerald-600 rounded-full" />
-
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <p className="inline-flex items-center gap-3 text-emerald-600 text-xs font-bold tracking-[0.18em] uppercase mb-4">
-                <span className="w-8 h-px bg-emerald-600/40" />
+              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-yell" />
                 Choose How to Help
-                <span className="w-8 h-px bg-emerald-600/40" />
+                <span className="w-8 h-px bg-yell" />
               </p>
-              <h2 className="text-4xl lg:text-5xl font-black text-emerald-600 leading-tight">
-                Support <span className="italic">Options</span>
-              </h2>
+              <h1
+                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                Support <span className="text-greenish">Options</span>
+              </h1>
+              {/* thin emerald divider */}
+              <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {supportOptions.map((opt) => (
-                <div
+            <div className="grid md:grid-cols-3 gap-8">
+              {supportOptions.map((opt, i) => (
+                <motion.div
                   key={opt.number}
-                  className={`group relative rounded-3xl p-8 flex flex-col gap-6 overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
-                    opt.featured
-                      ? "bg-emerald-600 shadow-2xl shadow-emerald-600/30"
-                      : "bg-white border-2 border-emerald-600/15 hover:border-emerald-600 hover:shadow-xl hover:shadow-emerald-600/10"
-                  }`}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.15 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -6 }}
+                  className={`relative flex flex-col gap-6 p-8 border-l-[5px] shadow-md transition
+${
+  opt.featured
+    ? "bg-[var(--color-greenish)] border-[var(--color-yell)]"
+    : "bg-white border-[var(--color-greenish)]/30 hover:shadow-xl"
+}`}
                 >
+                  {/* NUMBER */}
                   <span
-                    className={`absolute top-4 right-5 text-7xl font-black leading-none pointer-events-none select-none transition-colors ${opt.featured ? "text-white/[0.08]" : "text-emerald-600/[0.07] group-hover:text-emerald-600/15"}`}
+                    className={`absolute top-5 right-6 text-6xl font-black opacity-10
+${opt.featured ? "text-white" : "text-[var(--color-greenish)]"}
+`}
                   >
                     {opt.number}
                   </span>
+
+                  {/* ICON */}
                   <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${opt.featured ? "bg-white/20 border border-white/30" : "bg-emerald-600/10 border border-emerald-600/20 group-hover:bg-emerald-600/20"}`}
+                    className={`w-12 h-12 flex items-center justify-center border
+${
+  opt.featured
+    ? "border-white/40 bg-white/10"
+    : "border-[var(--color-primary)]/30 bg-[var(--bg-grn)]"
+}`}
                   >
                     <opt.Icon
+                      size={24}
                       className={
-                        opt.featured ? "text-white" : "text-emerald-600"
+                        opt.featured
+                          ? "text-white"
+                          : "text-[var(--color-primary)]"
                       }
-                      size={26}
-                      strokeWidth={1.5}
                     />
                   </div>
+
+                  {/* TITLE */}
                   <div>
                     <p
-                      className={`text-xs font-bold uppercase tracking-widest mb-1 ${opt.featured ? "text-white/60" : "text-emerald-600/60"}`}
+                      className={`text-xs font-bold uppercase tracking-widest mb-2
+${opt.featured ? "text-white/60" : "text-[var(--color-greenish)]"}
+`}
                     >
                       {opt.tag}
                     </p>
+
                     <h3
-                      className={`text-xl font-black leading-tight ${opt.featured ? "text-white" : "text-emerald-600"}`}
+                      className={`text-xl font-black
+${opt.featured ? "text-white" : "text-[var(--color-greenish)]"}
+`}
                     >
                       {opt.title}
                     </h3>
+
                     <p
-                      className={`text-sm mt-1.5 font-light leading-relaxed ${opt.featured ? "text-white/65" : "text-gray-500"}`}
+                      className={`text-sm mt-2 leading-relaxed
+${opt.featured ? "text-white/70" : "text-gray-600"}
+`}
                     >
                       {opt.desc}
                     </p>
                   </div>
-                  <ul className="flex flex-col gap-2.5 flex-1">
-                    {opt.points.map((pt, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
+
+                  {/* POINTS */}
+                  <ul className="flex flex-col gap-2 flex-1">
+                    {opt.points.map((pt, index) => (
+                      <li key={index} className="flex gap-2">
                         <span
-                          className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${opt.featured ? "bg-white/60" : "bg-emerald-600"}`}
+                          className={`w-2 h-2 mt-2
+${opt.featured ? "bg-[var(--color-yell)]" : "bg-[var(--color-greenish)]"}
+`}
                         />
+
                         <span
-                          className={`text-sm leading-snug font-light ${opt.featured ? "text-white/75" : "text-gray-600"}`}
+                          className={`text-sm
+${opt.featured ? "text-white/80" : "text-gray-600"}
+`}
                         >
                           {pt}
                         </span>
                       </li>
                     ))}
                   </ul>
+
+                  {/* BUTTON */}
                   <Link href={opt.href}>
-                    <button
-                      className={`w-full py-3.5 rounded-full font-semibold text-sm transition-all active:scale-95 ${opt.featured ? "bg-white text-emerald-600 hover:bg-white/90 shadow-lg shadow-black/10" : "bg-emerald-600 text-white hover:bg-emerald-600/90 shadow-lg shadow-emerald-600/25"}`}
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
+                      className={`w-full py-3 text-sm font-semibold tracking-wide transition
+${
+  opt.featured
+    ? "bg-[var(--color-yell)] text-black hover:opacity-90"
+    : "bg-[var(--color-greenish)] text-white hover:opacity-90"
+}`}
                     >
                       {opt.cta} →
-                    </button>
+                    </motion.button>
                   </Link>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Section - 6 */}
-        <section className="container bg-white overflow-hidden">         
+        <section className="container bg-white overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            {/* HEADER */}
 
-          <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="mb-14 text-center lg:text-left">
-              <p className="inline-flex items-center gap-2 border border-emerald-600/25 bg-emerald-600/5 text-emerald-600 text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                Transparency & Trust
-              </p>
-              <h2 className="text-4xl lg:text-5xl font-black text-emerald-600 leading-tight max-w-2xl">
-                What You <span className="italic">Receive</span>
-              </h2>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-10 items-start">
-              <div className="grid gap-4">
-                {receives.map(({ Icon, text }, i) => (
-                  <div
-                    key={i}
-                    className="group flex items-center gap-5 bg-white border-2 border-emerald-600/15 rounded-2xl px-6 py-5 hover:border-emerald-600 hover:shadow-lg hover:translate-x-1 transition-all duration-200"
-                  >
-                    <div className="w-11 h-11 bg-emerald-600/10 border border-emerald-600/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-emerald-600/20 transition-colors">
-                      <Icon
-                        className="text-emerald-600"
-                        size={20}
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                    <p className="text-gray-700 text-sm font-medium leading-snug">
-                      {text}
-                    </p>
-                    <span className="ml-auto text-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity text-lg">
-                      →
-                    </span>
-                  </div>
-                ))}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="mb-16 flex flex-wrap justify-between"
+            >
+              <div>
+                <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                  <span className="w-8 h-px bg-yell" />
+                  Transparency & Trust
+                  <span className="w-8 h-px bg-yell" />
+                </p>
+                <h1
+                  className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
+                  What You <span className="text-greenish">Receive</span>
+                </h1>
               </div>
 
+              {/* NEW PARAGRAPH */}
+              <p className="text-gray-600 text-sm lg:text-base max-w-2xl mt-4 leading-relaxed">
+                At GGPT, we believe that every contribution deserves complete
+                transparency. When you support a water structure project, you
+                receive clear documentation, project updates, and verified
+                reports that show the real impact of your support in building
+                sustainable water solutions for rural communities.
+              </p>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* LEFT IMAGE */}
+
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="relative flex justify-center"
+              >
+                {/* IMAGE */}
+                <img
+                  src="/image/support-a-structure/water-structure.png"
+                  alt="Water Structure"
+                  className="w-full max-w-[620px] h-full lg:h-[600px] object-cover rounded-2xl shadow-xl"
+                />
+
+                {/* IMPACT CARD */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[var(--color-yell)] text-white px-6 py-4 rounded-2xl shadow-lg text-center hidden md:block">
+                  <p className="text-xs uppercase text-black">GGPT Impact</p>
+
+                  <p className="text-lg font-bold text-black">
+                    Building Sustainable Water Structures
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* RIGHT CONTENT */}
+
               <div className="flex flex-col gap-6">
-                <div className="relative bg-emerald-600 rounded-3xl p-10 overflow-hidden">
-                  <div
-                    className="absolute top-0 right-0 w-48 h-48 opacity-15 pointer-events-none"
-                    style={{
-                      backgroundImage: `radial-gradient(circle, white 1.5px, transparent 1.5px)`,
-                      backgroundSize: "16px 16px",
-                    }}
-                  />
-                  <span className="text-5xl mb-4 block">🛡️</span>
-                  <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-3">
-                    Our Commitment
-                  </p>
-                  <p className="text-white text-2xl font-black leading-snug">
-                    GGPT follows audited processes and{" "}
-                    <span className="italic text-white/80">
-                      transparent fund utilization
-                    </span>
-                  </p>
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { num: "100%", label: "Audited" },
-                    { num: "GPS", label: "Tagged" },
-                    { num: "8354+", label: "Structures" },
-                  ].map((s) => (
-                    <div
-                      key={s.num}
-                      className="bg-white border-2 border-emerald-600/15 rounded-2xl px-4 py-5 text-center hover:border-emerald-600 transition-colors"
-                    >
-                      <p className="text-2xl font-black text-emerald-600 leading-none mb-1">
-                        {s.num}
-                      </p>
-                      <p className="text-gray-400 text-[10px] uppercase tracking-widest font-bold">
-                        {s.label}
-                      </p>
+                {receives.map(({ Icon, text }, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 60 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: i * 0.15 }}
+                    viewport={{ once: true }}
+                    whileHover={{ x: 6 }}
+                    className="flex items-center gap-5 border-l-4 border-[var(--color-greenish)] bg-white px-6 py-5 shadow-sm"
+                  >
+                    <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-primary)]/30 bg-[var(--bg-grn)]">
+                      <Icon
+                        size={20}
+                        className="text-[var(--color-greenish)]"
+                      />
                     </div>
-                  ))}
-                </div>
+
+                    <p className="text-gray-700 font-medium text-sm leading-relaxed">
+                      {text}
+                    </p>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* Section - 7 */}
-        <section className="container bg-emerald-600 overflow-hidden">
-  
-          <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="mb-12 text-center lg:text-left">
-              <p className="flex items-center justify-center gap-3 text-white/70 text-xs font-bold tracking-[0.18em] uppercase mb-4">
-                <span className="w-8 h-px bg-white/40" />
-                Get In Touch
-              </p>
-              <h2 className="text-4xl lg:text-5xl font-black text-white leading-tight max-w-xl">
-                CSR Partnership{" "}
-                <span className="italic text-white/75">Inquiry Form</span>
-              </h2>
-            </div>
-
-            <div className="max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl shadow-black/20 flex">
-              <div className="hidden md:flex w-2 bg-emerald-600/30 shrink-0" />
-              <div className="flex-1 px-8 sm:px-10 py-10 flex flex-col gap-5">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="text-xs font-bold text-emerald-600 uppercase tracking-widest block mb-1.5">
-                      Company Name *
-                    </label>
-                    <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-3 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors">
-                      <FileText
-                        size={14}
-                        className="text-emerald-600 shrink-0"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Your company name"
-                        value={form.company}
-                        onChange={(e) =>
-                          setForm({ ...form, company: e.target.value })
-                        }
-                        className="flex-1 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-emerald-600 uppercase tracking-widest block mb-1.5">
-                      Email *
-                    </label>
-                    <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-3 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors">
-                      <FileText
-                        size={14}
-                        className="text-emerald-600 shrink-0"
-                      />
-                      <input
-                        type="email"
-                        placeholder="example@email.com"
-                        value={form.email}
-                        onChange={(e) =>
-                          setForm({ ...form, email: e.target.value })
-                        }
-                        className="flex-1 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-xs font-bold text-emerald-600 uppercase tracking-widest block mb-1.5">
-                    Subject *
-                  </label>
-                  <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-3 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors">
-                    <FileText size={14} className="text-emerald-600 shrink-0" />
-                    <input
-                      type="text"
-                      placeholder="Subject Details"
-                      value={form.subject}
-                      onChange={(e) =>
-                        setForm({ ...form, subject: e.target.value })
-                      }
-                      className="flex-1 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-xs font-bold text-emerald-600 uppercase tracking-widest block mb-1.5">
-                    CSR Budget & Contact Person Details *
-                  </label>
-                  <div className="flex items-start gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-3 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors">
-                    <FileText
-                      size={14}
-                      className="text-emerald-600 shrink-0 mt-0.5"
-                    />
-                    <textarea
-                      rows={4}
-                      placeholder="Your CSR Budget, Contact person Name, Number and Other Details"
-                      value={form.message}
-                      onChange={(e) =>
-                        setForm({ ...form, message: e.target.value })
-                      }
-                      className="flex-1 text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent resize-none"
-                    />
-                  </div>
-                </div>
-
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  Note: Fill-up all respective fields, then click below button
-                  to send your message.
+        <section className="font-[var(--font)]">
+          <div className="container">
+            <div className=" mx-auto">
+              <div className="text-center mb-16">
+                <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center  gap-3">
+                  <span className="w-8 h-px bg-[var(--color-yell)]" />
+                  Get In Touch
+                  <span className="w-8 h-px bg-[var(--color-yell)]" />
                 </p>
 
-                <button className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-600/90 text-white font-bold px-10 py-4 rounded-full transition-all shadow-lg shadow-emerald-600/25 active:scale-[0.98] flex items-center gap-2 justify-center">
-                  Send Message →
-                </button>
+                <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center">
+                  CSR Partnership
+                  <span className="text-[var(--color-greenish)]">
+                    {" "}
+                    Inquiry Form
+                  </span>
+                </h2>
+
+                {/* paragraph */}
+                <p className="text-gray-500 text-lg mb-10 leading-relaxed text-center ">
+                  Partner with us to create sustainable impact. Fill in the
+                  details and our team will get back to you shortly.
+                </p>
+              </div>
+
+              {/* form card */}
+              <div>
+                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-primary)]/20 flex flex-col md:flex-row">
+                  {/* LEFT IMAGE */}
+                  <div className="md:w-2/5 relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80"
+                      alt="Water structure construction"
+                      className="w-full h-full object-cover max-h-[315px]"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-greenish)]/80 to-transparent" />
+
+                    <div className="absolute bottom-8 left-8 right-8 text-white">
+                      <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-yell)] mb-2">
+                        CSR Partnership
+                      </p>
+
+                      <h3 className="text-2xl font-bold leading-snug">
+                        Build Water Security <br />
+                        For Gujarat Villages
+                      </h3>
+
+                      <p className="text-sm text-white/80 mt-2">
+                        Partner with us to create sustainable water structures.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* RIGHT FORM */}
+                  <div className="w-full md:w-3/5 bg-white px-8 sm:px-12 py-10 flex flex-col gap-6">
+                    <div>
+                      <h3 className="text-2xl font-bold text-[var(--color-greenish)]">
+                        Partner With Us
+                      </h3>
+
+                      <p className="text-gray-500 text-sm mt-1">
+                        Enquire about CSR opportunities
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                      {/* Company */}
+                      <div>
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                          Company Name
+                        </label>
+
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                          <Building2
+                            size={16}
+                            className="text-[var(--color-greenish)]"
+                          />
+
+                          <input
+                            type="text"
+                            placeholder="Your company name"
+                            className="flex-1 text-sm outline-none bg-transparent"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Contact */}
+                      <div>
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                          Contact Number
+                        </label>
+
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                          <User
+                            size={16}
+                            className="text-[var(--color-greenish)]"
+                          />
+
+                          <input
+                            type="tel"
+                            placeholder="Your contact number"
+                            maxLength={10}
+                            pattern="[0-9]{10}"
+                            className="flex-1 text-sm outline-none bg-transparent"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Email */}
+                      <div>
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                          Email
+                        </label>
+
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                          <Mail
+                            size={16}
+                            className="text-[var(--color-greenish)]"
+                          />
+
+                          <input
+                            type="email"
+                            placeholder="exmple@emil.com"
+                            className="flex-1 text-sm outline-none bg-transparent"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Subject */}
+                      <div>
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                          Subject
+                        </label>
+
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                          <FileText
+                            size={16}
+                            className="text-[var(--color-greenish)]"
+                          />
+
+                          <input
+                            type="text"
+                            placeholder="subject details"
+                            className="flex-1 text-sm outline-none bg-transparent"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* TEXTAREA */}
+                    <div>
+                      <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                        CSR Budget & Details
+                      </label>
+
+                      <div className="flex items-start gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-3 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <MessageSquare
+                          size={16}
+                          className="text-[var(--color-greenish)] mt-1"
+                        />
+
+                        <textarea
+                          rows={3}
+                          placeholder="Share your CSR budget range and expectations..."
+                          className="flex-1 text-sm outline-none bg-transparent resize-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* BUTTON */}
+                    <button className="w-full bg-[var(--color-greenish)] cursor-pointer transition text-white font-semibold py-3 rounded-xl shadow-lg">
+                      Submit Inquiry →
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Section - 8 */}
-        <section className="container bg-white overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-600" />
-
+        <section className="container">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-14">
-              <p className="inline-flex items-center gap-3 text-emerald-600 text-xs font-bold tracking-[0.18em] uppercase mb-4">
-                <span className="w-8 h-px bg-emerald-600/40" />
-                Explore More
-                <span className="w-8 h-px bg-emerald-600/40" />
-              </p>
-              <h2 className="text-4xl lg:text-5xl font-black text-emerald-600 leading-tight">
-                Know More <span className="italic">About Us</span>
-              </h2>
-              <p className="text-gray-500 text-base font-light mt-4 max-w-lg mx-auto leading-relaxed">
-                Repairing, deepening, and raising check dams. A Rainwater
+            {/* Heading */}
+            <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+              <div>
+                <p className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center justify-center lg:justify-start gap-3">
+                  <span className="w-8 h-px bg-greenish" />
+                  Explore More
+                </p>
+                <h2
+                  className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
+                  Know More <span className="text-greenish">About Us</span>
+                </h2>
+              </div>
+              <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start  lg:max-w-xs">
+                Repairing, deepening, and raising check dams. A rainwater
                 harvesting initiative.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            {/* Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {[
                 {
                   img: "/image/support-structure-1.jpg",
                   label: "Awards",
                   Icon: Award,
                   href: "/awards",
-                  desc: "Recognition & achievements earned over 22 years of impact.",
                 },
                 {
                   img: "/image/support-structure-2.jpg",
                   label: "Media",
                   Icon: Tv2,
                   href: "/media",
-                  desc: "News coverage, documentaries and stories from the field.",
                 },
                 {
                   img: "/image/support-structure-3.png",
                   label: "Structure Locations",
                   Icon: MapPin,
                   href: "/Our-Work",
-                  desc: "GPS-tagged structures across Gujarat's drought-prone regions.",
                 },
-              ].map(({ img, label, Icon, href, desc }) => (
+              ].map(({ img, label, Icon, href }) => (
                 <Link key={label} href={href}>
-                  <div className="group relative bg-white border-2 border-emerald-600/15 rounded-3xl overflow-hidden hover:border-emerald-600 hover:shadow-xl hover:shadow-emerald-600/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                  <div
+                    className="group relative bg-[#111815] rounded-2xl overflow-hidden
+                     transition-all duration-300 cursor-pointer"
+                  >
+                    {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={img}
                         alt={label}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-75"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-600/50 via-transparent to-transparent" />
-                      <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
+
+                      {/* Icon badge */}
+                      <div className="absolute top-4 right-4 w-9 h-9 bg-greenish rounded-lg flex items-center justify-center shadow-md">
                         <Icon
-                          className="text-emerald-600"
-                          size={18}
+                          className="text-white"
+                          size={16}
                           strokeWidth={1.5}
                         />
                       </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-emerald-600 font-black text-lg mb-2">
+
+                    {/* Text */}
+                    <div className="p-5">
+                      <h3
+                        className="text-white font-bold text-lg mb-2"
+                        style={{
+                          fontFamily: "'Playfair Display', Georgia, serif",
+                        }}
+                      >
                         {label}
                       </h3>
-                      <p className="text-gray-500 text-sm font-light leading-relaxed">
-                        {desc}
-                      </p>
-                      <span className="mt-4 inline-flex items-center gap-1 text-emerald-600 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                        Explore →
+                      <span className="mt-4 inline-flex items-center gap-2 text-yell text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Explore
+                        <span className="w-5 h-px bg-yell group-hover:w-8 transition-all duration-300" />
                       </span>
                     </div>
                   </div>

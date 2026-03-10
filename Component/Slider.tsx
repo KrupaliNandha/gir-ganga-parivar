@@ -46,10 +46,10 @@ export default function Slider() {
   return (
     <div
       data-aos="fade-up"
-      className="container section-padding w-full overflow-hidden bg-emerald-50"
+      className="container section-padding w-full overflow-hidden bg-[var(--bg-grn)]"
     >
       <div>
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-emerald-600 mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-center text-greenish mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
           Our Partners
         </h1>
         <p className="text-xl font-semibold text-center">

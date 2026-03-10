@@ -38,44 +38,44 @@ const STATS = [
     number: 8354,
     suffix: "+",
     label: "Water structures developed",
-    accent: "#10b981",
+    accent: "#6d8c54",
     bg: "from-emerald-50 to-white",
-    border: "border-emerald-100",
-    iconBg: "bg-emerald-100",
-    iconColor: "text-emerald-600",
+    border: "border-greenish",
+    iconBg: "bg-greenish",
+    iconColor: "text-white",
   },
   {
     icon: Sprout,
     number: 429000,
     suffix: "+",
     label: "Acres farmland rejuvenated",
-    accent: "#059669",
+    accent: "#6d8c54",
     bg: "from-teal-50 to-white",
-    border: "border-teal-100",
-    iconBg: "bg-teal-100",
-    iconColor: "text-teal-600",
+    border: "border-greenish",
+    iconBg: "bg-greenish",
+    iconColor: "text-white",
   },
   {
     icon: Users,
     number: 151000,
     suffix: "+",
     label: "Farmers benefited",
-    accent: "#047857",
+    accent: "#6d8c54",
     bg: "from-green-50 to-white",
-    border: "border-green-100",
-    iconBg: "bg-green-100",
-    iconColor: "text-green-700",
+    border: "border-greenish",
+    iconBg: "bg-greenish",
+    iconColor: "text-white",
   },
   {
     icon: Building2,
     number: 580,
     suffix: "+",
     label: "Gram Panchayats engaged",
-    accent: "#065f46",
+    accent: "#6d8c54",
     bg: "from-emerald-50 to-white",
-    border: "border-emerald-200",
-    iconBg: "bg-emerald-200",
-    iconColor: "text-emerald-800",
+    border: "border-greenish",
+    iconBg: "bg-greenish",
+    iconColor: "text-white",
   },
 ];
 
@@ -366,22 +366,24 @@ export default function OurWorkPage() {
         {/* Section - 1 */}
         <section className="container mx-auto">
           <div className="text-center mb-10">
-            <p className="inline-flex items-center gap-2 border border-emerald-600/25 bg-emerald-600/5 text-emerald-600 text-[11px] tracking-[0.16em] uppercase px-4 py-2 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+            <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+              <span className="w-8 h-px bg-yell" />
               Map
+              <span className="w-8 h-px bg-yell" />
             </p>
-            <h1 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
+            <h1
+              className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
               Structures Created by{" "}
-              <span className="text-emerald-500 italic">
-                Girganga Parivar Trust
-              </span>
+              <span className="text-greenish">Girganga Parivar Trust</span>
             </h1>
           </div>
 
           {/* Toolbar */}
           <div className="flex flex-wrap items-center gap-3 mb-5">
             <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-2.5 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors flex-1 max-w-xs">
-              <Search size={15} className="text-emerald-600 shrink-0" />
+              <Search size={15} className="text-greenish shrink-0" />
               <input
                 type="text"
                 placeholder="Search structures..."
@@ -395,7 +397,7 @@ export default function OurWorkPage() {
               onClick={() => setShowLakes((v) => !v)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
                 showLakes
-                  ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+                  ? "bg-greenish border-greenish text-white shadow-lg "
                   : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
               }`}
             >
@@ -407,7 +409,7 @@ export default function OurWorkPage() {
               onClick={() => setShowDams((v) => !v)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
                 showDams
-                  ? "bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-600/25"
+                  ? "bg-greenish border-greenish text-white shadow-lg"
                   : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
               }`}
             >
@@ -417,7 +419,7 @@ export default function OurWorkPage() {
 
             <button
               onClick={() => setShowPanel((v) => !v)}
-              className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-emerald-600 text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
+              className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-greenish text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
             >
               {showPanel ? <EyeOff size={15} /> : <Eye size={15} />}
               {showPanel ? "Hide Panel" : "Show Panel"}
@@ -428,8 +430,8 @@ export default function OurWorkPage() {
           <div className="relative rounded-3xl overflow-hidden border-2 border-emerald-600/15 shadow-2xl shadow-emerald-600/10">
             {!mounted && (
               <div className="h-[580px] flex flex-col items-center justify-center bg-emerald-50">
-                <div className="w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin mb-3" />
-                <p className="text-emerald-600 text-sm font-medium">
+                <div className="w-8 h-8 border-2 border-greenish border-t-transparent rounded-full animate-spin mb-3" />
+                <p className="text-greenish text-sm font-medium">
                   Loading map…
                 </p>
               </div>
@@ -443,7 +445,7 @@ export default function OurWorkPage() {
             {/* Floating side panel */}
             {mounted && showPanel && (
               <div className="absolute top-4 right-4 z-[1000] w-56 bg-white rounded-2xl shadow-xl border border-emerald-600/15 overflow-hidden">
-                <div className="bg-emerald-600 px-4 py-3 flex items-center gap-2">
+                <div className="bg-greenish px-4 py-3 flex items-center gap-2">
                   <MapPin size={14} className="text-white" strokeWidth={1.5} />
                   <p className="text-white text-xs font-bold uppercase tracking-widest">
                     Categories
@@ -456,7 +458,7 @@ export default function OurWorkPage() {
                   <div className="flex items-center gap-2.5">
                     <Waves
                       size={14}
-                      className="text-emerald-600"
+                      className="text-greenish"
                       strokeWidth={1.5}
                     />
                     <span className="text-sm font-semibold text-gray-700">
@@ -464,7 +466,7 @@ export default function OurWorkPage() {
                     </span>
                   </div>
                   <span
-                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showLakes ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
+                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showLakes ? "bg-greenish border-greenish" : "bg-white border-gray-300"}`}
                   />
                 </div>
                 <div
@@ -474,19 +476,19 @@ export default function OurWorkPage() {
                   <div className="flex items-center gap-2.5">
                     <MapPin
                       size={14}
-                      className="text-emerald-600"
+                      className="text-greenish"
                       strokeWidth={1.5}
                     />
-                    <span className="text-sm font-semibold text-gray-700">
+                    <span className="text-sm font-semibold text-greenish">
                       Check Dam ({CHECK_DAMS.length})
                     </span>
                   </div>
                   <span
-                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showDams ? "bg-emerald-600 border-emerald-600" : "bg-white border-gray-300"}`}
+                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showDams ? "bg-greenish border-greenish" : "bg-white border-gray-300"}`}
                   />
                 </div>
                 <div className="px-4 py-2.5 bg-emerald-600/5 border-t border-emerald-600/10">
-                  <p className="text-[10px] text-emerald-600/60 font-bold uppercase tracking-widest text-center">
+                  <p className="text-[10px] text-greenish/60 font-bold uppercase tracking-widest text-center">
                     GGPT · Gujarat, India
                   </p>
                 </div>
@@ -531,27 +533,23 @@ export default function OurWorkPage() {
                 transform: inView ? "translateY(0)" : "translateY(20px)",
               }}
             >
-              <div className="inline-flex items-center gap-2 mb-5">
-                <span className="w-6 h-px bg-emerald-400" />
-                <span className="text-emerald-600 text-xs font-bold tracking-[0.2em] uppercase">
-                  Proven Impact
-                </span>
-                <span className="w-6 h-px bg-emerald-400" />
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-black text-gray-900 leading-tight mb-4">
-                Measurable transformation
-                <span className="block text-emerald-600 italic font-black">
-                  across Gujarat, India
-                </span>
-              </h2>
-              <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
-                Every number tells a story of communities revived, land
-                restored, and futures secured through water conservation.
+              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-yell" />
+                Proven Impact
+                <span className="w-8 h-px bg-yell" />
               </p>
+              <h1
+                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                Measurable transformation <br />
+                <span className="text-greenish">across Gujarat, India</span>
+              </h1>
+
               <div className="mt-8">
                 <a
-                  href="#"
-                  className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:-translate-y-0.5"
+                  href="/impact"
+                  className="inline-flex items-center gap-2 bg-yell text-black text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20  hover:-translate-y-0.5"
                 >
                   Explore Our Impact
                   <ArrowUpRight size={15} />
@@ -587,17 +585,19 @@ export default function OurWorkPage() {
               }}
             >
               <div>
-                <p className="text-emerald-600 text-xs font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-2">
-                  <span className="w-8 h-px bg-emerald-400 inline-block" />
+                <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                  <span className="w-8 h-px bg-yell" />
                   What People Say
+                  <span className="w-8 h-px bg-yell" />
                 </p>
-                <h2 className="text-5xl font-black text-gray-900 leading-none">
-                  Success
-                  <br />
-                  <span className="text-emerald-600 italic">Stories</span>
-                </h2>
+                <h1
+                  className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center lg:text-start"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
+                  Success <span className="text-greenish"> Stories</span>
+                </h1>
               </div>
-              <p className="text-gray-400 text-sm max-w-xs leading-relaxed md:text-right">
+              <p className="text-gray-400 text-sm lg:max-w-md leading-relaxed md:text-right text-center lg:text-start">
                 Real voices from communities transformed by Girganga Parivar
                 Trust water conservation work.
               </p>
@@ -613,8 +613,8 @@ export default function OurWorkPage() {
                     onClick={() => setActive(i)}
                     className={`group text-left rounded-2xl px-6 py-5 border-2 transition-all duration-300 ${
                       active === i
-                        ? "bg-emerald-600 border-emerald-600 shadow-lg shadow-emerald-600/25"
-                        : "bg-white border-gray-100 hover:border-emerald-600/30 hover:bg-emerald-50/50"
+                        ? "bg-greenish border-greenish shadow-lg shadow-emerald-600/25"
+                        : "bg-white border-gray-100 hover:border-emerald-600/30 hover:bg-greenish/50"
                     }`}
                     style={{
                       opacity: inView ? 1 : 0,
@@ -625,7 +625,7 @@ export default function OurWorkPage() {
                     }}
                   >
                     <div
-                      className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-white/30" : "text-emerald-600/20"}`}
+                      className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-white/30" : "text-greenish/20"}`}
                     >
                       {s.num}
                     </div>
@@ -645,7 +645,7 @@ export default function OurWorkPage() {
 
               {/* Right — big active card */}
               <div
-                className="relative bg-emerald-900 rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
+                className="relative bg-greenish rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
                 style={{
                   opacity: inView ? 1 : 0,
                   transform: inView ? "translateX(0)" : "translateX(24px)",
@@ -654,9 +654,6 @@ export default function OurWorkPage() {
                   transition: "opacity 700ms, transform 700ms",
                 }}
               >
-                {/* Background decorations */}
-                <div className="absolute top-0 right-0 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-700/30 rounded-full blur-2xl pointer-events-none" />
                 {/* Big number watermark */}
                 <span className="absolute right-8 top-6 text-[8rem] font-black text-white/[0.04] leading-none select-none pointer-events-none">
                   {STORIES[active].num}
@@ -664,7 +661,7 @@ export default function OurWorkPage() {
 
                 {/* Large open-quote */}
                 <div className="relative z-10">
-                  <div className="text-emerald-400 text-7xl font-black leading-none mb-4 font-serif">
+                  <div className="text-yell text-7xl font-black leading-none mb-4 font-serif">
                     &ldquo;
                   </div>
                   <p className="text-white text-xl font-medium leading-relaxed max-w-xl transition-all duration-300">
@@ -674,14 +671,14 @@ export default function OurWorkPage() {
 
                 {/* Author row */}
                 <div className="relative z-10 flex flex-wrap items-center gap-4 mt-10 pt-8 border-t border-white/10">
-                  <div className="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-black text-sm shrink-0">
+                  <div className="w-12 h-12 bg-yell rounded-2xl flex items-center justify-center text-black font-black text-sm shrink-0">
                     {STORIES[active].initials}
                   </div>
                   <div>
-                    <p className="text-white font-black">
+                    <p className="text-yell font-black">
                       {STORIES[active].name}
                     </p>
-                    <p className="text-emerald-400 text-xs mt-0.5">
+                    <p className="text-yell text-xs mt-0.5">
                       {STORIES[active].role} · {STORIES[active].location}
                     </p>
                   </div>
@@ -691,7 +688,7 @@ export default function OurWorkPage() {
                       <button
                         key={i}
                         onClick={() => setActive(i)}
-                        className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2 bg-emerald-400" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
+                        className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2 bg-yell" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
                       />
                     ))}
                   </div>
@@ -709,47 +706,52 @@ export default function OurWorkPage() {
               }}
             >
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0 text-lg font-black">
+                <div className="w-10 h-10 bg-greenish rounded-xl flex items-center justify-center text-white shrink-0 text-lg font-black">
                   &ldquo;
                 </div>
                 <p className="text-gray-700 text-sm italic leading-relaxed max-w-xl">
                   After deepening the check dam, water stayed till summer. Our
                   borewells revived, and migration stopped.
-                  <span className="block text-emerald-700 font-black not-italic mt-1">
+                  <span className="block text-greenish font-black not-italic mt-1">
                     — Chhaganbhai Patel, Rajkot
                   </span>
                 </p>
               </div>
-              <a
+              <Link
                 href="/donate"
-                className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-7 py-3 rounded-xl shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
+                className="shrink-0 bg-greenish  text-white font-bold px-7 py-3 rounded-xl shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
               >
                 Contribute Now →
-              </a>
+              </Link>
             </div>
           </div>
         </section>
 
         {/* Section - 4 */}
-        <section className="container overflow-hidden">
+        <section className="container">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-14">
-              <p className="inline-flex items-center gap-3 text-emerald-600 text-xs font-bold tracking-[0.18em] uppercase mb-4">
-                <span className="w-8 h-px bg-emerald-600/40" />
-                Explore More
-                <span className="w-8 h-px bg-emerald-600/40" />
-              </p>
-              <h2 className="text-4xl lg:text-5xl font-black text-emerald-700 leading-tight">
-                Know More{" "}
-                <span className="text-emerald-500 italic">About Us</span>
-              </h2>
-              <p className="text-gray-500 text-base font-light mt-4 max-w-lg mx-auto leading-relaxed">
-                Repairing, deepening, and raising check dams. A Rainwater
+            {/* Heading */}
+            <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+              <div>
+                <p className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
+                  <span className="w-8 h-px bg-greenish" />
+                  Explore More
+                </p>
+                <h2
+                  className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
+                  Know More <span className="text-greenish">About Us</span>
+                </h2>
+              </div>
+              <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start lg:max-w-xs">
+                Repairing, deepening, and raising check dams. A rainwater
                 harvesting initiative.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            {/* Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {[
                 {
                   img: "/image/support-structure-1.jpg",
@@ -774,32 +776,47 @@ export default function OurWorkPage() {
                 },
               ].map(({ img, label, Icon, href, desc }) => (
                 <Link key={label} href={href}>
-                  <div className="group relative bg-white border-2 border-emerald-600/15 rounded-3xl overflow-hidden hover:border-emerald-600 hover:shadow-xl hover:shadow-emerald-600/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-emerald-100">
+                  <div
+                    className="group relative bg-[#111815] rounded-2xl overflow-hidden
+                     transition-all duration-300 cursor-pointer"
+                  >
+                    {/* Image */}
+                    <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={img}
                         alt={label}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover h-auto group-hover:scale-105 transition-transform duration-500 brightness-75"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-600/50 via-transparent to-transparent" />
-                      <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
+
+                      {/* Icon badge */}
+                      <div className="absolute top-4 right-4 w-9 h-9 bg-greenish rounded-lg flex items-center justify-center shadow-md">
                         <Icon
-                          className="text-emerald-600"
-                          size={18}
+                          className="text-white"
+                          size={16}
                           strokeWidth={1.5}
                         />
                       </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-emerald-700 font-black text-lg mb-2">
+
+                    {/* Text */}
+                    <div className="p-5">
+                      <h3
+                        className="text-white font-bold text-lg mb-2"
+                        style={{
+                          fontFamily: "'Playfair Display', Georgia, serif",
+                        }}
+                      >
                         {label}
                       </h3>
-                      <p className="text-gray-500 text-sm font-light leading-relaxed">
+                      <p className="text-gray-500 text-xs leading-relaxed">
                         {desc}
                       </p>
-                      <span className="mt-4 inline-flex items-center gap-1 text-emerald-600 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                        Explore →
+
+                      <span className="mt-4 inline-flex items-center gap-2 text-yell text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Explore
+                        <span className="w-5 h-px bg-yell group-hover:w-8 transition-all duration-300" />
                       </span>
                     </div>
                   </div>
