@@ -38,8 +38,9 @@ const CountUp: React.FC<CountUpProps> = ({ value, suffix = "" }) => {
    SLIDER DATA
 ───────────────────────────────────────────── */
 interface Stat {
-  num: string;
+  num: number;
   label: string;
+  suffix?: string;
 }
 interface Slide {
   id: number;
@@ -60,9 +61,9 @@ const slides: Slide[] = [
     cta: { label: "Discover More", href: "/our-work" },
     bg: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
     stats: [
-      { num: "8354+", label: "Water Structures" },
-      { num: "580+", label: "Gram Panchayats" },
-      { num: "18+", label: "CSR Excavators" },
+      { num: 8354, label: "Water Structures", suffix: "+" },
+      { num: 580, label: "Gram Panchayats", suffix: "+" },
+      { num: 18, label: "CSR Excavators", suffix: "+" },
     ],
   },
   {
@@ -289,7 +290,10 @@ const HeroSection = () => {
                         )}
                         <div>
                           <p className="font-caveat text-[clamp(22px,6vw,42px)] sm:text-[clamp(26px,3.2vw,42px)] font-bold text-[#E8C84A] leading-none">
-                            {stat.num}
+                            <CountUp
+                              value={stat.num}
+                              suffix={stat.suffix || ""}
+                            />
                           </p>
                           <p className="text-[9px] sm:text-[clamp(9px,0.9vw,11px)] font-normal tracking-[0.1em] text-white/65 uppercase mt-1">
                             {stat.label}
@@ -527,7 +531,10 @@ const HeroSection = () => {
                     Our Impact Areas
                   </span>
                 </div>
-                <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                <h2
+                  className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                >
                   Explore Our Impact
                 </h2>
               </motion.div>
