@@ -112,7 +112,7 @@ const SectionBlock = ({
 
             <h2
               className="text-black text-3xl sm:text-4xl font-bold leading-snug text-center lg:text-start"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              
             >
               {title}
             </h2>
@@ -173,7 +173,6 @@ export default function JalMandirSection() {
           </p>
           <h1
             className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Transforming <span className="text-greenish">Water-Scarce</span>
             <br />
@@ -219,7 +218,6 @@ export default function JalMandirSection() {
           </p>
           <h3
             className=" text-2xl sm:text-3xl font-bold mb-8 leading-snug"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Each Donation Helps Secure
             <br />
@@ -246,7 +244,6 @@ export default function JalMandirSection() {
                 </p>
                 <h2
                   className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   Know More <span className="text-greenish">About Us</span>
                 </h2>
@@ -311,9 +308,6 @@ export default function JalMandirSection() {
                     <div className="p-5">
                       <h3
                         className="text-white font-bold text-lg mb-2"
-                        style={{
-                          fontFamily: "'Playfair Display', Georgia, serif",
-                        }}
                       >
                         {label}
                       </h3>
