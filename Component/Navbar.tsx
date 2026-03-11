@@ -455,7 +455,7 @@ export default function Navbar() {
             <FiX size={28} />
           </button>
 
-          <div className="absolute top-36 fixed left-0 right-0 h-4 overflow-hidden">
+          <div className="absolute top-36 left-0 right-0 h-4 overflow-hidden">
             <svg
               className="w-full h-full"
               viewBox="0 0 1200 12"
