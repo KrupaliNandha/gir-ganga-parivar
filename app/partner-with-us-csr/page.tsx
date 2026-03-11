@@ -65,22 +65,22 @@ export default function Support() {
         <section className="bg-[var(--bg-grn)] font-[var(--font)]">
           <div className="container">
             <div className="text-center">
-              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-yell" />
+              <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
                 CSR Partnership
-                <span className="w-8 h-px bg-yell" />
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               >
-                Girganga <span className="text-greenish"> Parivar </span> Trust
+                Girganga <span className="text-[var(--color-greenish)]"> Parivar </span> Trust
               </h1>
               <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
                 Work with us to build sustainable water conservation systems
                 across Gujarat. Together we can empower villages and ensure
                 long-term water security.
               </p>
-              <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
+              <div className="w-16 h-0.5 bg-[var(--color-greenish)] mx-auto mt-10 rounded-full" />
             </div>
 
             <div className="max-w-7xl mx-auto gap-16 items-center">
@@ -93,14 +93,14 @@ export default function Support() {
                     className="relative group bg-white rounded-3xl p-7 shadow-md border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                   >
                     {/* top gradient bar */}
-                    <div className="absolute top-0 left-0 w-full h-1 rounded-t-3xl bg-greenish"></div>
+                    <div className="absolute top-0 left-0 w-full h-1 rounded-t-3xl bg-[var(--color-greenish)]"></div>
 
                     <div className="flex gap-5">
                       {/* icon */}
                       <div className="relative">
                         <div
                           className="w-14 h-14 flex items-center justify-center rounded-full text-white text-xl shadow-lg
-          bg-greenish"
+          bg-[var(--color-greenish)]"
                         >
                           {card.icon}
                         </div>

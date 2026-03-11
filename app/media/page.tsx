@@ -73,17 +73,17 @@ export default function media() {
         {/* Section - 1 */}
         <section className="container w-full max-h-screen overflow-hidden flex flex-col items-center justify-start">
           {/* Heading */}
-          <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-            <span className="w-8 h-px bg-yell" />
+          <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+            <span className="w-8 h-px bg-[var(--color-yell)]" />
             Media & Impact
-            <span className="w-8 h-px bg-yell" />
+            <span className="w-8 h-px bg-[var(--color-yell)]" />
           </p>
 
           <h1
             className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center mb-10"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
-            Reviving Water, <span className="text-greenish">Reviving Life</span>
+            Reviving Water, <span className="text-[var(--color-greenish)]">Reviving Life</span>
           </h1>
 
           {/* YOUTUBE VIDEO */}
@@ -105,15 +105,15 @@ export default function media() {
             {/* Heading */}
             <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div>
-                <p className="text-yell text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
-                  <span className="w-8 h-px bg-yell" />
+                <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
+                  <span className="w-8 h-px bg-[var(--color-yell)]" />
                   Explore More
                 </p>
                 <h2
                   className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
                   style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
-                  Know More <span className="text-greenish">About Us</span>
+                  Know More <span className="text-[var(--color-greenish)]">About Us</span>
                 </h2>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed lg:max-w-xs text-center lg:text-star">
@@ -160,7 +160,7 @@ export default function media() {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}
-                      <div className="absolute top-4 right-4 w-9 h-9 bg-greenish rounded-lg flex items-center justify-center shadow-md">
+                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-greenish)] rounded-lg flex items-center justify-center shadow-md">
                         <Icon
                           className="text-white"
                           size={16}
@@ -180,9 +180,9 @@ export default function media() {
                         {label}
                       </h3>
 
-                      <span className="mt-4 inline-flex items-center gap-2 text-yell text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-yell)] text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Explore
-                        <span className="w-5 h-px bg-yell group-hover:w-8 transition-all duration-300" />
+                        <span className="w-5 h-px bg-[var(--color-yell)] group-hover:w-8 transition-all duration-300" />
                       </span>
                     </div>
                   </div>
@@ -196,16 +196,16 @@ export default function media() {
         <section className="container py-20">
           {/* Heading */}
           <div className="text-center mb-14">
-            <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-              <span className="w-8 h-px bg-yell" />
+            <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+              <span className="w-8 h-px bg-[var(--color-yell)]" />
               Project Progress
-              <span className="w-8 h-px bg-yell" />
+              <span className="w-8 h-px bg-[var(--color-yell)]" />
             </p>
             <h1
               className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             >
-              Construction <span className="text-greenish">Work </span>
+              Construction <span className="text-[var(--color-greenish)]">Work </span>
               Images
             </h1>
           </div>

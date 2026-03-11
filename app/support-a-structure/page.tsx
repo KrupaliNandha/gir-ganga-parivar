@@ -26,28 +26,28 @@ import { motion } from "framer-motion";
 
 const structures = [
   {
-    icon: "/icons/crane-machine (1).png",
+    icon: "/icons/craner.png",
     alt: "Check Dam Rejuvenation",
     title: "Check Dam Deepening & Rejuvenation",
     desc: "Restoring aging dams to retain maximum water through monsoon seasons.",
     number: "01",
   },
   {
-    icon: "/icons/tanker.png",
+    icon: "/icons/truck.png",
     alt: "New Check Dam Construction",
     title: "New Check Dam Construction",
     desc: "Building barriers that harvest seasonal rainfall before it runs off.",
     number: "02",
   },
   {
-    icon: "/icons/rotate.png",
+    icon: "/icons/reload.png",
     alt: "Borewell Recharge Structures",
     title: "Borewell Recharge Structures",
     desc: "Channeling surface water deep underground to replenish aquifers.",
     number: "03",
   },
   {
-    icon: "/icons/spinner-of-dots (1).png",
+    icon: "/icons/loading.png",
     alt: "Percolation Pits",
     title: "Percolation Pits",
     desc: "Simple yet powerful pits that slowly filter water back into the soil.",
@@ -68,7 +68,7 @@ const supportOptions = [
       "Village-level impact with long-term benefits",
     ],
     cta: "Structure Support",
-    href: "/support-a-structure",
+    href: "/donate",
   },
   {
     number: "02",
@@ -81,7 +81,7 @@ const supportOptions = [
       "Your contribution is pooled for structure development",
     ],
     cta: "Part Contribution",
-    href: "/donate",
+    href: "#",
     featured: true,
   },
   {
@@ -96,7 +96,7 @@ const supportOptions = [
       "As a group / community contribution",
     ],
     cta: "Dedicate A Structure",
-    href: "/donate",
+    href: "#",
   },
 ];
 
@@ -130,16 +130,16 @@ export default function SupportAStructure() {
         <section className="bg-[var(--bg-grn)] p-15 overflow-hidden">
           <div className="container">
             <div className="relative z-10 max-w-7xl mx-auto justify-center items-center flex flex-col text-center">
-              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-yell" />
+              <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
                 Water for Farms, Families, and the Future
-                <span className="w-8 h-px bg-yell" />
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               >
                 One Structure. <br />{" "}
-                <span className="text-greenish">
+                <span className="text-[var(--color-greenish)]">
                   {" "}
                   Multiple Generations Benefit.
                 </span>
@@ -151,7 +151,7 @@ export default function SupportAStructure() {
                 entire village.
               </p>
               {/* thin emerald divider */}
-              <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
+              <div className="w-16 h-0.5 bg-[var(--color-greenish)] mx-auto mt-10 rounded-full" />
 
               <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-emerald-600/10 pt-8">
                 {[
@@ -163,7 +163,7 @@ export default function SupportAStructure() {
                     key={s.num}
                     className="flex items-center gap-3 bg-white border border-emerald-600/15 rounded-full px-5 py-2.5"
                   >
-                    <span className="text-xl font-black text-greenish">
+                    <span className="text-xl font-black text-[var(--color-greenish)]">
                       {s.num}
                     </span>
                     <span className="text-gray-500 text-sm">{s.label}</span>
@@ -179,15 +179,15 @@ export default function SupportAStructure() {
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-end mb-16">
               <div>
-                <p className="flex items-center justify-center lg:justify-start gap-3 text-yell text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+                <p className="flex items-center justify-center lg:justify-start gap-3 text-[var(--color-yell)] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
                   About Structures
-                  <span className="flex-1 max-w-[40px] h-px bg-yell" />
+                  <span className="flex-1 max-w-[40px] h-px bg-[var(--color-yell)]" />
                 </p>
                 <h2
                   className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-center lg:text-left"
                 >
                   What is a{" "}
-                  <span className="italic text-greenish">
+                  <span className="italic text-[var(--color-greenish)]">
                     &ldquo;Structure&rdquo;?
                   </span>
                 </h2>
@@ -206,7 +206,7 @@ export default function SupportAStructure() {
                 fill
                 className="object-cover w-full h-auto"
               />
-              <div className="absolute bottom-6 left-6 bg-yell backdrop-blur-sm text-black text-sm font-medium px-5 py-2 rounded-full border border-white/20">
+              <div className="absolute bottom-6 left-6 bg-[var(--color-yell)] backdrop-blur-sm text-black text-sm font-medium px-5 py-2 rounded-full border border-white/20">
                 GGPT Field Operations — Gujarat, India
               </div>
             </div>
@@ -217,28 +217,28 @@ export default function SupportAStructure() {
         <section className="container bg-white overflow-hidden">
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="mb-16">
-              <p className="flex items-center justify-center lg:justify-start gap-3 text-yell text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+              <p className="flex items-center justify-center lg:justify-start gap-3 text-[var(--color-yell)] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
                 Structure Types
-                <span className="flex-1 max-w-[40px] h-px bg-yell" />
+                <span className="flex-1 max-w-[40px] h-px bg-[var(--color-yell)]" />
               </p>
               <h2
                 className="text-4xl lg:text-5xl font-black text-black leading-tight max-w-4xl text-center lg:text-left"
               >
                 Structures Supported{" "}
-                <span className="text-greenish">by GGPT</span>
+                <span className="text-[var(--color-greenish)]">by GGPT</span>
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-px rounded-3xl overflow-hidden bg-greenish/30">
+            <div className="grid sm:grid-cols-2 gap-px rounded-3xl overflow-hidden bg-[var(--color-greenish)]/30">
               {structures.map((s) => (
                 <div
                   key={s.number}
-                  className="group relative bg-white hover:bg-greenish/20 transition-colors p-10 flex flex-col gap-6"
+                  className="group relative bg-white hover:bg-[var(--color-greenish)]/20 transition-colors p-10 flex flex-col gap-6"
                 >
-                  <span className="absolute top-6 right-8 text-6xl font-black text-greenish leading-none pointer-events-none select-none transition-colors">
+                  <span className="absolute top-6 right-8 text-6xl font-black text-[var(--color-greenish)] leading-none pointer-events-none select-none transition-colors">
                     {s.number}
                   </span>
-                  <div className="w-14 h-14 bg-greenish border border-greenish/20 rounded-2xl flex items-center justify-center group-hover:bg-greenish/20 ">
+                  <div className="w-14 h-14 bg-[var(--color-greenish)] border border-[var(--color-greenish)]/20 rounded-2xl flex items-center justify-center group-hover:bg-[var(--color-greenish)]/20 ">
                     <Image
                       src={s.icon}
                       alt={s.alt}
@@ -248,7 +248,7 @@ export default function SupportAStructure() {
                     />
                   </div>
                   <div>
-                    <h3 className="text-greenish text-xl font-bold leading-snug mb-2">
+                    <h3 className="text-[var(--color-greenish)] text-xl font-bold leading-snug mb-2">
                       {s.title}
                     </h3>
                     <p className="text-gray-500 text-sm leading-relaxed font-light">
@@ -265,19 +265,19 @@ export default function SupportAStructure() {
         <section className="container bg-white overflow-hidden">
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="mb-14 text-center">
-              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-yell" />
+              <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
                 The Ground Reality
-                <span className="w-8 h-px bg-yell" />
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               >
                 Why Your{" "}
-                <span className="text-greenish w-full">Support Matters</span>
+                <span className="text-[var(--color-greenish)] w-full">Support Matters</span>
               </h1>
               {/* thin emerald divider */}
-              <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
+              <div className="w-16 h-0.5 bg-[var(--color-greenish)] mx-auto mt-10 rounded-full" />
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -357,18 +357,18 @@ export default function SupportAStructure() {
         <section className="container bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-yell" />
+              <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
                 Choose How to Help
-                <span className="w-8 h-px bg-yell" />
+                <span className="w-8 h-px bg-[var(--color-yell)]" />
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               >
-                Support <span className="text-greenish">Options</span>
+                Support <span className="text-[var(--color-greenish)]">Options</span>
               </h1>
               {/* thin emerald divider */}
-              <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
+              <div className="w-16 h-0.5 bg-[var(--color-greenish)] mx-auto mt-10 rounded-full" />
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -467,7 +467,7 @@ ${opt.featured ? "text-white/80" : "text-gray-600"}
                   <Link href={opt.href}>
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      className={`w-full py-3 text-sm font-semibold tracking-wide transition
+                      className={`w-full py-3 text-sm font-semibold tracking-wide transition cursor-pointer
 ${
   opt.featured
     ? "bg-[var(--color-yell)] text-black hover:opacity-90"
@@ -496,15 +496,15 @@ ${
               className="mb-16 flex flex-wrap justify-between"
             >
               <div>
-                <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                  <span className="w-8 h-px bg-yell" />
+                <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                  <span className="w-8 h-px bg-[var(--color-yell)]" />
                   Transparency & Trust
-                  <span className="w-8 h-px bg-yell" />
+                  <span className="w-8 h-px bg-[var(--color-yell)]" />
                 </p>
                 <h1
                   className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
                 >
-                  What You <span className="text-greenish">Receive</span>
+                  What You <span className="text-[var(--color-greenish)]">Receive</span>
                 </h1>
               </div>
 
@@ -763,14 +763,14 @@ ${
             {/* Heading */}
             <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div>
-                <p className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center justify-center lg:justify-start gap-3">
-                  <span className="w-8 h-px bg-greenish" />
+                <p className="text-[var(--color-greenish)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center justify-center lg:justify-start gap-3">
+                  <span className="w-8 h-px bg-[var(--color-greenish)]" />
                   Explore More
                 </p>
                 <h2
                   className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
                 >
-                  Know More <span className="text-greenish">About Us</span>
+                  Know More <span className="text-[var(--color-greenish)]">About Us</span>
                 </h2>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start  lg:max-w-xs">
@@ -817,7 +817,7 @@ ${
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}
-                      <div className="absolute top-4 right-4 w-9 h-9 bg-greenish rounded-lg flex items-center justify-center shadow-md">
+                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-greenish)] rounded-lg flex items-center justify-center shadow-md">
                         <Icon
                           className="text-white"
                           size={16}
@@ -836,9 +836,9 @@ ${
                       >
                         {label}
                       </h3>
-                      <span className="mt-4 inline-flex items-center gap-2 text-yell text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-yell)] text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Explore
-                        <span className="w-5 h-px bg-yell group-hover:w-8 transition-all duration-300" />
+                        <span className="w-5 h-px bg-[var(--color-yell)] group-hover:w-8 transition-all duration-300" />
                       </span>
                     </div>
                   </div>

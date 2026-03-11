@@ -53,14 +53,15 @@ export default function Media() {
         {/* Heading */}
         <div className="text-center mb-16">
 
-          <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-            <span className="w-8 h-px bg-yell" />
+          <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+            <span className="w-8 h-px bg-[var(--color-yell)]" />
             Project Gallery
-            <span className="w-8 h-px bg-yell" />
+            <span className="w-8 h-px bg-[var(--color-yell)]
+" />
           </p>
 
           <h2 className="text-4xl md:text-5xl font-bold">
-            Our <span className="text-greenish">Check Dam Work</span>
+            Our <span className="text-[var(--color-greenish)]">Check Dam Work</span>
           </h2>
 
           <p className="text-gray-500 max-w-xl mx-auto mt-4">
@@ -105,13 +106,13 @@ export default function Media() {
         {/* Heading */}
         <div className="mb-14 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 max-w-4xl mx-auto">
           <div>
-            <p className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
-              <span className="w-8 h-px bg-greenish" />
+            <p className="text-[var(--color-greenish)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
+              <span className="w-8 h-px bg-[var(--color-greenish)]" />
               Explore More
             </p>
 
             <h2 className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start">
-              Know More <span className="text-greenish">About Us</span>
+              Know More <span className="text-[var(--color-greenish)]">About Us</span>
             </h2>
           </div>
 
@@ -139,7 +140,7 @@ export default function Media() {
               <h3 className="text-2xl font-bold mb-3">Location</h3>
 
               <Link href="/Our-Work">
-                <span className="text-greenish font-semibold hover:underline">
+                <span className="text-[var(--color-greenish)] font-semibold hover:underline">
                   Learn More →
                 </span>
               </Link>
