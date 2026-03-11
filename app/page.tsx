@@ -59,7 +59,7 @@ const slides: Slide[] = [
     headline: ["Solution For", "Generations"],
     sub: "Reviving rivers, recharging groundwater, and securing water for communities across drought-prone Gujarat.",
     cta: { label: "Discover More", href: "/our-work" },
-    bg: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+    bg: "/image/home/Slide1.png",
     stats: [
       { num: 8354, label: "Water Structures", suffix: "+" },
       { num: 580, label: "Gram Panchayats", suffix: "+" },
@@ -72,7 +72,7 @@ const slides: Slide[] = [
     headline: ["Every Drop", "Counts"],
     sub: "Not a single drop of rainwater should flow into the sea. We are building 1,11,111 check dams and bore recharge systems across Gujarat.",
     cta: { label: "Explore Impact", href: "/impact" },
-    bg: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&q=80",
+    bg: "/image/home/Slide2.png",
   },
   {
     id: 3,
@@ -80,7 +80,7 @@ const slides: Slide[] = [
     headline: ["Reviving Rivers,", "Restoring Life"],
     sub: "A decade of grassroots partnership with communities, CSR partners, and government agencies restoring watersheds and improving biodiversity in Saurashtra.",
     cta: { label: "Partner with Us", href: "/partner-with-us-csr" },
-    bg: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&q=80",
+    bg: "/image/home/Slide3.png",
   },
   {
     id: 4,
@@ -88,7 +88,7 @@ const slides: Slide[] = [
     headline: ["Water Security", "For All"],
     sub: "Recognised globally for our innovative PPP model. Partner with Girganga Parivar Trust to transform arid regions into water-abundant landscapes.",
     cta: { label: "Support Now", href: "/donation" },
-    bg: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=80",
+    bg: "/image/home/Slide4.png",
   },
 ];
 
@@ -262,9 +262,9 @@ const HeroSection = () => {
                   className="flex items-center gap-4 sm:gap-[25px]"
                 >
                   <Link href={slide.cta.href}>
-                    <span className="mt-4 sm:mt-10 group relative inline-block bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-white text-[10px] sm:text-[clamp(10px,1vw,12px)] font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase px-6 sm:px-9 py-3 sm:py-4 rounded-[3px] overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-transform duration-300">
+                    <span className="mt-4 sm:mt-10 group relative inline-block bg-[var(--color-secondary)] text-[var(--color-greenish)] hover:text-white text-[10px] sm:text-[clamp(10px,1vw,12px)] font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase px-6 sm:px-9 py-3 sm:py-4 rounded-[3px] overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-transform duration-300">
                       <span className="relative z-10">{slide.cta.label}</span>
-                      <span className="absolute inset-0 bg-[var(--color-primary)] -translate-x-[110%] group-hover:translate-x-[110%] transition-transform duration-1000" />
+                      <span className="absolute inset-0 bg-[var(--color-greenish)] -translate-x-[110%] group-hover:translate-x-[110%] transition-transform duration-1000" />
                     </span>
                   </Link>
                   {/* Arrow image — hidden on very small screens */}
@@ -339,18 +339,12 @@ const HeroSection = () => {
               </button>
             ))}
           </div>
-
-          {/* Progress bar */}
-          <div
-            className="absolute bottom-0 left-0 h-[3px] bg-[var(--color-secondary)] z-10"
-            style={{ width: `${progress}%`, transition: "width 50ms linear" }}
-          />
         </section>
 
         {/* ══════════════════════════════
             SECTION 2 — INTRO / MISSION & VISION
         ══════════════════════════════ */}
-        <section className="bg-[var(--bg-grn)] py-12 sm:py-16 md:py-24 px-4 overflow-hidden">
+        <section className="bg-[var(--color-tertiary)]/50 py-12 sm:py-16 md:py-24 px-4 overflow-hidden">
           <div className="container">
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -511,8 +505,8 @@ const HeroSection = () => {
         {/* ══════════════════════════════
             SECTION 3 — EXPLORE IMPACT
         ══════════════════════════════ */}
-        <section className="px-4 py-8 sm:py-10">
-          <div className="max-w-7xl mx-auto">
+        <section className="">
+          
             <div className="container">
               {/* Heading */}
               <motion.div
@@ -623,7 +617,7 @@ const HeroSection = () => {
                 </a>
               </motion.div>
             </div>
-          </div>
+        
         </section>
       </SmoothScroll>
     </>

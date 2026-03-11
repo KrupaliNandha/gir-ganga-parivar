@@ -24,6 +24,17 @@
   margin: 0 auto;
 }
 
+/* second container */
+.containers {
+  max-width: 110rem; /* 7xl = 1280px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem; 
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 /* Color Variables */
 :root {
   --font: "Poppins", sans-serif;
@@ -31,7 +42,9 @@
   --color-secondary: #f1cf69; /* --color-yell */
   --color-tertiary: #E6F7FB;
   --color-accent: #34d399;  /* --bg-grn */
-  --color-dark: #acd7f3; /* Deep teal #acd7f3, greenish-#6d8c54 */
+  --color-dark: #acd7f3; /* Deep teal #acd7f3,*/
+  --color-greenish: #6d8c54; /*  greenish-#6d8c54 */
+
 }
 
 .section-padding-header {

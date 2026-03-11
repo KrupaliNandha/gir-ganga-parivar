@@ -60,8 +60,8 @@ const BeforeAfterImage = ({
         <span
           className="px-6 py-3 rounded-full text-xs font-semibold tracking-wide transition-all duration-500"
           style={{
-            background: hovered ? "#059669" : "rgba(0,0,0,0.45)",
-            color: "#fff",
+            background: hovered ? "#6d8c54" : "rgba(0,0,0,0.45)",
+            color: "#ffff",
           }}
         >
           {hovered ? "After" : "Before"}
@@ -94,7 +94,7 @@ const SectionBlock = ({
   dark = false,
   useNextImage = false,
 }: SectionBlockProps) => (
-  <section className={`${dark ? "bg-[var(--bg-grn)]" : "bg-[var(--bg-grn)]"} `}>
+  <section className="bg-[var(--color-tertiary)]">
     <div className="max-w-7xl mx-auto">
       <div className="container">
         <div
@@ -104,8 +104,8 @@ const SectionBlock = ({
           <div className="w-full lg:w-[42%] space-y-5">
             {/* eyebrow */}
             <div className="flex items-center justify-center lg:justify-start gap-3">
-              <span className="w-8 h-px bg-yell" />
-              <span className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase ">
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+              <span className="text-[var(--color-primary)] text-[10px] font-bold tracking-[0.25em] uppercase ">
                 {eyebrow}
               </span>
             </div>
@@ -117,7 +117,7 @@ const SectionBlock = ({
               {title}
             </h2>
 
-            <p className="text-greenish text-sm font-medium text-center lg:text-start">
+            <p className="text-[var(--color-primary)] text-sm font-medium text-center lg:text-start">
               {subtitle}
             </p>
 
@@ -128,10 +128,10 @@ const SectionBlock = ({
             <div className="flex justify-self-center lg:justify-self-start">
               <Link
                 href="/donate"
-                className="inline-flex items-center gap-2 text-yell border p-4 text-xs font-bold uppercase tracking-widest group mt-2"
+                className="inline-flex items-center gap-2 text-[var(--color-secondary)] border p-4 text-xs font-bold uppercase tracking-widest group mt-2"
               >
                 <span>Donate Now</span>
-                <span className="w-8 h-px bg-yell group-hover:w-14 transition-all duration-300" />
+                <span className="w-8 h-px bg-[var(--color-secondary)] group-hover:w-14 transition-all duration-300" />
               </Link>
             </div>
           </div>
@@ -165,16 +165,16 @@ export default function JalMandirSection() {
     <>
       <SmoothScroll>
         {/* ── PAGE HERO ── */}
-        <div className="bg-[var(--bg-grn)] pt-16 pb-6 px-4 text-center">
-          <p className="text-yell text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-            <span className="w-8 h-px bg-yell" />
+        <div className="bg-[var(--color-tertiary)] pt-16 pb-6 text-center container">
+          <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+            <span className="w-8 h-px bg-[var(--color-secondary)]" />
             Our Impact
-            <span className="w-8 h-px bg-yell" />
+            <span className="w-8 h-px bg-[var(--color-secondary)]" />
           </p>
           <h1
             className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
           >
-            Transforming <span className="text-greenish">Water-Scarce</span>
+            Transforming <span className="text-[var(--color-primary)]">Water-Scarce</span>
             <br />
             Regions of Gujarat
           </h1>
@@ -183,7 +183,7 @@ export default function JalMandirSection() {
             witness the change.
           </p>
           {/* thin emerald divider */}
-          <div className="w-16 h-0.5 bg-greenish mx-auto mt-10 rounded-full" />
+          <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
         </div>
 
         {/* ── SECTION 1 — GEBEA Jal Mandir ── */}
@@ -221,13 +221,13 @@ export default function JalMandirSection() {
           >
             Each Donation Helps Secure
             <br />
-            <span className="text-greenish">A Water-Safe Future</span>
+            <span className="text-[var(--color-primary)]">A Water-Safe Future</span>
           </h3>
           <Link href="/donate">
-            <button className="group relative bg-greenish text-white font-semibold px-10 py-4 rounded-lg overflow-hidden hover:-translate-y-0.5 transition-transform duration-300 inline-flex items-center gap-3 shadow-xl">
+            <button className="group relative bg-[var(--color-primary)] text-white font-semibold px-10 py-4 rounded-lg overflow-hidden hover:-translate-y-0.5 transition-transform duration-300 inline-flex items-center gap-3 shadow-xl">
               <span className="relative z-10">Donate Now</span>
               <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              <span className="absolute inset-0 bg-yell translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <span className="absolute inset-0 bg-[var(--color-secondary)] text-black translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </button>
           </Link>
         </div>
@@ -238,14 +238,14 @@ export default function JalMandirSection() {
             {/* Heading */}
             <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div>
-                <p className="text-greenish text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
-                  <span className="w-8 h-px bg-greenish" />
+                <p className="text-[var(--color-primary)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
+                  <span className="w-8 h-px bg-[var(--color-primary)]" />
                   Explore More
                 </p>
                 <h2
                   className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
                 >
-                  Know More <span className="text-greenish">About Us</span>
+                  Know More <span className="text-[var(--color-primary)]">About Us</span>
                 </h2>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start lg:max-w-xs">
@@ -295,7 +295,7 @@ export default function JalMandirSection() {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}
-                      <div className="absolute top-4 right-4 w-9 h-9 bg-greenish rounded-lg flex items-center justify-center shadow-md">
+                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-primary)] rounded-lg flex items-center justify-center shadow-md">
                         <Icon
                           className="text-white"
                           size={16}
@@ -315,9 +315,9 @@ export default function JalMandirSection() {
                         {desc}
                       </p>
 
-                      <span className="mt-4 inline-flex items-center gap-2 text-yell text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-secondary)] text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Explore
-                        <span className="w-5 h-px bg-yell group-hover:w-8 transition-all duration-300" />
+                        <span className="w-5 h-px bg-[var(--color-secondary)] group-hover:w-8 transition-all duration-300" />
                       </span>
                     </div>
                   </div>
