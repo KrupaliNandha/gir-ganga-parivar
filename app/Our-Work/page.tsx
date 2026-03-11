@@ -39,8 +39,8 @@ const STATS = [
     suffix: "+",
     label: "Water structures developed",
     accent: "#009dc4",
-    bg: "from-emerald-50 to-white",
-    border: "border-[var(--color-primary)]",
+    bg: "bg-[var(--color-primary)]/10",
+    border: "border-[var(--color-primary)]/60",
     iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
@@ -50,8 +50,8 @@ const STATS = [
     suffix: "+",
     label: "Acres farmland rejuvenated",
     accent: "#009dc4",
-    bg: "from-teal-50 to-white",
-    border: "border-[var(--color-primary)]",
+    bg: "bg-[var(--color-primary)]/10",
+    border: "border-[var(--color-primary)]/60",
     iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
@@ -61,8 +61,8 @@ const STATS = [
     suffix: "+",
     label: "Farmers benefited",
     accent: "#009dc4",
-    bg: "from-green-50 to-white",
-    border: "border-[var(--color-primary)]",
+    bg: "bg-[var(--color-primary)]/10",
+    border: "border-[var(--color-primary)]/60",
     iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
@@ -72,8 +72,8 @@ const STATS = [
     suffix: "+",
     label: "Gram Panchayats engaged",
     accent: "#009dc4",
-    bg: "from-emerald-50 to-white",
-    border: "border-[var(--color-primary)]",
+    bg: "bg-[var(--color-primary)]/10",
+    border: "border-[var(--color-primary)]/60",
     iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
@@ -219,8 +219,8 @@ export default function OurWorkPage() {
           className: "",
         });
 
-      const LAKE_ICON = makeFlagIcon("#059669");
-      const DAM_ICON = makeFlagIcon("#047857");
+      const LAKE_ICON = makeFlagIcon("#009dc4");
+      const DAM_ICON = makeFlagIcon("#009dc7");
 
       const map = L.map(mapContainerRef.current!).setView([22.35, 70.65], 10);
       mapInstanceRef.current = map;
@@ -235,7 +235,7 @@ export default function OurWorkPage() {
           .bindPopup(
             `
           <div style="font-family:sans-serif;min-width:140px">
-            <p style="font-weight:700;color:#059669;font-size:13px;margin:0 0 4px">${lake.name}</p>
+            <p style="font-weight:700;color:#009dc4;font-size:13px;margin:0 0 4px">${lake.name}</p>
             <p style="color:#9ca3af;font-size:11px;margin:0">Lake · GGPT Structure</p>
           </div>
         `,
@@ -390,7 +390,7 @@ export default function OurWorkPage() {
 
           {/* Toolbar */}
           <div className="flex flex-wrap items-center gap-3 mb-5">
-            <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-2.5 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors flex-1 max-w-xs">
+            <div className="flex items-center gap-2 border-2 border-[var(--color-primary)] rounded-xl px-4 py-2.5 bg-[var(--color-primary)]/5 focus-within:border-[var(--color-primary)] focus-within:bg-white transition-colors flex-1 max-w-xs">
               <Search
                 size={15}
                 className="text-[var(--color-primary)] shrink-0"
@@ -409,7 +409,7 @@ export default function OurWorkPage() {
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
                 showLakes
                   ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg "
-                  : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
+                  : "bg-white border-[var(--color-primary)]/20 text-[var(--color-primary)] hover:border-[var(--color-primary)]"
               }`}
             >
               <Waves size={15} strokeWidth={1.5} />
@@ -421,7 +421,7 @@ export default function OurWorkPage() {
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
                 showDams
                   ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg"
-                  : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
+                  : "bg-white border-[var(--color-primary)]/20 text-[var(--color-primary)] hover:border-[var(--color-primary)]"
               }`}
             >
               <MapPin size={15} strokeWidth={1.5} />
@@ -430,7 +430,7 @@ export default function OurWorkPage() {
 
             <button
               onClick={() => setShowPanel((v) => !v)}
-              className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-[var(--color-primary)] text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
+              className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-[var(--color-primary)]/20 text-[var(--color-primary)] text-sm font-semibold hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)]/5 transition-all"
             >
               {showPanel ? <EyeOff size={15} /> : <Eye size={15} />}
               {showPanel ? "Hide Panel" : "Show Panel"}
@@ -464,7 +464,7 @@ export default function OurWorkPage() {
                 </div>
                 <div
                   onClick={() => setShowLakes((v) => !v)}
-                  className={`flex items-center justify-between px-4 py-3.5 border-b border-emerald-600/10 cursor-pointer transition-colors ${showLakes ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
+                  className={`flex items-center justify-between px-4 py-3.5 border-b border-[var(--color-primary)]/10 cursor-pointer transition-colors ${showLakes ? "bg-emerald-600/5" : "bg-white hover:bg-emerald-600/5"}`}
                 >
                   <div className="flex items-center gap-2.5">
                     <Waves
@@ -472,7 +472,7 @@ export default function OurWorkPage() {
                       className="text-[var(--color-primary)]"
                       strokeWidth={1.5}
                     />
-                    <span className="text-sm font-semibold text-gray-700">
+                    <span className="text-sm font-semibold text-[var(--color-primary)]">
                       Lake ({LAKES.length})
                     </span>
                   </div>
@@ -509,10 +509,10 @@ export default function OurWorkPage() {
             {/* Search badge */}
             {mounted && searchQuery && (
               <div className="absolute bottom-4 left-4 z-[1000] bg-white border border-emerald-600/20 rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2">
-                <Search size={13} className="text-emerald-600" />
+                <Search size={13} className="text-[var(--color-primary)]" />
                 <span className="text-xs text-gray-600 font-medium">
                   {filteredCount} result(s) for{" "}
-                  <span className="text-emerald-600 font-bold">
+                  <span className="text-[var(--color-primary)] font-bold">
                     {searchQuery}
                   </span>
                 </span>

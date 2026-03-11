@@ -127,7 +127,7 @@ export default function SupportAStructure() {
     <SmoothScroll>
       <section className="overflow-x-hidden">
         {/* Section - 1 */}
-        <section className="bg-[var(--bg-grn)]  overflow-hidden">
+        <section className="bg-[var(--color-tertiary)]  overflow-hidden">
           <div className="container">
             <div className="relative z-10 max-w-7xl mx-auto justify-center items-center flex flex-col text-center">
               <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
@@ -402,7 +402,7 @@ ${opt.featured ? "text-white" : "text-[var(--color-primary)]"}
 ${
   opt.featured
     ? "border-white/40 bg-white/10"
-    : "border-[var(--color-primary)]/30 bg-[var(--bg-grn)]"
+    : "border-[var(--color-primary)]/30 bg-[var(--color-tertiary)]"
 }`}
                   >
                     <opt.Icon
@@ -558,7 +558,7 @@ ${
                     whileHover={{ x: 6 }}
                     className="flex items-center gap-5 border-l-4 border-[var(--color-primary)] bg-white px-6 py-5 shadow-sm"
                   >
-                    <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-primary)]/30 bg-[var(--bg-grn)]">
+                    <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-primary)]/30 bg-[var(--color-tertiary)]">
                       <Icon
                         size={20}
                         className="text-[var(--color-primary)]"
@@ -612,7 +612,7 @@ ${
                       className="w-full h-full object-cover max-h-[315px]"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/60 to-transparent" />
 
                     <div className="absolute bottom-8 left-8 right-8 text-white">
                       <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-secondary)] mb-2">
@@ -649,7 +649,7 @@ ${
                           Company Name
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--color-tertiary)] focus-within:border-[var(--color-primary)]">
                           <Building2
                             size={16}
                             className="text-[var(--color-primary)]"
@@ -669,7 +669,7 @@ ${
                           Contact Number
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--color-tertiary)] focus-within:border-[var(--color-primary)]">
                           <User
                             size={16}
                             className="text-[var(--color-primary)]"
@@ -691,7 +691,7 @@ ${
                           Email
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--color-tertiary)] focus-within:border-[var(--color-primary)]">
                           <Mail
                             size={16}
                             className="text-[var(--color-primary)]"
@@ -711,7 +711,7 @@ ${
                           Subject
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--color-tertiary)] focus-within:border-[var(--color-primary)]">
                           <FileText
                             size={16}
                             className="text-[var(--color-primary)]"
@@ -732,7 +732,7 @@ ${
                         CSR Budget & Details
                       </label>
 
-                      <div className="flex items-start gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-3 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                      <div className="flex items-start gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-3 bg-[var(--color-tertiary)] focus-within:border-[var(--color-primary)]">
                         <MessageSquare
                           size={16}
                           className="text-[var(--color-primary)] mt-1"
