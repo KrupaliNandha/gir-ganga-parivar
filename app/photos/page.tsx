@@ -45,23 +45,11 @@ const galleryItems = [
     title: "Earthmoving Work Near Water Reservoir",
   },
   { img: "/image/photos/photos - 12.jpg", title: "Canal Excavation Work" },
-  {
-    img: "/image/photos/photos - 13.jpg",
-    title: "Fetching Water by the Dam",
-  },
-  {
-    img: "/image/photos/photos - 14.jpg",
-    title: "Heavy Machinery at Work",
-  },
-  {
-    img: "/image/photos/photos - 15.jpg",
-    title: "Local Dam Repair Activity",
-  },
+  { img: "/image/photos/photos - 13.jpg", title: "Fetching Water by the Dam" },
+  { img: "/image/photos/photos - 14.jpg", title: "Heavy Machinery at Work" },
+  { img: "/image/photos/photos - 15.jpg", title: "Local Dam Repair Activity" },
   { img: "/image/photos/photos - 16.jpg", title: "Heavy Machinery at Work" },
-  {
-    img: "/image/photos/photos - 17.jpg",
-    title: "River Excavation Work",
-  },
+  { img: "/image/photos/photos - 17.jpg", title: "River Excavation Work" },
   {
     img: "/image/photos/photos - 18.png",
     title: "JCB Excavation for Water Recharge Structure",
@@ -83,59 +71,103 @@ const galleryItems = [
     title: "Concrete Channel Construction Work",
   },
   { img: "/image/photos/photos - 24.jpeg", title: "Heavy Machinery at Work" },
-  {
-    img: "/image/photos/photos - 25.jpeg",
-    title: "River Cleanup Drive",
-  },
-  {
-    img: "/image/photos/photos - 26.jpeg",
-    title: "Earthmoving Operation",
-  },
+  { img: "/image/photos/photos - 25.jpeg", title: "River Cleanup Drive" },
+  { img: "/image/photos/photos - 26.jpeg", title: "Earthmoving Operation" },
 ];
 
-export default function Products() {
+// Mosaic pattern: defines col-span and row-span for each card in a repeating 12-item group
+// Matches the reference image's varied mosaic grid
+const mosaicPattern = [
+  { colSpan: "col-span-2", rowSpan: "row-span-2" }, // 0: large square
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 1: small
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 2: small
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 3: small
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 4: small
+
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 1: small
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 2: small
+  { colSpan: "col-span-2", rowSpan: "row-span-2" }, // large square
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 3: small
+  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 4: small
+];
+
+export default function Photos() {
   return (
     <>
       <SmoothScroll>
-        {/* Section - 1 */}
-        <section className="container">
-          <div>
-            <h1 className="text-emerald-600 text-center text-4xl sm:text-5xl md:text-6xl ld:text-7xl font-bold select-none">
-              Photos
-            </h1>
-          </div>
-        </section>
-
-        {/* Section - 2 */}
-        <section className="container mx-auto px-5 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 ">
-          {galleryItems.map((item, index) => (
-            <div
-              key={index}
-              data-aos="fade-up"
-              className="relative w-full group"
+        {/* Section */}
+        <div className="container">
+          <section className=" text-center mb-10">
+            <p
+              className="text-[var(--color-secondary)]
+ text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
             >
-              {/* Image */}
-              <img
-                src={item.img}
-                alt={item.title}
-                width={500}
-                height={300}
-                className="w-full h-85 object-cover rounded-xl"
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
               />
+              Gallery
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
+              />
+            </p>
+            <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+              Some Of Our{" "}
+              <span className="text-[var(--color-primary)]">
+                Photo Galleries
+              </span>
+            </h1>
+          </section>
 
-              {/* Skew Label */}
-              <div className="absolute bottom-0 left-0 w-[90%] bg-primary skew-x-12">
-                <div className="relative bg-white p-3 -left-3">
-                  <div className="-skew-x-12">
-                    <p className="text-primary text-base sm:text-lg font-semibold select-none">
-                      {item.title}
-                    </p>
+          {/* Mosaic Grid */}
+          <section className="container mx-auto pb-16">
+            <div
+              className="
+  grid space-y-2 sm:gap-3
+  grid-cols-1
+  sm:grid-cols-2
+  md:grid-cols-3
+  lg:grid-cols-4
+  auto-rows-[180px]
+  sm:auto-rows-[200px]
+  md:auto-rows-[220px]
+  lg:auto-rows-[270px]
+"
+              style={{
+                gridTemplateColumns: "lg:repeat(4, 1fr) flex-warp",
+                gridAutoRows: "",
+              }}
+            >
+              {galleryItems.map((item, index) => {
+                const pattern = mosaicPattern[index % mosaicPattern.length];
+                return (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden rounded-lg group cursor-pointer lg:${pattern.colSpan} ${pattern.rowSpan}`}
+                    data-aos="fade-up"
+                  >
+                    {/* Image */}
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    {/* Hover overlay with title */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-all duration-400 flex items-end">
+                      <div className="w-full translate-y-full group-hover:translate-y-0 transition-transform duration-400 p-3">
+                        <p className="text-white text-sm sm:text-base font-semibold leading-snug drop-shadow">
+                          {item.title}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
-          ))}
-        </section>
+          </section>
+        </div>
       </SmoothScroll>
     </>
   );

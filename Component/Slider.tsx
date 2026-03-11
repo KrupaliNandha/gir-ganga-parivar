@@ -45,11 +45,11 @@ export default function Slider() {
 
   return (
     <div
-      data-aos="fade-up"
-      className="container section-padding w-full overflow-hidden bg-[var(--bg-grn)]"
+      
+      className="container section-padding w-full overflow-hidden "
     >
       <div>
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-greenish mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-center text-[var(--color-primary)] mb-4">
           Our Partners
         </h1>
         <p className="text-xl font-semibold text-center">
@@ -73,6 +73,7 @@ export default function Slider() {
           ))}
         </div>
       </div>
+    
     </div>
   );
 }

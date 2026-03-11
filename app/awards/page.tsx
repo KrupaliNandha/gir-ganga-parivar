@@ -4,20 +4,31 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import SmoothScroll from "../../Component/SmothScrolling";
 
-const awards = [
+type Award = {
+  id: number;
+  title: string;
+  image: string;
+  dic: string;
+  badge: string;
+  year: string;
+};
+
+const awards: Award[] = [
   {
     id: 1,
     title: "Jal Prahari Award",
     image: "/image/Award/Jal Pahari Award.jpg",
     dic: "Jal Prahari Award 2023 – UNOPS & Ministry of Jal Shakti",
     badge: "National",
+    year: "2023",
   },
   {
     id: 2,
     title: "Jal Ratna Award",
     image: "/image/Award/Jal Ratana Award.jpg",
-    dic: "Jal Ratna Award",
+    dic: "Jal Ratna Award – Excellence in Water Conservation",
     badge: "Excellence",
+    year: "2024",
   },
   {
     id: 3,
@@ -25,6 +36,7 @@ const awards = [
     image: "/image/Award/Mayor's Award.jpg",
     dic: "Mayor's Award 2024 – Rajkot Municipal Corporation",
     badge: "Municipal",
+    year: "2024",
   },
   {
     id: 4,
@@ -32,6 +44,7 @@ const awards = [
     image: "/image/Award/Nataion water mission.jpeg",
     dic: "MoU with National Water Mission, Ministry of Jal Shakti",
     badge: "Government",
+    year: "2024",
   },
   {
     id: 5,
@@ -39,6 +52,7 @@ const awards = [
     image: "/image/Award/NGO Award.jpg",
     dic: "Best NGO Award 2025 by Ministry of Jal Shakti under Jal Sanchay Jan Bhagidari (JSJB) 1.0",
     badge: "Best NGO",
+    year: "2025",
   },
 ];
 
@@ -50,8 +64,10 @@ function useInView(threshold = 0.15) {
   const [inView, setInView] = useState(false);
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold }
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold },
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
@@ -59,177 +75,216 @@ function useInView(threshold = 0.15) {
   return { ref, inView };
 }
 
-function AwardCard({ award, index }: { award: typeof awards[0]; index: number }) {
+function AwardCard({ award, index }: { award: Award; index: number }) {
   const { ref, inView } = useInView();
+
   return (
     <div
       ref={ref}
-      className={`group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-100
-        transition-all duration-700 ease-out
-        ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      className=" group relative bg-white rounded-3xl overflow-hidden flex flex-col"
+      style={{
+        boxShadow:
+          "0 2px 24px 0 rgba(16,185,129,0.07), 0 1px 4px 0 rgba(0,0,0,0.05)",
+        border: "1.5px solid #e6f4ee",
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(32px)",
+        transition: `opacity 0.6s ease, transform 0.6s ease`,
+        transitionDelay: `${index * 90}ms`,
+      }}
     >
-      {/* Badge */}
-      <div className="absolute top-3 left-3 z-10">
-        <span className="bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
-          {award.badge}
-        </span>
-      </div>
-
-
       {/* Image */}
-      <div className="relative w-full h-[260px] overflow-hidden">
+      <div className="relative w-full h-70 overflow-hidden">
         <Image
           src={award.image}
           alt={award.title}
-          width={500}
-          height={300}
-          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        {/* Gradient overlay always present at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 55%)",
+          }}
+        />
       </div>
 
-      {/* Content */}
-      <div className="px-5 py-4">
-        <h3 className="text-base font-bold text-slate-800 group-hover:text-emerald-600 transition-colors duration-300 leading-snug">
+      {/* Body */}
+      <div className="flex flex-col flex-1 px-5 py-5 gap-2">
+        <span className="self-start text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full border border-[var(--color-primary)] select-none bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
+          {award.badge}
+        </span>
+
+        <h3 className="text-gray-900 font-bold text-base leading-snug mt-1 group-hover:text-[var(--color-primary)] transition-colors duration-300">
           {award.title}
         </h3>
-        <p className="text-sm text-slate-500 mt-1.5 leading-relaxed line-clamp-2">
+
+        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 flex-1">
           {award.dic}
         </p>
 
-        {/* Bottom accent line */}
-        <div className="mt-4 h-0.5 w-0 bg-emerald-400 group-hover:w-full transition-all duration-500 rounded-full" />
+        <div
+          className="mt-4 h-[2px] rounded-full bg-[var(--color-primary)] transition-all duration-500"
+          style={{ width: "0%" }}
+          ref={(el: HTMLDivElement | null) => {
+            if (el) {
+              el.parentElement?.parentElement?.addEventListener(
+                "mouseenter",
+                () => (el.style.width = "100%"),
+              );
+              el.parentElement?.parentElement?.addEventListener(
+                "mouseleave",
+                () => (el.style.width = "0%"),
+              );
+            }
+          }}
+        />
       </div>
     </div>
   );
 }
 
 export default function AwardsSection() {
-  const headingRef = useRef<HTMLDivElement>(null);
-  const [headingVisible, setHeadingVisible] = useState(false);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setHeadingVisible(true); },
-      { threshold: 0.2 }
-    );
-    if (headingRef.current) obs.observe(headingRef.current);
-    return () => obs.disconnect();
-  }, []);
+  const { ref: headingRef, inView: headingVisible } = useInView(0.2);
 
   return (
     <SmoothScroll>
+      {/* ── Hero / Page Header ── */}
+      <section className="container relative w-full text-center overflow-hidden">
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <div className="text-center">
+            <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+              Recognition & Honours
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+            </p>
+            <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+              Awards Received by{" "}
+              <span className="text-[var(--color-primary)]">
+                {" "}
+                Girganga Parivar{" "}
+              </span>{" "}
+            </h1>
+            <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
+              Nationally recognized for outstanding contributions to water
+              conservation, river rejuvenation, and sustainable environmental
+              initiatives across Gujarat.
+            </p>
+            <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
+          </div>
+        </div>
+      </section>
 
-      {/* ── AWARDS SECTION ── */}
-      <section className="bg-gradient-to-b from-slate-50 to-white py-20 px-4">
+      {/* ── Award Cards Grid ── */}
+      <section className="container">
         <div className="max-w-7xl mx-auto">
-
-          {/* Heading */}
+          {/* Stats strip */}
           <div
             ref={headingRef}
-            className={`text-center mb-14 transition-all duration-700 ${headingVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+            className="grid grid-cols-3 gap-4 mb-14 transition-all duration-700"
+            style={{
+              opacity: headingVisible ? 1 : 0,
+              transform: headingVisible ? "translateY(0)" : "translateY(20px)",
+            }}
           >
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded-full mb-5">
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              Recognition & Honours
-            </div>
-
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-800 leading-tight">
-              Awards Received by{" "}
-              <span className="text-emerald-600">Girganga Parivar</span>
-            </h2>
-
-            <p className="mt-3 text-lg font-semibold text-emerald-500 tracking-wide">
-              Champion of Global CSR &amp; ESG 2025 for Water Conservation
-            </p>
-
-            <p className="mt-4 text-base text-slate-500 max-w-3xl mx-auto leading-relaxed">
-              Nationally recognized for outstanding contributions to water conservation,
-              river rejuvenation, and sustainable environmental initiatives — reflecting
-              our commitment to community participation and responsible water management.
-            </p>
+            {[
+              { value: "5+", label: "Awards Won" },
+              { value: "2025", label: "Latest Recognition" },
+              { value: "National", label: "Level Honour" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="text-center rounded-2xl py-6 px-3"
+                style={{
+                  background: "#fff",
+                }}
+              >
+                <p
+                  className="font-extrabold text-[var(--color-primary)]"
+                  style={{
+                    fontSize: "clamp(1.4rem, 3vw, 2rem)",
+                  }}
+                >
+                  {stat.value}
+                </p>
+                <p className="text-gray-400 text-xs font-semibold uppercase tracking-widest mt-1">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
 
-          {/* Card Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
             {awards.map((award, index) => (
               <AwardCard key={award.id} award={award} index={index} />
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* ── FEATURED NEWS BANNER ── */}
-      <section className="container">
-        <div className="max-w-7xl mx-auto">
-
-          {/* News Card */}
-          <div className="relative bg-gradient-to-br from-emerald-900 via-slate-800 to-slate-900 rounded-3xl overflow-hidden border border-emerald-800/40 shadow-2xl">
-
-            {/* Decorative circles */}
-            <div className="absolute -top-16 -right-16 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl pointer-events-none" />
-
-            <div className="relative px-8 py-10 sm:px-12 sm:py-12 flex flex-col sm:flex-row items-start sm:items-center gap-8">
-
-              {/* Icon */}
-              <div className="flex-shrink-0 w-16 h-16 bg-emerald-500/20 border border-emerald-500/30 rounded-2xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+      {/* ── Featured News Banner ── */}
+      <section className="container  ">
+        <div className="max-w-5xl mx-auto">
+          <div className="relative rounded-3xl overflow-hidden flex flex-col sm:flex-row items-stretch border border-[var(--color-primary)]">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 px-7 py-8 flex-1 bg-[var(--color-tertiary)]">
+              <div className="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center bg-[var(--color-tertiary)] border border-[var(--color-primary)]">
+                <svg
+                  className="w-7 h-7 text-[var(--color-primary)]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.8}
+                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                  />
                 </svg>
               </div>
 
-              {/* Text */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                    Latest News
+                
+                <h3 className="text-gray-900 font-bold text-lg sm:text-xl leading-snug">
+                  Girganga Parivar Trust —{" "}
+                  <span className="text-[var(--color-primary)]">
+                    Champion of Global CSR &amp; ESG 2025
                   </span>
-                  <span className="text-emerald-400/70 text-xs">2025</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white leading-snug">
-                  Girganga Parivar Trust — Champion of Global CSR &amp; ESG 2025
                 </h3>
-                <p className="mt-2 text-slate-400 text-sm leading-relaxed">
-                  Read the full coverage on DevDiscourse about our recognition for
-                  Water Conservation leadership and sustainable environmental impact.
+                <p className="mt-1.5 text-gray-400 text-sm leading-relaxed">
+                  Read the full coverage on DevDiscourse about our recognition
+                  for Water Conservation leadership and sustainable
+                  environmental impact.
                 </p>
               </div>
 
-              {/* CTA */}
-              <div className="flex-shrink-0">
-                <a
-                  href={newsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-900/50 hover:shadow-emerald-700/50 hover:-translate-y-0.5 whitespace-nowrap"
+              <a
+                href={newsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 inline-flex items-center gap-2 font-bold text-sm px-6 py-3  bg-[var(--color-primary)] text-white
+                rounded-xl transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap select-none"
+              >
+                 Latest News
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  Read Article
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            {/* Bottom ticker strip */}
-            <div className="bg-emerald-500/10 border-t border-emerald-800/30 px-8 sm:px-12 py-3 flex items-center gap-3">
-              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse flex-shrink-0" />
-              <p className="text-emerald-400 text-xs font-medium truncate">
-                Featured on DevDiscourse · Global CSR &amp; ESG Recognition · Water Conservation Leadership 2025
-              </p>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
       </section>
-
     </SmoothScroll>
   );
 }

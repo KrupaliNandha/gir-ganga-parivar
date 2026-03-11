@@ -69,29 +69,47 @@ export default function Products() {
         {/* Section - 1 */}
         <section className="container">
           <div>
-            <h1 className="text-emerald-600 text-center text-4xl sm:text-5xl md:text-6xl ld:text-7xl font-bold select-none">
-              Press Photos
-            </h1>
-          </div>
-        </section>
+            <section className=" text-center mb-10">
+              <p
+                className="text-[var(--color-secondary)]
+ text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+              >
+                <span
+                  className="w-8 h-px bg-[var(--color-secondary)]
+"
+                />
+                Gallery
+                <span
+                  className="w-8 h-px bg-[var(--color-secondary)]
+"
+                />
+              </p>
+              <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                Press{" "}
+                <span className="text-[var(--color-primary)]">
+                  Photo Galleries
+                </span>
+              </h1>
+            </section>
 
-        {/* Section - 2 */}
-        <section className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 ">
-          {galleryItems.map((item, index) => (
-            <div
-              key={index}
-              data-aos="fade-up"
-              className="relative w-full group"
-            >
-              {/* Image */}
-              <img
-                src={item.img}
-                width={500}
-                height={500}
-                className="w-full h-full border p-3 shadow-lg object-fix rounded-xl"
-              />
-            </div>
-          ))}
+            <section className=" mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 ">
+              {galleryItems.map((item, index) => (
+                <div
+                  key={index}
+                  data-aos="fade-up"
+                  className="relative w-full group"
+                >
+                  {/* Image */}
+                  <img
+                    src={item.img}
+                    width={500}
+                    height={500}
+                    className="w-full h-full border p-3 shadow-lg object-fix rounded-xl"
+                  />
+                </div>
+              ))}
+            </section>
+          </div>
         </section>
       </SmoothScroll>
     </>

@@ -53,7 +53,7 @@ export default function Navbar() {
   /* Animated underline that grows from left */
   const underline = (active: boolean, hoverGroup = true) =>
     [
-      "absolute bottom-0 left-3 right-3 h-[2px] bg-[var(--color-greenish)] transition-all duration-300 origin-left",
+      "absolute bottom-0 left-3 right-3 h-[2px] bg-[var(--color-primary)] transition-all duration-300 origin-left",
       active ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0",
       !active && hoverGroup
         ? "group-hover:scale-x-100 group-hover:opacity-100"
@@ -65,7 +65,7 @@ export default function Navbar() {
     [
       "relative inline-flex items-center px-3 xl:px-4 py-5",
       "text-[12.5px] xl:text-[13px] font-semibold uppercase tracking-[0.1em] transition-colors group",
-      isActive(path) ? "text-[var(--color-greenish)]" : "text-slate-700 hover:text-[var(--color-greenish)]",
+      isActive(path) ? "text-[var(--color-primary)]" : "text-slate-700 hover:text-[var(--color-primary)]",
     ].join(" ");
 
   /* Dropdown item */
@@ -73,8 +73,8 @@ export default function Navbar() {
     [
       "block px-5 py-2.5 text-[12px] font-semibold uppercase tracking-wider transition-colors",
       isActive(path)
-        ? "text-[var(--color-greenish)] bg-white"
-        : "text-slate-600 hover:text-[var(--color-greenish)] hover:bg-slate-50",
+        ? "text-[var(--color-primary)] bg-white"
+        : "text-slate-600 hover:text-[var(--color-primary)] hover:bg-slate-50",
     ].join(" ");
 
   /* Centred dropdown panel */
@@ -129,7 +129,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="hover:text-[var(--color-greenish)] transition-colors"
+                  className="hover:text-[var(--color-primary)] transition-colors"
                 >
                   {icon}
                 </a>
@@ -141,17 +141,17 @@ export default function Navbar() {
           <div className="flex items-center gap-4 text-[12px] text-slate-500 font-medium">
             <a
               href="mailto:info@girgangaparivartrust.com"
-              className="hidden md:flex items-center gap-1.5 hover:text-[var(--color-greenish)] transition-colors"
+              className="hidden md:flex items-center gap-1.5 hover:text-[var(--color-primary)] transition-colors"
             >
-              <FiMail size={15} className="text-[var(--color-yell)]" />
+              <FiMail size={15} className="text-[var(--color-secondary)]" />
               info@girgangaparivartrust.com
             </a>
             <span className="hidden md:block text-slate-300">|</span>
             <a
               href="tel:+919409692693"
-              className="flex items-center gap-1.5 hover:text-[var(--color-greenish)] transition-colors"
+              className="flex items-center gap-1.5 hover:text-[var(--color-primary)] transition-colors"
             >
-              <FiPhone size={15} className="text-[var(--color-yell)]" />
+              <FiPhone size={15} className="text-[var(--color-secondary)]" />
               +91 94096 92693
             </a>
           </div>
@@ -315,8 +315,8 @@ export default function Navbar() {
               <Link
                 href="/donate"
                 className="text-[11px] font-extrabold uppercase tracking-[0.15em] px-5 py-2
-                           border border-[var(--color-greenish)] text-[var(--color-greenish)]
-                           hover:bg-[var(--color-yell)] hover:border-transparent hover:text-white
+                           border border-[var(--color-primary)] text-[var(--color-primary)]
+                           hover:bg-[var(--color-secondary)] hover:border-transparent hover:text-white
                            rounded-sm transition-all duration-200"
               >
                 Donate
@@ -347,7 +347,7 @@ export default function Navbar() {
             <path
               d="M0,6 C150,0 300,12 450,6 C600,0 750,12 900,6 C1050,0 1200,12 1200,6 L1200,12 L0,12 Z"
               fill="#10b981"
-              className="fill-[var(--color-greenish)]"
+              className="fill-[var(--color-primary)]"
             />
           </svg>
         </div>
@@ -396,7 +396,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="hover:text-[var(--color-greenish)] transition-colors"
+                    className="hover:text-[var(--color-primary)] transition-colors"
                   >
                     {icon}
                   </a>
@@ -408,17 +408,17 @@ export default function Navbar() {
             <div className="flex items-center gap-4 text-[12px] text-slate-500 font-medium">
               <a
                 href="mailto:info@girgangaparivartrust.com"
-                className="hidden md:flex items-center gap-1.5 hover:text-[var(--color-greenish)] transition-colors"
+                className="hidden md:flex items-center gap-1.5 hover:text-[var(--color-primary)] transition-colors"
               >
-                <FiMail size={15} className="text-[var(--color-yell)]" />
+                <FiMail size={15} className="text-[var(--color-secondary)]" />
                 info@girgangaparivartrust.com
               </a>
               <span className="hidden md:block text-slate-300">|</span>
               <a
                 href="tel:+919409692693"
-                className="flex items-center gap-1.5 hover:text-[var(--color-greenish)] transition-colors"
+                className="flex items-center gap-1.5 hover:text-[var(--color-primary)] transition-colors"
               >
-                <FiPhone size={15} className="text-[var(--color-yell)]" />
+                <FiPhone size={15} className="text-[var(--color-secondary)]" />
                 +91 94096 92693
               </a>
             </div>
@@ -450,7 +450,7 @@ export default function Navbar() {
             type="button"
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
-            className="text-slate-600 hover:text-[var(--color-greenish)]"
+            className="text-slate-600 hover:text-[var(--color-primary)]"
           >
             <FiX size={28} />
           </button>
@@ -465,7 +465,7 @@ export default function Navbar() {
               <path
                 d="M0,6 C150,0 300,12 450,6 C600,0 750,12 900,6 C1050,0 1200,12 1200,6 L1200,12 L0,12 Z"
                 fill="#10b981"
-                className="fill-[var(--color-greenish)]"
+                className="fill-[var(--color-primary)]"
               />
             </svg>
           </div>
@@ -482,7 +482,7 @@ export default function Navbar() {
               <Link
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isActive(href) ? "text-[var(--color-greenish)]" : "text-slate-800"}`}
+                className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isActive(href) ? "text-[var(--color-primary)]" : "text-slate-800"}`}
               >
                 {label}
               </Link>
@@ -504,14 +504,14 @@ export default function Navbar() {
             <div
               className={`overflow-hidden transition-all ${workOpen ? "max-h-36 py-2" : "max-h-0"}`}
             >
-              <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-greenish)] mt-1">
+              <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
                 {[{ label: "Impact", href: "/impact" }].map(
                   ({ label, href }) => (
                     <li key={href}>
                       <Link
                         href={href}
                         onClick={() => setMenuOpen(false)}
-                        className={`text-[15px] font-semibold ${isActive(href) ? "text-[var(--color-greenish)]" : "text-slate-500"}`}
+                        className={`text-[15px] font-semibold ${isActive(href) ? "text-[var(--color-primary)]" : "text-slate-500"}`}
                       >
                         {label}
                       </Link>
@@ -528,7 +528,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setMediaOpen(!mediaOpen)}
               className={`w-full flex items-center justify-between py-3.5 text-lg font-bold
-                 border-b border-slate-50 tracking-wide ${isMediaActive ? "text-[var(--color-greenish)]" : "text-slate-800"}`}
+                 border-b border-slate-50 tracking-wide ${isMediaActive ? "text-[var(--color-primary)]" : "text-slate-800"}`}
             >
               Media
               <FiChevronDown
@@ -538,7 +538,7 @@ export default function Navbar() {
             <div
               className={`overflow-hidden transition-all ${mediaOpen ? "max-h-52 py-2" : "max-h-0"}`}
             >
-              <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-greenish)] mt-1">
+              <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
                 {[
                   { label: "Photos", href: "/photos" },
                   { label: "Press Release", href: "/press-release" },
@@ -548,7 +548,7 @@ export default function Navbar() {
                     <Link
                       href={href}
                       onClick={() => setMenuOpen(false)}
-                      className={`text-[15px] font-semibold ${isActive(href) ? "text-[var(--color-greenish)]" : "text-slate-500"}`}
+                      className={`text-[15px] font-semibold ${isActive(href) ? "text-[var(--color-primary)]" : "text-slate-500"}`}
                     >
                       {label}
                     </Link>
@@ -564,7 +564,7 @@ export default function Navbar() {
             href="tel:+919409692693"
             className="flex items-center gap-3 text-slate-700 font-semibold text-sm"
           >
-            <span className="bg-[var(--color-greenish)] text-white p-2 rounded-lg">
+            <span className="bg-[var(--color-primary)] text-white p-2 rounded-lg">
               <FiPhone size={15} />
             </span>
             +91 94096 92693
@@ -573,7 +573,7 @@ export default function Navbar() {
             href="mailto:info@girgangaparivartrust.com"
             className="flex items-center gap-3 text-slate-700 font-semibold text-sm"
           >
-            <span className="bg-[var(--color-greenish)] text-white p-2 rounded-lg">
+            <span className="bg-[var(--color-primary)] text-white p-2 rounded-lg">
               <FiMail size={15} />
             </span>
             info@girgangaparivartrust.com
@@ -581,8 +581,8 @@ export default function Navbar() {
           <Link
             href="/donate"
             onClick={() => setMenuOpen(false)}
-            className="mt-2 w-full block text-center border border-[var(--color-greenish)] text-[var(--color-greenish)]
-                       hover:bg-[var(--color-greenish)] hover:text-white font-extrabold py-3
+            className="mt-2 w-full block text-center border border-[var(--color-primary)] text-[var(--color-primary)]
+                       hover:bg-[var(--color-primary)] hover:text-white font-extrabold py-3
                        uppercase tracking-[0.15em] text-sm transition-colors rounded-sm"
           >
             Donate
