@@ -29,9 +29,9 @@
   --font: "Poppins", sans-serif;
   --color-primary: #009dc4; /* --color-greenish*/
   --color-secondary: #f1cf69; /* --color-yell */
-  --color-tertiary: #f0fdf4;
-  --color-accent: #34d399; /*  */ /* --bg-grn */
-  --color-dark: #164e63; /* Deep teal #acd7f3 */
+  --color-tertiary: #E6F7FB;
+  --color-accent: #34d399;  /* --bg-grn */
+  --color-dark: #acd7f3; /* Deep teal #acd7f3, greenish-#6d8c54 */
 }
 
 .section-padding-header {

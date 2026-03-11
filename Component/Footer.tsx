@@ -60,7 +60,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 rounded-lg bg-white/10 border border-white/15 backdrop-blur-sm
+                    className="w-9 h-9 rounded-lg bg-[var(--color-dark)] border border-white/15 backdrop-blur-sm
                                flex items-center justify-center text-black
                                hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white
                                transition-all duration-200"
