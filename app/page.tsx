@@ -527,7 +527,7 @@ const HeroSection = () => {
                     alt=""
                     className="w-5 h-5 rounded-full object-cover"
                   />
-                  <span className="text-greenish text-xs font-bold tracking-[0.2em] uppercase">
+                  <span className="text-greenish text-xs font-bold tracking-[0.2em] uppercase ">
                     Our Impact Areas
                   </span>
                 </div>
