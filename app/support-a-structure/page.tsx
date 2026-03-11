@@ -125,21 +125,21 @@ export default function SupportAStructure() {
 
   return (
     <SmoothScroll>
-      <section className=" overflow-x-hidden">
+      <section className="overflow-x-hidden">
         {/* Section - 1 */}
-        <section className="bg-[var(--bg-grn)] p-15 overflow-hidden">
+        <section className="bg-[var(--bg-grn)]  overflow-hidden">
           <div className="container">
             <div className="relative z-10 max-w-7xl mx-auto justify-center items-center flex flex-col text-center">
-              <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-[var(--color-yell)]" />
+              <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-[var(--color-secondary)]" />
                 Water for Farms, Families, and the Future
-                <span className="w-8 h-px bg-[var(--color-yell)]" />
+                <span className="w-8 h-px bg-[var(--color-secondary)]" />
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               >
                 One Structure. <br />{" "}
-                <span className="text-[var(--color-greenish)]">
+                <span className="text-[var(--color-primary)]">
                   {" "}
                   Multiple Generations Benefit.
                 </span>
@@ -151,7 +151,7 @@ export default function SupportAStructure() {
                 entire village.
               </p>
               {/* thin emerald divider */}
-              <div className="w-16 h-0.5 bg-[var(--color-greenish)] mx-auto mt-10 rounded-full" />
+              <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
 
               <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-emerald-600/10 pt-8">
                 {[
@@ -163,7 +163,7 @@ export default function SupportAStructure() {
                     key={s.num}
                     className="flex items-center gap-3 bg-white border border-emerald-600/15 rounded-full px-5 py-2.5"
                   >
-                    <span className="text-xl font-black text-[var(--color-greenish)]">
+                    <span className="text-xl font-black text-[var(--color-primary)]">
                       {s.num}
                     </span>
                     <span className="text-gray-500 text-sm">{s.label}</span>
@@ -179,15 +179,15 @@ export default function SupportAStructure() {
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-end mb-16">
               <div>
-                <p className="flex items-center justify-center lg:justify-start gap-3 text-[var(--color-yell)] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+                <p className="flex items-center justify-center lg:justify-start gap-3 text-[var(--color-secondary)] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
                   About Structures
-                  <span className="flex-1 max-w-[40px] h-px bg-[var(--color-yell)]" />
+                  <span className="flex-1 max-w-[40px] h-px bg-[var(--color-secondary)]" />
                 </p>
                 <h2
                   className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-center lg:text-left"
                 >
                   What is a{" "}
-                  <span className="italic text-[var(--color-greenish)]">
+                  <span className="italic text-[var(--color-primary)]">
                     &ldquo;Structure&rdquo;?
                   </span>
                 </h2>
@@ -206,7 +206,7 @@ export default function SupportAStructure() {
                 fill
                 className="object-cover w-full h-auto"
               />
-              <div className="absolute bottom-6 left-6 bg-[var(--color-yell)] backdrop-blur-sm text-black text-sm font-medium px-5 py-2 rounded-full border border-white/20">
+              <div className="absolute bottom-6 left-6 bg-[var(--color-secondary)] backdrop-blur-sm text-black text-sm font-medium px-5 py-2 rounded-full border border-white/20">
                 GGPT Field Operations — Gujarat, India
               </div>
             </div>
@@ -217,28 +217,28 @@ export default function SupportAStructure() {
         <section className="container bg-white overflow-hidden">
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="mb-16">
-              <p className="flex items-center justify-center lg:justify-start gap-3 text-[var(--color-yell)] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
+              <p className="flex items-center justify-center lg:justify-start gap-3 text-[var(--color-secondary)] text-xs font-semibold tracking-[0.18em] uppercase mb-4">
                 Structure Types
-                <span className="flex-1 max-w-[40px] h-px bg-[var(--color-yell)]" />
+                <span className="flex-1 max-w-[40px] h-px bg-[var(--color-secondary)]" />
               </p>
               <h2
                 className="text-4xl lg:text-5xl font-black text-black leading-tight max-w-4xl text-center lg:text-left"
               >
                 Structures Supported{" "}
-                <span className="text-[var(--color-greenish)]">by GGPT</span>
+                <span className="text-[var(--color-primary)]">by GGPT</span>
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-px rounded-3xl overflow-hidden bg-[var(--color-greenish)]/30">
+            <div className="grid sm:grid-cols-2 gap-px rounded-3xl overflow-hidden bg-[var(--color-primary)]/30">
               {structures.map((s) => (
                 <div
                   key={s.number}
-                  className="group relative bg-white hover:bg-[var(--color-greenish)]/20 transition-colors p-10 flex flex-col gap-6"
+                  className="group relative bg-white hover:bg-[var(--color-primary)]/20 transition-colors p-10 flex flex-col gap-6"
                 >
-                  <span className="absolute top-6 right-8 text-6xl font-black text-[var(--color-greenish)] leading-none pointer-events-none select-none transition-colors">
+                  <span className="absolute top-6 right-8 text-6xl font-black text-[var(--color-primary)] leading-none pointer-events-none select-none transition-colors">
                     {s.number}
                   </span>
-                  <div className="w-14 h-14 bg-[var(--color-greenish)] border border-[var(--color-greenish)]/20 rounded-2xl flex items-center justify-center group-hover:bg-[var(--color-greenish)]/20 ">
+                  <div className="w-14 h-14 bg-[var(--color-primary)] border border-[var(--color-primary)]/20 rounded-2xl flex items-center justify-center group-hover:bg-[var(--color-primary)]/20 ">
                     <Image
                       src={s.icon}
                       alt={s.alt}
@@ -248,7 +248,7 @@ export default function SupportAStructure() {
                     />
                   </div>
                   <div>
-                    <h3 className="text-[var(--color-greenish)] text-xl font-bold leading-snug mb-2">
+                    <h3 className="text-[var(--color-primary)] text-xl font-bold leading-snug mb-2">
                       {s.title}
                     </h3>
                     <p className="text-gray-500 text-sm leading-relaxed font-light">
@@ -265,19 +265,19 @@ export default function SupportAStructure() {
         <section className="container bg-white overflow-hidden">
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="mb-14 text-center">
-              <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-[var(--color-yell)]" />
+              <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-[var(--color-secondary)]" />
                 The Ground Reality
-                <span className="w-8 h-px bg-[var(--color-yell)]" />
+                <span className="w-8 h-px bg-[var(--color-secondary)]" />
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               >
                 Why Your{" "}
-                <span className="text-[var(--color-greenish)] w-full">Support Matters</span>
+                <span className="text-[var(--color-primary)] w-full">Support Matters</span>
               </h1>
               {/* thin emerald divider */}
-              <div className="w-16 h-0.5 bg-[var(--color-greenish)] mx-auto mt-10 rounded-full" />
+              <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -291,9 +291,9 @@ export default function SupportAStructure() {
                     transition={{ duration: 0.5, delay: i * 0.15 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.03 }}
-                    className="flex items-start gap-5 border-l-4 border-[var(--color-yell)] bg-white px-6 py-5 shadow-sm hover:shadow-md transition"
+                    className="flex items-start gap-5 border-l-4 border-[var(--color-secondary)] bg-white px-6 py-5 shadow-sm hover:shadow-md transition"
                   >
-                    <span className="text-[var(--color-greenish)] font-bold text-lg w-8">
+                    <span className="text-[var(--color-primary)] font-bold text-lg w-8">
                       {String(i + 1).padStart(2, "0")}
                     </span>
 
@@ -311,17 +311,17 @@ export default function SupportAStructure() {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
-                className="relative bg-[var(--color-greenish)] p-10 shadow-xl"
+                className="relative bg-[var(--color-primary)] p-10 shadow-xl"
               >
                 <div className="flex flex-col gap-6">
                   <div>
-                    <p className="text-[var(--color-yell)] text-xs font-bold uppercase tracking-[0.25em] mb-3">
+                    <p className="text-[var(--color-secondary)] text-xs font-bold uppercase tracking-[0.25em] mb-3">
                       Impact Insight
                     </p>
 
                     <h3 className="text-3xl lg:text-4xl font-black text-white leading-tight">
                       One water structure can support
-                      <span className="block text-[var(--color-yell)] mt-2">
+                      <span className="block text-[var(--color-secondary)] mt-2">
                         200 – 500 Families
                       </span>
                       for many years.
@@ -357,18 +357,18 @@ export default function SupportAStructure() {
         <section className="container bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
-              <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-[var(--color-yell)]" />
+              <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                <span className="w-8 h-px bg-[var(--color-secondary)]" />
                 Choose How to Help
-                <span className="w-8 h-px bg-[var(--color-yell)]" />
+                <span className="w-8 h-px bg-[var(--color-secondary)]" />
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
               >
-                Support <span className="text-[var(--color-greenish)]">Options</span>
+                Support <span className="text-[var(--color-primary)]">Options</span>
               </h1>
               {/* thin emerald divider */}
-              <div className="w-16 h-0.5 bg-[var(--color-greenish)] mx-auto mt-10 rounded-full" />
+              <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -383,14 +383,14 @@ export default function SupportAStructure() {
                   className={`relative flex flex-col gap-6 p-8 border-l-[5px] shadow-md transition
 ${
   opt.featured
-    ? "bg-[var(--color-greenish)] border-[var(--color-yell)]"
-    : "bg-white border-[var(--color-greenish)]/30 hover:shadow-xl"
+    ? "bg-[var(--color-primary)] border-[var(--color-secondary)]"
+    : "bg-white border-[var(--color-primary)]/30 hover:shadow-xl"
 }`}
                 >
                   {/* NUMBER */}
                   <span
                     className={`absolute top-5 right-6 text-6xl font-black opacity-10
-${opt.featured ? "text-white" : "text-[var(--color-greenish)]"}
+${opt.featured ? "text-white" : "text-[var(--color-primary)]"}
 `}
                   >
                     {opt.number}
@@ -402,7 +402,7 @@ ${opt.featured ? "text-white" : "text-[var(--color-greenish)]"}
 ${
   opt.featured
     ? "border-white/40 bg-white/10"
-    : "border-[var(--color-greenish)]/30 bg-[var(--bg-grn)]"
+    : "border-[var(--color-primary)]/30 bg-[var(--bg-grn)]"
 }`}
                   >
                     <opt.Icon
@@ -410,7 +410,7 @@ ${
                       className={
                         opt.featured
                           ? "text-white"
-                          : "text-[var(--color-greenish)]"
+                          : "text-[var(--color-primary)]"
                       }
                     />
                   </div>
@@ -419,7 +419,7 @@ ${
                   <div>
                     <p
                       className={`text-xs font-bold uppercase tracking-widest mb-2
-${opt.featured ? "text-white/60" : "text-[var(--color-greenish)]"}
+${opt.featured ? "text-white/60" : "text-[var(--color-primary)]"}
 `}
                     >
                       {opt.tag}
@@ -427,7 +427,7 @@ ${opt.featured ? "text-white/60" : "text-[var(--color-greenish)]"}
 
                     <h3
                       className={`text-xl font-black
-${opt.featured ? "text-white" : "text-[var(--color-greenish)]"}
+${opt.featured ? "text-white" : "text-[var(--color-primary)]"}
 `}
                     >
                       {opt.title}
@@ -448,7 +448,7 @@ ${opt.featured ? "text-white/70" : "text-gray-600"}
                       <li key={index} className="flex gap-2">
                         <span
                           className={`w-2 h-2 mt-2
-${opt.featured ? "bg-[var(--color-yell)]" : "bg-[var(--color-greenish)]"}
+${opt.featured ? "bg-[var(--color-secondary)]" : "bg-[var(--color-primary)]"}
 `}
                         />
 
@@ -470,8 +470,8 @@ ${opt.featured ? "text-white/80" : "text-gray-600"}
                       className={`w-full py-3 text-sm font-semibold tracking-wide transition cursor-pointer
 ${
   opt.featured
-    ? "bg-[var(--color-yell)] text-black hover:opacity-90"
-    : "bg-[var(--color-greenish)] text-white hover:opacity-90"
+    ? "bg-[var(--color-secondary)] text-black hover:opacity-90"
+    : "bg-[var(--color-primary)] text-white hover:opacity-90"
 }`}
                     >
                       {opt.cta} →
@@ -496,15 +496,15 @@ ${
               className="mb-16 flex flex-wrap justify-between"
             >
               <div>
-                <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                  <span className="w-8 h-px bg-[var(--color-yell)]" />
+                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
                   Transparency & Trust
-                  <span className="w-8 h-px bg-[var(--color-yell)]" />
+                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
                 </p>
                 <h1
                   className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
                 >
-                  What You <span className="text-[var(--color-greenish)]">Receive</span>
+                  What You <span className="text-[var(--color-primary)]">Receive</span>
                 </h1>
               </div>
 
@@ -536,7 +536,7 @@ ${
                 />
 
                 {/* IMPACT CARD */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[var(--color-yell)] text-white px-6 py-4 rounded-2xl shadow-lg text-center hidden md:block">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[var(--color-secondary)] text-white px-6 py-4 rounded-2xl shadow-lg text-center hidden md:block">
                   <p className="text-xs uppercase text-black">GGPT Impact</p>
 
                   <p className="text-lg font-bold text-black">
@@ -556,12 +556,12 @@ ${
                     transition={{ duration: 0.4, delay: i * 0.15 }}
                     viewport={{ once: true }}
                     whileHover={{ x: 6 }}
-                    className="flex items-center gap-5 border-l-4 border-[var(--color-greenish)] bg-white px-6 py-5 shadow-sm"
+                    className="flex items-center gap-5 border-l-4 border-[var(--color-primary)] bg-white px-6 py-5 shadow-sm"
                   >
-                    <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-greenish)]/30 bg-[var(--bg-grn)]">
+                    <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-primary)]/30 bg-[var(--bg-grn)]">
                       <Icon
                         size={20}
-                        className="text-[var(--color-greenish)]"
+                        className="text-[var(--color-primary)]"
                       />
                     </div>
 
@@ -580,15 +580,15 @@ ${
           <div className="container">
             <div className=" mx-auto">
               <div className="text-center mb-16">
-                <p className="text-[var(--color-yell)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center  gap-3">
-                  <span className="w-8 h-px bg-[var(--color-yell)]" />
+                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center  gap-3">
+                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
                   Get In Touch
-                  <span className="w-8 h-px bg-[var(--color-yell)]" />
+                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
                 </p>
 
                 <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center">
                   CSR Partnership
-                  <span className="text-[var(--color-greenish)]">
+                  <span className="text-[var(--color-primary)]">
                     {" "}
                     Inquiry Form
                   </span>
@@ -603,7 +603,7 @@ ${
 
               {/* form card */}
               <div>
-                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-greenish)]/20 flex flex-col md:flex-row">
+                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-primary)]/20 flex flex-col md:flex-row">
                   {/* LEFT IMAGE */}
                   <div className="md:w-2/5 relative">
                     <img
@@ -612,10 +612,10 @@ ${
                       className="w-full h-full object-cover max-h-[315px]"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-greenish)]/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/80 to-transparent" />
 
                     <div className="absolute bottom-8 left-8 right-8 text-white">
-                      <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-yell)] mb-2">
+                      <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-secondary)] mb-2">
                         CSR Partnership
                       </p>
 
@@ -633,7 +633,7 @@ ${
                   {/* RIGHT FORM */}
                   <div className="w-full md:w-3/5 bg-white px-8 sm:px-12 py-10 flex flex-col gap-6">
                     <div>
-                      <h3 className="text-2xl font-bold text-[var(--color-greenish)]">
+                      <h3 className="text-2xl font-bold text-[var(--color-primary)]">
                         Partner With Us
                       </h3>
 
@@ -645,14 +645,14 @@ ${
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                       {/* Company */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
                           Company Name
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
                           <Building2
                             size={16}
-                            className="text-[var(--color-greenish)]"
+                            className="text-[var(--color-primary)]"
                           />
 
                           <input
@@ -665,14 +665,14 @@ ${
 
                       {/* Contact */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
                           Contact Number
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
                           <User
                             size={16}
-                            className="text-[var(--color-greenish)]"
+                            className="text-[var(--color-primary)]"
                           />
 
                           <input
@@ -687,14 +687,14 @@ ${
 
                       {/* Email */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
                           Email
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
                           <Mail
                             size={16}
-                            className="text-[var(--color-greenish)]"
+                            className="text-[var(--color-primary)]"
                           />
 
                           <input
@@ -707,14 +707,14 @@ ${
 
                       {/* Subject */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
                           Subject
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
                           <FileText
                             size={16}
-                            className="text-[var(--color-greenish)]"
+                            className="text-[var(--color-primary)]"
                           />
 
                           <input
@@ -728,14 +728,14 @@ ${
 
                     {/* TEXTAREA */}
                     <div>
-                      <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
+                      <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
                         CSR Budget & Details
                       </label>
 
-                      <div className="flex items-start gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-3 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                      <div className="flex items-start gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-3 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
                         <MessageSquare
                           size={16}
-                          className="text-[var(--color-greenish)] mt-1"
+                          className="text-[var(--color-primary)] mt-1"
                         />
 
                         <textarea
@@ -747,7 +747,7 @@ ${
                     </div>
 
                     {/* BUTTON */}
-                    <button className="w-full bg-[var(--color-greenish)] cursor-pointer transition text-white font-semibold py-3 rounded-xl shadow-lg">
+                    <button className="w-full bg-[var(--color-primary)] cursor-pointer transition text-white font-semibold py-3 rounded-xl shadow-lg">
                       Submit Inquiry →
                     </button>
                   </div>
@@ -763,14 +763,14 @@ ${
             {/* Heading */}
             <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div>
-                <p className="text-[var(--color-greenish)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center justify-center lg:justify-start gap-3">
-                  <span className="w-8 h-px bg-[var(--color-greenish)]" />
+                <p className="text-[var(--color-primary)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center justify-center lg:justify-start gap-3">
+                  <span className="w-8 h-px bg-[var(--color-primary)]" />
                   Explore More
                 </p>
                 <h2
                   className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
                 >
-                  Know More <span className="text-[var(--color-greenish)]">About Us</span>
+                  Know More <span className="text-[var(--color-primary)]">About Us</span>
                 </h2>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start  lg:max-w-xs">
@@ -817,7 +817,7 @@ ${
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}
-                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-greenish)] rounded-lg flex items-center justify-center shadow-md">
+                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-primary)] rounded-lg flex items-center justify-center shadow-md">
                         <Icon
                           className="text-white"
                           size={16}
@@ -836,9 +836,9 @@ ${
                       >
                         {label}
                       </h3>
-                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-yell)] text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-secondary)] text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Explore
-                        <span className="w-5 h-px bg-[var(--color-yell)] group-hover:w-8 transition-all duration-300" />
+                        <span className="w-5 h-px bg-[var(--color-secondary)] group-hover:w-8 transition-all duration-300" />
                       </span>
                     </div>
                   </div>

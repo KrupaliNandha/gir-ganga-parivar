@@ -38,10 +38,10 @@ const STATS = [
     number: 8354,
     suffix: "+",
     label: "Water structures developed",
-    accent: "#6d8c54",
+    accent: "#009dc4",
     bg: "from-emerald-50 to-white",
-    border: "border-[var(--color-greenish)]",
-    iconBg: "bg-[var(--color-greenish)]",
+    border: "border-[var(--color-primary)]",
+    iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
   {
@@ -49,10 +49,10 @@ const STATS = [
     number: 429000,
     suffix: "+",
     label: "Acres farmland rejuvenated",
-    accent: "#6d8c54",
+    accent: "#009dc4",
     bg: "from-teal-50 to-white",
-    border: "border-[var(--color-greenish)]",
-    iconBg: "bg-[var(--color-greenish)]",
+    border: "border-[var(--color-primary)]",
+    iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
   {
@@ -60,10 +60,10 @@ const STATS = [
     number: 151000,
     suffix: "+",
     label: "Farmers benefited",
-    accent: "#6d8c54",
+    accent: "#009dc4",
     bg: "from-green-50 to-white",
-    border: "border-[var(--color-greenish)]",
-    iconBg: "bg-[var(--color-greenish)]",
+    border: "border-[var(--color-primary)]",
+    iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
   {
@@ -71,10 +71,10 @@ const STATS = [
     number: 580,
     suffix: "+",
     label: "Gram Panchayats engaged",
-    accent: "#6d8c54",
+    accent: "#009dc4",
     bg: "from-emerald-50 to-white",
-    border: "border-[var(--color-greenish)]",
-    iconBg: "bg-[var(--color-greenish)]",
+    border: "border-[var(--color-primary)]",
+    iconBg: "bg-[var(--color-primary)]",
     iconColor: "text-white",
   },
 ];
@@ -367,22 +367,22 @@ export default function OurWorkPage() {
         <section className="container mx-auto">
           <div className="text-center mb-10">
             <p
-              className="text-[var(--color-yell)]
+              className="text-[var(--color-secondary)]
  text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
             >
               <span
-                className="w-8 h-px bg-[var(--color-yell)]
+                className="w-8 h-px bg-[var(--color-secondary)]
 "
               />
               Map
               <span
-                className="w-8 h-px bg-[var(--color-yell)]
+                className="w-8 h-px bg-[var(--color-secondary)]
 "
               />
             </p>
             <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
               Structures Created by{" "}
-              <span className="text-[var(--color-greenish)]">
+              <span className="text-[var(--color-primary)]">
                 Girganga Parivar Trust
               </span>
             </h1>
@@ -393,7 +393,7 @@ export default function OurWorkPage() {
             <div className="flex items-center gap-2 border-2 border-emerald-600/20 rounded-xl px-4 py-2.5 bg-emerald-600/5 focus-within:border-emerald-600 focus-within:bg-white transition-colors flex-1 max-w-xs">
               <Search
                 size={15}
-                className="text-[var(--color-greenish)] shrink-0"
+                className="text-[var(--color-primary)] shrink-0"
               />
               <input
                 type="text"
@@ -408,7 +408,7 @@ export default function OurWorkPage() {
               onClick={() => setShowLakes((v) => !v)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
                 showLakes
-                  ? "bg-[var(--color-greenish)] border-[var(--color-greenish)] text-white shadow-lg "
+                  ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg "
                   : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
               }`}
             >
@@ -420,7 +420,7 @@ export default function OurWorkPage() {
               onClick={() => setShowDams((v) => !v)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
                 showDams
-                  ? "bg-[var(--color-greenish)] border-[var(--color-greenish)] text-white shadow-lg"
+                  ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg"
                   : "bg-white border-emerald-600/20 text-emerald-600 hover:border-emerald-600"
               }`}
             >
@@ -430,7 +430,7 @@ export default function OurWorkPage() {
 
             <button
               onClick={() => setShowPanel((v) => !v)}
-              className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-[var(--color-greenish)] text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
+              className="ml-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-600/20 text-[var(--color-primary)] text-sm font-semibold hover:border-emerald-600 hover:bg-emerald-600/5 transition-all"
             >
               {showPanel ? <EyeOff size={15} /> : <Eye size={15} />}
               {showPanel ? "Hide Panel" : "Show Panel"}
@@ -441,8 +441,8 @@ export default function OurWorkPage() {
           <div className="relative rounded-3xl overflow-hidden border-2 border-emerald-600/15 shadow-2xl shadow-emerald-600/10">
             {!mounted && (
               <div className="h-[580px] flex flex-col items-center justify-center bg-emerald-50">
-                <div className="w-8 h-8 border-2 border-[var(--color-greenish)] border-t-transparent rounded-full animate-spin mb-3" />
-                <p className="text-[var(--color-greenish)] text-sm font-medium">
+                <div className="w-8 h-8 border-2 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin mb-3" />
+                <p className="text-[var(--color-primary)] text-sm font-medium">
                   Loading map…
                 </p>
               </div>
@@ -456,7 +456,7 @@ export default function OurWorkPage() {
             {/* Floating side panel */}
             {mounted && showPanel && (
               <div className="absolute top-4 right-4 z-[1000] w-56 bg-white rounded-2xl shadow-xl border border-emerald-600/15 overflow-hidden">
-                <div className="bg-[var(--color-greenish)] px-4 py-3 flex items-center gap-2">
+                <div className="bg-[var(--color-primary)] px-4 py-3 flex items-center gap-2">
                   <MapPin size={14} className="text-white" strokeWidth={1.5} />
                   <p className="text-white text-xs font-bold uppercase tracking-widest">
                     Categories
@@ -469,7 +469,7 @@ export default function OurWorkPage() {
                   <div className="flex items-center gap-2.5">
                     <Waves
                       size={14}
-                      className="text-[var(--color-greenish)]"
+                      className="text-[var(--color-primary)]"
                       strokeWidth={1.5}
                     />
                     <span className="text-sm font-semibold text-gray-700">
@@ -477,7 +477,7 @@ export default function OurWorkPage() {
                     </span>
                   </div>
                   <span
-                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showLakes ? "bg-[var(--color-greenish)] border-[var(--color-greenish)]" : "bg-white border-gray-300"}`}
+                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showLakes ? "bg-[var(--color-primary)] border-[var(--color-primary)]" : "bg-white border-gray-300"}`}
                   />
                 </div>
                 <div
@@ -487,19 +487,19 @@ export default function OurWorkPage() {
                   <div className="flex items-center gap-2.5">
                     <MapPin
                       size={14}
-                      className="text-[var(--color-greenish)]"
+                      className="text-[var(--color-primary)]"
                       strokeWidth={1.5}
                     />
-                    <span className="text-sm font-semibold text-[var(--color-greenish)]">
+                    <span className="text-sm font-semibold text-[var(--color-primary)]">
                       Check Dam ({CHECK_DAMS.length})
                     </span>
                   </div>
                   <span
-                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showDams ? "bg-[var(--color-greenish)] border-[var(--color-greenish)]" : "bg-white border-gray-300"}`}
+                    className={`w-3 h-3 rounded-full border-2 transition-colors ${showDams ? "bg-[var(--color-primary)] border-[var(--color-primary)]" : "bg-white border-gray-300"}`}
                   />
                 </div>
                 <div className="px-4 py-2.5 bg-emerald-600/5 border-t border-emerald-600/10">
-                  <p className="text-[10px] text-[var(--color-greenish)]/60 font-bold uppercase tracking-widest text-center">
+                  <p className="text-[10px] text-[var(--color-primary)]/60 font-bold uppercase tracking-widest text-center">
                     GGPT · Gujarat, India
                   </p>
                 </div>
@@ -543,22 +543,22 @@ export default function OurWorkPage() {
               }}
             >
               <p
-                className="text-[var(--color-yell)]
+                className="text-[var(--color-secondary)]
  text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
               >
                 <span
-                  className="w-8 h-px bg-[var(--color-yell)]
+                  className="w-8 h-px bg-[var(--color-secondary)]
 "
                 />
                 Proven Impact
                 <span
-                  className="w-8 h-px bg-[var(--color-yell)]
+                  className="w-8 h-px bg-[var(--color-secondary)]
 "
                 />
               </p>
               <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
                 Measurable transformation <br />
-                <span className="text-[var(--color-greenish)]">
+                <span className="text-[var(--color-primary)]">
                   across Gujarat, India
                 </span>
               </h1>
@@ -566,7 +566,7 @@ export default function OurWorkPage() {
               <div className="mt-8">
                 <a
                   href="/impact"
-                  className="inline-flex items-center gap-2 bg-[var(--color-yell)]
+                  className="inline-flex items-center gap-2 bg-[var(--color-secondary)]
  text-black text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20  hover:-translate-y-0.5"
                 >
                   Explore Our Impact
@@ -604,22 +604,22 @@ export default function OurWorkPage() {
             >
               <div>
                 <p
-                  className="text-[var(--color-yell)]
+                  className="text-[var(--color-secondary)]
  text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
                 >
                   <span
-                    className="w-8 h-px bg-[var(--color-yell)]
+                    className="w-8 h-px bg-[var(--color-secondary)]
 "
                   />
                   What People Say
                   <span
-                    className="w-8 h-px bg-[var(--color-yell)]
+                    className="w-8 h-px bg-[var(--color-secondary)]
 "
                   />
                 </p>
                 <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center lg:text-start">
                   Success{" "}
-                  <span className="text-[var(--color-greenish)]"> Stories</span>
+                  <span className="text-[var(--color-primary)]"> Stories</span>
                 </h1>
               </div>
               <p className="text-gray-400 text-sm lg:max-w-md leading-relaxed md:text-right text-center lg:text-start">
@@ -638,8 +638,8 @@ export default function OurWorkPage() {
                     onClick={() => setActive(i)}
                     className={`group text-left rounded-2xl px-6 py-5 border-2 transition-all duration-300 ${
                       active === i
-                        ? "bg-[var(--color-greenish)] border-[var(--color-greenish)] shadow-lg shadow-emerald-600/25"
-                        : "bg-white border-gray-100 hover:border-emerald-600/30 hover:bg-[var(--color-greenish)]/50"
+                        ? "bg-[var(--color-primary)] border-[var(--color-primary)] shadow-lg shadow-emerald-600/25"
+                        : "bg-white border-gray-100 hover:border-emerald-600/30 hover:bg-[var(--color-primary)]/50"
                     }`}
                     style={{
                       opacity: inView ? 1 : 0,
@@ -650,17 +650,17 @@ export default function OurWorkPage() {
                     }}
                   >
                     <div
-                      className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-[var(--color-yell)]/30" : "text-[var(--color-greenish)]/20"}`}
+                      className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-[var(--color-secondary)]/30" : "text-[var(--color-primary)]/20"}`}
                     >
                       {s.num}
                     </div>
                     <p
-                      className={`font-black text-sm transition-colors ${active === i ? "text-[var(--color-yell)]" : "text-gray-800"}`}
+                      className={`font-black text-sm transition-colors ${active === i ? "text-[var(--color-secondary)]" : "text-gray-800"}`}
                     >
                       {s.name}
                     </p>
                     <p
-                      className={`text-xs mt-0.5 transition-colors ${active === i ? "text-[var(--color-yell)]/60" : "text-gray-400"}`}
+                      className={`text-xs mt-0.5 transition-colors ${active === i ? "text-[var(--color-secondary)]/60" : "text-gray-400"}`}
                     >
                       {s.role}
                     </p>
@@ -670,7 +670,7 @@ export default function OurWorkPage() {
 
               {/* Right — big active card */}
               <div
-                className="relative bg-[var(--color-greenish)] rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
+                className="relative bg-[var(--color-primary)] rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
                 style={{
                   opacity: inView ? 1 : 0,
                   transform: inView ? "translateX(0)" : "translateX(24px)",
@@ -680,14 +680,14 @@ export default function OurWorkPage() {
                 }}
               >
                 {/* Big number watermark */}
-                <span className="absolute right-8 top-6 text-[8rem] font-black text-[var(--color-yell)]/[0.04] leading-none select-none pointer-events-none">
+                <span className="absolute right-8 top-6 text-[8rem] font-black text-[var(--color-secondary)]/[0.04] leading-none select-none pointer-events-none">
                   {STORIES[active].num}
                 </span>
 
                 {/* Large open-quote */}
                 <div className="relative z-10">
                   <div
-                    className="text-[var(--color-yell)]
+                    className="text-[var(--color-secondary)]
  text-7xl font-black leading-none mb-4 font-serif"
                   >
                     &ldquo;
@@ -699,16 +699,16 @@ export default function OurWorkPage() {
 
                 {/* Author row */}
                 <div className="relative z-10 flex flex-wrap items-center gap-4 mt-10 pt-8 border-t border-white/10">
-                  <div className="w-12 h-12 bg-[var(--color-yell)]
+                  <div className="w-12 h-12 bg-[var(--color-secondary)]
  rounded-2xl flex items-center justify-center text-black font-black text-sm shrink-0">
                     {STORIES[active].initials}
                   </div>
                   <div>
-                    <p className="text-[var(--color-yell)]
+                    <p className="text-[var(--color-secondary)]
  font-black">
                       {STORIES[active].name}
                     </p>
-                    <p className="text-[var(--color-yell)]
+                    <p className="text-[var(--color-secondary)]
  text-xs mt-0.5">
                       {STORIES[active].role} · {STORIES[active].location}
                     </p>
@@ -719,7 +719,7 @@ export default function OurWorkPage() {
                       <button
                         key={i}
                         onClick={() => setActive(i)}
-                        className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2 bg-[var(--color-yell)]" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
+                        className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2 bg-[var(--color-secondary)]" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
                       />
                     ))}
                   </div>
@@ -729,7 +729,7 @@ export default function OurWorkPage() {
 
             {/* ── Bottom featured strip ── */}
             <div
-              className="mt-6  border border-[var(--color-greenish)] rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
+              className="mt-6  border border-[var(--color-primary)] rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "translateY(0)" : "translateY(20px)",
@@ -737,20 +737,20 @@ export default function OurWorkPage() {
               }}
             >
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-[var(--color-greenish)] rounded-xl flex items-center justify-center text-white shrink-0 text-lg font-black">
+                <div className="w-10 h-10 bg-[var(--color-primary)] rounded-xl flex items-center justify-center text-white shrink-0 text-lg font-black">
                   &ldquo;
                 </div>
                 <p className="text-gray-700 text-sm italic leading-relaxed max-w-xl">
                   After deepening the check dam, water stayed till summer. Our
                   borewells revived, and migration stopped.
-                  <span className="block text-[var(--color-greenish)] font-black not-italic mt-1">
+                  <span className="block text-[var(--color-primary)] font-black not-italic mt-1">
                     — Chhaganbhai Patel, Rajkot
                   </span>
                 </p>
               </div>
               <Link
                 href="/donate"
-                className="shrink-0 bg-[var(--color-greenish)]
+                className="shrink-0 bg-[var(--color-primary)]
                   text-white font-bold px-7 py-3 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
               >
                 Contribute Now →
@@ -765,13 +765,13 @@ export default function OurWorkPage() {
             {/* Heading */}
             <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
               <div>
-                <p className="text-[var(--color-greenish)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
-                  <span className="w-8 h-px bg-[var(--color-greenish)]" />
+                <p className="text-[var(--color-primary)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
+                  <span className="w-8 h-px bg-[var(--color-primary)]" />
                   Explore More
                 </p>
                 <h2 className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start">
                   Know More{" "}
-                  <span className="text-[var(--color-greenish)]">About Us</span>
+                  <span className="text-[var(--color-primary)]">About Us</span>
                 </h2>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start lg:max-w-xs">
@@ -821,7 +821,7 @@ export default function OurWorkPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}
-                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-greenish)] rounded-lg flex items-center justify-center shadow-md">
+                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-primary)] rounded-lg flex items-center justify-center shadow-md">
                         <Icon
                           className="text-white"
                           size={16}
@@ -844,10 +844,10 @@ export default function OurWorkPage() {
                         {desc}
                       </p>
 
-                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-yell)]
+                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-secondary)]
  text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Explore
-                        <span className="w-5 h-px bg-[var(--color-yell)]
+                        <span className="w-5 h-px bg-[var(--color-secondary)]
  group-hover:w-8 transition-all duration-300" />
                       </span>
                     </div>
