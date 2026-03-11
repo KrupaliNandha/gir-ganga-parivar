@@ -7,7 +7,7 @@ import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-[var(--bg-grn)] text-black">
+    <footer className="relative w-full overflow-hidden bg-[var(--color-tertiary)] text-black">
 
       {/* ── Dark overlay so text is readable over image ── */}
       <div className="absolute inset-0" />
@@ -37,7 +37,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-black font-black text-base leading-tight">Girganga</p>
-                  <p className="text-[var(--color-greenish)]  font-bold text-sm">Parivar Trust</p>
+                  <p className="text-[var(--color-primary)]  font-bold text-sm">Parivar Trust</p>
                 </div>
               </div>
 
@@ -62,7 +62,7 @@ export default function Footer() {
                     aria-label={label}
                     className="w-9 h-9 rounded-lg bg-white/10 border border-white/15 backdrop-blur-sm
                                flex items-center justify-center text-black
-                               hover:bg-[var(--color-greenish)] hover:border-[var(--color-greenish)] hover:text-black
+                               hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white
                                transition-all duration-200"
                   >
                     {icon}
@@ -74,7 +74,7 @@ export default function Footer() {
             {/* Quick Links */}
             <div>
               <h3 className="text-black font-bold text-sm uppercase tracking-widest mb-5 flex items-center gap-2">
-                <span className="w-5 h-0.5 bg-[var(--color-greenish)] rounded-full inline-block" />
+                <span className="w-5 h-0.5 bg-[var(--color-primary)] rounded-full inline-block" />
                 Quick Links
               </h3>
               <ul className="space-y-3">
@@ -88,10 +88,10 @@ export default function Footer() {
                   <li key={label}>
                     <Link
                       href={href}
-                      className="text-black text-sm hover:text-[var(--color-greenish)] hover:pl-1.5
+                      className="text-black text-sm hover:text-[var(--color-primary)] hover:pl-1.5
                                  transition-all duration-200 inline-flex items-center gap-1.5 group"
                     >
-                      <span className="w-0 group-hover:w-2 h-px bg-[var(--color-greenish)]
+                      <span className="w-0 group-hover:w-2 h-px bg-[var(--color-primary)]
                                        transition-all duration-200 inline-block" />
                       {label}
                     </Link>
@@ -103,7 +103,7 @@ export default function Footer() {
             {/* Our Work */}
             <div>
               <h3 className="text-black font-bold text-sm uppercase tracking-widest mb-5 flex items-center gap-2">
-                <span className="w-5 h-0.5 bg-[var(--color-greenish)] rounded-full inline-block" />
+                <span className="w-5 h-0.5 bg-[var(--color-primary)] rounded-full inline-block" />
                 Our Work
               </h3>
               <ul className="space-y-3">
@@ -114,7 +114,7 @@ export default function Footer() {
                   "Community Engagement",
                 ].map((item) => (
                   <li key={item} className="text-black text-sm flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-greenish)] mt-1.5 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] mt-1.5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -124,7 +124,7 @@ export default function Footer() {
             {/* Get Involved + Contact */}
             <div>
               <h3 className="text-black font-bold text-sm uppercase tracking-widest mb-5 flex items-center gap-2">
-                <span className="w-5 h-0.5 bg-[var(--color-greenish)] rounded-full inline-block" />
+                <span className="w-5 h-0.5 bg-[var(--color-primary)] rounded-full inline-block" />
                 Get Involved
               </h3>
               <ul className="space-y-3 mb-8">
@@ -136,10 +136,10 @@ export default function Footer() {
                   <li key={label}>
                     <Link
                       href={href}
-                      className="text-black text-sm hover:text-[var(--color-greenish)] hover:pl-1.5
+                      className="text-black text-sm hover:text-[var(--color-primary)] hover:pl-1.5
                                  transition-all duration-200 inline-flex items-center gap-1.5 group"
                     >
-                      <span className="w-0 group-hover:w-2 h-px bg-[var(--color-greenish)]
+                      <span className="w-0 group-hover:w-2 h-px bg-[var(--color-primary)]
                                        transition-all duration-200 inline-block" />
                       {label}
                     </Link>
@@ -150,17 +150,17 @@ export default function Footer() {
               {/* Contact details */}
               <div className="space-y-3">
                 <a href="tel:+919409692693"
-                   className="flex items-center gap-2.5 text-black text-sm hover:text-[var(--color-greenish)] transition-colors">
-                  <FiPhone size={13} className="text-[var(--color-greenish)] flex-shrink-0" />
+                   className="flex items-center gap-2.5 text-black text-sm hover:text-[var(--color-primary)] transition-colors">
+                  <FiPhone size={13} className="text-[var(--color-primary)] flex-shrink-0" />
                   +91 94096 92693
                 </a>
                 <a href="mailto:info@girgangaparivartrust.com"
-                   className="flex items-center gap-2.5 text-black text-sm hover:text-[var(--color-greenish)] transition-colors">
-                  <FiMail size={13} className="text-[var(--color-greenish)] flex-shrink-0" />
+                   className="flex items-center gap-2.5 text-black text-sm hover:text-[var(--color-primary)] transition-colors">
+                  <FiMail size={13} className="text-[var(--color-primary)] flex-shrink-0" />
                   info@girgangaparivartrust.com
                 </a>
                 <div className="flex items-start gap-2.5 text-black text-sm">
-                  <FiMapPin size={13} className="text-[var(--color-greenish)] flex-shrink-0 mt-0.5" />
+                  <FiMapPin size={13} className="text-[var(--color-primary)] flex-shrink-0 mt-0.5" />
                   <span>Sunstar Chamber, Rajkot - 360005, Gujarat</span>
                 </div>
               </div>
@@ -174,8 +174,8 @@ export default function Footer() {
                           gap-3 text-black text-xs">
             <p>Registered Non-Profit Trust · All Rights Reserved</p>
             <p className="flex items-center gap-1.5">
-              Made with <span className="text-[var(--color-greenish)]">♥</span> for Water Conservation
-              · <span className="text-[var(--color-greenish)] ">Girganga Parivar Trust © 2026</span>
+              Made with <span className="text-[var(--color-primary)]">♥</span> for Water Conservation
+              · <span className="text-[var(--color-primary)] ">Girganga Parivar Trust © 2026</span>
             </p>
           </div>
         </div>
