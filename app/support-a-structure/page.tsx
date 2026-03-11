@@ -137,7 +137,6 @@ export default function SupportAStructure() {
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 One Structure. <br />{" "}
                 <span className="text-greenish">
@@ -186,7 +185,6 @@ export default function SupportAStructure() {
                 </p>
                 <h2
                   className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-center lg:text-left"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   What is a{" "}
                   <span className="italic text-greenish">
@@ -225,14 +223,13 @@ export default function SupportAStructure() {
               </p>
               <h2
                 className="text-4xl lg:text-5xl font-black text-black leading-tight max-w-4xl text-center lg:text-left"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Structures Supported{" "}
                 <span className="text-greenish">by GGPT</span>
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-px rounded-3xl overflow-hidden bg-emerald-600/10">
+            <div className="grid sm:grid-cols-2 gap-px rounded-3xl overflow-hidden bg-greenish/30">
               {structures.map((s) => (
                 <div
                   key={s.number}
@@ -241,7 +238,7 @@ export default function SupportAStructure() {
                   <span className="absolute top-6 right-8 text-6xl font-black text-greenish leading-none pointer-events-none select-none transition-colors">
                     {s.number}
                   </span>
-                  <div className="w-14 h-14 bg-emerald-600/10 border border-emerald-600/20 rounded-2xl flex items-center justify-center group-hover:bg-emerald-600/20 transition-colors">
+                  <div className="w-14 h-14 bg-greenish border border-greenish/20 rounded-2xl flex items-center justify-center group-hover:bg-greenish/20 ">
                     <Image
                       src={s.icon}
                       alt={s.alt}
@@ -275,7 +272,6 @@ export default function SupportAStructure() {
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Why Your{" "}
                 <span className="text-greenish w-full">Support Matters</span>
@@ -368,7 +364,6 @@ export default function SupportAStructure() {
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Support <span className="text-greenish">Options</span>
               </h1>
@@ -407,7 +402,7 @@ ${opt.featured ? "text-white" : "text-[var(--color-greenish)]"}
 ${
   opt.featured
     ? "border-white/40 bg-white/10"
-    : "border-[var(--color-primary)]/30 bg-[var(--bg-grn)]"
+    : "border-[var(--color-greenish)]/30 bg-[var(--bg-grn)]"
 }`}
                   >
                     <opt.Icon
@@ -415,7 +410,7 @@ ${
                       className={
                         opt.featured
                           ? "text-white"
-                          : "text-[var(--color-primary)]"
+                          : "text-[var(--color-greenish)]"
                       }
                     />
                   </div>
@@ -508,7 +503,6 @@ ${
                 </p>
                 <h1
                   className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   What You <span className="text-greenish">Receive</span>
                 </h1>
@@ -564,7 +558,7 @@ ${
                     whileHover={{ x: 6 }}
                     className="flex items-center gap-5 border-l-4 border-[var(--color-greenish)] bg-white px-6 py-5 shadow-sm"
                   >
-                    <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-primary)]/30 bg-[var(--bg-grn)]">
+                    <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-greenish)]/30 bg-[var(--bg-grn)]">
                       <Icon
                         size={20}
                         className="text-[var(--color-greenish)]"
@@ -609,7 +603,7 @@ ${
 
               {/* form card */}
               <div>
-                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-primary)]/20 flex flex-col md:flex-row">
+                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-greenish)]/20 flex flex-col md:flex-row">
                   {/* LEFT IMAGE */}
                   <div className="md:w-2/5 relative">
                     <img
@@ -775,7 +769,6 @@ ${
                 </p>
                 <h2
                   className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   Know More <span className="text-greenish">About Us</span>
                 </h2>

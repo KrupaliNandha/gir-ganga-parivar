@@ -440,7 +440,7 @@ const HeroSection = () => {
                   {/* Heading */}
                   <h2
                     className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
-                    style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                    
                   >
                     Mission &amp; Vision <br />
                     <span className="text-greenish">For Gujarat</span>
@@ -533,7 +533,6 @@ const HeroSection = () => {
                 </div>
                 <h2
                   className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   Explore Our Impact
                 </h2>

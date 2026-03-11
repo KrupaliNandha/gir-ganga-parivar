@@ -72,7 +72,6 @@ export default function Support() {
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Girganga <span className="text-greenish"> Parivar </span> Trust
               </h1>
@@ -148,7 +147,7 @@ export default function Support() {
                   <span className="w-8 h-px bg-[var(--color-yell)]" />
                 </p>
 
-                <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center lg:text-start" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center lg:text-start">
                   Transparency Builds Trust <br />
                   <span className="text-[var(--color-greenish)]">
                     Trust Builds Impact
@@ -167,12 +166,12 @@ export default function Support() {
                 <div className="space-y-5">
                   {/* CSR Proposal */}
                   <div className="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-md border border-[var(--color-primary)]/10 hover:shadow-lg transition">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-tealBrand)]/20 text-[var(--color-primary)]">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-greenish)]/20 text-[var(--color-greenish)]">
                       <LayoutList size={22} />
                     </div>
 
                     <div>
-                      <h3 className="font-semibold text-[var(--color-primary)]">
+                      <h3 className="font-semibold text-[var(--color-greenish)]">
                         CSR Proposal
                       </h3>
 
@@ -181,7 +180,7 @@ export default function Support() {
                       </p>
 
                       <Link href="/Our-Work">
-                        <button className="flex items-center gap-2 text-sm font-medium text-[var(--color-primary)] hover:text-[var(--color-tealBrand)]">
+                        <button className="flex items-center gap-2 text-sm font-medium text-[var(--color-greenish)] cursor-pointer">
                           <Download size={15} />
                           Download PDF
                         </button>
@@ -191,12 +190,12 @@ export default function Support() {
 
                   {/* Company Profile */}
                   <div className="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-md border border-[var(--color-primary)]/10 hover:shadow-lg transition">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-cyanBrand)]/20 text-[var(--color-primary)]">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-greenish)]/20 text-[var(--color-greenish)]">
                       <Building2 size={22} />
                     </div>
 
                     <div>
-                      <h3 className="font-semibold text-[var(--color-primary)]">
+                      <h3 className="font-semibold text-[var(--color-greenish)]">
                         Company Profile
                       </h3>
 
@@ -205,7 +204,7 @@ export default function Support() {
                       </p>
 
                       <a href="/Our-Work">
-                        <button className="flex items-center gap-2 text-sm font-medium text-[var(--color-primary)] hover:text-[var(--color-tealBrand)]">
+                        <button className="flex items-center gap-2 text-sm font-medium text-[var(--color-greenish)] cursor-pointer">
                           <Download size={15} />
                           Download PDF
                         </button>
@@ -226,7 +225,7 @@ export default function Support() {
                 </div>
 
                 {/* floating card */}
-                <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-[var(--color-primary)]/10 hidden lg:block">
+                <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-[var(--color-greenish)]/10 hidden lg:block">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-yell)] text-white">
                       <Building2 size={22} />
@@ -257,7 +256,7 @@ export default function Support() {
                   <span className="w-8 h-px bg-[var(--color-yell)]" />
                 </p>
 
-                <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center">
                   CSR Partnership
                   <span className="text-[var(--color-greenish)]">
                     {" "}
@@ -274,7 +273,7 @@ export default function Support() {
 
               {/* form card */}
               <div>
-                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-primary)]/20 flex flex-col md:flex-row">
+                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-greenish)]/20 flex flex-col md:flex-row">
                   {/* LEFT IMAGE */}
                   <div className="md:w-2/5 relative">
                     <img
@@ -283,7 +282,7 @@ export default function Support() {
                       className="w-full h-full object-cover max-h-[315px]"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-greenish)]/80 to-transparent" />
 
                     <div className="absolute bottom-8 left-8 right-8 text-white">
                       <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-yell)] mb-2">
@@ -304,7 +303,7 @@ export default function Support() {
                   {/* RIGHT FORM */}
                   <div className="w-full md:w-3/5 bg-white px-8 sm:px-12 py-10 flex flex-col gap-6">
                     <div>
-                      <h3 className="text-2xl font-bold text-[var(--color-primary)]">
+                      <h3 className="text-2xl font-bold text-[var(--color-greenish)]">
                         Partner With Us
                       </h3>
 
@@ -316,14 +315,14 @@ export default function Support() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                       {/* Company */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
                           Company Name
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-greenish)]">
                           <Building2
                             size={16}
-                            className="text-[var(--color-primary)]"
+                            className="text-[var(--color-greenish)]"
                           />
 
                           <input
@@ -336,14 +335,14 @@ export default function Support() {
 
                       {/* Contact */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
                           Contact Number
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-greenish)]">
                           <User
                             size={16}
-                            className="text-[var(--color-primary)]"
+                            className="text-[var(--color-greenish)]"
                           />
 
                           <input
@@ -358,14 +357,14 @@ export default function Support() {
 
                       {/* Email */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
                           Email
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-greenish)]">
                           <Mail
                             size={16}
-                            className="text-[var(--color-primary)]"
+                            className="text-[var(--color-greenish)]"
                           />
 
                           <input
@@ -378,14 +377,14 @@ export default function Support() {
 
                       {/* Subject */}
                       <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
+                        <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
                           Subject
                         </label>
 
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                        <div className="flex items-center gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-greenish)]">
                           <FileText
                             size={16}
-                            className="text-[var(--color-primary)]"
+                            className="text-[var(--color-greenish)]"
                           />
 
                           <input
@@ -399,14 +398,14 @@ export default function Support() {
 
                     {/* TEXTAREA */}
                     <div>
-                      <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
+                      <label className="text-xs font-semibold text-[var(--color-greenish)] uppercase tracking-wide mb-1 block">
                         CSR Budget & Details
                       </label>
 
-                      <div className="flex items-start gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-3 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
+                      <div className="flex items-start gap-2 border border-[var(--color-greenish)]/20 rounded-xl px-3 py-3 bg-[var(--bg-grn)] focus-within:border-[var(--color-greenish)]">
                         <MessageSquare
                           size={16}
-                          className="text-[var(--color-primary)] mt-1"
+                          className="text-[var(--color-greenish)] mt-1"
                         />
 
                         <textarea
@@ -418,7 +417,7 @@ export default function Support() {
                     </div>
 
                     {/* BUTTON */}
-                    <button className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-greenish)] transition text-white font-semibold py-3 rounded-xl shadow-lg">
+                    <button className="w-full bg-[var(--color-greenish)] transition text-white cursor-pointer font-semibold py-3 rounded-xl shadow-lg">
                       Submit Inquiry →
                     </button>
                   </div>

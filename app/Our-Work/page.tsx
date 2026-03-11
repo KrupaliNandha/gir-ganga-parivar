@@ -373,7 +373,6 @@ export default function OurWorkPage() {
             </p>
             <h1
               className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             >
               Structures Created by{" "}
               <span className="text-greenish">Girganga Parivar Trust</span>
@@ -515,7 +514,7 @@ export default function OurWorkPage() {
           ref={sectionRef}
           className="container relative bg-white overflow-hidden"
         >
-          <div></div>
+         
           <div
             className="absolute inset-0 opacity-[0.03] pointer-events-none"
             style={{
@@ -523,7 +522,6 @@ export default function OurWorkPage() {
               backgroundSize: "48px 48px",
             }}
           />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative max-w-6xl mx-auto">
             <div
@@ -540,7 +538,6 @@ export default function OurWorkPage() {
               </p>
               <h1
                 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
               >
                 Measurable transformation <br />
                 <span className="text-greenish">across Gujarat, India</span>
@@ -592,7 +589,6 @@ export default function OurWorkPage() {
                 </p>
                 <h1
                   className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center lg:text-start"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   Success <span className="text-greenish"> Stories</span>
                 </h1>
@@ -625,17 +621,17 @@ export default function OurWorkPage() {
                     }}
                   >
                     <div
-                      className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-white/30" : "text-greenish/20"}`}
+                      className={`text-3xl font-black mb-1 transition-colors ${active === i ? "text-yell/30" : "text-greenish/20"}`}
                     >
                       {s.num}
                     </div>
                     <p
-                      className={`font-black text-sm transition-colors ${active === i ? "text-white" : "text-gray-800"}`}
+                      className={`font-black text-sm transition-colors ${active === i ? "text-yell" : "text-gray-800"}`}
                     >
                       {s.name}
                     </p>
                     <p
-                      className={`text-xs mt-0.5 transition-colors ${active === i ? "text-white/60" : "text-gray-400"}`}
+                      className={`text-xs mt-0.5 transition-colors ${active === i ? "text-yell/60" : "text-gray-400"}`}
                     >
                       {s.role}
                     </p>
@@ -655,7 +651,7 @@ export default function OurWorkPage() {
                 }}
               >
                 {/* Big number watermark */}
-                <span className="absolute right-8 top-6 text-[8rem] font-black text-white/[0.04] leading-none select-none pointer-events-none">
+                <span className="absolute right-8 top-6 text-[8rem] font-black text-yell/[0.04] leading-none select-none pointer-events-none">
                   {STORIES[active].num}
                 </span>
 
@@ -698,7 +694,7 @@ export default function OurWorkPage() {
 
             {/* ── Bottom featured strip ── */}
             <div
-              className="mt-6 bg-emerald-50 border border-emerald-100 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
+              className="mt-6  border border-greenish rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "translateY(0)" : "translateY(20px)",
@@ -719,7 +715,8 @@ export default function OurWorkPage() {
               </div>
               <Link
                 href="/donate"
-                className="shrink-0 bg-greenish  text-white font-bold px-7 py-3 rounded-xl shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
+                className="shrink-0 bg-greenish
+                  text-white font-bold px-7 py-3 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
               >
                 Contribute Now →
               </Link>
@@ -739,7 +736,6 @@ export default function OurWorkPage() {
                 </p>
                 <h2
                   className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   Know More <span className="text-greenish">About Us</span>
                 </h2>

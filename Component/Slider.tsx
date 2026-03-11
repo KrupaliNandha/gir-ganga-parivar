@@ -49,7 +49,7 @@ export default function Slider() {
       className="container section-padding w-full overflow-hidden bg-[var(--bg-grn)]"
     >
       <div>
-        <h1 className="text-4xl md:text-5xl font-bold text-center text-greenish mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+        <h1 className="text-4xl md:text-5xl font-bold text-center text-greenish mb-4">
           Our Partners
         </h1>
         <p className="text-xl font-semibold text-center">
