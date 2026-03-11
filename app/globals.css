@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 .container {
@@ -26,10 +26,12 @@
 
 /* Color Variables */
 :root {
-  --font: 'Poppins', sans-serif;
-  --color-greenish: #6d8c54;
-  --color-yell: #f1cf69;
-  --bg-grn: #f0fdf4;
+  --font: "Poppins", sans-serif;
+  --color-primary: #009dc4; /* --color-greenish*/
+  --color-secondary: #f1cf69; /* --color-yell */
+  --color-tertiary: #f0fdf4;
+  --color-accent: #34d399; /*  */ /* --bg-grn */
+  --color-dark: #164e63; /* Deep teal #acd7f3 */
 }
 
 .section-padding-header {
@@ -40,5 +42,5 @@ html,
 body {
   overflow-x: hidden;
   background-color: #ffffff;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }

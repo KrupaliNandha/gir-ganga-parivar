@@ -211,7 +211,7 @@ function ContactForm() {
 export default function Contact() {
   return (
     <div className="min-h-screen bg-slate-50 py-14 px-4">
-      <div className="max-w-5xl mx-auto bg-[var(--bg-grn)] rounded-3xl shadow-sm border border-slate-100 p-8 md:p-12">
+      <div className="max-w-5xl mx-auto bg-[var(--color-tertiary)] rounded-3xl shadow-sm border border-slate-100 p-8 md:p-12">
 
         {/* ── Header ── */}
         <div className="text-center mb-10">

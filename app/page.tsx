@@ -262,9 +262,9 @@ const HeroSection = () => {
                   className="flex items-center gap-4 sm:gap-[25px]"
                 >
                   <Link href={slide.cta.href}>
-                    <span className="mt-4 sm:mt-10 group relative inline-block bg-[#E8C84A] text-[#1a3a20] text-[10px] sm:text-[clamp(10px,1vw,12px)] font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase px-6 sm:px-9 py-3 sm:py-4 rounded-[3px] overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-transform duration-300">
+                    <span className="mt-4 sm:mt-10 group relative inline-block bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-white text-[10px] sm:text-[clamp(10px,1vw,12px)] font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase px-6 sm:px-9 py-3 sm:py-4 rounded-[3px] overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-transform duration-300">
                       <span className="relative z-10">{slide.cta.label}</span>
-                      <span className="absolute inset-0 bg-greenish -translate-x-[110%] group-hover:translate-x-[110%] transition-transform duration-1000" />
+                      <span className="absolute inset-0 bg-[var(--color-primary)] -translate-x-[110%] group-hover:translate-x-[110%] transition-transform duration-1000" />
                     </span>
                   </Link>
                   {/* Arrow image — hidden on very small screens */}
@@ -289,7 +289,7 @@ const HeroSection = () => {
                           <div className="w-px bg-white/20 self-stretch hidden xs:block" />
                         )}
                         <div>
-                          <p className="font-caveat text-[clamp(22px,6vw,42px)] sm:text-[clamp(26px,3.2vw,42px)] font-bold text-[#E8C84A] leading-none">
+                          <p className="font-caveat text-[clamp(22px,6vw,42px)] sm:text-[clamp(26px,3.2vw,42px)] font-bold text-[var(--color-secondary)] leading-none">
                             <CountUp
                               value={stat.num}
                               suffix={stat.suffix || ""}
@@ -333,7 +333,7 @@ const HeroSection = () => {
                 key={label}
                 aria-label={label}
                 onClick={() => goTo(current + dir)}
-                className="w-11 h-11 rounded-full border border-white/50 bg-white/[0.08] backdrop-blur-md text-white flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[#E8C84A] hover:border-[#E8C84A] hover:text-[#1a3a20] hover:scale-[1.08]"
+                className="w-11 h-11 rounded-full border border-white/50 bg-white/[0.08] backdrop-blur-md text-white flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[var(--color-secondary)] hover:border-[var(--color-secondary)] hover:text-[var(--color-primary)] hover:scale-[1.08]"
               >
                 <Icon />
               </button>
@@ -342,7 +342,7 @@ const HeroSection = () => {
 
           {/* Progress bar */}
           <div
-            className="absolute bottom-0 left-0 h-[3px] bg-[#E8C84A] z-10"
+            className="absolute bottom-0 left-0 h-[3px] bg-[var(--color-secondary)] z-10"
             style={{ width: `${progress}%`, transition: "width 50ms linear" }}
           />
         </section>
@@ -398,7 +398,7 @@ const HeroSection = () => {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
-                    className="absolute top-2 right-2 sm:top-6 sm:right-4 md:top-8 md:right-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-greenish text-white flex flex-col items-center justify-center shadow-xl shadow-emerald-600/30"
+                    className="absolute top-2 right-2 sm:top-6 sm:right-4 md:top-8 md:right-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-primary)] text-white flex flex-col items-center justify-center shadow-xl shadow-emerald-600/30"
                   >
                     <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
                       90%
@@ -416,7 +416,7 @@ const HeroSection = () => {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.55, type: "spring" }}
-                    className="absolute bottom-2 left-2 sm:bottom-6 sm:left-4 md:bottom-8 md:left-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[#E8C84A] text-[#1a3a20] flex flex-col items-center justify-center shadow-xl shadow-yellow-500/30"
+                    className="absolute bottom-2 left-2 sm:bottom-6 sm:left-4 md:bottom-8 md:left-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] flex flex-col items-center justify-center shadow-xl shadow-yellow-500/30"
                   >
                     <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
                       580+
@@ -443,7 +443,7 @@ const HeroSection = () => {
                     
                   >
                     Mission &amp; Vision <br />
-                    <span className="text-greenish">For Gujarat</span>
+                    <span className="text-[var(--color-primary)]">For Gujarat</span>
                   </h2>
 
                   <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
@@ -464,8 +464,8 @@ const HeroSection = () => {
                         key={point}
                         className="flex items-center justify-center lg:justify-start gap-3 text-sm text-gray-700"
                       >
-                        <span className="mt-0.5 w-5 h-5 rounded-full bg-[#E8C84A] flex items-center justify-center shrink-0">
-                          <CircleCheckBig className="w-3 h-3 text-[#1a3a20]" />
+                        <span className="mt-0.5 w-5 h-5 rounded-full bg-[var(--color-secondary)] flex items-center justify-center shrink-0">
+                          <CircleCheckBig className="w-3 h-3 text-[var(--color-primary)]" />
                         </span>
                         {point}
                       </li>
@@ -477,7 +477,7 @@ const HeroSection = () => {
                   {/* Mission + Vision cards */}
                   <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div className="bg-emerald-50 rounded-2xl p-4 sm:p-5 border border-emerald-100">
-                      <div className="w-10 h-10 bg-greenish rounded-lg flex items-center justify-center text-white font-playfair font-bold text-lg mb-3">
+                      <div className="w-10 h-10 bg-[var(--color-primary)] rounded-lg flex items-center justify-center text-white font-playfair font-bold text-lg mb-3">
                         M
                       </div>
                       <h4 className="font-bold text-gray-800 mb-2 text-sm">
@@ -490,7 +490,7 @@ const HeroSection = () => {
                       </p>
                     </div>
                     <div className="bg-yellow-50 rounded-2xl p-4 sm:p-5 border border-yellow-100">
-                      <div className="w-10 h-10 bg-yell rounded-lg flex items-center justify-center text-[#1a3a20] font-playfair font-bold text-lg mb-3">
+                      <div className="w-10 h-10 bg-[var(--color-secondary)] rounded-lg flex items-center justify-center text-[var(--color-primary)] font-playfair font-bold text-lg mb-3">
                         V
                       </div>
                       <h4 className="font-bold text-gray-800 mb-2 text-sm">
@@ -527,7 +527,7 @@ const HeroSection = () => {
                     alt=""
                     className="w-5 h-5 rounded-full object-cover"
                   />
-                  <span className="text-greenish text-xs font-bold tracking-[0.2em] uppercase ">
+                  <span className="text-[var(--color-primary)] text-xs font-bold tracking-[0.2em] uppercase ">
                     Our Impact Areas
                   </span>
                 </div>
@@ -584,7 +584,7 @@ const HeroSection = () => {
                         <card.Icon className="text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                     </div>
-                    <h4 className="font-playfair font-bold text-gray-900 text-sm leading-snug group-hover:text-greenish transition-colors">
+                    <h4 className="font-playfair font-bold text-gray-900 text-sm leading-snug group-hover:text-[var(--color-primary)] transition-colors">
                       {card.label}
                     </h4>
                     <p className="text-gray-400 text-xs mt-0.5">{card.sub}</p>
@@ -602,17 +602,19 @@ const HeroSection = () => {
               >
                 <a
                   href="/partner-with-us-csr"
-                  className="group relative bg-yell text-white font-semibold px-10 py-4 rounded-lg shadow-lg shadow-emerald-600/25 text-base overflow-hidden hover:-translate-y-0.5 transition-transform duration-300 inline-flex items-center gap-2"
+                  className="group relative bg-[var(--color-secondary)] text-black font-semibold px-10 py-4 rounded-lg shadow-lg shadow-black/25
+                   hover:text-white text-base overflow-hidden hover:-translate-y-0.5 transition-transform duration-300 inline-flex items-center gap-2"
                 >
                   <span className="relative z-10">Partner With Us (CSR)</span>
                   <span className="relative z-10 group-hover:translate-x-1 transition-transform">
                     →
                   </span>
-                  <span className="absolute inset-0 bg-greenish translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                  <span className="absolute inset-0 bg-[var(--color-primary)] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </a>
                 <a
                   href="/support-a-structure"
-                  className="group border-2 border-greenish text-greenish font-semibold px-10 py-4 rounded-lg text-base hover:bg-greenish hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center gap-2"
+                  className="group border-2 border-[var(--color-primary)] text-[var(--color-primary)] 
+                  font-semibold px-10 py-4 rounded-lg shadow-lg shadow-black/25 text-base hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center gap-2"
                 >
                   Support A Structure
                   <span className="group-hover:translate-x-1 transition-transform">
