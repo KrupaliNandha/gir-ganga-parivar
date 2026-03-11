@@ -41,7 +41,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handle);
   }, []);
 
-
   /* add shadow after first scroll px */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -66,9 +65,7 @@ export default function Navbar() {
     [
       "relative inline-flex items-center px-3 xl:px-4 py-5",
       "text-[12.5px] xl:text-[13px] font-semibold uppercase tracking-[0.1em] transition-colors group",
-      isActive(path)
-        ? "text-greenish"
-        : "text-slate-700 hover:text-greenish",
+      isActive(path) ? "text-greenish" : "text-slate-700 hover:text-greenish",
     ].join(" ");
 
   /* Dropdown item */
@@ -96,7 +93,7 @@ export default function Navbar() {
       {/* ══════════════════════════════════════════════
           TOP BAR
       ══════════════════════════════════════════════ */}
-      <div className="w-full bg-[#f0ede6] border-b border-[#e2ddd4]">
+      <div className="w-full bg-[#f0ede6] border-b border-[#e2ddd4] relative z-50">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-10 flex items-center justify-between">
           {/* Left: welcome + socials */}
           <div className="flex items-center gap-5">
@@ -140,7 +137,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Right: email · phone · search */}
+          {/* Right: email · phone */}
           <div className="flex items-center gap-4 text-[12px] text-slate-500 font-medium">
             <a
               href="mailto:info@girgangaparivartrust.com"
@@ -159,8 +156,7 @@ export default function Navbar() {
             </a>
           </div>
         </div>
-      </div>
-
+      </div>{" "}
       {/* ══════════════════════════════════════════════
           MAIN NAV  ——  Selvatika style
           [ Logo + name ]              [ links … Donate ]
@@ -205,10 +201,14 @@ export default function Navbar() {
             </li>
 
             {/* OUR WORK ▾ */}
-            <li className="relative" ref={workRef}>
+            <li
+              className="relative group"
+              ref={workRef}
+              onMouseEnter={() => setWorkOpen(true)}
+              onMouseLeave={() => setWorkOpen(false)}
+            >
               <button
                 type="button"
-                title="Our Work"
                 onClick={() => {
                   setWorkOpen(!workOpen);
                   setMediaOpen(false);
@@ -222,10 +222,12 @@ export default function Navbar() {
                 />
                 <span className={underline(isWorkActive || workOpen, false)} />
               </button>
+
               <div className={dropPanel(workOpen)}>
-                {/* notch arrow */}
-                <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3
-                 bg-white border-l border-t border-slate-100 rotate-45" />
+                <div
+                  className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3
+                     bg-white border-l border-t border-slate-100 rotate-45"
+                />
                 {[{ label: "Impact", href: "/impact" }].map(
                   ({ label, href }) => (
                     <Link
@@ -242,10 +244,14 @@ export default function Navbar() {
             </li>
 
             {/* MEDIA ▾ */}
-            <li className="relative" ref={mediaRef}>
+            <li
+              className="relative"
+              ref={mediaRef}
+              onMouseEnter={() => setMediaOpen(true)}
+              onMouseLeave={() => setMediaOpen(false)}
+            >
               <button
                 type="button"
-                title="Media"
                 onClick={() => {
                   setMediaOpen(!mediaOpen);
                   setWorkOpen(false);
@@ -329,6 +335,7 @@ export default function Navbar() {
             <FiMenu size={26} />
           </button>
         </div>
+
         {/* Wave Design at Bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-4 overflow-hidden">
           <svg
@@ -345,7 +352,6 @@ export default function Navbar() {
           </svg>
         </div>
       </nav>
-
       {/* ══════════════════════════════════════════════
           MOBILE FULLSCREEN MENU
       ══════════════════════════════════════════════ */}
@@ -354,6 +360,70 @@ export default function Navbar() {
                        transition-all duration-500
                        ${menuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"}`}
       >
+        <div className="w-full bg-[#f0ede6] border-b border-[#e2ddd4] relative z-50">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-10 flex items-center justify-between">
+            {/* Left: welcome + socials */}
+            <div className="flex items-center gap-5">
+              <span className="hidden sm:block text-[12px] text-slate-500 font-medium tracking-wide">
+                Welcome to Gir Ganga Parivar Trust
+              </span>
+              <div className="flex items-center gap-3 text-slate-500">
+                {[
+                  {
+                    icon: <FaFacebookF size={11} />,
+                    href: "https://www.facebook.com/profile.php?id=100083921712230",
+                    label: "Facebook",
+                  },
+                  {
+                    icon: <FaYoutube size={12} />,
+                    href: "https://www.youtube.com/@girgangaparivartrust",
+                    label: "YouTube",
+                  },
+                  {
+                    icon: <FaInstagram size={12} />,
+                    href: "https://www.instagram.com/girgangaparivartrust/",
+                    label: "Instagram",
+                  },
+                  {
+                    icon: <FaTwitter size={11} />,
+                    href: "https://x.com/GirgangaT71455",
+                    label: "Twitter",
+                  },
+                ].map(({ icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="hover:text-greenish transition-colors"
+                  >
+                    {icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: email · phone */}
+            <div className="flex items-center gap-4 text-[12px] text-slate-500 font-medium">
+              <a
+                href="mailto:info@girgangaparivartrust.com"
+                className="hidden md:flex items-center gap-1.5 hover:text-greenish transition-colors"
+              >
+                <FiMail size={15} className="text-yell" />
+                info@girgangaparivartrust.com
+              </a>
+              <span className="hidden md:block text-slate-300">|</span>
+              <a
+                href="tel:+919409692693"
+                className="flex items-center gap-1.5 hover:text-greenish transition-colors"
+              >
+                <FiPhone size={15} className="text-yell" />
+                +91 94096 92693
+              </a>
+            </div>
+          </div>
+        </div>{" "}
         {/* Top row */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100">
           <Link
@@ -384,8 +454,22 @@ export default function Navbar() {
           >
             <FiX size={28} />
           </button>
-        </div>
 
+          <div className="absolute top-36 fixed left-0 right-0 h-4 overflow-hidden">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 1200 12"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0,6 C150,0 300,12 450,6 C600,0 750,12 900,6 C1050,0 1200,12 1200,6 L1200,12 L0,12 Z"
+                fill="#10b981"
+                className="fill-greenish"
+              />
+            </svg>
+          </div>
+        </div>
         {/* Link list */}
         <ul className="flex-1 overflow-y-auto px-6 py-6">
           {[
@@ -474,14 +558,13 @@ export default function Navbar() {
             </div>
           </li>
         </ul>
-
         {/* Bottom: contact info + donate CTA */}
         <div className="px-6 pb-8 pt-4 border-t border-slate-100 space-y-3">
           <a
             href="tel:+919409692693"
             className="flex items-center gap-3 text-slate-700 font-semibold text-sm"
           >
-            <span className="bg-emerald-100 text-greenish p-2 rounded-lg">
+            <span className="bg-greenish text-white p-2 rounded-lg">
               <FiPhone size={15} />
             </span>
             +91 94096 92693
@@ -490,7 +573,7 @@ export default function Navbar() {
             href="mailto:info@girgangaparivartrust.com"
             className="flex items-center gap-3 text-slate-700 font-semibold text-sm"
           >
-            <span className="bg-greenish text-greenish p-2 rounded-lg">
+            <span className="bg-greenish text-white p-2 rounded-lg">
               <FiMail size={15} />
             </span>
             info@girgangaparivartrust.com
