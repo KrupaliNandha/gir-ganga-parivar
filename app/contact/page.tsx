@@ -99,10 +99,9 @@ function ContactCards() {
           href={card.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl p-7 flex flex-col items-center text-center gap-3 
-          bg-[var(--color-tertiary)] text-[var(--color-primary)]
+          className="btn-secondary rounded-2xl p-7 flex flex-col items-center text-center gap-3 
+          bg-[var(--color-primary)] text-white
           border border-[var(--color-tertiary)]
-          transition-all duration-300 hover:scale-[1.02]
           hover:bg-[var(--color-secondary)] hover:text-black shadow-sm"
         >
           <div className="text-black">
@@ -239,7 +238,8 @@ function ContactForm() {
 
       <button
         disabled={loading}
-        className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-accent)] text-white font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2"
+        className="w-full bg-[var(--color-primary)] text-white hover:bg-[var(--color-accent)] hover:text-black
+        font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 btn-secondary"
       >
         {loading ? (
           "Sending..."
