@@ -109,31 +109,73 @@ export default function Media() {
     <>
       <SmoothScroll>
         {/* Section - 1 */}
-        <section className="container w-full max-h-screen overflow-hidden flex flex-col items-center justify-start">
-          {/* Heading */}
-          <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-            <span className="w-8 h-px bg-[var(--color-secondary)]" />
-            Media & Impact
-            <span className="w-8 h-px bg-[var(--color-secondary)]" />
-          </p>
+        <section className="container py-20">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <p className="text-[var(--color-secondary)] text-[10px] font-black tracking-[0.35em] uppercase mb-3 flex items-center justify-center gap-3">
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+              Media & Impact
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+            </p>
+            <h1 className="text-gray-900 text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+              Reviving Water,{" "}
+              <span className="text-[var(--color-primary)]">Reviving Life</span>
+            </h1>
+            <div className="w-16 h-1 bg-[var(--color-primary)] mx-auto mt-5" />
+          </div>
 
-          <h1
-            className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center mb-10"
-          >
-            Reviving Water,{" "}
-            <span className="text-[var(--color-primary)]">Reviving Life</span>
-          </h1>
+          {/* Video Card */}
+          <div className="max-w-5xl mx-auto">
+            <div className="relative group rounded-3xl overflow-hidden border-2 border-[var(--color-dark)] shadow-2xl shadow-[var(--color-primary)]/10">
+              {/* Top accent bar */}
+              <div className="h-1 w-full bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-primary)]" />
 
-          {/* YOUTUBE VIDEO */}
-          <div className="w-full max-w-7xl aspect-video rounded-2xl overflow-hidden shadow-xl">
-            <iframe
-              className="w-full h-full"
-              src="https://www.youtube.com/embed/EqBlc-0o8tk"
-              title="Water Structure Impact"
-              frameBorder="0"
-              allow="autoplay; fullscreen"
-              allowFullScreen
-            />
+              {/* Label bar */}
+              <div className="bg-white border-b border-[var(--color-dark)] px-6 py-3 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-secondary)]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
+                  Water Structure Impact
+                </span>
+                <span className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--color-primary)] bg-[var(--color-tertiary)] border border-[var(--color-primary)] px-2.5 py-1 rounded-full">
+                  YouTube
+                </span>
+              </div>
+
+              {/* Video */}
+              <div className="aspect-video w-full bg-black">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/EqBlc-0o8tk"
+                  title="Water Structure Impact"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                />
+              </div>
+
+              {/* Bottom info bar */}
+              <div className="bg-white border-t border-[var(--color-dark)] px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[var(--color-tertiary)] border border-[var(--color-dark)] flex items-center justify-center flex-shrink-0">
+                    <span className="text-base">💧</span>
+                  </div>
+                  <div>
+                    <p className="text-xs font-black text-gray-900">
+                      Girganga Parivar Trust
+                    </p>
+                    <p className="text-[10px] text-gray-400 font-medium">
+                      Water Conservation Initiative · Gujarat
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Below card — trust + CTA row */}
           </div>
         </section>
 
@@ -147,9 +189,7 @@ export default function Media() {
                   <span className="w-8 h-px bg-[var(--color-secondary)]" />
                   Explore More
                 </p>
-                <h2
-                  className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
-                >
+                <h2 className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start">
                   Know More{" "}
                   <span className="text-[var(--color-primary)]">About US</span>
                 </h2>
@@ -229,7 +269,7 @@ export default function Media() {
             </div>
           </div>
         </section>
-            
+
         {/* Section - 3 */}
         <section className="container py-20">
           {/* Heading */}
@@ -239,9 +279,7 @@ export default function Media() {
               Project Progress
               <span className="w-8 h-px bg-[var(--color-secondary)]" />
             </p>
-            <h1
-              className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-            >
+            <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
               Construction{" "}
               <span className="text-[var(--color-primary)]">Work </span>Images
             </h1>
@@ -249,8 +287,8 @@ export default function Media() {
 
           {/* Slider Wrapper */}
           <div
-            className="relative w-full rounded-3xl overflow-hidden"
-            style={{ height: "560px" }}
+            className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden"
+            style={{ height: "clamp(280px, 55vw, 560px)" }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -267,7 +305,7 @@ export default function Media() {
                   opacity: 0,
                 }}
                 transition={{ duration: 0.75, ease: [0.77, 0, 0.175, 1] }}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full"
               >
                 <img
                   src={images[current].src}
@@ -278,110 +316,6 @@ export default function Media() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
               </motion.div>
             </AnimatePresence>
-
-            {/* Bottom Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 flex items-end justify-between z-10">
-              {/* Left: Counter + Title */}
-              <div className="flex-1">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={current}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.4, delay: 0.2 }}
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <span
-                        className="text-[var(--color-primary)] font-black text-3xl leading-none"
-                        style={{ fontFamily: "monospace" }}
-                      >
-                        {String(current + 1).padStart(2, "0")}
-                      </span>
-                      <div className="flex flex-col gap-1">
-                        <div className="w-10 h-px bg-white/40" />
-                        <span className="text-white/40 text-xs font-bold tracking-widest">
-                          {String(images.length).padStart(2, "0")}
-                        </span>
-                      </div>
-                    </div>
-
-                    <h2
-                      className="text-white text-2xl sm:text-3xl font-bold leading-snug max-w-md"
-                      style={{
-                        fontFamily: "'Playfair Display', Georgia, serif",
-                      }}
-                    >
-                      {images[current].title}
-                    </h2>
-
-                    <div className="mt-3 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]" />
-                      <span className="text-white/70 text-[10px] font-semibold tracking-widest uppercase">
-                        {images[current].location}
-                      </span>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Right: Navigation */}
-              <div className="flex flex-col items-end gap-4">
-                <div className="flex gap-2">
-                  <button
-                    onClick={prev}
-                    className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] transition-all duration-300"
-                    aria-label="Previous"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="15 18 9 12 15 6" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={next}
-                    className="w-12 h-12 rounded-xl bg-[var(--color-primary)] border border-[var(--color-primary)] flex items-center justify-center text-white hover:bg-white hover:border-white hover:text-black transition-all duration-300"
-                    aria-label="Next"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="9 18 15 12 9 6" />
-                    </svg>
-                  </button>
-                </div>
-
-                <div className="flex gap-1.5">
-                  {images.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => goTo(i, i > current ? 1 : -1)}
-                      className={`h-1 rounded-full transition-all duration-500 ${
-                        i === current
-                          ? "w-8 bg-[var(--color-primary)]"
-                          : "w-1.5 bg-white/30 hover:bg-white/60"
-                      }`}
-                      aria-label={`Slide ${i + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
 
             {/* Auto-progress bar */}
             {!isHovered && (
@@ -395,6 +329,115 @@ export default function Media() {
                 />
               </div>
             )}
+
+            {/* Bottom Content */}
+            <div className="absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-6 md:p-8">
+              {/* Mobile layout: stacked. Desktop: side by side */}
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-6">
+                {/* Left: Counter + Title + Location */}
+                <div className="flex-1 min-w-0">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={current}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -12 }}
+                      transition={{ duration: 0.4, delay: 0.2 }}
+                    >
+                      {/* Counter */}
+                      <div className="flex items-center gap-3 mb-2 sm:mb-3">
+                        <span className="text-[var(--color-primary)] font-black text-2xl sm:text-3xl leading-none font-mono">
+                          {String(current + 1).padStart(2, "0")}
+                        </span>
+                        <div className="flex flex-col gap-1">
+                          <div className="w-8 sm:w-10 h-px bg-white/40" />
+                          <span className="text-white/40 text-[10px] font-bold tracking-widest">
+                            {String(images.length).padStart(2, "0")}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h2
+                        className="text-white text-lg sm:text-2xl md:text-3xl font-bold leading-snug max-w-xs sm:max-w-md truncate sm:whitespace-normal"
+                        style={{
+                          fontFamily: "'Playfair Display', Georgia, serif",
+                        }}
+                      >
+                        {images[current].title}
+                      </h2>
+
+                      {/* Location pill */}
+                      <div className="mt-2 sm:mt-3 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]" />
+                        <span className="text-white/70 text-[10px] font-semibold tracking-widest uppercase truncate max-w-[160px] sm:max-w-none">
+                          {images[current].location}
+                        </span>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Right: Nav buttons + dots */}
+                <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-end gap-3 sm:gap-4 flex-shrink-0">
+                  {/* Prev / Next */}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={prev}
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] transition-all duration-300"
+                      aria-label="Previous"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="15 18 9 12 15 6" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={next}
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--color-primary)] border border-[var(--color-primary)] flex items-center justify-center text-white hover:bg-white hover:border-white hover:text-black transition-all duration-300"
+                      aria-label="Next"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Dot indicators */}
+                  <div className="flex gap-1.5 items-center">
+                    {images.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => goTo(i, i > current ? 1 : -1)}
+                        className={`h-1 rounded-full transition-all duration-500 ${
+                          i === current
+                            ? "w-6 sm:w-8 bg-[var(--color-primary)]"
+                            : "w-1.5 bg-white/30 hover:bg-white/60"
+                        }`}
+                        aria-label={`Slide ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </SmoothScroll>

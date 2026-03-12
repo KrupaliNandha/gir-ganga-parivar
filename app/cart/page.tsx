@@ -19,7 +19,6 @@ export default function CartPage() {
     const saved = sessionStorage.getItem("cartItem");
     if (saved) {
       const parsed = JSON.parse(saved);
-      // Make state update async to avoid React warning
       setTimeout(() => {
         setCartItem(parsed);
         setQty(parsed.quantity || 1);
@@ -29,19 +28,17 @@ export default function CartPage() {
 
   if (!cartItem) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-gray-50">
-        <div className="text-6xl">🛒</div>
-        <h2 className="text-3xl font-extrabold text-gray-900">
-          Your cart is empty
-        </h2>
-        <p className="text-gray-400 text-base">
-          Looks like you haven&apos;t added anything yet.
-        </p>
+      <div className="min-h-screen flex flex-col items-center justify-center gap-5 bg-[var(--color-tertiary)]">
+        <div className="w-24 h-24 rounded-full bg-white border-2 border-[var(--color-dark)] flex items-center justify-center shadow-md">
+          <span className="text-4xl">🛒</span>
+        </div>
+        <h2 className="text-3xl font-black text-gray-900">Your cart is empty</h2>
+        <p className="text-gray-400 text-sm">You haven&apos;t added any donation yet.</p>
         <Link
           href="/donate"
-          className="mt-4 bg-gray-900 text-white px-8 py-3 rounded-xl font-bold text-sm hover:bg-gray-700 transition"
+          className="mt-2 bg-[var(--color-primary)] text-white px-8 py-3 rounded-2xl font-black text-sm hover:bg-[#007fa3] transition-all shadow-lg shadow-[var(--color-primary)]/20"
         >
-          Browse Products
+          Browse Donations →
         </Link>
       </div>
     );
@@ -60,48 +57,55 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      {/* Page Header */}
-      <div className="bg-white border-b border-gray-200 px-6 md:px-12 pt-10 pb-0">
-        <div className="max-w-6xl mx-auto flex items-baseline gap-3 pb-5">
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-            Shopping Cart
-          </h1>
-          <span className="text-sm text-gray-400 font-medium">1 item</span>
-        </div>
+    <div className="min-h-screen bg-[var(--color-tertiary)] pb-20">
+
+      {/* ── Page Header ── */}
+      <div className="bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-8">
         <div className="max-w-6xl mx-auto">
-          <div className="h-1 w-14 bg-emerald-500 rounded-full" />
+          <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center gap-2 mb-2">
+            <span className="w-5 h-px bg-[var(--color-secondary)]" />
+            Donation Cart
+            <span className="w-5 h-px bg-[var(--color-secondary)]" />
+          </p>
+          <div className="flex items-baseline gap-3">
+            <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
+              Your Cart
+            </h1>
+          </div>
         </div>
       </div>
 
-      {/* Main Layout */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-10 flex flex-col lg:flex-row gap-8 items-start">
-        {/* Left: Cart Items */}
-        <div className="flex-1 min-w-0">
-          <div className="hidden md:grid grid-cols-[1fr_120px_130px_120px] px-5 pb-3 text-xs font-bold text-gray-400 uppercase tracking-widest">
-            <span>Product</span>
-            <span className="text-center">Price</span>
+      {/* ── Main Layout ── */}
+      <div className="max-w-6xl mx-auto px-6 md:px-12 mt-10 flex flex-col lg:flex-row gap-8 items-start">
+
+        {/* ── LEFT: Cart Item ── */}
+        <div className="flex-1 min-w-0 space-y-4">
+
+          {/* Column headers — desktop */}
+          <div className="hidden md:grid grid-cols-[1fr_150px_100px_140px] px-6 pb-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
+            <span>Donation</span>
+            <span className="text-center">Amount</span>
             <span className="text-center">Quantity</span>
-            <span className="text-right">Subtotal</span>
+            <span className="text-right">Total</span>
           </div>
 
           {/* Item Card */}
           <div
-            className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col md:grid md:grid-cols-[1fr_120px_130px_120px] items-center gap-4 relative transition-all duration-300 ${
+            className={`bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm p-6 flex flex-col md:grid md:grid-cols-[1fr_110px_130px_110px] items-center gap-5 relative transition-all duration-300 ${
               removing ? "opacity-0 -translate-x-6" : "opacity-100 translate-x-0"
             }`}
           >
             {/* Remove Button */}
             <button
               onClick={handleRemove}
-              className="absolute top-3 right-3 w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 hover:border-red-400 hover:text-red-400 transition text-xs cursor-pointer"
+              className="absolute top-4 right-4 w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 hover:border-red-400 hover:text-red-400 hover:bg-red-50 transition text-xs cursor-pointer"
             >
               ✕
             </button>
 
             {/* Product Info */}
             <div className="flex items-center gap-4 w-full min-w-0">
-              <div className="w-20 h-20 rounded-xl overflow-hidden border border-gray-100 flex-shrink-0 bg-gray-50">
+              <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
                 <img
                   src={cartItem.img}
                   alt={cartItem.title}
@@ -109,76 +113,116 @@ export default function CartPage() {
                 />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-bold text-gray-900 truncate">
+                <span className="inline-block text-[9px] font-black uppercase tracking-widest text-[var(--color-primary)] bg-[var(--color-tertiary)] border border-[var(--color-dark)] px-2 py-0.5 rounded-full mb-1.5">
+                  Donation
+                </span>
+                <p className="text-sm font-black text-gray-900 leading-snug line-clamp-2">
                   {cartItem.title}
                 </p>
-                <p className="text-xs text-gray-400 mt-1">ID: #{cartItem.id}</p>
+                <p className="text-[10px] text-gray-400 mt-1 font-medium">
+                  ID: #{cartItem.id.slice(0, 24)}…
+                </p>
               </div>
             </div>
 
             {/* Price */}
             <div className="text-center w-full md:w-auto">
-              <span className="text-sm text-gray-500 md:hidden font-semibold">
-                Price:{" "}
-              </span>
-              <span className="text-sm font-semibold text-gray-600">
+              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden mb-1">Price</p>
+              <span className="text-sm font-bold text-gray-700">
                 {formatted(rawAmount)}
               </span>
             </div>
 
             {/* Quantity */}
-            <div className="flex items-center justify-center gap-3 w-full md:w-auto">
-              <button
-                onClick={() => setQty((q) => Math.max(1, q - 1))}
-                className="w-8 h-8 rounded-lg border border-gray-200 bg-gray-50 text-gray-600 font-bold text-base hover:border-emerald-400 hover:text-emerald-500 transition cursor-pointer flex items-center justify-center"
-              >
-                −
-              </button>
-              <span className="text-sm font-bold text-gray-900 w-6 text-center">
-                {qty}
-              </span>
-              <button
-                onClick={() => setQty((q) => q + 1)}
-                className="w-8 h-8 rounded-lg border border-gray-200 bg-gray-50 text-gray-600 font-bold text-base hover:border-emerald-400 hover:text-emerald-500 transition cursor-pointer flex items-center justify-center"
-              >
-                +
-              </button>
+            <div className="flex flex-col items-center gap-2 w-full md:w-auto">
+              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden">Quantity</p>
+              <div className="flex items-center gap-2 rounded-xl px-2 py-1">
+                <button
+                  onClick={() => setQty((q) => Math.max(1, q - 1))}
+                  className="w-7 h-7 rounded-lg bg-white border border-[var(--color-dark)] text-gray-600 font-black text-sm hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition cursor-pointer flex items-center justify-center shadow-sm"
+                >
+                  −
+                </button>
+                <span className="text-sm font-black text-gray-900 w-7 text-center tabular-nums">
+                  {qty}
+                </span>
+                <button
+                  onClick={() => setQty((q) => q + 1)}
+                  className="w-7 h-7 rounded-lg bg-white border border-[var(--color-dark)] text-gray-600 font-black text-sm hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition cursor-pointer flex items-center justify-center shadow-sm"
+                >
+                  +
+                </button>
+              </div>
             </div>
 
             {/* Subtotal */}
-            <div className="text-right w-full md:w-auto pr-6">
-              <span className="text-sm text-gray-500 md:hidden font-semibold">
-                Subtotal:{" "}
-              </span>
-              <span className="text-base font-extrabold text-gray-900">
+            <div className="text-right w-full md:w-auto pr-2">
+              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden mb-1">Subtotal</p>
+              <span className="text-lg font-black text-[var(--color-primary)]">
                 {formatted(subtotal)}
               </span>
             </div>
           </div>
+
+          {/* Continue Shopping */}
+          <Link
+            href="/donate"
+            className="inline-flex items-center gap-2 text-xs font-bold text-[var(--color-primary)] hover:underline mt-2"
+          >
+            ← Continue Donating
+          </Link>
         </div>
 
-        {/* Right: Order Summary */}
-        <div className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-4">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
-            <h2 className="text-xl font-extrabold text-gray-900 mb-6 tracking-tight">
-              Order Summary
-            </h2>
+        {/* ── RIGHT: Order Summary ── */}
+        <div className="w-full lg:w-80 flex-shrink-0">
+          <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
 
-            <div className="h-px bg-gray-100 my-5" />
-
-            <div className="flex justify-between items-center mb-6">
-              <span className="text-base font-bold text-gray-900">Total</span>
-              <span className="text-2xl font-black text-gray-900 tracking-tight">
-                {formatted(subtotal)}
-              </span>
+            {/* Summary header */}
+            <div className="bg-[var(--color-primary)] px-6 py-4 flex items-center gap-2">
+              <div className="w-1 h-5 bg-white/60 rounded-full" />
+              <h2 className="text-sm font-black uppercase tracking-[0.2em] text-white">
+                Order Summary
+              </h2>
             </div>
 
-            <Link
-              href="/checkout"
-              className="block w-full bg-gray-900 text-white text-center py-4 rounded-xl font-bold text-sm hover:bg-gray-700 transition"
-            >
-              Proceed to Checkout →
-            </Link>
+            <div className="p-6 space-y-5">
+              {/* Line items */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-gray-500 font-medium">Unit Amount</span>
+                  <span className="font-bold text-gray-800">{formatted(rawAmount)}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-gray-500 font-medium">Quantity</span>
+                  <span className="font-bold text-gray-800">× {qty}</span>
+                </div>
+              </div>
+
+              <div className="h-px bg-[var(--color-tertiary)]" />
+
+              {/* Total */}
+              <div className="bg-[var(--color-tertiary)] border border-[var(--color-dark)] rounded-2xl px-5 py-4 flex justify-between items-center">
+                <span className="text-sm font-black text-gray-700 uppercase tracking-wider">Total</span>
+                <span className="text-2xl font-black text-[var(--color-primary)] tabular-nums">
+                  {formatted(subtotal)}
+                </span>
+              </div>
+
+              {/* Checkout CTA */}
+              <Link
+                href="/checkout"
+                className="block w-full bg-[var(--color-primary)] hover:bg-[#007fa3] text-white text-center py-4 rounded-2xl font-black text-sm transition-all shadow-lg shadow-[var(--color-primary)]/20 hover:-translate-y-0.5 active:translate-y-0"
+              >
+                Proceed to Checkout →
+              </Link>
+
+              {/* Trust row */}
+              <div className="flex items-center justify-center gap-4 pt-1">
+                {["🔒 Secure", "80G Tax", "✓ Verified"].map((t) => (
+                  <span key={t} className="text-[10px] text-gray-400 font-bold">{t}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

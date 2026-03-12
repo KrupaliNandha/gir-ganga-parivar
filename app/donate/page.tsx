@@ -4,68 +4,76 @@ import SmoothScroll from "../../Component/SmothScrolling";
 import { FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 const PRESET_AMOUNTS = [100, 200, 500];
 
 const donateData = [
   {
     id: "donation-for-biggest-checkdam",
-    img: "/image/suport/Donation-Biggest-Size.png",
-    title: "Donation For Biggest Checkdam",
-    amount: "₹10,000,000",
-    desc: "Support the construction of a largest-scale check dam that can store significant rainwater, recharge groundwater, and provide long-term water security for entire villages.",
+    title: "Biggest Checkdam",
+    amount: "₹1,00,00,000",
+    tag: "FLAGSHIP",
+    desc: "Largest-scale dam storing significant rainwater, recharging groundwater, and providing long-term water security for entire villages.",
+    accent: "#0a3d2e",
+    drop: "💧💧💧💧",
   },
   {
     id: "donation-for-large-checkdam",
-    img: "/image/suport/Donation-Large-Size.png",
-    title: "Donation For Large Checkdam",
-    amount: "₹5,000,000",
-    desc: "Contribute towards building a large check dam that helps collect rainwater, improve irrigation for farmers, and increase groundwater levels in drought-prone areas.",
+    title: "Large Checkdam",
+    amount: "₹50,00,000",
+    tag: "HIGH IMPACT",
+    desc: "Collect rainwater, improve irrigation for farmers, and increase groundwater levels in drought-prone areas.",
+    accent: "#1a5c42",
+    drop: "💧💧💧",
   },
   {
     id: "donation-for-medium-checkdam",
-    img: "/image/suport/Donation-Medium-Size.png",
-    title: "Donation For Medium Checkdam",
-    amount: "₹2,000,000",
-    desc: "Help construct a medium-sized check dam that supports local farming communities by storing seasonal water and improving groundwater recharge.",
+    title: "Medium Checkdam",
+    amount: "₹20,00,000",
+    tag: "COMMUNITY",
+    desc: "Store seasonal water and improve groundwater recharge to support local farming communities nearby.",
+    accent: "#2d7a5a",
+    drop: "💧💧",
   },
   {
     id: "donation-for-small-checkdam",
-    img: "/image/suport/Donation-Small-Size.png",
-    title: "Donation For Small Checkdam",
-    amount: "₹500,000",
-    desc: "Donate to build a small check dam that captures rainwater, prevents soil erosion, and supports nearby farmers and wildlife with essential water resources.",
+    title: "Small Checkdam",
+    amount: "₹5,00,000",
+    tag: "START HERE",
+    desc: "Capture rainwater, prevent soil erosion, and support nearby farmers and wildlife with essential water.",
+    accent: "#3d9970",
+    drop: "💧",
   },
 ];
-
 const maintaindonateData = [
   {
     id: "donation-for-maintain-biggest-checkdam",
-    img: "/image/suport/Donation-Biggest-Size-Checkdam.png",
-    title: "Donation to Maintain Biggest Checkdam",
-    amount: "₹10,000,000",
-    desc: "Your donation helps maintain, renovate, and deepen the biggest checkdam to store more water and support nearby villages.",
+    title: "Maintain Biggest Checkdam",
+    amount: "₹1,00,00,000",
+    tag: "FLAGSHIP",
+    desc: "Help maintain, renovate, and deepen the biggest checkdam to store more water and support nearby villages.",
   },
   {
     id: "donation-for-maintain-large-checkdam",
-    img: "/image/suport/Donation-Large-Size-Checkdam.png",
-    title: "Donation to Maintain Large Checkdam",
-    amount: "₹5,000,000",
-    desc: "This contribution supports the maintenance, renovation, and deepening of a large checkdam to improve water conservation.",
+    title: "Maintain Large Checkdam",
+    amount: "₹50,00,000",
+    tag: "HIGH IMPACT",
+    desc: "Support maintenance, renovation, and deepening of a large checkdam to improve water conservation.",
   },
   {
     id: "donation-for-maintain-medium-checkdam",
-    img: "/image/suport/Donation-Medium-Size-Checkdam.png",
-    title: "Donation to Maintain Medium Checkdam",
-    amount: "₹2,000,000",
-    desc: "Your support helps repair, maintain, and deepen a medium-sized checkdam for better groundwater recharge.",
+    title: "Maintain Medium Checkdam",
+    amount: "₹20,00,000",
+    tag: "COMMUNITY",
+    desc: "Help repair and maintain a medium-sized checkdam for better groundwater recharge and farming support.",
   },
   {
     id: "donation-for-maintain-small-checkdam",
-    img: "/image/suport/Donation-Small-Size-Checkdam.png",
-    title: "Donation to Maintain Small Checkdam",
-    amount: "₹500,000",
-    desc: "This donation helps maintain and restore a small checkdam to ensure water availability for farming and local use.",
+    title: "Maintain Small Checkdam",
+    amount: "₹5,00,000",
+    tag: "START HERE",
+    desc: "Restore a small checkdam to ensure water availability for farming and local community use.",
   },
 ];
 
@@ -73,37 +81,42 @@ const donationequipment = [
   {
     id: "donation-for-Water-Tanker",
     img: "/image/suport/Water-Tanker.jpg",
-    title: "Donation for Water Tanker",
-    amount: "₹250,000",
-    desc: "Your generous contribution will help us purchase and maintain a water tanker used...",
+    title: "Water Tanker",
+    amount: "₹2,50,000",
+    tag: "ESSENTIAL",
+    desc: "Purchase and maintain a water tanker to deliver clean water to drought-affected villages and construction sites.",
   },
   {
     id: "donation-for-tractor",
     img: "/image/suport/Tractor.jpg",
-    title: "Donation for Tractor",
-    amount: "₹750,000",
-    desc: "Donating for a tractor helps support agricultural and rural development activities. The...",
+    title: "Tractor",
+    amount: "₹7,50,000",
+    tag: "AGRICULTURAL",
+    desc: "Support agricultural and rural development by funding a tractor for field work and earthmoving tasks.",
   },
   {
     id: "donation-for-ace-pickup-tempo",
     img: "/image/suport/Ace-Small-Truck.jpg",
-    title: "Donation for Ace Pickup Tempo",
-    amount: "₹750,000",
-    desc: "The Ace Pickup Tempo is a small utility vehicle that helps transport tools, construction...",
+    title: "Ace Pickup Tempo",
+    amount: "₹7,50,000",
+    tag: "LOGISTICS",
+    desc: "A utility vehicle to transport tools, materials, and construction supplies across project sites efficiently.",
   },
   {
     id: "donation-for-loader",
     img: "/image/suport/Loader.jpg",
-    title: "Donation for Loader",
-    amount: "₹1,500,000",
-    desc: "A loader machine is essential for construction, digging, and earth-moving work required in...",
+    title: "Loader Machine",
+    amount: "₹15,00,000",
+    tag: "HEAVY DUTY",
+    desc: "Essential for construction, digging, and earth-moving work required in checkdam and infrastructure projects.",
   },
   {
     id: "donation-for-jcb",
     img: "/image/suport/JCB.jpg",
-    title: "Donation for JCB",
-    amount: "₹4,000,000",
-    desc: "The JCB machine is one of the most important machines used in large-scale construction...",
+    title: "JCB Excavator",
+    amount: "₹40,00,000",
+    tag: "FLAGSHIP",
+    desc: "The most powerful machine for large-scale construction, dam building, and deep excavation projects.",
   },
 ];
 
@@ -141,111 +154,135 @@ export default function Donate() {
 
   return (
     <SmoothScroll>
-      {/* Section - 1 */}
-      <section className="container">
-        <div className="flex flex-wrap gap-10 mt-10 justify-center">
-          <a
-            href="/partner-with-us-csr"
-            className="bg-primary text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl select-none transition-transform transform hover:-translate-y-1 inline-block text-center"
-          >
-            Partner With Us (CSR)
-          </a>
-          <a
-            href="/support-a-structure"
-            className="bg-primary text-white font-semibold px-10 py-4 rounded-lg shadow-md text-xl select-none transition-transform transform hover:-translate-y-1 inline-block text-center"
-          >
-            Support A Structure
-          </a>
-        </div>
-      </section>
-
       {/* Section - 2 - Single Card */}
-      <section className="container">
-        <div className="border border-gray-100 p-3 sm:p-5 space-y-5 rounded-2xl bg-emerald-50">
-          <h1 className="text-3xl text-primary font-semibold text-center">
-            General Donation
-          </h1>
+      <section className="container min-h-scree flex items-center justify-center px-4 py-20 relative overflow-hidden">
+        <div className="relative z-10 w-full max-w-5xl">
+          {/* Section Label */}
+          <div className=" items-center gap-3 mb-4">
+            <p
+              className="text-[var(--color-secondary)]
+ text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex text-center items-center justify-center gap-3"
+            >
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
+              />
+              Water Conservation Fund
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
+              />
+            </p>
+            <h1 className="text-black text-4xl sm:text-5xl md:text-6xl text-center font-bold leading-tight">
+              General{" "}
+              <span className="text-[var(--color-primary)]"> Donation</span>
+            </h1>
+            <div className="w-16 h-1 bg-[var(--color-primary)] mx-auto mt-6 mb-8" />
+          </div>
 
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_300px] gap-5 items-stretch">
-            {/* LEFT CARD */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-7 h-full">
-              <div className="mb-5">
-                <h1 className="text-2xl font-extrabold text-primary leading-snug">
-                  General Donation
-                </h1>
-                <p className="text-lg text-gray-400 mt-1">
-                  Support our water conservation mission with a donation of your
-                  choice.
+          {/* Main Card */}
+          <div className="border border-[var(--color-primary)] rounded-3xl p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
+            {/* LEFT: Amount Display */}
+            <div>
+              {/* Live amount display */}
+              <div className="mb-8">
+                <p className="text-[var(--color-primary)] text-xs tracking-widest uppercase mb-2">
+                  Your Contribution
                 </p>
-              </div>
-
-              {/* Amount Bar */}
-              <div className="bg-primary rounded-xl px-5 py-3.5 flex items-center gap-2 mb-4">
-                <span className="text-white text-2xl font-bold">₹</span>
-                {isCustom ? (
-                  <input
-                    type="number"
-                    placeholder="Enter amount"
-                    value={customAmount}
-                    onChange={(e) => setCustomAmount(e.target.value)}
-                    autoFocus
-                    className="bg-transparent border-none outline-none text-white text-2xl font-bold w-full placeholder-white/40"
-                  />
-                ) : (
-                  <span className="text-white text-2xl font-bold flex-1">
-                    {amount}
+                <div className="flex items-start gap-2">
+                  <span className="text-[var(--color-primary)] text-3xl font-black mt-1">
+                    ₹
                   </span>
-                )}
+                  <span className="text-5xl font-black text-black leading-none tracking-tight">
+                    {isCustom
+                      ? customAmount || <span className="text-zinc-700"></span>
+                      : amount.toLocaleString("en-IN")}
+                  </span>
+                </div>
+                <div className="mt-3 h-px w-full bg-[var(--color-primary)]" />
               </div>
 
-              {/* Preset Buttons: 100 / 200 / 500 / Custom */}
-              <div className="flex flex-wrap gap-2 mb-6">
+              {/* Preset Buttons */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
                 {PRESET_AMOUNTS.map((v) => (
                   <button
                     key={v}
                     onClick={() => handlePreset(v)}
-                    className={`px-4 py-2 rounded-lg text-sm font-semibold border-[1.5px] transition-all duration-150 ${
+                    className={`py-3 rounded-xl text-sm font-bold border transition-all duration-200 ${
                       !isCustom && amount === v
-                        ? "bg-primary text-white border-primary"
-                        : "bg-white text-gray-600 border-gray-200 hover:border-primary hover:text-primary"
+                        ? "bg-[var(--color-tertiary)] border-[var(--color-primary)] text-[var(--color-primary)] shadow-lg"
+                        : "bg-[var(--color-primary)] border-[var(--color-tertiary)] text-white"
                     }`}
                   >
-                    ₹{v}
+                    ₹{v.toLocaleString("en-IN")}
                   </button>
                 ))}
+              </div>
 
-                <button
-                  onClick={handleCustom}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold border-[1.5px] transition-all duration-150 ${
-                    isCustom
-                      ? "bg-primary text-white border-primary"
-                      : "bg-white text-primary border-dashed border-primary hover:bg-emerald-50"
-                  }`}
+              {/* Custom Amount */}
+              <div
+                onClick={handleCustom}
+                className={`w-full rounded-xl border-2 border-dashed px-4 py-3 flex items-center gap-2 cursor-text transition-all duration-200 mb-8 ${
+                  isCustom
+                    ? "border-[var(--color-primary)]"
+                    : "border-[var(--color-primary)] bg-[var(--color-tertiary)]"
+                }`}
+              >
+                <span
+                  className={`font-bold text-lg ${isCustom ? "text-[var(--color-primary)]" : "text-[var(--color-primary)]"}`}
                 >
-                  Custom Amount
-                </button>
+                  ₹
+                </span>
+                <input
+                  type="number"
+                  placeholder="Enter custom amount"
+                  value={customAmount}
+                  onChange={(e) => setCustomAmount(e.target.value)}
+                  onFocus={handleCustom}
+                  className="bg-transparent outline-none text-[var(--color-primary)] text-sm font-semibold w-full placeholder-zinc-400"
+                />
               </div>
 
               {/* Donate Button */}
               <button
                 onClick={handleDonate}
-                className="bg-primary flex gap-3 items-center text-white font-bold px-6 py-2 rounded-lg hover:bg-emerald-700 transition cursor-pointer"
+                className="w-full bg-[var(--color-primary)]/90 hover:bg-[var(--color-primary)] text-white font-black text-base py-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-200 shadow-md hover:-translate-y-0.5 active:translate-y-0"
               >
-                <FaShoppingCart />
-                Donate Now
+                <FaShoppingCart className="text-lg" />
+                Donate ₹
+                {isCustom
+                  ? customAmount || "0"
+                  : amount.toLocaleString("en-IN")}{" "}
+                Now
               </button>
             </div>
 
-            {/* RIGHT PANEL */}
-            <div className="flex flex-col gap-4 h-full">
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-full flex flex-col justify-between">
-                <img
-                  src="/image/suport/Donent-hero.png"
-                  alt="Campaign"
-                  className="w-full h-auto object-cover rounded-xl"
-                />
-                <p className="text-[17px] text-center font-extrabold text-gray-800 leading-snug mt-3">
+            {/* RIGHT: Info Panel */}
+            <div className="flex flex-col gap-6">
+              {/* Mission Statement */}
+              <div className="border border-zinc-800 rounded-2xl bg-[var(--color-tertiary)] p-6 relative overflow-hidden">
+                <p className="text-4xl mb-3">💧</p>
+                <p className="text-[var(--color-secondary)] font-bold text-lg leading-snug mb-2">
                   Raise Funds For Clean & Healthy Water
+                </p>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  Support our water conservation mission with a donation of your
+                  choice. Every rupee directly funds clean water access across
+                  drought-prone regions.
+                </p>
+              </div>
+
+              {/* Trust badge */}
+              <div className="flex items-center gap-3  border border-zinc-800 rounded-xl px-4 py-3">
+                <div className="w-8 h-8 rounded-full bg-[var(--color-tertiary)] flex items-center justify-center flex-shrink-0">
+                  <span className="text-[var(--color-primary)] text-sm">✓</span>
+                </div>
+                <p className="text-zinc-500 text-xs leading-snug">
+                  Tax deductible under{" "}
+                  <span className="text-[var(--color-primary)] font-bold">
+                    Section 80G
+                  </span>{" "}
+                  · 100% funds reach the field
                 </p>
               </div>
             </div>
@@ -254,112 +291,160 @@ export default function Donate() {
       </section>
 
       {/* Section - 3 */}
-      <section className="container">
-        <div className="border border-gray-100 p-3 sm:p-5 space-y-5 rounded-2xl bg-emerald-50">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center">
-            Donation to Create Checkdam
-          </h1>
+      <section className="container min-h-screen relative overflow-hidden">
+        <div className="container mx-auto relative ">
+          {/* Header */}
+          <div className="mb-16 text-center">
+            <p
+              className="text-[var(--color-secondary)]
+ text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+            >
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
+              />
+              Water Conservation Initiative
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
+              />
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-black leading-none tracking-tight mb-6">
+              Build A {""}
+              <span className="text-[var(--color-primary)]">Checkdam</span>
+            </h1>
+            <div className="w-16 h-1 bg-[var(--color-primary)] mx-auto mb-6" />
+            <p className="text-stone-400 text-lg max-w-xl mx-auto leading-relaxed">
+              Every drop saved is a life secured. Choose your level of impact
+              and help us restore water to drought-prone communities.
+            </p>
+          </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {donateData.map((item) => (
+          {/* Cards Grid */}
+          <div className="max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-self-center">
+            {donateData.map((item, index) => (
               <div
                 key={item.id}
-                className="bg-white rounded-xl shadow hover:shadow-lg transition"
+                className="group relative border border-[var(--color-primary)] text-center md:text-start  shadow-md rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col justify-between gap-6"
               >
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-auto object-cover rounded-t-xl"
-                />
-                <div className="p-5 space-y-3">
-                  <h3 className="text-xl font-semibold text-center text-emerald-700">
+                {/* Title + Amount */}
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-black text-[var(--color-primary)] leading-tight mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm text-center">
-                    {item.desc}
-                  </p>
-                  <p className="text-gray-800 font-bold text-center">
+                  <p className="text-xl sm:text-3xl md:text-4xl font-black text-black">
                     {item.amount}
                   </p>
-                  <div className="text-center">
-                    <Link
-                      href={`/donate/${item.id}`}
-                      className="inline-block text-primary font-semibold hover:underline"
-                    >
-                      Learn More →
-                    </Link>
-                  </div>
                 </div>
+
+                {/* Description */}
+                <p className="text-stone-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+
+                {/* CTA */}
+                <div className="justify-center">
+                  <Link
+                    href={`/donate/${item.id}`}
+                    className="inline-flex items-center gap-2 self-start bg-[var(--color-primary)]  hover:bg-[var(--color-secondary)] hover:text-black text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-200 group-hover:gap-3"
+                  >
+                    Donate Now
+                    <span>→</span>
+                  </Link>
+                </div>
+
+                {/* Decorative corner arc */}
+                <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full border border-[var(--color-secondary)] opacity-50 group-hover:opacity-40 transition-opacity" />
+                <div className="absolute -bottom-16 -right-16 w-44 h-44 rounded-full border border-[var(--color-secondary)] group-hover:opacity-20 transition-opacity" />
               </div>
             ))}
           </div>
-          {/* ✅ NEW: Before After Impact Section */}
-          <section className="container py-10">
-            <div className="text-center justify-center space-y-4 flex flex-wrap justify-between">
-              <div className="space-y-6">
-                {/* Title */}
-                <h2 className="text-3xl md:text-4xl font-bold text-primary">
-                  Check Our Impact By Comparing Before After Images
-                </h2>
-
-                {/* Description */}
-                <p className="text-gray-500 text-base md:text-lg max-w-5xl mx-auto">
-                  Every rupee you donate directly supports the vital work of
-                  repairing and enhancing checkdams across Saurashtra, Gujarat.
-                  Ensuring a more water-secure future for our communities in
-                  Gujarat, India.
-                </p>
-              </div>
-              {/* Button with Orange Brackets */}
-              <div className="flex items-center justify-center gap-3 mt-6">
-                <Link href="/Our-Work">
-                  <button className="bg-gray-900 text-white font-semibold px-8 py-3 rounded-full hover:bg-gray-700 transition cursor-pointer text-base md:text-lg">
-                    Click Here To Check Before And After Change
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </section>
         </div>
       </section>
 
       {/* Section - 4 */}
-      <section className="container">
-        <div className="border border-gray-100 p-3 sm:p-5 space-y-5 rounded-2xl bg-emerald-50">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-primary font-semibold text-center">
-            Donation to Maintain Checkdam
-          </h1>
+      <section className="container py-16">
+        <div className="bg-white border border-[var(--color-primary)] rounded-3xl p-6 sm:p-10">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.35em] uppercase flex items-center justify-center gap-3 mb-3">
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+              Water Conservation Initiative
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+            </p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight capitalize">
+              Donation to <br />{" "}
+              <span className="text-[var(--color-primary)] ">
+                Maintain checkdam
+              </span>
+              <br />
+              <span className="text-[var(--color-secondary)]"></span>
+            </h1>
+            <div className="w-16 h-1 bg-[var(--color-primary)] mx-auto mt-5" />
+          </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {maintaindonateData.map((item) => (
+          {/* Cards Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {maintaindonateData.map((item, index) => (
               <div
                 key={item.id}
-                className="bg-white rounded-xl shadow hover:shadow-lg transition"
+                className="group relative bg-white border border-[var(--color-tertiary)] text-center lg:text-start rounded-tr-4xl rounded-bl-4xl overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-xl hover:shadow-[#009dc4]/10 hover:border-[#009dc4] transition-all duration-300"
               >
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-auto object-cover rounded-t-xl"
-                />
-                <div className="p-5 space-y-3">
-                  <h3 className="text-xl font-semibold text-center text-primary">
+                {/* Top accent bar */}
+                <div className="h-1 w-full bg-gradient-to-r from-[var(--color-primary)] via-[#f1cf69] to-[var(--color-primary)]" />
+
+                {/* Card Body */}
+                <div className="p-6 flex flex-col flex-grow gap-4">
+                  {/* Title */}
+                  <h3 className="text-lg font-black text-gray-900 leading-snug group-hover:text-[var(--color-primary)] transition-colors duration-200">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm text-center">
+
+                  {/* Divider */}
+                  <div className="h-px bg-[var(--color-tertiary)]" />
+
+                  {/* Description */}
+                  <p className="text-gray-500 text-xs leading-relaxed flex-grow">
                     {item.desc}
                   </p>
-                  <p className="text-gray-800 font-bold text-center">
-                    {item.amount}
-                  </p>
-                  <div className="text-center">
-                    <Link
-                      href={`/donate/${item.id}`}
-                      className="inline-block text-primary font-semibold hover:underline"
-                    >
-                      Learn More →
-                    </Link>
+
+                  {/* Amount */}
+                  <div className="bg-[var(--color-tertiary)] rounded-xl px-4 py-3 text-center">
+                    <p className="text-[9px] text-[var(--color-primary)] font-bold tracking-widest uppercase mb-1">
+                      Donation Amount
+                    </p>
+                    <p className="text-[var(--color-primary)] font-black text-xl">
+                      {item.amount}
+                    </p>
                   </div>
+
+                  {/* CTA */}
+                  <Link
+                    href={`/donate/${item.id}`}
+                    className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] text-white hover:text-black text-xs font-black py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    Donate Now →
+                  </Link>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Trust Bar */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 border-t border-[#E6F7FB] pt-8">
+            {[
+              { icon: "✓", text: "Section 80G Tax Deductible" },
+              { icon: "💧", text: "100% Funds to Field" },
+              { icon: "🏛️", text: "Government Registered NGO" },
+            ].map((badge) => (
+              <div
+                key={badge.text}
+                className="flex items-center gap-2 text-gray-500 text-xs"
+              >
+                <span className="w-6 h-6 rounded-full bg-[#E6F7FB] flex items-center justify-center text-[#009dc4] font-bold text-sm">
+                  {badge.icon}
+                </span>
+                {badge.text}
               </div>
             ))}
           </div>
@@ -367,41 +452,65 @@ export default function Donate() {
       </section>
 
       {/* Section - 5 */}
-      <section className="container">
-        <div className=" p-3 sm:p-5 space-y-5 rounded-2xl ">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-primary font-bold text-center">
-            Donation for Equipment
-          </h1>
+      <section className="container py-16">
+        <div className="p-3 sm:p-6 space-y-10">
+          {/* Header */}
+          <div className="text-center">
+            <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.35em] uppercase flex items-center justify-center gap-3 mb-3">
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+              Field Equipment Fund
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+            </p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
+              Donation For{" "}
+              <span className="text-[var(--color-primary)]">Equipment</span>
+            </h1>
+            <div className="w-16 h-1 bg-[var(--color-primary)] mx-auto mt-4" />
+          </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+          {/* Cards */}
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
             {donationequipment.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-xl shadow hover:shadow-lg transition"
+                className="group bg-white border border-[var(--color-primary)] text-center   rounded-2xl overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-xl hover:shadow-[#009dc4]/10 hover:border-[#009dc4] transition-all duration-300"
               >
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-60 object-cover rounded-t-xl"
-                />
-                <div className="p-5 space-y-3">
-                  <h3 className="text-xl font-semibold text-center text-primary">
+                {/* Image */}
+                <div className="relative overflow-hidden h-48">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+                  {/* Amount badge on image */}
+                  <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-xl px-3 py-1.5 text-center">
+                    <p className="text-[#009dc4] font-black text-sm leading-none">
+                      {item.amount}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="p-5 flex flex-col flex-grow gap-3">
+                  <h3 className="text-base font-black text-gray-900 group-hover:text-[var(--color-primary)] transition-colors duration-200 leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm text-center">
+
+                  <div className="h-px bg-[#E6F7FB]" />
+
+                  <p className="text-gray-400 text-xs leading-relaxed flex-grow">
                     {item.desc}
                   </p>
-                  <p className="text-gray-800 font-bold text-center">
-                    {item.amount}
-                  </p>
-                  <div className="text-center">
-                    <Link
-                      href={`/donate/${item.id}`}
-                      className="inline-block text-primary font-semibold hover:underline"
-                    >
-                      Learn More →
-                    </Link>
-                  </div>
+
+                  <Link
+                    href={`/donate/${item.id}`}
+                    className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] hover:text-black text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 mt-1"
+                  >
+                    Donate Now →
+                  </Link>
                 </div>
               </div>
             ))}
@@ -411,35 +520,39 @@ export default function Donate() {
 
       {/* Section - 6 */}
       <section className="container overflow-hidden bg-white">
-
         <div className="relative z-10 max-w-3xl mx-auto">
           {/* Header */}
           <div className="mb-12">
             <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="w-8 h-1 rounded-full bg-primary" />
-              <span
-                className="text-primary text-sm font-semibold tracking-[0.2em] uppercase"
-                style={{ fontFamily: "'Georgia', serif" }}
+              <p
+                className="text-[var(--color-secondary)]
+ text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
               >
+                <span
+                  className="w-8 h-px bg-[var(--color-secondary)]
+"
+                />
                 Secure Transfer
-              </span>
-               <div className="w-8 h-1 rounded-full bg-primary" />
+                <span
+                  className="w-8 h-px bg-[var(--color-secondary)]
+"
+                />
+              </p>
             </div>
-            <h2
-              className="text-5xl font-bold text-slate-800 leading-tight text-center"
-              style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
-            >
-              Bank
-              <span className="text-primary"> Information</span>
-            </h2>
+
+            <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-center">
+              Bank{" "}
+              <span className="text-[var(--color-primary)]">Information</span>
+            </h1>
           </div>
+          <div></div>
 
           {/* Bank Details Card */}
           <div className="relative">
             {/* Card shadow layer */}
             <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl bg-primary" />
 
-            <div className="relative bg-white rounded-3xl border border-gray-300 overflow-hidden shadow-sm">
+            <div className="relative bg-white rounded-3xl border border-[var(--color-primary)] overflow-hidden shadow-sm">
               {/* Top accent bar */}
               <div className="w-full bg-gradient-to-r from-primary via-primary to-primary" />
 
@@ -470,7 +583,7 @@ export default function Donate() {
 
               {/* Bottom section */}
               <div className="px-8 md:px-10 pb-8">
-                <div className="flex items-center justify-center gap-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-500">
+                <div className="flex items-center justify-center gap-3 p-4 rounded-2xl font-semibold text-[var(--color-primary)] bg-[var(--color-tertiary)] border border-[var(--color-primary)]">
                   Contact us to get a receipt after payment.
                 </div>
               </div>
