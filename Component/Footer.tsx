@@ -82,9 +82,11 @@ export default function Footer() {
                     aria-label={label}
                     className="btn-secondary group"
                   >
-                    <span className="relative z-10 btn-secondary w-9 h-9 rounded-lg bg-[var(--color-dark)]
+                    <span
+                      className="relative z-10 btn-secondary w-9 h-9 rounded-lg bg-[var(--color-dark)]
                      border border-white/15 backdrop-blur-sm flex items-center justify-center text-black 
-                     hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white">
+                     hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white"
+                    >
                       {icon}
                     </span>
 
@@ -126,6 +128,7 @@ export default function Footer() {
             </div>
 
             {/* Our Work */}
+
             <div>
               <h3 className="text-black font-bold text-sm uppercase tracking-widest mb-5 flex items-center gap-2">
                 <span className="w-5 h-0.5 bg-[var(--color-primary)] rounded-full inline-block" />
@@ -133,17 +136,23 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 {[
-                  "Checkdam Construction",
-                  "Community Impact",
-                  "Media Coverage",
-                  "Community Engagement",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="text-black text-sm flex items-start gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] mt-1.5 flex-shrink-0" />
-                    {item}
+                  { label: "Checkdam Construction", href: "/check-dam-creat" },
+                  { label: "Community Impact", href: "/impact" },
+                  { label: "Media Coverage", href: "/media" },
+              
+                ].map(({ label, href }) => (
+                  <li key={label}>
+                    <Link
+                      href={href}
+                      className="text-black text-sm hover:text-[var(--color-primary)] hover:pl-1.5
+                                 transition-all duration-200 inline-flex items-center gap-1.5 group"
+                    >
+                      <span
+                        className="w-0 group-hover:w-2 h-px bg-[var(--color-primary)]
+                                       transition-all duration-200 inline-block"
+                      />
+                      {label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -199,13 +208,15 @@ export default function Footer() {
                   />
                   info@girgangaparivartrust.com
                 </a>
-                <div className="flex items-start gap-2.5 text-black text-sm">
+                <a href="/Our-Work">
+                <div className="flex items-start gap-2.5 text-black text-sm cursor-pointer select-none">
                   <FiMapPin
                     size={13}
                     className="text-[var(--color-primary)] flex-shrink-0 mt-0.5"
                   />
                   <span>Sunstar Chamber, Rajkot - 360005, Gujarat</span>
                 </div>
+                </a>
               </div>
             </div>
           </div>
@@ -217,12 +228,14 @@ export default function Footer() {
                           gap-3 text-black text-xs"
           >
             <p>Registered Non-Profit Trust · All Rights Reserved</p>
-            <p className="flex items-center gap-1.5">
+            <p className="flex flex-wrap items-center justify-center gap-1.5">
               Made with <span className="text-[var(--color-primary)]">♥</span>{" "}
               for Water Conservation ·{" "}
+              <a href="/page.tsx">
               <span className="text-[var(--color-primary)] ">
                 Girganga Parivar Trust © 2026
               </span>
+              </a>
             </p>
           </div>
         </div>

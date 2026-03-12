@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import SmoothScroll from "../../Component/SmothScrolling";
+import { motion } from "framer-motion";
 
 /* ── Before/After hover image ── */
 interface BeforeAfterProps {
@@ -110,10 +111,7 @@ const SectionBlock = ({
               </span>
             </div>
 
-            <h2
-              className="text-black text-3xl sm:text-4xl font-bold leading-snug text-center lg:text-start"
-              
-            >
+            <h2 className="text-black text-3xl sm:text-4xl font-bold leading-snug text-center lg:text-start">
               {title}
             </h2>
 
@@ -171,10 +169,9 @@ export default function JalMandirSection() {
             Our Impact
             <span className="w-8 h-px bg-[var(--color-secondary)]" />
           </p>
-          <h1
-            className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-          >
-            Transforming <span className="text-[var(--color-primary)]">Water-Scarce</span>
+          <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+            Transforming{" "}
+            <span className="text-[var(--color-primary)]">Water-Scarce</span>
             <br />
             Regions of Gujarat
           </h1>
@@ -216,20 +213,31 @@ export default function JalMandirSection() {
           <p className="text-gray-500 text-xs tracking-[0.2em] uppercase mb-3">
             Make a difference today
           </p>
-          <h3
-            className=" text-2xl sm:text-3xl font-bold mb-8 leading-snug"
-          >
+          <h3 className=" text-2xl sm:text-3xl font-bold mb-8 leading-snug">
             Each Donation Helps Secure
             <br />
-            <span className="text-[var(--color-primary)]">A Water-Safe Future</span>
+            <span className="text-[var(--color-primary)]">
+              A Water-Safe Future
+            </span>
           </h3>
-          <Link href="/donate">
-            <button className="group relative bg-[var(--color-primary)] text-white font-semibold px-10 py-4 rounded-lg overflow-hidden hover:-translate-y-0.5 transition-transform duration-300 inline-flex items-center gap-3 shadow-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap gap-6 justify-center"
+          >
+            {/* Secondary Button */}
+            <Link
+              href="/donate"
+              className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-base
+    px-10 py-4 bg-[var(--color-secondary)] text-black hover:text-white flex cursor-pointer"
+            >
               <span className="relative z-10">Donate Now</span>
               <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              <span className="absolute inset-0 bg-[var(--color-secondary)] text-black translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </button>
-          </Link>
+              <span className="btn-secondary-overlay"></span>
+            </Link>
+          </motion.div>
         </div>
 
         {/* ── SECTION 3 — Know More About Us ── */}
@@ -242,10 +250,9 @@ export default function JalMandirSection() {
                   <span className="w-8 h-px bg-[var(--color-primary)]" />
                   Explore More
                 </p>
-                <h2
-                  className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
-                >
-                  Know More <span className="text-[var(--color-primary)]">About Us</span>
+                <h2 className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start">
+                  Know More{" "}
+                  <span className="text-[var(--color-primary)]">About Us</span>
                 </h2>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start lg:max-w-xs">
@@ -306,9 +313,7 @@ export default function JalMandirSection() {
 
                     {/* Text */}
                     <div className="p-5">
-                      <h3
-                        className="text-white font-bold text-lg mb-2"
-                      >
+                      <h3 className="text-white font-bold text-lg mb-2">
                         {label}
                       </h3>
                       <p className="text-gray-500 text-xs leading-relaxed">

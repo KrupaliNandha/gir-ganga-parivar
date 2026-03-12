@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import SmoothScroll from "../../Component/SmothScrolling";
+import { motion } from "framer-motion";
 
 type Award = {
   id: number;
@@ -243,9 +244,7 @@ export default function AwardsSection() {
                   />
                 </svg>
               </div>
-
               <div className="flex-1 min-w-0">
-                
                 <h3 className="text-gray-900 font-bold text-lg sm:text-xl leading-snug">
                   Girganga Parivar Trust —{" "}
                   <span className="text-[var(--color-primary)]">
@@ -259,28 +258,38 @@ export default function AwardsSection() {
                 </p>
               </div>
 
-              <a
-                href={newsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-shrink-0 inline-flex items-center gap-2 font-bold text-sm px-6 py-3  bg-[var(--color-primary)] text-white
-                rounded-xl transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap select-none"
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex flex-wrap gap-6 justify-center"
               >
-                 Latest News
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                {/* Secondary Button */}
+                <a
+                  href="/partner-with-us-csr"
+                  className="btn-primary groupinline-flex items-center gap-2 font-semibold text-base
+  px-10 py-4 bg-[var(--color-primary)] text-black hover:text-white flex"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
+                  <span className="relative z-10">Latest News</span>
+
+                  <svg
+                    className="w-4 h-4 relative z-10"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+
+                  <span className="btn-primary-overlay"></span>
+                </a>
+              </motion.div>
             </div>
           </div>
         </div>
