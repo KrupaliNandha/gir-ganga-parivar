@@ -58,7 +58,7 @@ const slides: Slide[] = [
     tag: "Gir Ganga Parivar Trust · Water Conservation",
     headline: ["Solution For", "Generations"],
     sub: "Reviving rivers, recharging groundwater, and securing water for communities across drought-prone Gujarat.",
-    cta: { label: "Discover More", href: "/our-work" },
+    cta: { label: "Discover More", href: "/about-us" },
     bg: "/image/home/Slide1.png",
     stats: [
       { num: 8354, label: "Water Structures", suffix: "+" },
@@ -87,7 +87,7 @@ const slides: Slide[] = [
     tag: "Global CSR & ESG Awards 2025 Winner",
     headline: ["Water Security", "For All"],
     sub: "Recognised globally for our innovative PPP model. Partner with Girganga Parivar Trust to transform arid regions into water-abundant landscapes.",
-    cta: { label: "Support Now", href: "/donation" },
+    cta: { label: "Support Now", href: "/donate" },
     bg: "/image/home/Slide4.png",
   },
 ];
@@ -262,13 +262,13 @@ const HeroSection = () => {
                   className="flex items-center gap-4 sm:gap-[25px]"
                 >
                   <Link href={slide.cta.href}>
-                    <span className="mt-4 sm:mt-10 group relative inline-block bg-[var(--color-secondary)] text-[var(--color-greenish)] hover:text-white text-[10px] sm:text-[clamp(10px,1vw,12px)] font-semibold tracking-[0.14em] sm:tracking-[0.16em] uppercase px-6 sm:px-9 py-3 sm:py-4 rounded-[3px] overflow-hidden cursor-pointer hover:-translate-y-0.5 transition-transform duration-300">
+                    <span className="btn-primary group mt-4 sm:mt-10">
                       <span className="relative z-10">{slide.cta.label}</span>
-                      <span className="absolute inset-0 bg-[var(--color-greenish)] -translate-x-[110%] group-hover:translate-x-[110%] transition-transform duration-1000" />
+                      <span className="btn-primary-overlay"></span>
                     </span>
                   </Link>
-                  {/* Arrow image — hidden on very small screens */}
-                  <div className="hidden xs:block sm:block top-50">
+
+                  <div className="hidden xs:block sm:block">
                     <img
                       className="h-12 w-12 sm:h-20 sm:w-20"
                       src="/image/home/main-slider__button-arrow.png"
@@ -432,12 +432,11 @@ const HeroSection = () => {
                   className="space-y-5 sm:space-y-6 text-center lg:text-start"
                 >
                   {/* Heading */}
-                  <h2
-                    className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
-                    
-                  >
+                  <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                     Mission &amp; Vision <br />
-                    <span className="text-[var(--color-primary)]">For Gujarat</span>
+                    <span className="text-[var(--color-primary)]">
+                      For Gujarat
+                    </span>
                   </h2>
 
                   <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
@@ -506,118 +505,113 @@ const HeroSection = () => {
             SECTION 3 — EXPLORE IMPACT
         ══════════════════════════════ */}
         <section className="">
-          
-            <div className="container">
-              {/* Heading */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-center mb-8 sm:mb-12"
-              >
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <img
-                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=40&h=40&q=80&fit=crop"
-                    alt=""
-                    className="w-5 h-5 rounded-full object-cover"
-                  />
-                  <span className="text-[var(--color-primary)] text-xs font-bold tracking-[0.2em] uppercase ">
-                    Our Impact Areas
-                  </span>
-                </div>
-                <h2
-                  className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900"
-                >
-                  Explore Our Impact
-                </h2>
-              </motion.div>
-
-              {/* 4-col image cards */}
-              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4 mb-8 sm:mb-12">
-                {[
-                  {
-                    img: "https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=400&q=80",
-                    label: "Government Partnership",
-                    sub: "Ministry of Water, Govt. of India",
-                    Icon: GiRibbonMedal,
-                  },
-                  {
-                    img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80",
-                    label: "CSR & ESG Awards",
-                    sub: "Global Awards 2025 Winner",
-                    Icon: MdEmojiEvents,
-                  },
-                  {
-                    img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80",
-                    label: "Community Driven",
-                    sub: "580+ Gram Panchayats",
-                    Icon: MdPeople,
-                  },
-                  {
-                    img: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80",
-                    label: "Support A Structure",
-                    sub: "Fund a check dam today",
-                    Icon: MdOutlineWaterDrop,
-                  },
-                ].map((card, i) => (
-                  <motion.div
-                    key={card.label}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.08 }}
-                    className="group cursor-pointer"
-                  >
-                    <div className="relative overflow-hidden rounded-xl mb-3 aspect-[4/3]">
-                      <img
-                        src={card.img}
-                        alt={card.label}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-emerald-900/0 group-hover:bg-emerald-900/40 transition-colors duration-300 flex items-center justify-center">
-                        <card.Icon className="text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </div>
-                    </div>
-                    <h4 className="font-playfair font-bold text-gray-900 text-sm leading-snug group-hover:text-[var(--color-primary)] transition-colors">
-                      {card.label}
-                    </h4>
-                    <p className="text-gray-400 text-xs mt-0.5">{card.sub}</p>
-                  </motion.div>
-                ))}
+          <div className="container">
+            {/* Heading */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-8 sm:mb-12"
+            >
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=40&h=40&q=80&fit=crop"
+                  alt=""
+                  className="w-5 h-5 rounded-full object-cover"
+                />
+                <span className="text-[var(--color-primary)] text-xs font-bold tracking-[0.2em] uppercase ">
+                  Our Impact Areas
+                </span>
               </div>
+              <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+                Explore Our Impact
+              </h2>
+            </motion.div>
 
-              {/* ── CTA buttons ── */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex flex-wrap gap-6 justify-center"
-              >
-                <a
-                  href="/partner-with-us-csr"
-                  className="group relative bg-[var(--color-secondary)] text-black font-semibold px-10 py-4 rounded-lg shadow-lg shadow-black/25
-                   hover:text-white text-base overflow-hidden hover:-translate-y-0.5 transition-transform duration-300 inline-flex items-center gap-2"
+            {/* 4-col image cards */}
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4 mb-8 sm:mb-12">
+              {[
+                {
+                  img: "https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=400&q=80",
+                  label: "Government Partnership",
+                  sub: "Ministry of Water, Govt. of India",
+                  Icon: GiRibbonMedal,
+                },
+                {
+                  img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80",
+                  label: "CSR & ESG Awards",
+                  sub: "Global Awards 2025 Winner",
+                  Icon: MdEmojiEvents,
+                },
+                {
+                  img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80",
+                  label: "Community Driven",
+                  sub: "580+ Gram Panchayats",
+                  Icon: MdPeople,
+                },
+                {
+                  img: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80",
+                  label: "Support A Structure",
+                  sub: "Fund a check dam today",
+                  Icon: MdOutlineWaterDrop,
+                },
+              ].map((card, i) => (
+                <motion.div
+                  key={card.label}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="group cursor-pointer"
                 >
-                  <span className="relative z-10">Partner With Us (CSR)</span>
-                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-                  <span className="absolute inset-0 bg-[var(--color-primary)] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                </a>
-                <a
-                  href="/support-a-structure"
-                  className="group border-2 border-[var(--color-primary)] text-[var(--color-primary)] 
-                  font-semibold px-10 py-4 rounded-lg shadow-lg shadow-black/25 text-base hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center gap-2"
-                >
-                  Support A Structure
-                  <span className="group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-                </a>
-              </motion.div>
+                  <div className="relative overflow-hidden rounded-xl mb-3 aspect-[4/3]">
+                    <img
+                      src={card.img}
+                      alt={card.label}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-emerald-900/0 group-hover:bg-emerald-900/40 transition-colors duration-300 flex items-center justify-center">
+                      <card.Icon className="text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  </div>
+                  <h4 className="font-playfair font-bold text-gray-900 text-sm leading-snug group-hover:text-[var(--color-primary)] transition-colors">
+                    {card.label}
+                  </h4>
+                  <p className="text-gray-400 text-xs mt-0.5">{card.sub}</p>
+                </motion.div>
+              ))}
             </div>
-        
+
+            {/* ── CTA buttons ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-wrap gap-6 justify-center"
+            >
+              {/* Secondary Button */}
+              <a href="/partner-with-us-csr" className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-base
+    px-10 py-4 bg-[var(--color-secondary)] text-black hover:text-white">
+                <span className="relative z-10">Partner With Us (CSR)</span>
+                <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+                <span className="btn-secondary-overlay"></span>
+              </a>
+
+              {/* Outline Button */}
+              <a href="/support-a-structure" className="btn-outline group">
+                <span className="relative z-10">Support A Structure</span>
+
+                <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+
+                <span className="btn-outline-overlay"></span>
+              </a>
+            </motion.div>
+          </div>
         </section>
       </SmoothScroll>
     </>

@@ -29,7 +29,7 @@
   max-width: 110rem; /* 7xl = 1280px */
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem; 
+  padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -40,11 +40,10 @@
   --font: "Poppins", sans-serif;
   --color-primary: #009dc4; /* --color-greenish*/
   --color-secondary: #f1cf69; /* --color-yell */
-  --color-tertiary: #E6F7FB;
-  --color-accent: #34d399;  /* --bg-grn */
+  --color-tertiary: #e6f7fb;
+  --color-accent: #34d399; /* --bg-grn */
   --color-dark: #acd7f3; /* Deep teal #acd7f3,*/
   --color-greenish: #6d8c54; /*  greenish-#6d8c54 */
-
 }
 
 .section-padding-header {
@@ -57,3 +56,88 @@ body {
   background-color: #ffffff;
   font-family: "Poppins", sans-serif;
 }
+
+/* css for Hero button */
+
+@layer components {
+  .btn-primary {
+    @apply relative inline-block font-semibold uppercase overflow-hidden 
+    tracking-[0.14em] sm:tracking-[0.16em]
+    px-6 sm:px-9 py-3 sm:py-4
+    rounded-[3px]
+    bg-[var(--color-secondary)]
+    text-[var(--color-greenish)]
+    text-[10px] sm:text-[clamp(10px,1vw,12px)]
+    cursor-pointer
+    transition-transform duration-300
+    hover:-translate-y-0.5
+    hover:text-white;
+  }
+
+  .btn-primary-overlay {
+    @apply absolute inset-0 
+    bg-[var(--color-greenish)]
+    -translate-x-[110%]
+    transition-transform duration-1000;
+  }
+
+  .btn-primary:hover .btn-primary-overlay {
+    transform: translateX(110%);
+  }
+}
+
+/* Button For other Sections */
+@layer components {
+  /* Secondary Button */
+  .btn-secondary {
+    @apply relative
+    rounded-lg
+    shadow-lg shadow-black/25
+    overflow-hidden
+    transition-transform duration-300
+    hover:-translate-y-0.5;
+  }
+
+  .btn-secondary-overlay {
+    @apply absolute inset-0
+    bg-[var(--color-primary)]
+    -translate-x-[110%]
+    transition-transform duration-500;
+  }
+
+  .btn-secondary:hover .btn-secondary-overlay {
+    transform: translateX(110%);
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    @apply relative inline-flex items-center gap-2
+    border-2 border-[var(--color-primary)]
+    text-[var(--color-primary)]
+    font-semibold text-base
+    px-10 py-4 rounded-lg
+    shadow-lg shadow-black/25
+    overflow-hidden
+    transition-transform duration-300
+    hover:-translate-y-0.5
+    hover:text-black;
+  }
+
+  .btn-outline-overlay {
+    @apply absolute inset-0
+    bg-[var(--color-primary)]
+    -translate-x-[110%]
+    transition-transform duration-500;
+  }
+
+  .btn-outline:hover .btn-outline-overlay {
+    transform: translateX(110%);
+  }
+}
+
+/* <span className="btn-secondary-overlay"></span> 
+
+      blue patch
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 md:w-[700px] w-[200px] h-56 bg-[var(--color-primary)]/10
+     rounded-full blur-3xl pointer-events-none" />
+     */
