@@ -292,7 +292,7 @@ export default function VideosPage() {
               bg-red-600 hover:bg-red-700 text-white
               text-sm sm:text-base
               px-5 sm:px-8 py-3
-              rounded-xl font-semibold
+              rounded-xl sm:font-semibold
               transition cursor-pointer"
           >
             <Youtube size={18} />

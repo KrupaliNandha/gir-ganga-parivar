@@ -10,6 +10,7 @@ import {
   CheckCircle,
   Quote,
   Link,
+  ArrowUpRight,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
@@ -171,354 +172,515 @@ export default function AboutPage() {
     if (statsInView) setStatsVisible(true);
   }, [statsInView]);
 
+  /* ─────────────────────────────────────
+   Animation Variants
+───────────────────────────────────── */
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 32 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
+  const fadeIn: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.9, ease: "easeOut" } },
+  };
+
+  const stagger: Variants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  };
+
+  const slideUp: Variants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+    },
+  };
+
+  function SectionPill({
+    label,
+    dark = false,
+  }: {
+    label: string;
+    dark?: boolean;
+  }) {
+    return (
+      <motion.div
+        variants={slideUp}
+        className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 ${
+          dark
+            ? "border border-white/20 bg-white/10"
+            : "border border-[var(--color-primary)]/20 bg-[var(--color-tertiary)]"
+        }`}
+      >
+        <span
+          className="w-2 h-2 rounded-full"
+          style={{
+            background: dark ? "rgba(255,255,255,0.6)" : "var(--color-primary)",
+          }}
+        />
+        <span
+          className={`text-[11px] font-semibold uppercase tracking-widest ${
+            dark ? "text-white/70" : "text-[var(--color-primary)]"
+          }`}
+        >
+          {label}
+        </span>
+      </motion.div>
+    );
+  }
+
   return (
     <div className="bg-white text-gray-800">
       {/* ══════════════════════════════
           1. HERO
       ══════════════════════════════ */}
-      <section className="containers py-20 grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-            className="text-xs uppercase tracking-[0.25em] text-[var(--color-primary)] mb-4"
-          >
-            About Girganga Parivar Trust
-          </motion.p>
+      <section className=" container flex flex-col">
+        {/* Top announcement bar */}
 
-          <motion.h1
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="text-5xl font-bold leading-tight mb-6"
-          >
-            Conserving{" "}
-            <span className="text-[var(--color-primary)]">Water,</span>
-            <br />
-            Reviving Gujarat's Future
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="text-gray-500 text-sm leading-relaxed max-w-lg mb-8"
-          >
-            Girganga Parivar Trust is a dedicated organization committed to
-            revitalizing India's water infrastructure, with a primary focus on
-            Saurashtra, Gujarat — through the strategic repair, deepening, and
-            raising of check dams.
-          </motion.p>
-
+        {/* Hero content */}
+        <div className="flex-1 max-w-7xl mx-auto grid lg:grid-cols-[1fr_480px] gap-12 items-center">
+          {/* Left */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap gap-6 "
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
           >
-            {/* Secondary Button */}
-            <a
-              href="/donation"
-              className="btn-primary groupinline-flex items-center gap-2 font-semibold text-base
-  px-10 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)] flex"
+            <motion.p
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="text-xs uppercase tracking-[0.25em] text-[var(--color-primary)] mb-4 text-center lg:text-start"
             >
-              <span className="relative z-10"> Support Us</span>
+              About Girganga Parivar Trust
+            </motion.p>
 
-              <span className="relative z-10 flex">
-                <ArrowRight size={16} />
-              </span>
-              <span className="btn-primary-overlay"></span>
-            </a>
+            <motion.h1
+              variants={fadeUp}
+              transition={{ duration: 0.6 }}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-center lg:text-start"
+            >
+              Conserving{" "}
+              <span className="text-[var(--color-primary)]">Water,</span>
+              <br />
+              Reviving Gujarat's Future
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              transition={{ duration: 0.6 }}
+              className="text-gray-500 text-sm leading-relaxed max-w-lg mb-8 text-center lg:text-start"
+            >
+              Girganga Parivar Trust is a dedicated organization committed to
+              revitalizing India's water infrastructure, with a primary focus on
+              Saurashtra, Gujarat — through the strategic repair, deepening, and
+              raising of check dams.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-wrap gap-6 justify-center lg:justify-start"
+            >
+              {/* Secondary Button */}
+              <a
+                href="/donation"
+                className="btn-primary groupinline-flex items-center gap-2 font-semibold text-base
+  px-10 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)] flex"
+              >
+                <span className="relative z-10"> Support Us</span>
+
+                <span className="relative z-10 flex">
+                  <ArrowRight size={16} />
+                </span>
+                <span className="btn-primary-overlay"></span>
+              </a>
+            </motion.div>
+
+            {/* Founder card */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{
+                scale: 1.03,
+                boxShadow: "0 12px 32px rgba(0,0,0,0.10)",
+              }}
+              className="flex items-center justify-self-center lg:justify-self-start gap-4 mt-10 p-4 border border-gray-100 rounded-2xl max-w-sm cursor-default"
+            >
+              <motion.div
+                whileHover={{
+                  rotate: [0, -8, 8, 0],
+                  transition: { duration: 0.4 },
+                }}
+                className="w-12 h-12 rounded-xl bg-[var(--color-primary)]  text-white flex items-center justify-center font-bold text-sm shrink-0"
+              >
+                DS
+              </motion.div>
+              <div className="">
+                <p className="font-semibold text-sm">Shri Dilip Sakhiya</p>
+                <p className="text-xs text-gray-400">
+                  Founder · Girganga Parivar Trust
+                </p>
+                <span className="text-xs text-[var(--color-primary)] font-semibold">
+                  "Waterman of India" 💧
+                </span>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Founder card */}
+          {/* Right — image collage */}
           <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            whileHover={{
-              scale: 1.03,
-              boxShadow: "0 12px 32px rgba(0,0,0,0.10)",
-            }}
-            className="flex items-center gap-4 mt-10 p-4 border border-gray-100 rounded-2xl max-w-sm cursor-default"
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+            className="w-full"
           >
-            <motion.div
-              whileHover={{
-                rotate: [0, -8, 8, 0],
-                transition: { duration: 0.4 },
-              }}
-              className="w-12 h-12 rounded-xl bg-[var(--color-primary)] text-white flex items-center justify-center font-bold text-sm shrink-0"
-            >
-              DS
-            </motion.div>
-            <div>
-              <p className="font-semibold text-sm">Shri Dilip Sakhiya</p>
-              <p className="text-xs text-gray-400">
-                Founder · Girganga Parivar Trust
-              </p>
-              <span className="text-xs text-[var(--color-primary)] font-semibold">
-                "Waterman of India" 💧
-              </span>
+            {/* ── MOBILE / TABLET: simple 2-col grid ── */}
+            <div className="grid grid-cols-2 gap-3 lg:hidden">
+              <motion.div
+                variants={fadeIn}
+                className="relative h-44 rounded-2xl overflow-hidden shadow-lg col-span-2"
+              >
+                <Image
+                  src="/image/home/Slide1.png"
+                  alt="Water conservation"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                {/* Badge inside main image */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.8, duration: 0.4 }}
+                  className="absolute bottom-3 left-3 bg-white rounded-xl shadow-md px-3 py-2"
+                >
+                  <p
+                    className="text-[10px] font-bold"
+                    style={{ color: "var(--color-primary)" }}
+                  >
+                    🌊 Gujarat · Saurashtra
+                  </p>
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                variants={slideUp}
+                className="relative h-36 rounded-2xl overflow-hidden shadow-md"
+              >
+                <Image
+                  src="/image/home/Slide2.png"
+                  alt="Check dam"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent" />
+              </motion.div>
+
+              <motion.div
+                variants={slideUp}
+                transition={{ delay: 0.15 }}
+                className="relative h-36 rounded-2xl overflow-hidden shadow-md"
+              >
+                <Image
+                  src="/image/home/Slide3.png"
+                  alt="Farmers"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            </div>
+
+            {/* ── DESKTOP: absolute collage ── */}
+            <div className="relative h-[520px] hidden lg:block">
+              {/* Back image — top right */}
+              <motion.div
+                variants={fadeIn}
+                className="absolute right-0 top-0 w-[68%] h-[55%] rounded-3xl overflow-hidden shadow-xl"
+              >
+                <Image
+                  src="/image/home/Slide2.png"
+                  alt="Check dam"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent" />
+              </motion.div>
+
+              {/* Front image — bottom left */}
+              <motion.div
+                variants={slideUp}
+                className="absolute left-0 bottom-0 w-[72%] h-[62%] rounded-3xl overflow-hidden shadow-2xl"
+              >
+                <Image
+                  src="/image/home/Slide1.png"
+                  alt="Water conservation"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              </motion.div>
+
+              {/* Third image — small overlap */}
+              <motion.div
+                variants={fadeIn}
+                transition={{ delay: 0.3 }}
+                className="absolute right-2 bottom-[18%] w-[32%] h-[28%] rounded-2xl overflow-hidden shadow-xl border-2 border-white"
+              >
+                <Image
+                  src="/image/home/Slide3.png"
+                  alt="Farmers"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+
+              {/* Floating badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 12, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+                className="absolute top-[38%] left-[16%] bg-white rounded-2xl shadow-xl px-4 py-3 z-10 border border-gray-100"
+              >
+                <p
+                  className="text-xs font-bold"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  🌊 Gujarat · Saurashtra
+                </p>
+                <p className="text-[10px] text-gray-400 mt-0.5">
+                  Since Inception
+                </p>
+              </motion.div>
             </div>
           </motion.div>
-        </motion.div>
-
-        {/* Right image grid */}
-        <motion.div
-          className="grid grid-cols-2 gap-4 h-[420px]"
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          {/* Tall image */}
-          <motion.div
-            variants={slideRight}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            whileHover="imgHover"
-            initial="imgRest"
-            animate="imgRest"
-            className="row-span-2 rounded-3xl overflow-hidden relative cursor-pointer"
-          >
-            <motion.div
-              variants={{
-                imgRest: { scale: 1 },
-                imgHover: {
-                  scale: 1.07,
-                  transition: { duration: 0.5, ease: "easeOut" },
-                },
-              }}
-              className="w-full h-full"
-            >
-              <Image
-                src="/image/home/Slide1.png"
-                alt="Water conservation work"
-                width={500}
-                height={600}
-                className="object-cover w-full h-full"
-              />
-            </motion.div>
-            <motion.div
-              variants={{
-                imgRest: { opacity: 0 },
-                imgHover: { opacity: 1, transition: { duration: 0.3 } },
-              }}
-              className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-white/10 rounded-3xl pointer-events-none"
-            />
-            <motion.div
-              variants={{
-                imgRest: { opacity: 0 },
-                imgHover: { opacity: 1, transition: { duration: 0.3 } },
-              }}
-              className="absolute inset-0 rounded-3xl ring-2 ring-[var(--color-primary)]/50 pointer-events-none"
-            />
-          </motion.div>
-
-          {/* Top-right image */}
-          <motion.div
-            variants={slideRight}
-            transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-            whileHover="imgHover"
-            initial="imgRest"
-            animate="imgRest"
-            className="rounded-3xl overflow-hidden relative cursor-pointer"
-          >
-            <motion.div
-              variants={{
-                imgRest: { scale: 1 },
-                imgHover: {
-                  scale: 1.09,
-                  transition: { duration: 0.5, ease: "easeOut" },
-                },
-              }}
-              className="w-full h-full"
-            >
-              <Image
-                src="/image/home/Slide2.png"
-                alt="Check dam"
-                width={400}
-                height={200}
-                className="object-cover w-full h-full"
-              />
-            </motion.div>
-            <motion.div
-              variants={{
-                imgRest: { opacity: 0 },
-                imgHover: { opacity: 1, transition: { duration: 0.3 } },
-              }}
-              className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/25 to-transparent rounded-3xl pointer-events-none"
-            />
-            <motion.div
-              variants={{
-                imgRest: { opacity: 0 },
-                imgHover: { opacity: 1, transition: { duration: 0.3 } },
-              }}
-              className="absolute inset-0 rounded-3xl ring-2 ring-[var(--color-primary)]/50 pointer-events-none"
-            />
-          </motion.div>
-
-          {/* Bottom-right image */}
-          <motion.div
-            variants={slideRight}
-            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            whileHover="imgHover"
-            initial="imgRest"
-            animate="imgRest"
-            className="rounded-3xl overflow-hidden relative cursor-pointer"
-          >
-            <motion.div
-              variants={{
-                imgRest: { scale: 1 },
-                imgHover: {
-                  scale: 1.09,
-                  transition: { duration: 0.5, ease: "easeOut" },
-                },
-              }}
-              className="w-full h-full"
-            >
-              <Image
-                src="/image/home/Slide3.png"
-                alt="Farmers"
-                width={400}
-                height={200}
-                className="object-cover w-full h-full"
-              />
-            </motion.div>
-            <motion.div
-              variants={{
-                imgRest: { opacity: 0 },
-                imgHover: { opacity: 1, transition: { duration: 0.3 } },
-              }}
-              className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/25 to-transparent rounded-3xl pointer-events-none"
-            />
-            <motion.div
-              variants={{
-                imgRest: { opacity: 0 },
-                imgHover: { opacity: 1, transition: { duration: 0.3 } },
-              }}
-              className="absolute inset-0 rounded-3xl ring-2 ring-[var(--color-primary)]/50 pointer-events-none"
-            />
-          </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ══════════════════════════════
           2. WHO WE ARE + OUR JOURNEY
       ══════════════════════════════ */}
-      <section className="bg-[var(--color-tertiary)] py-20">
-        <motion.div
-          className="containers grid lg:grid-cols-3 gap-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={staggerContainer}
-        >
-          {/* Card 1 */}
+      <section
+        id="story"
+        className="container"
+        style={{ background: "var(--color-tertiary)" }}
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Section header */}
           <motion.div
-            variants={staggerItem}
-            whileHover={{
-              y: -10,
-              boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
-              transition: { type: "spring", stiffness: 260 },
-            }}
-            className="bg-white rounded-2xl p-8 border border-transparent hover:border-[var(--color-primary)]/20 cursor-default"
-          >
-            <motion.div
-              whileHover={{
-                rotate: 15,
-                scale: 1.2,
-                transition: { type: "spring", stiffness: 300 },
-              }}
-              className="w-10 h-10 rounded-xl bg-[var(--color-tertiary)] flex items-center justify-center mb-5 w-fit"
-            >
-              <span className="text-lg">🌊</span>
-            </motion.div>
-            <h3 className="font-bold text-lg mb-3">Who We Are</h3>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Girganga Parivar Trust is a not-for-profit organization working
-              for sustainable water security in Gujarat, especially the
-              drought-prone Saurashtra region.
-            </p>
-            <p className="text-gray-500 text-sm leading-relaxed mt-3">
-              The Trust believes that water conservation is not just
-              infrastructure creation, but a{" "}
-              <span className="text-[var(--color-primary)] font-semibold">
-                people-centric movement.
-              </span>
-            </p>
-          </motion.div>
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={stagger}
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 "
+          ></motion.div>
 
-          {/* Card 2 */}
+          {/* 3-card grid */}
           <motion.div
-            variants={staggerItem}
-            whileHover={{
-              y: -10,
-              boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
-              transition: { type: "spring", stiffness: 260 },
-            }}
-            className="bg-white rounded-2xl p-8 border border-transparent hover:border-[var(--color-primary)]/20 cursor-default"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={stagger}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
+            {/* Card 1 — Who We Are */}
             <motion.div
+              variants={slideUp}
               whileHover={{
-                rotate: -12,
-                scale: 1.2,
-                transition: { type: "spring", stiffness: 300 },
+                y: -8,
+                boxShadow: "0 24px 48px rgba(0,157,196,0.12)",
+                transition: { type: "spring", stiffness: 280 },
               }}
-              className="w-10 h-10 rounded-xl bg-[var(--color-tertiary)] flex items-center justify-center mb-5 w-fit"
+              className="bg-white rounded-3xl p-8 flex flex-col gap-5 border border-transparent hover:border-[var(--color-primary)]/15 cursor-default transition-colors group"
             >
-              <span className="text-lg">🗺️</span>
-            </motion.div>
-            <h3 className="font-bold text-lg mb-3">Our Journey</h3>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Founded under the leadership of Shri Dilip Sakhiya — popularly
-              known as the{" "}
-              <span className="font-semibold text-gray-700">
-                "Waterman of Gujarat"
-              </span>{" "}
-              — GGPT has evolved into one of India's largest grassroots water
-              conservation movements.
-            </p>
-          </motion.div>
+              {/* Icon */}
+              <div
+                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0"
+                style={{ background: "var(--color-tertiary)" }}
+              >
+                🌊
+              </div>
 
-          {/* Card 3 — quote */}
-          <motion.div
-            variants={staggerItem}
-            whileHover={{
-              y: -10,
-              scale: 1.02,
-              boxShadow: "0 28px 56px rgba(0,0,0,0.20)",
-              transition: { type: "spring", stiffness: 260 },
-            }}
-            className="bg-[var(--color-primary)] rounded-2xl p-8 flex flex-col justify-between cursor-default"
-          >
-            <motion.div
-              whileHover={{
-                rotate: 12,
-                scale: 1.18,
-                transition: { type: "spring", stiffness: 300 },
-              }}
-              className="w-fit"
-            >
-              <Quote size={32} className="text-white opacity-30 mb-4" />
+              {/* Top rule */}
+              <div
+                className="w-10 h-1 rounded-full"
+                style={{ background: "var(--color-primary)" }}
+              />
+
+              <div>
+                <h3 className="font-bold text-lg mb-3">Who We Are</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Girganga Parivar Trust is a not-for-profit organization
+                  working for sustainable water security in Gujarat, especially
+                  the drought-prone Saurashtra region.
+                </p>
+                <p className="text-gray-500 text-sm leading-relaxed mt-3">
+                  The Trust believes water conservation is not just
+                  infrastructure creation, but a{" "}
+                  <span
+                    className="font-semibold"
+                    style={{ color: "var(--color-primary)" }}
+                  >
+                    people-centric movement.
+                  </span>
+                </p>
+              </div>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mt-auto pt-2">
+                {["Non-Profit", "Gujarat", "Since Inception"].map((t) => (
+                  <span
+                    key={t}
+                    className="text-[11px] font-medium px-3 py-1 rounded-full"
+                    style={{
+                      background: "var(--color-tertiary)",
+                      color: "var(--color-primary)",
+                    }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
             </motion.div>
-            <p className="text-white font-semibold text-lg leading-relaxed">
-              "Water conservation is not a project, it is a responsibility."
-            </p>
-            <p className="text-white/60 text-sm mt-6 font-medium">
-              — Shri Dilip Sakhiya
-            </p>
+
+            {/* Card 2 — Our Journey */}
+            <motion.div
+              variants={slideUp}
+              whileHover={{
+                y: -8,
+                boxShadow: "0 24px 48px rgba(0,157,196,0.12)",
+                transition: { type: "spring", stiffness: 280 },
+              }}
+              className="bg-white rounded-3xl p-8 flex flex-col gap-5 border border-transparent hover:border-[var(--color-primary)]/15 cursor-default transition-colors group"
+            >
+              {/* Icon */}
+              <div
+                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0"
+                style={{ background: "var(--color-tertiary)" }}
+              >
+                🗺️
+              </div>
+
+              {/* Top rule */}
+              <div
+                className="w-10 h-1 rounded-full"
+                style={{ background: "var(--color-secondary)" }}
+              />
+
+              <div>
+                <h3 className="font-bold text-lg mb-3">Our Journey</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Founded under the leadership of Shri Dilip Sakhiya — popularly
+                  known as the{" "}
+                  <span className="font-semibold text-gray-700">
+                    "Waterman of Gujarat"
+                  </span>{" "}
+                  — GGPT has evolved into one of India's largest grassroots
+                  water conservation movements.
+                </p>
+              </div>
+
+              {/* Milestone strip */}
+              <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-3">
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xs font-bold shrink-0"
+                  style={{ background: "var(--color-primary)" }}
+                >
+                  DS
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-800">
+                    Shri Dilip Sakhiya
+                  </p>
+                  <p className="text-[11px] text-gray-400">
+                    Founder · Waterman of Gujarat
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3 — Quote (primary bg) */}
+            <motion.div
+              variants={slideUp}
+              whileHover={{
+                y: -8,
+                scale: 1.02,
+                boxShadow: "0 32px 64px rgba(0,157,196,0.30)",
+                transition: { type: "spring", stiffness: 280 },
+              }}
+              className="rounded-3xl p-8 flex flex-col justify-between cursor-default relative overflow-hidden md:col-span-2 lg:col-span-1"
+              style={{ background: "var(--color-primary)" }}
+            >
+              {/* Decorative circles */}
+              <div
+                className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-10"
+                style={{ background: "var(--color-secondary)" }}
+              />
+              <div
+                className="absolute -bottom-10 -left-10 w-36 h-36 rounded-full opacity-10"
+                style={{ background: "var(--color-secondary)" }}
+              />
+
+              {/* Quote mark */}
+              <div className="text-7xl leading-none font-serif text-white opacity-20 mb-2 select-none">
+                "
+              </div>
+
+              <p className="text-white font-semibold text-xl leading-relaxed relative z-10 flex-1">
+                Water conservation is not a project, it is a responsibility.
+              </p>
+
+              {/* Author */}
+              <div className="mt-8 pt-5 border-t border-white/20 flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-white text-sm font-bold shrink-0">
+                  DS
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">
+                    Shri Dilip Sakhiya
+                  </p>
+                  <p className="text-white/50 text-xs">Founder, GGPT</p>
+                </div>
+                {/* Yellow accent dot */}
+                <div
+                  className="ml-auto w-3 h-3 rounded-full"
+                  style={{ background: "var(--color-secondary)" }}
+                />
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ══════════════════════════════
           3. LEGAL & COMPLIANCE
       ══════════════════════════════ */}
-      <section className="containers py-20">
+      <section className="container justify-self-center">
+        <div>
+          <p
+            className="text-[var(--color-secondary)]
+ text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+          >
+            <span
+              className="w-8 h-px bg-[var(--color-secondary)]
+"
+            />
+            Legal &amp; Compliance
+            <span
+              className="w-8 h-px bg-[var(--color-secondary)]
+"
+            />
+          </p>
+        </div>
         <motion.div
-          className="grid lg:grid-cols-2 gap-14 items-center"
+          className="max-w-7xl py-5 grid lg:grid-cols-2 gap-14 items-center justify-self-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
@@ -532,7 +694,7 @@ export default function AboutPage() {
               Transparency
             </p>
             <h2 className="text-4xl font-bold mb-4">Legal &amp; Compliance</h2>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-md">
+            <p className="text-gray-500 text-sm leading-relaxed max-w-lg">
               Girganga Parivar Trust maintains complete transparency and
               operates in full compliance with statutory and regulatory
               requirements under Indian law.
@@ -578,14 +740,8 @@ export default function AboutPage() {
       {/* ══════════════════════════════
           4. IMPACT STATS
       ══════════════════════════════ */}
-      <section
-        ref={statsRef}
-        className="relative bg-[var(--color-tertiary)] py-24 overflow-hidden"
-      >
-        <div className="absolute -top-20 -left-20 w-72 h-72 bg-[var(--color-primary)] opacity-10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-[var(--color-secondary)] opacity-10 rounded-full blur-3xl" />
-
-        <div className="containers relative">
+      <section ref={statsRef} className="container relative overflow-hidden">
+        <div className="max-w-7xl relative justify-self-center">
           <motion.div
             className="text-center mb-14"
             initial="hidden"
@@ -594,10 +750,24 @@ export default function AboutPage() {
             variants={fadeUp}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-xs tracking-[0.25em] uppercase text-[var(--color-primary)] mb-3">
+            <p
+              className="text-[var(--color-secondary)]
+ text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+            >
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
+              />
               Our Impact
+              <span
+                className="w-8 h-px bg-[var(--color-secondary)]
+"
+              />
             </p>
-            <h2 className="text-4xl font-bold">Changing Lives Through Water</h2>
+            <h2 className="text-4xl font-bold">
+              Changing Lives{" "}
+              <span className="text-[var(--color-primary)]">Through Water</span>
+            </h2>
             <p className="text-gray-500 text-sm mt-3 max-w-lg mx-auto">
               Measurable transformation across Gujarat, India
             </p>
@@ -900,8 +1070,8 @@ export default function AboutPage() {
               {/* Secondary Button */}
               <a
                 href="/donate"
-                className="btn-secondary-outline groupinline-flex items-center gap-2  font-semibold text-sm lg:text-base
-            px-8 py-4 bg-[var(--color-primary)]"
+                className="btn-secondary-outline groupinline-flex items-center gap-2  font-semibold text-base
+            px-10 py-4 bg-[var(--color-primary)]"
               >
                 <span className="relative z-10 ">Know More</span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">
@@ -949,64 +1119,34 @@ export default function AboutPage() {
               whileHover={{
                 y: -12,
                 scale: 1.02,
-                boxShadow:
-                  i === 0
-                    ? "0 28px 56px rgba(0,0,0,0.22)"
-                    : "0 20px 44px rgba(0,0,0,0.12)",
                 transition: { type: "spring", stiffness: 260, damping: 18 },
               }}
-              className={`rounded-2xl p-8 border flex flex-col gap-5 cursor-default ${
-                i === 0
-                  ? "bg-[var(--color-primary)] border-transparent"
-                  : "bg-white border-gray-100 hover:border-[var(--color-primary)]/40"
-              }`}
+              className="group rounded-2xl p-8 border border-gray-100 flex flex-col gap-5 cursor-default bg-white hover:bg-[var(--color-primary)] hover:border-transparent transition-all duration-300"
             >
-              <motion.div
-                whileHover={{
-                  y: -4,
-                  rotate: -10,
-                  transition: { type: "spring", stiffness: 300 },
-                }}
-                className="w-fit"
-              >
+              {/* Quote icon */}
+              <div className="w-fit">
                 <Quote
                   size={28}
-                  className={
-                    i === 0 ? "text-white/25" : "text-[var(--color-primary)]/20"
-                  }
+                  className="text-[var(--color-primary)]/30 group-hover:text-white/40 transition"
                 />
-              </motion.div>
+              </div>
 
-              <p
-                className={`text-sm leading-relaxed flex-1 ${i === 0 ? "text-white/85" : "text-gray-500"}`}
-              >
+              {/* Quote text */}
+              <p className="text-sm leading-relaxed flex-1 text-gray-500 group-hover:text-white/90 transition">
                 {s.quote}
               </p>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                <motion.div
-                  whileHover={{
-                    scale: 1.18,
-                    rotate: 6,
-                    transition: { type: "spring", stiffness: 300 },
-                  }}
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 ${
-                    i === 0
-                      ? "bg-white/20 text-white"
-                      : "bg-[var(--color-tertiary)] text-[var(--color-primary)]"
-                  }`}
-                >
+              {/* Author */}
+              <div className="flex items-center gap-3 pt-4 border-t border-gray-100 group-hover:border-white/20 transition">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 bg-[var(--color-tertiary)] text-[var(--color-primary)] group-hover:bg-white/20 group-hover:text-white transition">
                   {s.initials}
-                </motion.div>
+                </div>
+
                 <div>
-                  <p
-                    className={`font-semibold text-sm ${i === 0 ? "text-white" : "text-gray-800"}`}
-                  >
+                  <p className="font-semibold text-sm text-gray-800 group-hover:text-white transition">
                     {s.name}
                   </p>
-                  <p
-                    className={`text-xs mt-0.5 ${i === 0 ? "text-white/50" : "text-gray-400"}`}
-                  >
+                  <p className="text-xs mt-0.5 text-gray-400 group-hover:text-white/60 transition">
                     {s.role}
                   </p>
                 </div>
