@@ -10,7 +10,14 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-const galleryItems = [
+/* Types */
+type LightboxProps = {
+  src: string;
+  onClose: () => void;
+};
+
+/* Gallery Images */
+const galleryItems: string[] = [
   "/image/press/news1.jpg",
   "/image/press/news2.jpg",
   "/image/press/news3.jpg",
@@ -32,9 +39,10 @@ const galleryItems = [
   "/image/press/news19.jpeg",
 ];
 
-function Lightbox({ src, onClose }) {
+/* Lightbox */
+function Lightbox({ src, onClose }: LightboxProps) {
   useEffect(() => {
-    const h = (e) => e.key === "Escape" && onClose();
+    const h = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
@@ -47,35 +55,37 @@ function Lightbox({ src, onClose }) {
       onClick={onClose}
       className="fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex items-center justify-center p-4"
     >
+      {/* Close Button FIXED */}
+      <button
+        onClick={onClose}
+        className="absolute top-6 right-6 z-50 w-11 h-11 rounded-full bg-black/70 hover:bg-black flex items-center justify-center transition"
+      >
+        <X size={20} className="text-white" />
+      </button>
+
       <motion.div
         initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.85, opacity: 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 24 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative max-w-5xl w-full"
+        className="max-w-5xl w-full flex justify-center"
       >
         <img
           src={src}
           alt=""
-          className="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+          className="max-h-[85vh] w-auto object-contain rounded-2xl shadow-2xl"
         />
-
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 flex items-center justify-center"
-        >
-          <X size={18} className="text-white" />
-        </button>
       </motion.div>
     </motion.div>
   );
 }
 
 export default function PressGalleryPage() {
-  const swiperRef = useRef(null);
-  const swiperInst = useRef(null);
-  const [lightbox, setLightbox] = useState(null);
+  const swiperRef = useRef<HTMLDivElement | null>(null);
+  const swiperInst = useRef<Swiper | null>(null);
+
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   useEffect(() => {
     if (!swiperRef.current) return;
@@ -119,12 +129,14 @@ export default function PressGalleryPage() {
       },
     });
 
-    return () => swiperInst.current?.destroy(true, true);
+    return () => {
+      swiperInst.current?.destroy(true, true);
+    };
   }, []);
 
   return (
     <>
-      <div className=" bg-white max-h-screen overflow-hidden">
+      <div className="bg-white max-h-screen overflow-hidden">
         {/* HEADER */}
         <section className="pt-16 pb-8 text-center relative px-6">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 md:w-[700px] w-[220px] h-56 bg-[var(--color-primary)]/10 rounded-full blur-3xl pointer-events-none" />
@@ -147,29 +159,19 @@ export default function PressGalleryPage() {
             Press{" "}
             <span className="text-[var(--color-primary)]">Photo Galleries</span>
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-gray-400 text-sm mt-4 max-w-lg mx-auto leading-relaxed"
-          >
-            Explore highlights from our press coverage showcasing water
-            conservation initiatives across Saurashtra.
-          </motion.p>
         </section>
 
         {/* SLIDER */}
-       <section className="relative py-10">
+        <section className="relative py-10">
+          <button className="swiper-btn-prev absolute top-1/2 left-4 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition">
+            &#10094;
+          </button>
 
-  <button className="swiper-btn-prev absolute top-1/2 left-4 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition">
-    &#10094;
-  </button>
+          <button className="swiper-btn-next absolute top-1/2 right-4 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition">
+            &#10095;
+          </button>
 
-  <button className="swiper-btn-next absolute top-1/2 right-4 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/80 shadow flex items-center justify-center hover:bg-white transition">
-    &#10095;
-  </button>
-
-  <div ref={swiperRef} className="swiper">
+          <div ref={swiperRef} className="swiper">
             <div className="swiper-wrapper">
               {galleryItems.map((img, i) => (
                 <div
@@ -177,7 +179,7 @@ export default function PressGalleryPage() {
                   className="swiper-slide group cursor-pointer"
                   onClick={() => setLightbox(img)}
                 >
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
+                  <div className="relative w-full h-[260px] sm:h-[300px] md:h-[340px] lg:h-[450px] rounded-2xl overflow-hidden shadow-xl">
                     <img
                       src={img}
                       alt={`Press ${i + 1}`}
@@ -203,34 +205,6 @@ export default function PressGalleryPage() {
           <Lightbox src={lightbox} onClose={() => setLightbox(null)} />
         )}
       </AnimatePresence>
-
-      {/* SLIDE SIZE */}
-      <style>{`
-
-      .swiper{
-        width:100%;
-        padding-top:40px;
-        padding-bottom:60px;
-      }
-
-      .swiper-slide{
-        width:100%;
-        height:220px;
-      }
-
-      @media (min-width:640px){
-        .swiper-slide{ height:260px; }
-      }
-
-      @media (min-width:768px){
-        .swiper-slide{ height:300px; }
-      }
-
-      @media (min-width:1024px){
-        .swiper-slide{ height:460px; }
-      }
-
-      `}</style>
     </>
   );
 }
