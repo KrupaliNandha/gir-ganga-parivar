@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Droplets, Sprout, Users, Building2, ArrowUpRight } from "lucide-react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import SmoothScroll from "../../Component/SmothScrolling";
+import { motion } from "framer-motion";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const LAKES = [
@@ -564,14 +565,29 @@ export default function OurWorkPage() {
               </h1>
 
               <div className="mt-8">
-                <a
-                  href="/impact"
-                  className="inline-flex items-center gap-2 bg-[var(--color-secondary)]
- text-black text-sm font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20  hover:-translate-y-0.5"
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className=""
                 >
-                  Explore Our Impact
-                  <ArrowUpRight size={15} />
-                </a>
+                  <Link href="/impact">
+                    <button
+                      type="submit"
+                      className="btn-secondary  group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-secondary)] text-[var(--color-primary)]
+      hover:text-[var(--color-secondary)] overflow-hidden"
+                    >
+                      <span className="relative z-10 flex gap-2 items-center">
+                        Explore Our Impact <ArrowUpRight size={15} />
+                      </span>
+
+                      <span className="btn-secondary-overlay"></span>
+                    </button>
+                  </Link>
+                </motion.div>
               </div>
             </div>
 
@@ -699,17 +715,23 @@ export default function OurWorkPage() {
 
                 {/* Author row */}
                 <div className="relative z-10 flex flex-wrap items-center gap-4 mt-10 pt-8 border-t border-white/10">
-                  <div className="w-12 h-12 bg-[var(--color-secondary)]
- rounded-2xl flex items-center justify-center text-black font-black text-sm shrink-0">
+                  <div
+                    className="w-12 h-12 bg-[var(--color-secondary)]
+ rounded-2xl flex items-center justify-center text-black font-black text-sm shrink-0"
+                  >
                     {STORIES[active].initials}
                   </div>
                   <div>
-                    <p className="text-[var(--color-secondary)]
- font-black">
+                    <p
+                      className="text-[var(--color-secondary)]
+ font-black"
+                    >
                       {STORIES[active].name}
                     </p>
-                    <p className="text-[var(--color-secondary)]
- text-xs mt-0.5">
+                    <p
+                      className="text-[var(--color-secondary)]
+ text-xs mt-0.5"
+                    >
                       {STORIES[active].role} · {STORIES[active].location}
                     </p>
                   </div>
@@ -748,13 +770,37 @@ export default function OurWorkPage() {
                   </span>
                 </p>
               </div>
-              <Link
+              {/* <Link
                 href="/donate"
                 className="shrink-0 bg-[var(--color-primary)]
                   text-white font-bold px-7 py-3 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
               >
                 Contribute Now →
-              </Link>
+              </Link> */}
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className=""
+              >
+                <Link href="/donate">
+                  <button
+                    type="submit"
+                    className="btn-primary  group relative  gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                  >
+                    <span className="relative z-10 flex gap-2 items-center">
+                       Contribute Now →
+                    </span>
+
+                    <span className="btn-primary-overlay"></span>
+                  </button>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -844,11 +890,15 @@ export default function OurWorkPage() {
                         {desc}
                       </p>
 
-                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-secondary)]
- text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span
+                        className="mt-4 inline-flex items-center gap-2 text-[var(--color-secondary)]
+ text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      >
                         Explore
-                        <span className="w-5 h-px bg-[var(--color-secondary)]
- group-hover:w-8 transition-all duration-300" />
+                        <span
+                          className="w-5 h-px bg-[var(--color-secondary)]
+ group-hover:w-8 transition-all duration-300"
+                        />
                       </span>
                     </div>
                   </div>

@@ -60,7 +60,7 @@ body {
 /* css for Hero button */
 
 @layer components {
-  .btn-primary {
+  .btn-primary-hero {
     @apply relative inline-block font-semibold uppercase overflow-hidden 
     tracking-[0.14em] sm:tracking-[0.16em]
     px-6 sm:px-9 py-3 sm:py-4
@@ -74,14 +74,14 @@ body {
     hover:text-white;
   }
 
-  .btn-primary-overlay {
+  .btn-primary-hero-overlay {
     @apply absolute inset-0 
     bg-[var(--color-greenish)]
     -translate-x-[110%]
     transition-transform duration-1000;
   }
 
-  .btn-primary:hover .btn-primary-overlay {
+  .btn-primary-hero:hover .btn-primary-hero-overlay {
     transform: translateX(110%);
   }
 }
@@ -109,7 +109,7 @@ body {
     transform: translateX(110%);
   }
 
-   /* primary Button */
+  /* primary Button */
   .btn-primary {
     @apply relative
     rounded-lg
@@ -131,7 +131,7 @@ body {
   }
 
   /* Outline Button primary */
-  .btn-outline {
+  .btn-primary-outline {
     @apply relative inline-flex items-center gap-2
     border-2 border-[var(--color-primary)]
     text-[var(--color-primary)]
@@ -141,22 +141,45 @@ body {
     overflow-hidden
     transition-transform duration-300
     hover:-translate-y-0.5
-    hover:text-black;
+    hover:text-[var(--color-secondary)];
   }
 
-  .btn-outline-overlay {
+  .btn-primary-outline-overlay {
     @apply absolute inset-0
     bg-[var(--color-primary)]
     -translate-x-[110%]
     transition-transform duration-500;
   }
 
-  .btn-outline:hover .btn-outline-overlay {
+  .btn-primary-outline:hover .btn-primary-outline-overlay {
+    transform: translateX(110%);
+  }
+
+  /* Outline Button secondary */
+  .btn-secondary-outline {
+    @apply relative inline-flex items-center gap-2
+    border-2 border-[var(--color-secondary)]
+    text-[var(--color-secondary)]
+    font-semibold text-base
+    px-10 py-4 rounded-lg
+    shadow-lg shadow-black/25
+    overflow-hidden
+    transition-transform duration-300
+    hover:-translate-y-0.5
+    hover:text-[var(--color-primary)];
+  }
+
+  .btn-secondary-outline-overlay {
+    @apply absolute inset-0
+    bg-[var(--color-secondary)]
+    -translate-x-[110%]
+    transition-transform duration-500;
+  }
+
+  .btn-secondary-outline:hover .btn-secondary-outline-overlay {
     transform: translateX(110%);
   }
 }
-
-
 
 /* <span className="btn-secondary-overlay"></span> 
 

@@ -2,6 +2,7 @@
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { getDonationById } from "../donateData";
+import { motion } from "framer-motion";
 
 // ─── Shared Detail Layout ────────────────────────────────────────────────────
 function DetailLayout({
@@ -50,7 +51,7 @@ function DetailLayout({
   return (
     <>
       {/* ── Main Detail Section ── */}
-      <section className="container py-12 px-4">
+      <section className="container ">
         <div className="max-w-7xl mx-auto">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs text-gray-400 mb-10">
@@ -87,8 +88,6 @@ function DetailLayout({
                 <span className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-[var(--color-primary)] text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow border border-[var(--color-dark)]">
                   {badgeLabel}
                 </span>
-
-              
 
                 {/* Bottom gradient overlay */}
                 <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
@@ -131,8 +130,6 @@ function DetailLayout({
                 </h1>
               </div>
 
-              
-
               {/* Gradient divider */}
               <div className="h-0.5 rounded-full bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-secondary)] to-transparent" />
 
@@ -157,13 +154,29 @@ function DetailLayout({
               </div>
 
               {/* Donate Button */}
-              <button
-                onClick={onDonate}
-                className="w-full bg-[var(--color-primary)] cursor-pointer active:scale-[0.98] text-white font-black text-sm uppercase tracking-[0.2em] px-8 py-4 rounded-2xl transition-all duration-200 shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="w-full"
               >
-                <span>Donate Now</span>
-                <span className="text-base">→</span>
-              </button>
+                <button
+                  type="submit"
+                  onClick={onDonate}
+                  className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                >
+                  <span className="relative z-10 flex gap-2 items-center">
+                    Donate →
+                  </span>
+
+                  <span className="btn-primary-overlay"></span>
+                </button>
+              </motion.div>
 
               {/* Trust badges */}
               <div className="grid grid-cols-3 gap-3">
@@ -296,12 +309,32 @@ function DetailLayout({
                     <p className="text-xs text-gray-400 leading-relaxed flex-1 line-clamp-3">
                       {item.desc}
                     </p>
-                    <Link
-                      href={`/donate/${item.id}`}
-                      className="w-full bg-[var(--color-primary)] cursor-pointer text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1 transition-all duration-200"
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="w-full"
                     >
-                      Donate Now →
-                    </Link>
+                      <Link
+                        href={`/donate/${item.id}`}
+                        className="w-full block"
+                      >
+                        <button
+                          type="submit"
+                          className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                        >
+                          <span className="relative z-10 flex gap-2 items-center">
+                            Donate →
+                          </span>
+
+                          <span className="btn-primary-overlay"></span>
+                        </button>
+                      </Link>
+                    </motion.div>
                   </div>
                 </div>
               ))}

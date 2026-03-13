@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 type CartItem = {
   id: string;
@@ -32,8 +33,12 @@ export default function CartPage() {
         <div className="w-24 h-24 rounded-full bg-white border-2 border-[var(--color-dark)] flex items-center justify-center shadow-md">
           <span className="text-4xl">🛒</span>
         </div>
-        <h2 className="text-3xl font-black text-gray-900">Your cart is empty</h2>
-        <p className="text-gray-400 text-sm">You haven&apos;t added any donation yet.</p>
+        <h2 className="text-3xl font-black text-gray-900">
+          Your cart is empty
+        </h2>
+        <p className="text-gray-400 text-sm">
+          You haven&apos;t added any donation yet.
+        </p>
         <Link
           href="/donate"
           className="mt-2 bg-[var(--color-primary)] text-white px-8 py-3 rounded-2xl font-black text-sm hover:bg-[#007fa3] transition-all shadow-lg shadow-[var(--color-primary)]/20"
@@ -58,7 +63,6 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-tertiary)] pb-20">
-
       {/* ── Page Header ── */}
       <div className="bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-8">
         <div className="max-w-6xl mx-auto">
@@ -77,10 +81,8 @@ export default function CartPage() {
 
       {/* ── Main Layout ── */}
       <div className="max-w-6xl mx-auto px-6 md:px-12 mt-10 flex flex-col lg:flex-row gap-8 items-start">
-
         {/* ── LEFT: Cart Item ── */}
         <div className="flex-1 min-w-0 space-y-4">
-
           {/* Column headers — desktop */}
           <div className="hidden md:grid grid-cols-[1fr_150px_100px_140px] px-6 pb-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
             <span>Donation</span>
@@ -92,7 +94,9 @@ export default function CartPage() {
           {/* Item Card */}
           <div
             className={`bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm p-6 flex flex-col md:grid md:grid-cols-[1fr_110px_130px_110px] items-center gap-5 relative transition-all duration-300 ${
-              removing ? "opacity-0 -translate-x-6" : "opacity-100 translate-x-0"
+              removing
+                ? "opacity-0 -translate-x-6"
+                : "opacity-100 translate-x-0"
             }`}
           >
             {/* Remove Button */}
@@ -127,7 +131,9 @@ export default function CartPage() {
 
             {/* Price */}
             <div className="text-center w-full md:w-auto">
-              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden mb-1">Price</p>
+              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden mb-1">
+                Price
+              </p>
               <span className="text-sm font-bold text-gray-700">
                 {formatted(rawAmount)}
               </span>
@@ -135,7 +141,9 @@ export default function CartPage() {
 
             {/* Quantity */}
             <div className="flex flex-col items-center gap-2 w-full md:w-auto">
-              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden">Quantity</p>
+              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden">
+                Quantity
+              </p>
               <div className="flex items-center gap-2 rounded-xl px-2 py-1">
                 <button
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
@@ -157,7 +165,9 @@ export default function CartPage() {
 
             {/* Subtotal */}
             <div className="text-right w-full md:w-auto pr-2">
-              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden mb-1">Subtotal</p>
+              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden mb-1">
+                Subtotal
+              </p>
               <span className="text-lg font-black text-[var(--color-primary)]">
                 {formatted(subtotal)}
               </span>
@@ -176,7 +186,6 @@ export default function CartPage() {
         {/* ── RIGHT: Order Summary ── */}
         <div className="w-full lg:w-80 flex-shrink-0">
           <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
-
             {/* Summary header */}
             <div className="bg-[var(--color-primary)] px-6 py-4 flex items-center gap-2">
               <div className="w-1 h-5 bg-white/60 rounded-full" />
@@ -190,7 +199,9 @@ export default function CartPage() {
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-500 font-medium">Unit Amount</span>
-                  <span className="font-bold text-gray-800">{formatted(rawAmount)}</span>
+                  <span className="font-bold text-gray-800">
+                    {formatted(rawAmount)}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-500 font-medium">Quantity</span>
@@ -202,24 +213,46 @@ export default function CartPage() {
 
               {/* Total */}
               <div className="bg-[var(--color-tertiary)] border border-[var(--color-dark)] rounded-2xl px-5 py-4 flex justify-between items-center">
-                <span className="text-sm font-black text-gray-700 uppercase tracking-wider">Total</span>
+                <span className="text-sm font-black text-gray-700 uppercase tracking-wider">
+                  Total
+                </span>
                 <span className="text-2xl font-black text-[var(--color-primary)] tabular-nums">
                   {formatted(subtotal)}
                 </span>
               </div>
 
               {/* Checkout CTA */}
-              <Link
-                href="/checkout"
-                className="block w-full bg-[var(--color-primary)] hover:bg-[#007fa3] text-white text-center py-4 rounded-2xl font-black text-sm transition-all shadow-lg shadow-[var(--color-primary)]/20 hover:-translate-y-0.5 active:translate-y-0"
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="w-full"
               >
-                Proceed to Checkout →
-              </Link>
+                <Link href={`/checkout`} className="w-full block">
+                  <button
+                    type="submit"
+                    className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                  >
+                    <span className="relative z-10 flex gap-2 items-center">
+                      Proceed to Checkout →
+                    </span>
+
+                    <span className="btn-primary-overlay"></span>
+                  </button>
+                </Link>
+              </motion.div>
 
               {/* Trust row */}
               <div className="flex items-center justify-center gap-4 pt-1">
                 {["🔒 Secure", "80G Tax", "✓ Verified"].map((t) => (
-                  <span key={t} className="text-[10px] text-gray-400 font-bold">{t}</span>
+                  <span key={t} className="text-[10px] text-gray-400 font-bold">
+                    {t}
+                  </span>
                 ))}
               </div>
             </div>

@@ -402,7 +402,7 @@ export default function Media() {
                     </button>
                     <button
                       onClick={next}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--color-primary)] border border-[var(--color-primary)] flex items-center justify-center text-white hover:bg-white hover:border-white hover:text-black transition-all duration-300"
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--color-primary)] border border-[var(--color-primary)] flex items-center justify-center text-white transition-all duration-300"
                       aria-label="Next"
                     >
                       <svg

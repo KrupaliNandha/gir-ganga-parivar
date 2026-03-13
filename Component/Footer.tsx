@@ -25,25 +25,27 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Brand */}
             <div className="flex flex-col">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="rounded-xl p-1.5 flex-shrink-0 backdrop-blur-sm">
-                  <Image
-                    src="/image/logo.png"
-                    alt="Girganga Parivar Trust"
-                    width={56}
-                    height={56}
-                    className="object-contain"
-                  />
+              <Link href="/">
+                <div className="flex items-center  mb-5 cursor-pointer">
+                  <div className="rounded-xl p-1 flex-shrink-0 backdrop-blur-sm">
+                    <Image
+                      src="/image/logo.png"
+                      alt="Girganga Parivar Trust"
+                      width={56}
+                      height={56}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-black font-black text-base leading-tight">
+                      Girganga
+                    </p>
+                    <p className="text-[var(--color-primary)]  font-bold text-sm">
+                      Parivar Trust
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-black font-black text-base leading-tight">
-                    Girganga
-                  </p>
-                  <p className="text-[var(--color-primary)]  font-bold text-sm">
-                    Parivar Trust
-                  </p>
-                </div>
-              </div>
+              </Link>
 
               <p className="text-black text-sm leading-relaxed mb-6">
                 Transforming Saurashtra through water conservation — building a
@@ -83,8 +85,8 @@ export default function Footer() {
                     className="btn-secondary group"
                   >
                     <span
-                      className="relative z-10 btn-secondary w-9 h-9 rounded-lg bg-[var(--color-dark)]
-                     border border-white/15 backdrop-blur-sm flex items-center justify-center text-black 
+                      className="relative z-10 btn-secondary w-9 h-9 rounded-lg bg-[var(--color-tertiary)] border-2 border-[var(--color-primary)]
+                      backdrop-blur-sm flex items-center justify-center text-[var(--color-primary)]
                      hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white"
                     >
                       {icon}
@@ -139,7 +141,6 @@ export default function Footer() {
                   { label: "Checkdam Construction", href: "/check-dam-creat" },
                   { label: "Community Impact", href: "/impact" },
                   { label: "Media Coverage", href: "/media" },
-              
                 ].map(({ label, href }) => (
                   <li key={label}>
                     <Link
@@ -209,13 +210,13 @@ export default function Footer() {
                   info@girgangaparivartrust.com
                 </a>
                 <a href="/Our-Work">
-                <div className="flex items-start gap-2.5 text-black text-sm cursor-pointer select-none">
-                  <FiMapPin
-                    size={13}
-                    className="text-[var(--color-primary)] flex-shrink-0 mt-0.5"
-                  />
-                  <span>Sunstar Chamber, Rajkot - 360005, Gujarat</span>
-                </div>
+                  <div className="flex items-start gap-2.5 text-black text-sm cursor-pointer select-none">
+                    <FiMapPin
+                      size={13}
+                      className="text-[var(--color-primary)] flex-shrink-0 mt-0.5"
+                    />
+                    <span>Sunstar Chamber, Rajkot - 360005, Gujarat</span>
+                  </div>
                 </a>
               </div>
             </div>
@@ -232,9 +233,9 @@ export default function Footer() {
               Made with <span className="text-[var(--color-primary)]">♥</span>{" "}
               for Water Conservation ·{" "}
               <a href="/page.tsx">
-              <span className="text-[var(--color-primary)] ">
-                Girganga Parivar Trust © 2026
-              </span>
+                <span className="text-[var(--color-primary)] ">
+                  Girganga Parivar Trust © 2026
+                </span>
               </a>
             </p>
           </div>

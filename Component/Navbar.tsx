@@ -65,7 +65,9 @@ export default function Navbar() {
     [
       "relative inline-flex items-center px-3 xl:px-4 py-5",
       "text-[12.5px] xl:text-[13px] font-semibold uppercase tracking-[0.1em] transition-colors group",
-      isActive(path) ? "text-[var(--color-primary)]" : "text-slate-700 hover:text-[var(--color-primary)]",
+      isActive(path)
+        ? "text-[var(--color-primary)]"
+        : "text-slate-700 hover:text-[var(--color-primary)]",
     ].join(" ");
 
   /* Dropdown item */
@@ -472,90 +474,166 @@ export default function Navbar() {
         </div>
         {/* Link list */}
         <ul className="flex-1 overflow-y-auto px-6 py-6">
-          {[
-            { label: "Home", href: "/" },
-            { label: "Awards", href: "/awards" },
-            { label: "About Us", href: "/about-us" },
-            { label: "Contact", href: "/contact" },
-          ].map(({ label, href }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isActive(href) ? "text-[var(--color-primary)]" : "text-slate-800"}`}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
+          {/* Home */}
+          <li>
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/") ? "text-[var(--color-primary)]" : "text-slate-800"
+              }`}
+            >
+              Home
+            </Link>
+          </li>
 
-          {/* Our Work accordion */}
+          {/* Our Work */}
           <li>
             <button
               type="button"
               onClick={() => setWorkOpen(!workOpen)}
-              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${isWorkActive ? "text-[var(--color-greenish)]" : "text-slate-800"}`}
+              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+                isWorkActive ? "text-[var(--color-primary)]" : "text-slate-800"
+              }`}
             >
               Our Work
               <FiChevronDown
                 className={`transition-transform ${workOpen ? "rotate-180" : ""}`}
               />
             </button>
+
             <div
-              className={`overflow-hidden transition-all ${workOpen ? "max-h-36 py-2" : "max-h-0"}`}
+              className={`overflow-hidden transition-all ${
+                workOpen ? "max-h-36 py-2" : "max-h-0"
+              }`}
             >
               <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
-                {[{ label: "Impact", href: "/impact" }].map(
-                  ({ label, href }) => (
-                    <li key={href}>
-                      <Link
-                        href={href}
-                        onClick={() => setMenuOpen(false)}
-                        className={`text-[15px] font-semibold ${isActive(href) ? "text-[var(--color-primary)]" : "text-slate-500"}`}
-                      >
-                        {label}
-                      </Link>
-                    </li>
-                  ),
-                )}
+                <li>
+                  <Link
+                    href="/impact"
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-[15px] font-semibold ${
+                      isActive("/impact")
+                        ? "text-[var(--color-primary)]"
+                        : "text-slate-500"
+                    }`}
+                  >
+                    Impact
+                  </Link>
+                </li>
               </ul>
             </div>
           </li>
 
-          {/* Media accordion */}
+          {/* Media */}
           <li>
             <button
               type="button"
               onClick={() => setMediaOpen(!mediaOpen)}
-              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold
-                 border-b border-slate-50 tracking-wide ${isMediaActive ? "text-[var(--color-primary)]" : "text-slate-800"}`}
+              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+                isMediaActive ? "text-[var(--color-primary)]" : "text-slate-800"
+              }`}
             >
               Media
               <FiChevronDown
                 className={`transition-transform ${mediaOpen ? "rotate-180" : ""}`}
               />
             </button>
+
             <div
-              className={`overflow-hidden transition-all ${mediaOpen ? "max-h-52 py-2" : "max-h-0"}`}
+              className={`overflow-hidden transition-all ${
+                mediaOpen ? "max-h-52 py-2" : "max-h-0"
+              }`}
             >
               <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
-                {[
-                  { label: "Photos", href: "/photos" },
-                  { label: "Press Release", href: "/press-release" },
-                  { label: "Videos", href: "/videos" },
-                ].map(({ label, href }) => (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      onClick={() => setMenuOpen(false)}
-                      className={`text-[15px] font-semibold ${isActive(href) ? "text-[var(--color-primary)]" : "text-slate-500"}`}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
+                <li>
+                  <Link
+                    href="/photos"
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-[15px] font-semibold ${
+                      isActive("/photos")
+                        ? "text-[var(--color-primary)]"
+                        : "text-slate-500"
+                    }`}
+                  >
+                    Photos
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/press-release"
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-[15px] font-semibold ${
+                      isActive("/press-release")
+                        ? "text-[var(--color-primary)]"
+                        : "text-slate-500"
+                    }`}
+                  >
+                    Press Release
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/videos"
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-[15px] font-semibold ${
+                      isActive("/videos")
+                        ? "text-[var(--color-primary)]"
+                        : "text-slate-500"
+                    }`}
+                  >
+                    Videos
+                  </Link>
+                </li>
               </ul>
             </div>
+          </li>
+
+          {/* Awards */}
+          <li>
+            <Link
+              href="/awards"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/awards")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              Awards
+            </Link>
+          </li>
+
+          {/* About */}
+          <li>
+            <Link
+              href="/about-us"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/about-us")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              About Us
+            </Link>
+          </li>
+
+          {/* Contact */}
+          <li>
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/contact")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              Contact
+            </Link>
           </li>
         </ul>
         {/* Bottom: contact info + donate CTA */}

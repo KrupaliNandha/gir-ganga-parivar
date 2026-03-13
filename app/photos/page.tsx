@@ -121,7 +121,7 @@ export default function Photos() {
           </section>
 
           {/* Mosaic Grid */}
-          <section className="container mx-auto pb-16">
+          <section className="">
             <div
               className="
   grid space-y-2 sm:gap-3

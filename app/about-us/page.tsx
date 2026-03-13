@@ -9,6 +9,7 @@ import {
   Building2,
   CheckCircle,
   Quote,
+  Link,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
@@ -223,7 +224,7 @@ export default function AboutPage() {
             <a
               href="/donation"
               className="btn-primary groupinline-flex items-center gap-2 font-semibold text-base
-  px-10 py-4 bg-[var(--color-primary)] text-black hover:text-white flex"
+  px-10 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)] flex"
             >
               <span className="relative z-10"> Support Us</span>
 
@@ -878,7 +879,7 @@ export default function AboutPage() {
             <p className="text-white/60 text-xs uppercase tracking-[0.25em] mb-4">
               Make a Difference
             </p>
-            <h2 className="text-3xl font-bold text-white leading-snug mb-5">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white leading-snug mb-5">
               Your Contribution
               <br />
               Is Important
@@ -888,17 +889,27 @@ export default function AboutPage() {
               repairing and enhancing check dams across Saurashtra, ensuring a
               more water-secure future for our communities in Gujarat.
             </p>
-            <motion.a
-              whileHover={{
-                scale: 1.06,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.22)",
-              }}
-              whileTap={{ scale: 0.97 }}
-              href="/donation"
-              className="inline-flex items-center gap-2 bg-[var(--color-secondary)] text-gray-900 px-6 py-3 rounded-lg text-sm font-bold hover:opacity-90 transition w-fit"
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-wrap gap-6 "
             >
-              Know More <ArrowRight size={16} />
-            </motion.a>
+              {/* Secondary Button */}
+              <a
+                href="/donate"
+                className="btn-secondary-outline groupinline-flex items-center gap-2  font-semibold text-sm lg:text-base
+            px-8 py-4 bg-[var(--color-primary)]"
+              >
+                <span className="relative z-10 ">Know More</span>
+                <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+                <span className="btn-secondary-outline-overlay"></span>
+              </a>
+            </motion.div>
           </motion.div>
         </motion.div>
       </section>
@@ -1141,17 +1152,27 @@ export default function AboutPage() {
           Together we can restore water security for millions of families across
           drought-prone Saurashtra.
         </p>
-        <motion.a
-          whileHover={{
-            scale: 1.07,
-            boxShadow: "0 10px 28px rgba(0,0,0,0.25)",
-          }}
-          whileTap={{ scale: 0.96 }}
-          href="/donation"
-          className="inline-flex items-center gap-2 bg-[var(--color-secondary)] text-gray-900 px-8 py-4 rounded-lg font-bold text-sm hover:opacity-90 transition"
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap gap-6 justify-center"
         >
-          Donate Now <ArrowRight size={16} />
-        </motion.a>
+          {/* Secondary Button */}
+          <a
+            href="/donate"
+            className="btn-secondary-outline groupinline-flex items-center gap-2  font-semibold text-base
+            px-10 py-4 bg-[var(--color-primary)]"
+          >
+            <span className="relative z-10">Donate Now</span>
+            <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+            <span className="btn-secondary-outline-overlay"></span>
+          </a>
+        </motion.div>
       </motion.section>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 type CartItem = {
   id: string;
@@ -442,10 +443,32 @@ export default function DonationCheckout() {
             </div>
 
             {/* CTA */}
-            <button className="w-full bg-[var(--color-primary)] hover:bg-[#007fa3] text-white py-4 rounded-2xl font-black text-sm transition-all duration-200 shadow-xl shadow-[var(--color-primary)]/20 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+            {/* <button className="w-full bg-[var(--color-primary)] hover:bg-[#007fa3] text-white py-4 rounded-2xl font-black text-sm transition-all duration-200 shadow-xl shadow-[var(--color-primary)]/20 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
               <span>💙</span>
               Donate {formatted(rawAmount)} Now
-            </button>
+            </button> */}
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="w-full"
+            >
+              <button
+                type="submit"
+                className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+              >
+                <span className="relative z-10 flex gap-2 items-center">
+                  Donate {formatted(rawAmount)} Now
+                </span>
+
+                <span className="btn-primary-overlay"></span>
+              </button>
+            </motion.div>
 
             {/* Trust badges */}
             <div className="grid grid-cols-3 gap-2">

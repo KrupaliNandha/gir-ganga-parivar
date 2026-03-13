@@ -182,7 +182,7 @@ export default function AwardsSection() {
           {/* Stats strip */}
           <div
             ref={headingRef}
-            className="grid grid-cols-3 gap-4 mb-14 transition-all duration-700"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-14 transition-all duration-700"
             style={{
               opacity: headingVisible ? 1 : 0,
               transform: headingVisible ? "translateY(0)" : "translateY(20px)",
@@ -195,7 +195,7 @@ export default function AwardsSection() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="text-center rounded-2xl py-6 px-3"
+                className="text-center rounded-2xl py-6 px-3 bg-white shadow-sm"
                 style={{
                   background: "#fff",
                 }}
@@ -269,7 +269,7 @@ export default function AwardsSection() {
                 <a
                   href="/partner-with-us-csr"
                   className="btn-primary groupinline-flex items-center gap-2 font-semibold text-base
-  px-10 py-4 bg-[var(--color-primary)] text-black hover:text-white flex"
+  px-10 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)] flex"
                 >
                   <span className="relative z-10">Latest News</span>
 

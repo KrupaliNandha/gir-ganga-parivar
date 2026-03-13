@@ -154,7 +154,7 @@ export default function Donate() {
 
   return (
     <SmoothScroll>
-      {/* Section - 2 - Single Card */}
+      {/* Section - 1 */}
       <section className="container min-h-scree flex items-center justify-center px-4 py-20 relative overflow-hidden">
         <div className="relative z-10 w-full max-w-5xl">
           {/* Section Label */}
@@ -210,8 +210,8 @@ export default function Donate() {
                     onClick={() => handlePreset(v)}
                     className={`py-3 rounded-xl text-sm font-bold border transition-all duration-200 ${
                       !isCustom && amount === v
-                        ? "bg-[var(--color-tertiary)] border-[var(--color-primary)] text-[var(--color-primary)] shadow-lg"
-                        : "bg-[var(--color-primary)] border-[var(--color-tertiary)] text-white"
+                        ? "bg-[var(--color-primary)] border-[var(--color-tertiary)] text-[var(--color-secondary)]  shadow-lg"
+                        : "bg-[var(--color-tertiary)] border-[var(--color-primary)] text-[var(--color-primary)]"
                     }`}
                   >
                     ₹{v.toLocaleString("en-IN")}
@@ -244,17 +244,32 @@ export default function Donate() {
               </div>
 
               {/* Donate Button */}
-              <button
-                onClick={handleDonate}
-                className="w-full bg-[var(--color-primary)]/90 hover:bg-[var(--color-primary)] text-white font-black text-base py-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-200 shadow-md hover:-translate-y-0.5 active:translate-y-0"
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex flex-wrap gap-6 justify-center"
               >
-                <FaShoppingCart className="text-lg" />
-                Donate ₹
-                {isCustom
-                  ? customAmount || "0"
-                  : amount.toLocaleString("en-IN")}{" "}
-                Now
-              </button>
+                <button
+                  type="submit"
+                  onClick={handleDonate}
+                  className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+                  font-semibold text-base px-10 py-4 cursor-pointer
+                  bg-[var(--color-primary)] text-[var(--color-secondary)]
+                  hover:text-[var(--color-primary)] overflow-hidden"
+                >
+                  <span className="relative z-10 flex gap-2 items-center">
+                    Donate ₹
+                    {isCustom
+                      ? customAmount || "0"
+                      : amount.toLocaleString("en-IN")}{" "}
+                    Now
+                  </span>
+
+                  <span className="btn-primary-overlay"></span>
+                </button>
+              </motion.div>
             </div>
 
             {/* RIGHT: Info Panel */}
@@ -290,7 +305,7 @@ export default function Donate() {
         </div>
       </section>
 
-      {/* Section - 3 */}
+      {/* Section - 2 */}
       <section className="container min-h-screen relative overflow-hidden">
         <div className="container mx-auto relative ">
           {/* Header */}
@@ -343,15 +358,29 @@ export default function Donate() {
                 </p>
 
                 {/* CTA */}
-                <div className="justify-center">
-                  <Link
-                    href={`/donate/${item.id}`}
-                    className="inline-flex items-center gap-2 self-start bg-[var(--color-primary)]  hover:bg-[var(--color-secondary)] hover:text-black text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-200 group-hover:gap-3"
-                  >
-                    Donate Now
-                    <span>→</span>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="flex flex-wrap gap-6 justify-center md:justify-start"
+                >
+                  <Link href={`/donate/${item.id}`}>
+                    <button
+                      type="submit"
+                      className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+                  font-semibold text-base px-10 py-4 cursor-pointer
+                  bg-[var(--color-primary)] text-[var(--color-secondary)]
+                  hover:text-[var(--color-primary)] overflow-hidden"
+                    >
+                      <span className="relative z-10 flex gap-2 items-center">
+                        Donate →
+                      </span>
+
+                      <span className="btn-primary-overlay"></span>
+                    </button>
                   </Link>
-                </div>
+                </motion.div>
 
                 {/* Decorative corner arc */}
                 <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full border border-[var(--color-secondary)] opacity-50 group-hover:opacity-40 transition-opacity" />
@@ -362,7 +391,7 @@ export default function Donate() {
         </div>
       </section>
 
-      {/* Section - 4 */}
+      {/* Section - 3 */}
       <section className="container py-16">
         <div className="bg-white border border-[var(--color-primary)] rounded-3xl p-6 sm:p-10">
           {/* Header */}
@@ -419,12 +448,29 @@ export default function Donate() {
                   </div>
 
                   {/* CTA */}
-                  <Link
-                    href={`/donate/${item.id}`}
-                    className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] text-white hover:text-black text-xs font-black py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="w-full"
                   >
-                    Donate Now →
-                  </Link>
+                    <Link href={`/donate/${item.id}`} className="w-full block">
+                      <button
+                        type="submit"
+                        className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                      >
+                        <span className="relative z-10 flex gap-2 items-center">
+                          Donate →
+                        </span>
+
+                        <span className="btn-primary-overlay"></span>
+                      </button>
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             ))}
@@ -451,7 +497,7 @@ export default function Donate() {
         </div>
       </section>
 
-      {/* Section - 5 */}
+      {/* Section - 4 */}
       <section className="container py-16">
         <div className="p-3 sm:p-6 space-y-10">
           {/* Header */}
@@ -505,12 +551,29 @@ export default function Donate() {
                     {item.desc}
                   </p>
 
-                  <Link
-                    href={`/donate/${item.id}`}
-                    className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] hover:text-black text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 mt-1"
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="w-full"
                   >
-                    Donate Now →
-                  </Link>
+                    <Link href={`/donate/${item.id}`} className="w-full block">
+                      <button
+                        type="submit"
+                        className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                      >
+                        <span className="relative z-10 flex gap-2 items-center">
+                          Donate →
+                        </span>
+
+                        <span className="btn-primary-overlay"></span>
+                      </button>
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             ))}
@@ -518,7 +581,7 @@ export default function Donate() {
         </div>
       </section>
 
-      {/* Section - 6 */}
+      {/* Section - 5 */}
       <section className="container overflow-hidden bg-white">
         <div className="relative z-10 max-w-3xl mx-auto">
           {/* Header */}

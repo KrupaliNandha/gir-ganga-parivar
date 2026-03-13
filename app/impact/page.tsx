@@ -231,7 +231,7 @@ export default function JalMandirSection() {
             <Link
               href="/donate"
               className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-base
-    px-10 py-4 bg-[var(--color-secondary)] text-black hover:text-white flex cursor-pointer"
+    px-10 py-4 bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-[var(--color-secondary)] flex cursor-pointer"
             >
               <span className="relative z-10">Donate Now</span>
               <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 
+import { motion } from "framer-motion";
+
 /* ─── Icons ───────────────────────────────────────── */
 
 function MapPinIcon({ filled = false }) {
@@ -104,14 +106,12 @@ function ContactCards() {
           border border-[var(--color-tertiary)]
           hover:bg-[var(--color-secondary)] hover:text-black shadow-sm"
         >
-          <div className="text-black">
-            {card.icon}
-          </div>
+          <div className="text-black">{card.icon}</div>
 
           <p className="font-bold text-lg tracking-wide">{card.label}</p>
 
           {card.lines.map((line, j) => (
-            <p key={j} className="text-sm opacity-80">
+            <p key={j} className="text-xs sm:text-sm opacity-80">
               {line}
             </p>
           ))}
@@ -148,8 +148,24 @@ function ContactForm() {
     setSent(true);
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+  const options = [
+    "General Inquiry",
+    "Volunteer Opportunities",
+    "Donation",
+    "Media",
+  ];
+
+  const handleSelect = (value: string) => {
+    setSelected(value);
+    setIsOpen(false);
+    // sync with your form state:
+    handleChange({ target: { name: "subject", value } } );
+  };
+
   const inputClass =
-    "w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-700 text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition bg-white";
+    "w-full px-5 py-3 rounded-xl border border-gray-200 text-gray-700 text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition bg-white";
 
   if (sent) {
     return (
@@ -212,19 +228,47 @@ function ContactForm() {
         className={inputClass}
       />
 
-      <select
-        required
-        name="subject"
-        value={form.subject}
-        onChange={handleChange}
-        className={inputClass}
-      >
-        <option value="">Select Subject</option>
-        <option>General Inquiry</option>
-        <option>Volunteer Opportunities</option>
-        <option>Donation</option>
-        <option>Media</option>
-      </select>
+      <div className="relative">
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className={
+            inputClass + " flex items-center justify-between w-full pr-7"
+          }
+        >
+          <span className={selected ? "text-gray-900" : "text-gray-400"}>
+            {selected || "Select Subject"}
+          </span>
+          <svg
+            className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+
+        {isOpen && (
+          <ul className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-sm">
+            {options.map((opt) => (
+              <li
+                key={opt}
+                onClick={() => handleSelect(opt)}
+                className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-50"
+              >
+                {opt}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* hidden input for form submission */}
+        <input type="hidden" name="subject" value={selected} required />
+      </div>
 
       <textarea
         required
@@ -236,19 +280,34 @@ function ContactForm() {
         className={inputClass + " resize-none"}
       />
 
-      <button
-        disabled={loading}
-        className="w-full bg-[var(--color-primary)] text-white hover:bg-[var(--color-accent)] hover:text-black
-        font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 btn-secondary"
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="flex flex-wrap gap-6 justify-center"
       >
-        {loading ? (
-          "Sending..."
-        ) : (
-          <>
-            Send <SendIcon />
-          </>
-        )}
-      </button>
+        <button
+          type="submit"
+          disabled={loading}
+          className="btn-secondary w-full group relative inline-flex items-center justify-center gap-2
+    font-semibold text-base px-10 py-4 cursor-pointer
+    bg-[var(--color-secondary)] text-[var(--color-primary)]
+    hover:text-[var(--color-secondary)] overflow-hidden"
+        >
+          <span className="relative z-10 flex gap-2 items-center">
+            {loading ? (
+              "Sending..."
+            ) : (
+              <>
+                Send <SendIcon />
+              </>
+            )}
+          </span>
+
+          <span className="btn-secondary-overlay"></span>
+        </button>
+      </motion.div>
     </form>
   );
 }

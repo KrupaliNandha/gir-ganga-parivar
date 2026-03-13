@@ -135,9 +135,7 @@ export default function SupportAStructure() {
                 Water for Farms, Families, and the Future
                 <span className="w-8 h-px bg-[var(--color-secondary)]" />
               </p>
-              <h1
-                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-              >
+              <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
                 One Structure. <br />{" "}
                 <span className="text-[var(--color-primary)]">
                   {" "}
@@ -183,9 +181,7 @@ export default function SupportAStructure() {
                   About Structures
                   <span className="flex-1 max-w-[40px] h-px bg-[var(--color-secondary)]" />
                 </p>
-                <h2
-                  className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-center lg:text-left"
-                >
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-center lg:text-left">
                   What is a{" "}
                   <span className="italic text-[var(--color-primary)]">
                     &ldquo;Structure&rdquo;?
@@ -221,9 +217,7 @@ export default function SupportAStructure() {
                 Structure Types
                 <span className="flex-1 max-w-[40px] h-px bg-[var(--color-secondary)]" />
               </p>
-              <h2
-                className="text-4xl lg:text-5xl font-black text-black leading-tight max-w-4xl text-center lg:text-left"
-              >
+              <h2 className="text-4xl lg:text-5xl font-black text-black leading-tight max-w-4xl text-center lg:text-left">
                 Structures Supported{" "}
                 <span className="text-[var(--color-primary)]">by GGPT</span>
               </h2>
@@ -270,11 +264,11 @@ export default function SupportAStructure() {
                 The Ground Reality
                 <span className="w-8 h-px bg-[var(--color-secondary)]" />
               </p>
-              <h1
-                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-              >
+              <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
                 Why Your{" "}
-                <span className="text-[var(--color-primary)] w-full">Support Matters</span>
+                <span className="text-[var(--color-primary)] w-full">
+                  Support Matters
+                </span>
               </h1>
               {/* thin emerald divider */}
               <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
@@ -362,10 +356,9 @@ export default function SupportAStructure() {
                 Choose How to Help
                 <span className="w-8 h-px bg-[var(--color-secondary)]" />
               </p>
-              <h1
-                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-              >
-                Support <span className="text-[var(--color-primary)]">Options</span>
+              <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                Support{" "}
+                <span className="text-[var(--color-primary)]">Options</span>
               </h1>
               {/* thin emerald divider */}
               <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
@@ -501,10 +494,9 @@ ${
                   Transparency & Trust
                   <span className="w-8 h-px bg-[var(--color-secondary)]" />
                 </p>
-                <h1
-                  className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-                >
-                  What You <span className="text-[var(--color-primary)]">Receive</span>
+                <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                  What You{" "}
+                  <span className="text-[var(--color-primary)]">Receive</span>
                 </h1>
               </div>
 
@@ -559,10 +551,7 @@ ${
                     className="flex items-center gap-5 border-l-4 border-[var(--color-primary)] bg-white px-6 py-5 shadow-sm"
                   >
                     <div className="w-10 h-10 flex items-center justify-center border border-[var(--color-primary)]/30 bg-[var(--color-tertiary)]">
-                      <Icon
-                        size={20}
-                        className="text-[var(--color-primary)]"
-                      />
+                      <Icon size={20} className="text-[var(--color-primary)]" />
                     </div>
 
                     <p className="text-gray-700 font-medium text-sm leading-relaxed">
@@ -747,9 +736,28 @@ ${
                     </div>
 
                     {/* BUTTON */}
-                    <button className="w-full bg-[var(--color-primary)] cursor-pointer transition text-white font-semibold py-3 rounded-xl shadow-lg">
-                      Submit Inquiry →
-                    </button>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="w-full"
+                    >
+                      <button
+                        type="submit"
+                        className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                      >
+                        <span className="relative z-10 flex gap-2 items-center">
+                          Submit Inquiry →
+                        </span>
+
+                        <span className="btn-primary-overlay"></span>
+                      </button>
+                    </motion.div>
                   </div>
                 </div>
               </div>
@@ -767,10 +775,9 @@ ${
                   <span className="w-8 h-px bg-[var(--color-primary)]" />
                   Explore More
                 </p>
-                <h2
-                  className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start"
-                >
-                  Know More <span className="text-[var(--color-primary)]">About Us</span>
+                <h2 className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start">
+                  Know More{" "}
+                  <span className="text-[var(--color-primary)]">About Us</span>
                 </h2>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start  lg:max-w-xs">

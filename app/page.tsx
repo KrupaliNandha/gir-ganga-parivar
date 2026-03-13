@@ -262,9 +262,9 @@ const HeroSection = () => {
                   className="flex items-center gap-4 sm:gap-[25px]"
                 >
                   <Link href={slide.cta.href}>
-                    <span className="btn-primary group mt-4 sm:mt-10">
+                    <span className="btn-primary-hero group mt-4 sm:mt-10">
                       <span className="relative z-10">{slide.cta.label}</span>
-                      <span className="btn-primary-overlay"></span>
+                      <span className="btn-primary-hero-overlay"></span>
                     </span>
                   </Link>
 
@@ -344,7 +344,7 @@ const HeroSection = () => {
         {/* ══════════════════════════════
             SECTION 2 — INTRO / MISSION & VISION
         ══════════════════════════════ */}
-        <section className="bg-[var(--color-tertiary)]/50 py-12 sm:py-16 md:py-24 px-4 overflow-hidden">
+        <section className="bg-[var(--color-tertiary)]/50 overflow-hidden">
           <div className="container">
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -591,9 +591,9 @@ const HeroSection = () => {
               className="flex flex-wrap gap-6 justify-center"
             >
               {/* Secondary Button */}
-              <a href="/partner-with-us-csr" className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-base
-    px-10 py-4 bg-[var(--color-secondary)] text-black hover:text-white">
-                <span className="relative z-10">Partner With Us (CSR)</span>
+              <a href="/partner-with-us-csr" className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-sm lg:text-base
+    px-10 py-4 bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-[var(--color-secondary)]">
+                <span className="relative z-10">Partner With Us (CSR) </span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">
                   →
                 </span>
@@ -601,14 +601,14 @@ const HeroSection = () => {
               </a>
 
               {/* Outline Button */}
-              <a href="/support-a-structure" className="btn-outline group">
+              <a href="/support-a-structure" className="btn-primary-outline group text-sm lg:text-base">
                 <span className="relative z-10">Support A Structure</span>
 
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">
                   →
                 </span>
 
-                <span className="btn-outline-overlay"></span>
+                <span className="btn-primary-outline-overlay"></span>
               </a>
             </motion.div>
           </div>

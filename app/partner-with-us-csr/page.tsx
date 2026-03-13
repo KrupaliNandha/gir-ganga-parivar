@@ -13,7 +13,7 @@ import {
 import Slider from "../../Component/Slider";
 import SmoothScroll from "../../Component/SmothScrolling";
 import Link from "next/link";
-
+import { motion } from "framer-motion";
 
 const csrCards = [
   {
@@ -70,10 +70,10 @@ export default function Support() {
                 CSR Partnership
                 <span className="w-8 h-px bg-[var(--color-secondary)]" />
               </p>
-              <h1
-                className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
-              >
-                Girganga <span className="text-[var(--color-primary)]"> Parivar </span> Trust
+              <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                Girganga{" "}
+                <span className="text-[var(--color-primary)]"> Parivar </span>{" "}
+                Trust
               </h1>
               <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
                 Work with us to build sustainable water conservation systems
@@ -417,9 +417,28 @@ export default function Support() {
                     </div>
 
                     {/* BUTTON */}
-                    <button className="w-full bg-[var(--color-primary)] transition text-white cursor-pointer font-semibold py-3 rounded-xl shadow-lg">
-                      Submit Inquiry →
-                    </button>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="w-full"
+                    >
+                      <button
+                        type="submit"
+                        className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+      font-semibold text-base px-10 py-4 cursor-pointer
+      bg-[var(--color-primary)] text-[var(--color-secondary)]
+      hover:text-[var(--color-primary)] overflow-hidden"
+                      >
+                        <span className="relative z-10 flex gap-2 items-center">
+                          Submit Inquiry →
+                        </span>
+
+                        <span className="btn-primary-overlay"></span>
+                      </button>
+                    </motion.div>
                   </div>
                 </div>
               </div>
