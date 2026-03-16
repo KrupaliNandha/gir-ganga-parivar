@@ -1,62 +1,37 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import SmoothScroll from "../../Component/SmothScrolling";
 import Link from "next/link";
+import Image from "next/image";
+import { Variants } from "framer-motion";
 
 /* ─────────────────────────────────────
    Shared animation helpers
 ───────────────────────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 36 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: [0.25, 0.1, 0.25, 1] },
+    transition: {
+      duration: 0.65,
+      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+    },
   },
 };
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.11, delayChildren: 0.06 } },
-};
 
-/* ─────────────────────────────────────
-   Section pill label
-───────────────────────────────────── */
-function SectionPill({
-  label,
-  dark = false,
-}: {
-  label: string;
-  dark?: boolean;
-}) {
-  return (
-    <div
-      className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5 ${
-        dark
-          ? "border border-white/20 bg-white/10"
-          : "border border-[var(--color-primary)]/20 bg-[var(--color-tertiary)]"
-      }`}
-    >
-      <span
-        className="w-2 h-2 rounded-full"
-        style={{
-          background: dark ? "rgba(255,255,255,0.6)" : "var(--color-primary)",
-        }}
-      />
-      <span
-        className={`text-[11px] font-bold uppercase tracking-widest ${
-          dark ? "text-white/70" : "text-[var(--color-primary)]"
-        }`}
-      >
-        {label}
-      </span>
-    </div>
-  );
-}
+const stagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.11,
+      delayChildren: 0.06,
+    },
+  },
+};
 
 /* ─────────────────────────────────────
    Counter
