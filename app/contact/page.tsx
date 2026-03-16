@@ -161,7 +161,7 @@ function ContactForm() {
     setSelected(value);
     setIsOpen(false);
     // sync with your form state:
-    handleChange({ target: { name: "subject", value } } );
+    handleChange({ target: { name: "subject", value } });
   };
 
   const inputClass =
@@ -316,39 +316,52 @@ function ContactForm() {
 
 export default function Contact() {
   return (
-    <div className="min-h-screen py-14 px-4">
-      <div className="max-w-6xl mx-auto bg-[var(--color-tertiary)] rounded-3xl shadow-md border border-[var(--color-tertiary)] p-8 md:p-12">
-        {/* Header */}
+    <>
+    <section>
+      
+    </section>
+      {/* section - 1 */}
+      <div className=" pt-16 pb-6 text-center container">
+        <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+          <span className="w-8 h-px bg-[var(--color-secondary)]" />
+          conact form
+          <span className="w-8 h-px bg-[var(--color-secondary)]" />
+        </p>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+          <span className="text-[var(--color-primary)]">Get In Touch</span>
+        </h1>
+        <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
+          Feel free to contact us. Submit your queries here and we will get back
+          to you soon.
+        </p>
+        {/* thin emerald divider */}
+        <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
+      </div>
 
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-black text-black mb-2">Get In Touch</h1>
+      {/* sECTION - 2 */}
+      <div className="container">
+        <div className="max-w-6xl mx-auto bg-[var(--color-tertiary)] rounded-3xl shadow-md border border-[var(--color-tertiary)] p-8 md:p-12">
+          <ContactCards />
 
-          <p className="text-gray-600 text-sm max-w-md mx-auto">
-            Feel free to contact us. Submit your queries here and we will get
-            back to you soon.
-          </p>
-        </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Map */}
 
-        <ContactCards />
+            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm min-h-[440px]">
+              <iframe
+                src="https://www.google.com/maps?q=GirGanga+Parivar+Trust+Rajkot&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "440px" }}
+                loading="lazy"
+              />
+            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Map */}
+            {/* Form */}
 
-          <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm min-h-[440px]">
-            <iframe
-              src="https://www.google.com/maps?q=GirGanga+Parivar+Trust+Rajkot&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: "440px" }}
-              loading="lazy"
-            />
+            <ContactForm />
           </div>
-
-          {/* Form */}
-
-          <ContactForm />
         </div>
       </div>
-    </div>
+    </>
   );
 }

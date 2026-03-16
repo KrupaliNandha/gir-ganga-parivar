@@ -1,1319 +1,1071 @@
 "use client";
 
 import Image from "next/image";
-import {
-  ArrowRight,
-  Droplets,
-  Users,
-  Sprout,
-  Building2,
-  CheckCircle,
-  Quote,
-  Link,
-  ArrowUpRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import SmoothScroll from "../../Component/SmothScrolling";
+import Link from "next/link";
 
 /* ─────────────────────────────────────
-   Reusable animation variants
+   Shared animation helpers
 ───────────────────────────────────── */
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const slideLeft: Variants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0 },
-};
-
-const slideRight: Variants = {
-  hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0 },
-};
-
-const staggerContainer: Variants = {
-  hidden: {},
+const fadeUp = {
+  hidden: { opacity: 0, y: 36 },
   visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
-
-const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.11, delayChildren: 0.06 } },
 };
 
 /* ─────────────────────────────────────
-   Count-up component
+   Section pill label
+───────────────────────────────────── */
+function SectionPill({
+  label,
+  dark = false,
+}: {
+  label: string;
+  dark?: boolean;
+}) {
+  return (
+    <div
+      className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5 ${
+        dark
+          ? "border border-white/20 bg-white/10"
+          : "border border-[var(--color-primary)]/20 bg-[var(--color-tertiary)]"
+      }`}
+    >
+      <span
+        className="w-2 h-2 rounded-full"
+        style={{
+          background: dark ? "rgba(255,255,255,0.6)" : "var(--color-primary)",
+        }}
+      />
+      <span
+        className={`text-[11px] font-bold uppercase tracking-widest ${
+          dark ? "text-white/70" : "text-[var(--color-primary)]"
+        }`}
+      >
+        {label}
+      </span>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────
+   Counter
 ───────────────────────────────────── */
 function Counter({ value, start }: { value: number; start: boolean }) {
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     if (!start) return;
-    let current = 0;
-    const duration = 2000;
-    const increment = value / (duration / 16);
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= value) {
+    let cur = 0;
+    const inc = value / (2000 / 16);
+    const t = setInterval(() => {
+      cur += inc;
+      if (cur >= value) {
         setCount(value);
-        clearInterval(timer);
-      } else setCount(Math.floor(current));
+        clearInterval(t);
+      } else setCount(Math.floor(cur));
     }, 16);
-    return () => clearInterval(timer);
+    return () => clearInterval(t);
   }, [value, start]);
-
   return <span>{count.toLocaleString("en-IN")}</span>;
 }
 
 /* ─────────────────────────────────────
-   Data
+   DATA
 ───────────────────────────────────── */
-const stats = [
+const timelineItems = [
   {
-    icon: Droplets,
-    value: 8354,
-    suffix: "+",
-    label: "Water Structures Developed",
+    year: "2017",
+    icon: "🐄",
+    title: "Foundation — Gau Seva",
+    desc: "Girganga Parivar Trust formally established with the vision of promoting Gau Seva and Gaushala activities while supporting rural communities through livestock care and grassroots participation.",
   },
   {
-    icon: Sprout,
-    value: 429000,
-    suffix: "+",
-    label: "Acres Farmland Rejuvenated",
+    year: "2019–2020",
+    icon: "💧",
+    title: "Beginning of Water Conservation Mission",
+    desc: (
+      <div className="space-y-3">
+        <p>
+          Recognizing the growing crisis of groundwater depletion and water
+          scarcity in rural Gujarat, the Trust expanded its mission to include
+          community-led water conservation initiatives.
+        </p>
+        <p className="font-semibold">Early work focused on:</p>
+        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+          <li>Cleaning and rejuvenation of check dams</li>
+          <li>Village-level water awareness programs</li>
+          <li>Community mobilisation for watershed restoration</li>
+        </ul>
+
+        <p>
+          This phase laid the foundation for GGPT’s long-term water conservation
+          movement.
+        </p>
+      </div>
+    ),
   },
-  { icon: Users, value: 151000, suffix: "+", label: "Farmers Benefited" },
   {
-    icon: Building2,
-    value: 580,
-    suffix: "+",
-    label: "Gram Panchayats Engaged",
+    year: "2021–2023",
+    icon: "🏞️",
+    title: "Expansion across Saurashtra",
+    desc: (
+      <div className="space-y-3">
+        <p>
+          The water conservation initiative rapidly expanded across several
+          districts in the Saurashtra region. Through collaboration with
+          farmers, gram panchayats, and local volunteers, GGPT facilitated the
+          construction and rejuvenation of thousands of decentralized water
+          harvesting structures including check dams and groundwater recharge
+          systems.
+        </p>
+        <p>
+          During this period, the organization’s work received national
+          recognition.
+        </p>
+        <p>
+          In 2023, GGPT received the Jal Prahari Award, organized in
+          collaboration with the Ministry of Jal Shakti, UNOPS and the National
+          Jal Jeevan Mission, acknowledging its contribution to community-led
+          water conservation.
+        </p>
+      </div>
+    ),
+  },
+  {
+    year: "2024",
+    icon: "🌍",
+    title: "Large-Scale Community Water Movement",
+    desc: (
+      <div className="space-y-3">
+        <p>
+          The water conservation program evolved into one of the region’s most
+          active grassroots environmental movements. Thousands of water
+          harvesting structures were constructed and rejuvenated across multiple
+          districts through strong community participation.
+        </p>
+        <p>
+          During this year, GGPT signed a Memorandum of Understanding (MoU) with
+          the Ministry of Jal Shakti, strengthening collaboration for expanding
+          community-driven water conservation initiatives.
+        </p>
+        <p>
+          In the same year, the organization was honored with the Mayor Award
+          2024 by the Rajkot Municipal Corporation for its contribution to water
+          conservation under the Pani Bachao Abhiyan.
+        </p>
+      </div>
+    ),
+  },
+  {
+    year: "2025",
+    icon: "📊",
+    title: "Major Impact Milestone",
+    desc: (
+      <div className="space-y-3">
+        <p>
+          By 2025, GGPT had facilitated the creation and rejuvenation of
+          thousands of water conservation structures across more than 500
+          villages across Gujarat.
+        </p>
+        <p className="font-semibold">Key highlights of this phase include:</p>
+        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+          <li>Expansion across 7 districts and multiple blocks,</li>
+          <li>
+            Thousands of farmers benefiting from improved groundwater
+            availability,
+          </li>
+          <li>
+            Strengthening agricultural productivity through improved irrigation
+            access,
+          </li>
+          <li>
+            Expansion of operational capacity with additional machinery and
+            equipment for water conservation work, supported by CSR partners.
+          </li>
+        </ul>
+
+        <p>
+          In 2025, Model recognized in Parliamentary proceedings as a scalable
+          grassroots solution under the Public–Private–People (PPP) model.
+        </p>
+        <p>
+          Featured in a national documentary by the Ministry of Jal Shakti for
+          decentralized, eco-friendly, people-powered execution.
+        </p>
+        <p>
+          GGPT also received the Global CSR and ESG Award recognizing its
+          impactful community-driven water conservation initiatives in
+          Saurashtra Region.
+        </p>
+      </div>
+    ),
+  },
+  {
+    year: "2026",
+    icon: "🚀",
+    title: "Scaling Impact & National Recognition",
+    desc: (
+      <div className="space-y-3">
+        <p>
+          The organization continued to grow rapidly with increasing support
+          from CSR partners and public sector institutions.
+        </p>
+        <p className="font-semibold">
+          Major milestones during this period include:
+        </p>
+        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+          <li>
+            Mobilization of 15 additional heavy machines for water conservation
+            activities
+          </li>
+          <li>₹18+ crore social investment mobilized for water initiatives</li>
+          <li>
+            Cumulative achievement crossing 9,000+ water conservation structures
+            across 619 villages, 35 blocks of 8 Districts of Gujarat.
+          </li>
+        </ul>
+
+        <p>
+          GGPT was also recognized as Best NGO – JSJB 1.0 (Second Rank at All
+          India Level) by the Ministry of Jal Shakti.
+        </p>
+        <p>
+          These efforts collectively contribute to an estimated 2.5–2.7 TMC
+          groundwater recharge capacity, significantly supporting rural
+          agriculture and water security.
+        </p>
+      </div>
+    ),
   },
 ];
 
-const compliance = [
-  "CSR-1 Registered",
-  "FCRA (Under Process)",
-  "NGO-DARPAN Registered",
-  "Registered Trust under Indian Trust Act",
-  "Audited Accounts & Annual Reports Available",
+const jalKathaRecords = [
+  "Asia Pacific Book of Records",
+  "Global Book of Records",
+  "IEA Book of World Records",
+  "India Book of Records",
+  "OMG Book of Records",
 ];
 
-const stories = [
-  {
-    quote:
-      "Before Girganga Parivar Trust came to our village, we struggled every year with water shortage. Now, with the check dam and recharge borewells, our wells have water throughout the year. My crop yield has doubled.",
-    name: "Ramesh Patel",
-    role: "Farmer, Morbi District",
-    initials: "RP",
-  },
-  {
-    quote:
-      "The PPP model is revolutionary. Instead of waiting for government projects that might take years, we partnered with Girganga Parivar Trust and completed our water conservation project in just six months.",
-    name: "Meera Ben",
-    role: "Village Sarpanch, Rajkot",
-    initials: "MB",
-  },
-  {
-    quote:
-      "I have worked in this region for over 20 years, and I have never seen such systematic and effective water conservation work. The impact on agricultural productivity has been remarkable.",
-    name: "Dr. Suresh Kumar",
-    role: "Agricultural Extension Officer, Gujarat",
-    initials: "SK",
-  },
-];
-
-const involvement = [
-  {
-    num: "01",
-    title: "Donate",
-    desc: "Support construction or rejuvenation of water conservation structures.",
-    items: [
-      "₹50,000 – One recharge borewell system",
-      "₹1,00,000 – Check dam contribution",
-    ],
-    btn: "Donate Now",
-    href: "/donate",
-  },
-  {
-    num: "02",
-    title: "Volunteer",
-    desc: "Join field activities, awareness campaigns, or professional volunteering.",
-    items: ["Field work and construction", "Professional expertise"],
-    btn: "Join Us",
-    href: "/team",
-  },
-  {
-    num: "03",
-    title: "Partnership",
-    desc: "Corporates, institutions, and government agencies welcome for Corporate Partnership.",
-    items: [
-      "Equipment and machinery",
-      "Funding for projects",
-      "Employee engagement",
-    ],
-    btn: "Partner With Us",
-    href: "/partner-with-us-csr",
-  },
-];
-
-/* ─────────────────────────────────────
-   Page
-───────────────────────────────────── */
+/* ═══════════════════════════════════════
+   MAIN COMPONENT
+═══════════════════════════════════════ */
 export default function AboutPage() {
-  const statsRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement | null>(null);
+  const storyRef = useRef<HTMLDivElement | null>(null);
+
   const [statsVisible, setStatsVisible] = useState(false);
-  const statsInView = useInView(statsRef, { once: true, amount: 0.2 });
+  const [storyVisible, setStoryVisible] = useState(false);
+
+  const statsInView = useInView(statsRef, { once: true });
+  const storyInView = useInView(storyRef, { once: true });
 
   useEffect(() => {
     if (statsInView) setStatsVisible(true);
   }, [statsInView]);
 
-  /* ─────────────────────────────────────
-   Animation Variants
-───────────────────────────────────── */
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 32 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
-
-  const fadeIn: Variants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.9, ease: "easeOut" } },
-  };
-
-  const stagger: Variants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
-  };
-
-  const slideUp: Variants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
-    },
-  };
-
-  function SectionPill({
-    label,
-    dark = false,
-  }: {
-    label: string;
-    dark?: boolean;
-  }) {
-    return (
-      <motion.div
-        variants={slideUp}
-        className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 ${
-          dark
-            ? "border border-white/20 bg-white/10"
-            : "border border-[var(--color-primary)]/20 bg-[var(--color-tertiary)]"
-        }`}
-      >
-        <span
-          className="w-2 h-2 rounded-full"
-          style={{
-            background: dark ? "rgba(255,255,255,0.6)" : "var(--color-primary)",
-          }}
-        />
-        <span
-          className={`text-[11px] font-semibold uppercase tracking-widest ${
-            dark ? "text-white/70" : "text-[var(--color-primary)]"
-          }`}
-        >
-          {label}
-        </span>
-      </motion.div>
-    );
-  }
+  useEffect(() => {
+    if (storyInView) setStoryVisible(true);
+  }, [storyInView]);
 
   return (
-    <div className="bg-white text-gray-800">
-      {/* ══════════════════════════════
-          1. HERO
-      ══════════════════════════════ */}
-      <section className=" container flex flex-col">
-        {/* Top announcement bar */}
-
-        {/* Hero content */}
-        <div className="flex-1 max-w-7xl mx-auto grid lg:grid-cols-[1fr_480px] gap-12 items-center">
-          {/* Left */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            <motion.p
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="text-xs uppercase tracking-[0.25em] text-[var(--color-primary)] mb-4 text-center lg:text-start"
-            >
-              About Girganga Parivar Trust
-            </motion.p>
-
-            <motion.h1
-              variants={fadeUp}
-              transition={{ duration: 0.6 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-center lg:text-start"
-            >
-              Conserving{" "}
-              <span className="text-[var(--color-primary)]">Water,</span>
-              <br />
-              Reviving Gujarat's Future
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              transition={{ duration: 0.6 }}
-              className="text-gray-500 text-sm leading-relaxed max-w-lg mb-8 text-center lg:text-start"
-            >
-              Girganga Parivar Trust is a dedicated organization committed to
-              revitalizing India's water infrastructure, with a primary focus on
-              Saurashtra, Gujarat — through the strategic repair, deepening, and
-              raising of check dams.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap gap-6 justify-center lg:justify-start"
-            >
-              {/* Secondary Button */}
-              <a
-                href="/donation"
-                className="btn-primary groupinline-flex items-center gap-2 font-semibold text-base
-  px-10 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)] flex"
-              >
-                <span className="relative z-10"> Support Us</span>
-
-                <span className="relative z-10 flex">
-                  <ArrowRight size={16} />
+    <SmoothScroll>
+      <div className="bg-white text-gray-800">
+        {/* ══════════════════════════════════════════
+            1. HERO
+        ══════════════════════════════════════════ */}
+        <section className="container">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_480px] gap-12 items-center">
+            {/* LEFT */}
+            <motion.div initial="hidden" animate="visible" variants={stagger}>
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                  About Girganga Parivar Trust
                 </span>
-                <span className="btn-primary-overlay"></span>
-              </a>
-            </motion.div>
-
-            {/* Founder card */}
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              whileHover={{
-                scale: 1.03,
-                boxShadow: "0 12px 32px rgba(0,0,0,0.10)",
-              }}
-              className="flex items-center justify-self-center lg:justify-self-start gap-4 mt-10 p-4 border border-gray-100 rounded-2xl max-w-sm cursor-default"
-            >
-              <motion.div
-                whileHover={{
-                  rotate: [0, -8, 8, 0],
-                  transition: { duration: 0.4 },
-                }}
-                className="w-12 h-12 rounded-xl bg-[var(--color-primary)]  text-white flex items-center justify-center font-bold text-sm shrink-0"
-              >
-                DS
-              </motion.div>
-              <div className="">
-                <p className="font-semibold text-sm">Shri Dilip Sakhiya</p>
-                <p className="text-xs text-gray-400">
-                  Founder · Girganga Parivar Trust
-                </p>
-                <span className="text-xs text-[var(--color-primary)] font-semibold">
-                  "Waterman of India" 💧
-                </span>
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
               </div>
-            </motion.div>
-          </motion.div>
 
-          {/* Right — image collage */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={stagger}
-            className="w-full"
-          >
-            {/* ── MOBILE / TABLET: simple 2-col grid ── */}
-            <div className="grid grid-cols-2 gap-3 lg:hidden">
-              <motion.div
-                variants={fadeIn}
-                className="relative h-44 rounded-2xl overflow-hidden shadow-lg col-span-2"
-              >
-                <Image
-                  src="/image/home/Slide1.png"
-                  alt="Water conservation"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                {/* Badge inside main image */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8, duration: 0.4 }}
-                  className="absolute bottom-3 left-3 bg-white rounded-xl shadow-md px-3 py-2"
+              <motion.h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5 text-center lg:text-start">
+                Conserving{" "}
+                <span className="text-[var(--color-primary)]">Water,</span>
+                <br />
+                Reviving Gujarat&#39;s Future
+              </motion.h1>
+
+              <motion.p className="text-gray-500 text-sm leading-relaxed max-w-3xl mb-3 text-center lg:text-start">
+                Girganga Parivar Trust (GGPT) is a non-profit organization
+                committed to strengthening rural water security through
+                community-led water conservation and groundwater recharge
+                initiatives. Working primarily in drought-prone regions of
+                Gujarat, the Trust focuses on building decentralized water
+                harvesting structures such as check dams, recharge bore wells,
+                and other watershed interventions that help capture monsoon
+                runoff and restore underground aquifers.
+              </motion.p>
+
+              <motion.p className="text-gray-500 text-sm leading-relaxed max-w-3xl mb-8 text-center lg:text-start">
+                Since its inception, GGPT has worked closely with local
+                communities, farmers, and institutions to address the growing
+                challenges of groundwater depletion, erratic rainfall, and
+                climate variability. Through participatory planning and
+                sustainable watershed development, the organization aims to
+                enhance water availability for agriculture, improve rural
+                livelihoods, and build long-term resilience in vulnerable
+                regions.
+              </motion.p>
+
+              <motion.p className="text-gray-500 text-sm leading-relaxed max-w-3xl mb-8 text-center lg:text-start">
+                Over the years, GGPT has implemented thousands of water
+                conservation structures across multiple districts, contributing
+                significantly to groundwater recharge and improved water access
+                for rural communities. The Trust’s approach combines traditional
+                knowledge, community participation, and practical engineering
+                solutions to create scalable and sustainable models for water
+                security.
+              </motion.p>
+
+              <motion.p className="text-gray-500 text-sm leading-relaxed max-w-3xl mb-8 text-center lg:text-start">
+                Guided by a vision of a water-secure and climate-resilient rural
+                India, GGPT continues to expand its efforts to support villages
+                in restoring their natural water systems and strengthening the
+                foundation for sustainable development.
+              </motion.p>
+
+              <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <Link
+                  href="/donate"
+                  className="btn-primary group inline-flex items-center gap-2 font-semibold text-base px-9 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)]"
                 >
-                  <p
-                    className="text-[10px] font-bold"
-                    style={{ color: "var(--color-primary)" }}
-                  >
+                  <span className="relative z-10">Support Us</span>
+                  <ArrowRight
+                    size={16}
+                    className="relative z-10 group-hover:translate-x-1 transition-transform"
+                  />
+                  <span className="btn-primary-overlay" />
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* RIGHT — image collage */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+              className="w-full"
+            >
+              {/* Mobile */}
+              <div className="grid grid-cols-2 gap-3 lg:hidden">
+                <motion.div className="relative h-44 rounded-2xl overflow-hidden shadow-lg col-span-2">
+                  <Image
+                    src="/image/home/Slide1.png"
+                    alt="Water conservation"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute bottom-3 left-3 bg-white rounded-xl shadow px-3 py-2">
+                    <p className="text-[10px] font-bold text-[var(--color-primary)]">
+                      🌊 Gujarat · Saurashtra
+                    </p>
+                  </div>
+                </motion.div>
+                <motion.div className="relative h-50 rounded-2xl overflow-hidden shadow-md">
+                  <Image
+                    src="/image/home/Slide2.png"
+                    alt="Check dam"
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+                <motion.div className="relative h-50 rounded-2xl overflow-hidden shadow-md">
+                  <Image
+                    src="/image/home/Slide3.png"
+                    alt="Farmers"
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+              </div>
+
+              {/* Desktop collage */}
+              <div className="relative h-[620px] hidden lg:block">
+                <motion.div className="absolute right-0 top-0 w-[75%] h-[55%] rounded-3xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/image/home/Slide2.png"
+                    alt="Check dam"
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+                <motion.div className="absolute left-0 bottom-0 w-[72%] h-[62%] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/image/home/Slide1.png"
+                    alt="Water conservation"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                </motion.div>
+                <motion.div
+                  transition={{ delay: 0.3 }}
+                  className="absolute right-2 bottom-[18%] w-[32%] h-[28%] rounded-2xl overflow-hidden shadow-xl border-2 border-white"
+                >
+                  <Image
+                    src="/image/home/Slide3.png"
+                    alt="Farmers"
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ delay: 1.1, duration: 0.5 }}
+                  className="absolute top-[38%] left-[16%] bg-white rounded-2xl shadow-xl px-4 py-3 z-10 border border-gray-100"
+                >
+                  <p className="text-xs font-bold text-[var(--color-primary)]">
                     🌊 Gujarat · Saurashtra
                   </p>
+                  <p className="text-[10px] text-gray-400 mt-0.5">Est. 2017</p>
                 </motion.div>
-              </motion.div>
-
-              <motion.div
-                variants={slideUp}
-                className="relative h-36 rounded-2xl overflow-hidden shadow-md"
-              >
-                <Image
-                  src="/image/home/Slide2.png"
-                  alt="Check dam"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent" />
-              </motion.div>
-
-              <motion.div
-                variants={slideUp}
-                transition={{ delay: 0.15 }}
-                className="relative h-36 rounded-2xl overflow-hidden shadow-md"
-              >
-                <Image
-                  src="/image/home/Slide3.png"
-                  alt="Farmers"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-            </div>
-
-            {/* ── DESKTOP: absolute collage ── */}
-            <div className="relative h-[520px] hidden lg:block">
-              {/* Back image — top right */}
-              <motion.div
-                variants={fadeIn}
-                className="absolute right-0 top-0 w-[68%] h-[55%] rounded-3xl overflow-hidden shadow-xl"
-              >
-                <Image
-                  src="/image/home/Slide2.png"
-                  alt="Check dam"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent" />
-              </motion.div>
-
-              {/* Front image — bottom left */}
-              <motion.div
-                variants={slideUp}
-                className="absolute left-0 bottom-0 w-[72%] h-[62%] rounded-3xl overflow-hidden shadow-2xl"
-              >
-                <Image
-                  src="/image/home/Slide1.png"
-                  alt="Water conservation"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </motion.div>
-
-              {/* Third image — small overlap */}
-              <motion.div
-                variants={fadeIn}
-                transition={{ delay: 0.3 }}
-                className="absolute right-2 bottom-[18%] w-[32%] h-[28%] rounded-2xl overflow-hidden shadow-xl border-2 border-white"
-              >
-                <Image
-                  src="/image/home/Slide3.png"
-                  alt="Farmers"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-
-              {/* Floating badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 12, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 1.1, duration: 0.5 }}
-                className="absolute top-[38%] left-[16%] bg-white rounded-2xl shadow-xl px-4 py-3 z-10 border border-gray-100"
-              >
-                <p
-                  className="text-xs font-bold"
-                  style={{ color: "var(--color-primary)" }}
-                >
-                  🌊 Gujarat · Saurashtra
-                </p>
-                <p className="text-[10px] text-gray-400 mt-0.5">
-                  Since Inception
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════
-          2. WHO WE ARE + OUR JOURNEY
-      ══════════════════════════════ */}
-      <section
-        id="story"
-        className="container"
-        style={{ background: "var(--color-tertiary)" }}
-      >
-        <div className="max-w-7xl mx-auto">
-          {/* Section header */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={stagger}
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 "
-          ></motion.div>
-
-          {/* 3-card grid */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={stagger}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {/* Card 1 — Who We Are */}
-            <motion.div
-              variants={slideUp}
-              whileHover={{
-                y: -8,
-                boxShadow: "0 24px 48px rgba(0,157,196,0.12)",
-                transition: { type: "spring", stiffness: 280 },
-              }}
-              className="bg-white rounded-3xl p-8 flex flex-col gap-5 border border-transparent hover:border-[var(--color-primary)]/15 cursor-default transition-colors group"
-            >
-              {/* Icon */}
-              <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0"
-                style={{ background: "var(--color-tertiary)" }}
-              >
-                🌊
-              </div>
-
-              {/* Top rule */}
-              <div
-                className="w-10 h-1 rounded-full"
-                style={{ background: "var(--color-primary)" }}
-              />
-
-              <div>
-                <h3 className="font-bold text-lg mb-3">Who We Are</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Girganga Parivar Trust is a not-for-profit organization
-                  working for sustainable water security in Gujarat, especially
-                  the drought-prone Saurashtra region.
-                </p>
-                <p className="text-gray-500 text-sm leading-relaxed mt-3">
-                  The Trust believes water conservation is not just
-                  infrastructure creation, but a{" "}
-                  <span
-                    className="font-semibold"
-                    style={{ color: "var(--color-primary)" }}
-                  >
-                    people-centric movement.
-                  </span>
-                </p>
-              </div>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mt-auto pt-2">
-                {["Non-Profit", "Gujarat", "Since Inception"].map((t) => (
-                  <span
-                    key={t}
-                    className="text-[11px] font-medium px-3 py-1 rounded-full"
-                    style={{
-                      background: "var(--color-tertiary)",
-                      color: "var(--color-primary)",
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
               </div>
             </motion.div>
+          </div>
+        </section>
 
-            {/* Card 2 — Our Journey */}
-            <motion.div
-              variants={slideUp}
-              whileHover={{
-                y: -8,
-                boxShadow: "0 24px 48px rgba(0,157,196,0.12)",
-                transition: { type: "spring", stiffness: 280 },
-              }}
-              className="bg-white rounded-3xl p-8 flex flex-col gap-5 border border-transparent hover:border-[var(--color-primary)]/15 cursor-default transition-colors group"
-            >
-              {/* Icon */}
-              <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0"
-                style={{ background: "var(--color-tertiary)" }}
-              >
-                🗺️
-              </div>
-
-              {/* Top rule */}
-              <div
-                className="w-10 h-1 rounded-full"
-                style={{ background: "var(--color-secondary)" }}
-              />
-
-              <div>
-                <h3 className="font-bold text-lg mb-3">Our Journey</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Founded under the leadership of Shri Dilip Sakhiya — popularly
-                  known as the{" "}
-                  <span className="font-semibold text-gray-700">
-                    "Waterman of Gujarat"
-                  </span>{" "}
-                  — GGPT has evolved into one of India's largest grassroots
-                  water conservation movements.
-                </p>
-              </div>
-
-              {/* Milestone strip */}
-              <div className="mt-auto pt-4 border-t border-gray-100 flex items-center gap-3">
-                <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xs font-bold shrink-0"
-                  style={{ background: "var(--color-primary)" }}
-                >
-                  DS
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-gray-800">
-                    Shri Dilip Sakhiya
-                  </p>
-                  <p className="text-[11px] text-gray-400">
-                    Founder · Waterman of Gujarat
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Card 3 — Quote (primary bg) */}
-            <motion.div
-              variants={slideUp}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                boxShadow: "0 32px 64px rgba(0,157,196,0.30)",
-                transition: { type: "spring", stiffness: 280 },
-              }}
-              className="rounded-3xl p-8 flex flex-col justify-between cursor-default relative overflow-hidden md:col-span-2 lg:col-span-1"
-              style={{ background: "var(--color-primary)" }}
-            >
-              {/* Decorative circles */}
-              <div
-                className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-10"
-                style={{ background: "var(--color-secondary)" }}
-              />
-              <div
-                className="absolute -bottom-10 -left-10 w-36 h-36 rounded-full opacity-10"
-                style={{ background: "var(--color-secondary)" }}
-              />
-
-              {/* Quote mark */}
-              <div className="text-7xl leading-none font-serif text-white opacity-20 mb-2 select-none">
-                "
-              </div>
-
-              <p className="text-white font-semibold text-xl leading-relaxed relative z-10 flex-1">
-                Water conservation is not a project, it is a responsibility.
-              </p>
-
-              {/* Author */}
-              <div className="mt-8 pt-5 border-t border-white/20 flex items-center gap-3 relative z-10">
-                <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-white text-sm font-bold shrink-0">
-                  DS
-                </div>
-                <div>
-                  <p className="text-white font-semibold text-sm">
-                    Shri Dilip Sakhiya
-                  </p>
-                  <p className="text-white/50 text-xs">Founder, GGPT</p>
-                </div>
-                {/* Yellow accent dot */}
-                <div
-                  className="ml-auto w-3 h-3 rounded-full"
-                  style={{ background: "var(--color-secondary)" }}
-                />
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════
-          3. LEGAL & COMPLIANCE
-      ══════════════════════════════ */}
-      <section className="container justify-self-center">
-        <div>
-          <p
-            className="text-[var(--color-secondary)]
- text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
-          >
-            <span
-              className="w-8 h-px bg-[var(--color-secondary)]
-"
-            />
-            Legal &amp; Compliance
-            <span
-              className="w-8 h-px bg-[var(--color-secondary)]
-"
-            />
-          </p>
-        </div>
-        <motion.div
-          className="max-w-7xl py-5 grid lg:grid-cols-2 gap-14 items-center justify-self-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={staggerContainer}
-        >
-          <motion.div
-            variants={slideLeft}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <p className="text-xs uppercase tracking-[0.25em] text-[var(--color-primary)] mb-3">
-              Transparency
-            </p>
-            <h2 className="text-4xl font-bold mb-4">Legal &amp; Compliance</h2>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-lg">
-              Girganga Parivar Trust maintains complete transparency and
-              operates in full compliance with statutory and regulatory
-              requirements under Indian law.
-            </p>
-          </motion.div>
-
-          <motion.div className="space-y-3" variants={staggerContainer}>
-            {compliance.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={staggerItem}
-                whileHover={{
-                  x: 10,
-                  backgroundColor: "var(--color-tertiary)",
-                  borderColor: "var(--color-primary)",
-                  boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
-                  transition: { type: "spring", stiffness: 300 },
-                }}
-                className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 cursor-default"
-              >
+        {/* ══════════════════════════════════════════
+            2. OUR ORIGIN
+        ══════════════════════════════════════════ */}
+        <section className="bg-[var(--color-tertiary)]/50 overflow-hidden">
+          <div className="container">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                {/* LEFT — circular image */}
                 <motion.div
-                  whileHover={{
-                    scale: 1.35,
-                    rotate: 360,
-                    transition: { duration: 0.45 },
-                  }}
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="relative flex items-center justify-center mx-auto w-full max-w-[420px] lg:max-w-none"
+                  style={{ minHeight: 320 }}
                 >
-                  <CheckCircle
-                    size={18}
-                    className="text-[var(--color-primary)] shrink-0"
-                    strokeWidth={2}
-                  />
-                </motion.div>
-                <span className="text-sm font-medium text-gray-700">
-                  {item}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
+                  {/* outer dashed ring */}
+                  <div className="absolute w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border-2 border-dashed border-emerald-200 animate-[spin_30s_linear_infinite]" />
+                  {/* inner ring */}
+                  <div className="absolute w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] rounded-full border border-emerald-100" />
 
-      {/* ══════════════════════════════
-          4. IMPACT STATS
-      ══════════════════════════════ */}
-      <section ref={statsRef} className="container relative overflow-hidden">
-        <div className="max-w-7xl relative justify-self-center">
-          <motion.div
-            className="text-center mb-14"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-          >
-            <p
-              className="text-[var(--color-secondary)]
- text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
-            >
-              <span
-                className="w-8 h-px bg-[var(--color-secondary)]
-"
-              />
-              Our Impact
-              <span
-                className="w-8 h-px bg-[var(--color-secondary)]
-"
-              />
-            </p>
-            <h2 className="text-4xl font-bold">
-              Changing Lives{" "}
-              <span className="text-[var(--color-primary)]">Through Water</span>
-            </h2>
-            <p className="text-gray-500 text-sm mt-3 max-w-lg mx-auto">
-              Measurable transformation across Gujarat, India
-            </p>
-          </motion.div>
+                  {/* main circle image */}
+                  <div className="relative w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden shadow-2xl shadow-emerald-900/20 border-4 border-white z-10">
+                    <img
+                      src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80"
+                      alt="Water conservation work"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
-          <motion.div
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                variants={staggerItem}
-                whileHover="cardHover"
-                initial="cardRest"
-                animate="cardRest"
-              >
-                <motion.div
-                  variants={{
-                    cardRest: {
-                      y: 0,
-                      scale: 1,
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-                    },
-                    cardHover: {
-                      y: -12,
-                      scale: 1.03,
-                      boxShadow: "0 28px 56px rgba(0,0,0,0.14)",
-                      transition: {
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 18,
-                      },
-                    },
-                  }}
-                  className="group relative bg-white rounded-2xl p-7 border border-transparent hover:border-[var(--color-primary)]/40 cursor-default"
-                >
+                  {/* Stat badge — top right */}
                   <motion.div
-                    variants={{
-                      cardRest: {
-                        backgroundColor: "var(--color-tertiary)",
-                        rotate: 0,
-                      },
-                      cardHover: {
-                        backgroundColor: "var(--color-primary)",
-                        rotate: 8,
-                        transition: { duration: 0.3 },
-                      },
-                    }}
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
+                    className="absolute top-2 right-2 sm:top-6 sm:right-4 md:top-8 md:right-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-primary)] text-white flex flex-col items-center justify-center shadow-xl shadow-emerald-600/30"
                   >
-                    <motion.div
-                      variants={{
-                        cardRest: { color: "var(--color-primary)" },
-                        cardHover: { color: "#ffffff" },
-                      }}
-                    >
-                      <stat.icon size={22} />
-                    </motion.div>
+                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
+                      90%
+                    </span>
+                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
+                      Water
+                      <br />
+                      Restored
+                    </span>
                   </motion.div>
 
-                  <h3 className="text-3xl font-bold">
-                    <Counter value={stat.value} start={statsVisible} />
-                    {stat.suffix}
-                  </h3>
-                  <p className="text-gray-500 text-sm mt-2">{stat.label}</p>
-
+                  {/* Stat badge — bottom left */}
                   <motion.div
-                    variants={{
-                      cardRest: { opacity: 0 },
-                      cardHover: { opacity: 1, transition: { duration: 0.3 } },
-                    }}
-                    className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--color-primary)]/8 to-transparent pointer-events-none"
-                  />
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════
-          5. STORY / MOVEMENT
-      ══════════════════════════════ */}
-      <section className="containers py-28">
-        <motion.div
-          className="grid lg:grid-cols-2 gap-14 items-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={staggerContainer}
-        >
-          {/* Story image */}
-          <motion.div
-            variants={slideLeft}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            whileHover="imgHover"
-            initial="imgRest"
-            animate="imgRest"
-            className="relative rounded-3xl overflow-hidden h-[440px] cursor-pointer"
-          >
-            <motion.div
-              variants={{
-                imgRest: { scale: 1 },
-                imgHover: {
-                  scale: 1.06,
-                  transition: { duration: 0.6, ease: "easeOut" },
-                },
-              }}
-              className="w-full h-full"
-            >
-              <Image
-                src="/image/home/Slide4.png"
-                alt="Water conservation story"
-                width={900}
-                height={600}
-                className="object-cover w-full h-full"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={{
-                imgRest: { opacity: 1 },
-                imgHover: { opacity: 0.8, transition: { duration: 0.4 } },
-              }}
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-            />
-
-            {/* Text slides up on hover */}
-            <motion.div
-              variants={{
-                imgRest: { y: 0 },
-                imgHover: {
-                  y: -8,
-                  transition: { duration: 0.4, ease: "easeOut" },
-                },
-              }}
-              className="absolute bottom-8 left-8 text-white max-w-sm"
-            >
-              <p className="text-xs tracking-[0.2em] uppercase text-[var(--color-secondary)] mb-2">
-                Our Story
-              </p>
-              <h3 className="text-2xl font-semibold leading-snug mb-2">
-                Reviving Water Scarce Villages
-              </h3>
-              <p className="text-sm text-gray-200">
-                Repairing and deepening check dams across Saurashtra has helped
-                thousands of villages revive groundwater and agriculture.
-              </p>
-            </motion.div>
-
-            {/* Ring border on hover */}
-            <motion.div
-              variants={{
-                imgRest: { opacity: 0 },
-                imgHover: { opacity: 1, transition: { duration: 0.3 } },
-              }}
-              className="absolute inset-0 rounded-3xl ring-2 ring-[var(--color-primary)]/60 pointer-events-none"
-            />
-          </motion.div>
-
-          {/* Timeline */}
-          <motion.div className="space-y-8" variants={staggerContainer}>
-            <motion.div variants={staggerItem}>
-              <p className="text-xs uppercase tracking-[0.25em] text-[var(--color-primary)] mb-4">
-                How We Work
-              </p>
-              <h2 className="text-4xl font-bold leading-tight">
-                A Movement Built
-                <br />
-                on Three Pillars
-              </h2>
-            </motion.div>
-
-            {[
-              {
-                n: "01",
-                title: "Public-Private-People Model",
-                desc: "Collaboration between communities, donors, and government enables faster water conservation development across the region.",
-              },
-              {
-                n: "02",
-                title: "Community Participation",
-                desc: "Villagers actively participate in rebuilding check dams and restoring water bodies for long-term sustainability.",
-              },
-              {
-                n: "03",
-                title: "Sustainable Impact",
-                desc: "The movement improves groundwater levels, agricultural productivity, and livelihoods across Gujarat.",
-              },
-            ].map((item) => (
-              <motion.div
-                key={item.n}
-                variants={staggerItem}
-                whileHover={{
-                  x: 6,
-                  transition: { type: "spring", stiffness: 300 },
-                }}
-                className="flex gap-5 items-start cursor-default"
-              >
-                <motion.div
-                  whileHover={{
-                    scale: 1.18,
-                    rotate: 10,
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
-                    transition: { type: "spring", stiffness: 300 },
-                  }}
-                  className="w-10 h-10 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white font-bold text-xs shrink-0"
-                >
-                  {item.n}
-                </motion.div>
-                <div>
-                  <h4 className="font-semibold mb-1">{item.title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* ══════════════════════════════
-          6. YOUR CONTRIBUTION IS IMPORTANT
-      ══════════════════════════════ */}
-      <section className="bg-[var(--color-tertiary)] py-0 overflow-hidden">
-        <motion.div
-          className="containers grid lg:grid-cols-2 gap-0 items-stretch"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={staggerContainer}
-        >
-          {/* Image with zoom */}
-          <motion.div
-            variants={slideLeft}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            whileHover="imgHover"
-            initial="imgRest"
-            animate="imgRest"
-            className="relative min-h-[340px] rounded-l-3xl overflow-hidden hidden lg:block cursor-pointer"
-          >
-            <motion.div
-              variants={{
-                imgRest: { scale: 1 },
-                imgHover: {
-                  scale: 1.07,
-                  transition: { duration: 0.6, ease: "easeOut" },
-                },
-              }}
-              className="absolute inset-0"
-            >
-              <Image
-                src="/image/home/Slide1.png"
-                alt="Your contribution matters"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-            <motion.div
-              variants={{
-                imgRest: { opacity: 1 },
-                imgHover: { opacity: 0.6, transition: { duration: 0.4 } },
-              }}
-              className="absolute inset-0 bg-gradient-to-r from-transparent to-[var(--color-tertiary)]/20"
-            />
-          </motion.div>
-
-          {/* Text panel */}
-          <motion.div
-            variants={slideRight}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="bg-[var(--color-primary)] rounded-3xl lg:rounded-l-none p-12 flex flex-col justify-center"
-          >
-            <p className="text-white/60 text-xs uppercase tracking-[0.25em] mb-4">
-              Make a Difference
-            </p>
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white leading-snug mb-5">
-              Your Contribution
-              <br />
-              Is Important
-            </h2>
-            <p className="text-white/75 text-sm leading-relaxed mb-8">
-              Every rupee you donate directly supports the vital work of
-              repairing and enhancing check dams across Saurashtra, ensuring a
-              more water-secure future for our communities in Gujarat.
-            </p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap gap-6 "
-            >
-              {/* Secondary Button */}
-              <a
-                href="/donate"
-                className="btn-secondary-outline groupinline-flex items-center gap-2  font-semibold text-base
-            px-10 py-4 bg-[var(--color-primary)]"
-              >
-                <span className="relative z-10 ">Know More</span>
-                <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-                <span className="btn-secondary-outline-overlay"></span>
-              </a>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* ══════════════════════════════
-          7. SUCCESS STORIES
-      ══════════════════════════════ */}
-      <section className="containers py-24">
-        <motion.div
-          className="text-center mb-14"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-xs uppercase tracking-[0.25em] text-[var(--color-primary)] mb-3">
-            Testimonials
-          </p>
-          <h2 className="text-4xl font-bold">Success Stories</h2>
-          <p className="text-gray-400 text-sm mt-3 max-w-lg mx-auto">
-            Real voices from communities transformed through water conservation
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="grid lg:grid-cols-3 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={staggerContainer}
-        >
-          {stories.map((s, i) => (
-            <motion.div
-              key={i}
-              variants={staggerItem}
-              whileHover={{
-                y: -12,
-                scale: 1.02,
-                transition: { type: "spring", stiffness: 260, damping: 18 },
-              }}
-              className="group rounded-2xl p-8 border border-gray-100 flex flex-col gap-5 cursor-default bg-white hover:bg-[var(--color-primary)] hover:border-transparent transition-all duration-300"
-            >
-              {/* Quote icon */}
-              <div className="w-fit">
-                <Quote
-                  size={28}
-                  className="text-[var(--color-primary)]/30 group-hover:text-white/40 transition"
-                />
-              </div>
-
-              {/* Quote text */}
-              <p className="text-sm leading-relaxed flex-1 text-gray-500 group-hover:text-white/90 transition">
-                {s.quote}
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-4 border-t border-gray-100 group-hover:border-white/20 transition">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 bg-[var(--color-tertiary)] text-[var(--color-primary)] group-hover:bg-white/20 group-hover:text-white transition">
-                  {s.initials}
-                </div>
-
-                <div>
-                  <p className="font-semibold text-sm text-gray-800 group-hover:text-white transition">
-                    {s.name}
-                  </p>
-                  <p className="text-xs mt-0.5 text-gray-400 group-hover:text-white/60 transition">
-                    {s.role}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* ══════════════════════════════
-          8. TRUST VOLUNTEERS / GET INVOLVED
-      ══════════════════════════════ */}
-      <section className="bg-[var(--color-tertiary)] py-24">
-        <div className="containers">
-          <motion.div
-            className="text-center mb-14"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs uppercase tracking-[0.25em] text-[var(--color-primary)] mb-3">
-              Get Involved
-            </p>
-            <h2 className="text-4xl font-bold">Trust Volunteers</h2>
-            <p className="text-gray-500 text-sm mt-3 max-w-xl mx-auto">
-              We are deeply grateful for our passionate volunteers across
-              Gujarat. Their dedication helps build a water-secure Saurashtra.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid lg:grid-cols-3 gap-6"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={staggerContainer}
-          >
-            {involvement.map((card) => (
-              <motion.div
-                key={card.num}
-                variants={staggerItem}
-                whileHover="cardHover"
-                initial="cardRest"
-                animate="cardRest"
-              >
-                <motion.div
-                  variants={{
-                    cardRest: {
-                      y: 0,
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-                      borderColor: "rgb(243 244 246)",
-                    },
-                    cardHover: {
-                      y: -12,
-                      boxShadow: "0 28px 56px rgba(0,0,0,0.13)",
-                      borderColor: "var(--color-primary)",
-                      transition: {
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 18,
-                      },
-                    },
-                  }}
-                  className="bg-white rounded-2xl p-8 border flex flex-col h-full cursor-default"
-                >
-                  <motion.p
-                    variants={{
-                      cardRest: { color: "var(--color-tertiary)" },
-                      cardHover: {
-                        color: "var(--color-primary)",
-                        transition: { duration: 0.25 },
-                      },
-                    }}
-                    className="text-5xl font-black leading-none mb-4 select-none"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.55, type: "spring" }}
+                    className="absolute bottom-2 left-2 sm:bottom-6 sm:left-4 md:bottom-8 md:left-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] flex flex-col items-center justify-center shadow-xl shadow-yellow-500/30"
                   >
-                    {card.num}
-                  </motion.p>
+                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
+                      580+
+                    </span>
+                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
+                      Villages
+                      <br />
+                      Covered
+                    </span>
+                  </motion.div>
+                </motion.div>
 
-                  <h3 className="font-bold text-xl mb-3">{card.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-5">
-                    {card.desc}
+                {/* RIGHT — content */}
+                <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="space-y-5 sm:space-y-6 text-center lg:text-start"
+                >
+                  {/* Heading */}
+                  <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                    Mission &amp; Vision <br />
+                    <span className="text-[var(--color-primary)]">
+                      For Gujarat
+                    </span>
+                  </h2>
+
+                  <div className="w-full h-px bg-gray-100" />
+
+                  {/* Mission + Vision cards */}
+                  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="bg-emerald-50 rounded-2xl p-4 sm:p-5 border border-emerald-100">
+                      <div className="w-10 h-10 bg-[var(--color-primary)] rounded-lg flex items-center justify-center text-white font-playfair font-bold text-lg mb-3">
+                        M
+                      </div>
+                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
+                        Our Mission
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        To strengthen rural water security through community-led
+                        water conservation, groundwater recharge, and watershed
+                        development initiatives that enhance agricultural
+                        productivity, support rural livelihoods, and build
+                        resilience to climate variability.
+                      </p>
+                    </div>
+                    <div className="bg-yellow-50 rounded-2xl p-4 sm:p-5 border border-yellow-100">
+                      <div className="w-10 h-10 bg-[var(--color-secondary)] rounded-lg flex items-center justify-center text-[var(--color-primary)] font-playfair font-bold text-lg mb-3">
+                        V
+                      </div>
+                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
+                        Our Vision
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        A water-secure and climate-resilient rural India where
+                        communities sustainably manage and protect their natural
+                        water resources, ensuring long-term agricultural
+                        prosperity, ecological balance, and improved quality of
+                        life for future generations.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════
+            3. OUR ORIGIN
+        ══════════════════════════════════════════ */}
+        <section className="bg-[var(--color-tertiary)]">
+          <div className="container">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                variants={stagger}
+                className="grid lg:grid-cols-2 gap-12 items-center"
+              >
+                <motion.div>
+                  <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
+                    <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                    <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                      Our Origin
+                    </span>
+                    <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                  </div>
+
+                  <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight">
+                    A Grassroots Movement <br />
+                    <span className="text-[var(--color-primary)]">
+                      Born in 2017
+                    </span>
+                  </h2>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                    Girganga Parivar Trust was established in 2017 as a
+                    grassroots initiative focused on Gau Seva (cattle welfare)
+                    and strengthening rural livelihoods in Gujarat. The
+                    initiative began with the collective participation of
+                    farmers, community leaders, and volunteers dedicated to
+                    supporting rural communities through livestock care and
+                    community service.
+                  </p>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                    The movement was led by Mr. Dilipbhai Sakhiya, a respected
+                    farmer leader, social worker, and former President of the
+                    District Kisan Sangh in Rajkot. Through his grassroots
+                    leadership, he mobilized villagers, gram panchayat
+                    representatives, youth volunteers, civil society
+                    organizations, and industry supporters to build a
+                    community-driven platform for rural development.
+                  </p>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                    As the initiative progressed, the organization witnessed the
+                    severe challenges faced by farmers due to water scarcity,
+                    declining groundwater levels, and recurring droughts across
+                    Gujarat. Recognizing that sustainable water resources are
+                    fundamental to rural livelihoods, the Trust gradually
+                    expanded its mission to include community-led water
+                    conservation and groundwater recharge initiatives.
                   </p>
 
-                  <ul className="space-y-2 mb-8 flex-1">
-                    {card.items.map((item) => (
-                      <motion.li
-                        key={item}
-                        variants={{
-                          cardRest: { x: 0 },
-                          cardHover: {
-                            x: 5,
-                            transition: { type: "spring", stiffness: 300 },
-                          },
-                        }}
-                        className="flex items-start gap-2 text-sm text-gray-500"
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                    What began with the cleaning and rejuvenation of a few
+                    silted check dams soon evolved into a large-scale grassroots
+                    movement for decentralized water conservation and watershed
+                    restoration.
+                  </p>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                    Today, GGPT has grown into one of Gujarat’s impactful
+                    community-driven initiatives for water conservation,
+                    groundwater recharge, and rural climate resilience, working
+                    closely with villages to strengthen long-term water
+                    security.
+                  </p>
+
+                  {/* Founder quote */}
+                  <div className="bg-[var(--color-primary)] rounded-2xl p-6 relative overflow-hidden">
+                    <div className="absolute top-3 right-4 text-6xl font-black text-white/10 font-serif select-none">
+                      &quot;
+                    </div>
+                    <p className="text-white font-semibold text-base leading-relaxed relative z-10 mb-4">
+                      &quot;Leadership at GGPT is not about hierarchy; it is
+                      about working with communities — structure by structure,
+                      village by village.&quot;
+                    </p>
+                    <div className="flex items-center gap-3 relative z-10">
+                      <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-white text-xs font-bold">
+                        DS
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-sm">
+                          Shri Dilipbhai Sakhiya
+                        </p>
+                        <p className="text-white/60 text-xs">
+                          Founder & President, GGPT
+                        </p>
+                      </div>
+                      <div className="ml-auto w-3 h-3 rounded-full bg-[var(--color-secondary)]" />
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div className="space-y-4">
+                  <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                      <span className="w-7 h-7 rounded-lg bg-[var(--color-tertiary)] flex items-center justify-center text-sm">
+                        🐄
+                      </span>
+                      Founded with Gau Seva
+                    </h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Began with cattle welfare and rural livelihood support,
+                      building community trust across Gujarat&apos;s villages.
+                    </p>
+                  </div>
+                  <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                      <span className="w-7 h-7 rounded-lg bg-[var(--color-tertiary)] flex items-center justify-center text-sm">
+                        💧
+                      </span>
+                      Evolved into Water Conservation
+                    </h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Recognised that sustainable water resources are
+                      fundamental to rural livelihoods — expanded mission
+                      accordingly.
+                    </p>
+                  </div>
+                  <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                      <span className="w-7 h-7 rounded-lg bg-[var(--color-tertiary)] flex items-center justify-center text-sm">
+                        🚀
+                      </span>
+                      Today&apos;s Scale
+                    </h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      One of Gujarat&apos;s most impactful community-driven
+                      initiatives for water conservation, groundwater recharge,
+                      and rural climate resilience — working across 8 districts
+                      and 619 villages.
+                    </p>
+                  </div>
+                  {/* SDG alignment */}
+                  <div className="flex gap-3 flex-wrap">
+                    {[
+                      "SDG 6 · Clean Water",
+                      "SDG 13 · Climate Action",
+                      "SDG 15 · Life on Land",
+                    ].map((sdg) => (
+                      <span
+                        key={sdg}
+                        className="text-[11px] font-semibold px-3 py-1.5 rounded-full border border-[var(--color-primary)]/25 text-[var(--color-primary)] bg-[var(--color-tertiary)]"
                       >
-                        <span className="text-[var(--color-primary)] font-bold mt-0.5">
-                          →
-                        </span>
-                        {item}
-                      </motion.li>
+                        {sdg}
+                      </span>
                     ))}
-                  </ul>
-
-                  <motion.a
-                    whileHover={{
-                      scale: 1.06,
-                      boxShadow: "0 6px 20px rgba(0,0,0,0.18)",
-                    }}
-                    whileTap={{ scale: 0.97 }}
-                    href={card.href}
-                    className="inline-flex items-center gap-2 bg-[var(--color-primary)] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition w-fit"
-                  >
-                    {card.btn} <ArrowRight size={14} />
-                  </motion.a>
+                  </div>
                 </motion.div>
               </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+            </div>
+          </div>
+        </section>
 
-      {/* ══════════════════════════════
-          9. CTA BANNER
-      ══════════════════════════════ */}
-      <motion.section
-        className="bg-[var(--color-primary)] text-white py-20 text-center"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
-        transition={{ duration: 0.6 }}
-      >
-        <p className="text-xs uppercase tracking-[0.25em] text-white/60 mb-4">
-          Join the Movement
-        </p>
-        <h2 className="text-3xl font-bold mb-4">
-          Support the Water Conservation Movement
-        </h2>
-        <p className="text-white/70 text-sm mb-8 max-w-md mx-auto">
-          Together we can restore water security for millions of families across
-          drought-prone Saurashtra.
-        </p>
+        {/* ══════════════════════════════════════════
+            4. TIMELINE — OUR JOURNEY
+        ══════════════════════════════════════════ */}
+        <section className="bg-white">
+          <div className="container">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                variants={stagger}
+                className="text-center mb-14"
+              >
+                <div className="flex items-center justify-center gap-3 mb-3">
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                  <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                    Our Journey
+                  </span>
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                </div>
+                <motion.h2
+                  className="text-3xl md:text-4xl font-bold"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  Timeline of{" "}
+                  <span className="text-[var(--color-primary)]">Impact</span>
+                </motion.h2>
+                <motion.p className="text-gray-500 text-sm mt-3 max-w-full mx-auto">
+                  Since its establishment, Girganga Parivar Trust has steadily
+                  expanded its efforts to address water scarcity and groundwater
+                  depletion in drought-prone regions of Gujarat.
+                </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap gap-6 justify-center"
-        >
-          {/* Secondary Button */}
-          <a
-            href="/donate"
-            className="btn-secondary-outline groupinline-flex items-center gap-2  font-semibold text-base
-            px-10 py-4 bg-[var(--color-primary)]"
-          >
-            <span className="relative z-10">Donate Now</span>
-            <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-              →
-            </span>
-            <span className="btn-secondary-outline-overlay"></span>
-          </a>
-        </motion.div>
-      </motion.section>
-    </div>
+                <motion.p className="text-gray-500 text-sm mt-3 max-w-full mx-auto">
+                  Through strong community participation, institutional
+                  partnerships, and support from CSR organizations and
+                  government agencies, GGPT has implemented thousands of
+                  decentralized water harvesting structures that capture monsoon
+                  runoff, recharge groundwater aquifers, and support
+                  agricultural livelihoods.
+                </motion.p>
+              </motion.div>
+
+              {/* Timeline */}
+              <div className="relative">
+                {/* Centre line — desktop */}
+                <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 -translate-x-1/2" />
+
+                <div className="space-y-10 lg:space-y-0">
+                  {timelineItems.map((item, i) => (
+                    <motion.div
+                      key={item.year}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: 0.05 * i }}
+                      className={`relative lg:grid lg:grid-cols-2 lg:gap-10 lg:mb-12 ${
+                        i % 2 === 0 ? "" : "lg:[direction:rtl]"
+                      }`}
+                    >
+                      {/* Content card */}
+                      <div
+                        className={`bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:border-[var(--color-primary)]/25 transition-all duration-300 lg:[direction:ltr] ${
+                          i % 2 === 0 ? "lg:text-right" : ""
+                        }`}
+                      >
+                        <div
+                          className={`flex items-center gap-3 mb-3 ${i % 2 === 0 ? "lg:flex-row-reverse" : ""}`}
+                        >
+                          <span className="text-2xl">{item.icon}</span>
+                          <span className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-primary)] bg-[var(--color-tertiary)] px-3 py-1 rounded-full">
+                            {item.year}
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-gray-900 mb-2">
+                          {item.title}
+                        </h3>
+                        <div className="text-gray-500 text-sm leading-relaxed">
+                          {item.desc}
+                        </div>
+                      </div>
+
+                      {/* Centre dot — desktop */}
+                      <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[var(--color-primary)] border-4 border-white shadow-md z-10" />
+
+                      {/* Empty col opposite */}
+                      <div className="hidden lg:block" />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Jal Katha 2026 — special callout */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={fadeUp}
+                className="mt-16 rounded-3xl overflow-hidden bg-[var(--color-primary)] p-8 lg:p-12 relative"
+              >
+                <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--color-secondary)]/10" />
+                <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[var(--color-secondary)]/10" />
+                <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <span className="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-white/80 text-xs font-bold uppercase tracking-widest mb-4">
+                      🌍 Global Recognition 2026
+                    </span>
+                    <h3
+                      className="text-white text-2xl lg:text-3xl font-bold mb-3 leading-tight"
+                      style={{ fontFamily: "Poppins, sans-serif" }}
+                    >
+                      Jal Katha 2026 —<br />
+                      <span className="text-[var(--color-secondary)]">
+                        World Record Initiative
+                      </span>
+                    </h3>
+                    <p className="text-white/75 text-sm leading-relaxed">
+                      In 2026, GGPT organized Jal Katha – Apne Apne Shyam Ki, a
+                      unique public awareness initiative focused on promoting
+                      water conservation and responsible water use.
+                    </p>
+                    <p className="text-white/75 text-sm leading-relaxed">
+                      The event created a historic moment where thousands of
+                      people collectively took an oath to conserve water, making
+                      it the world’s first mass public water conservation pledge
+                      through a Jal Katha event.
+                    </p>
+                  </div>
+                  <div className="space-y-3">
+                    <p className="text-[var(--color-secondary)] text-xs font-bold uppercase tracking-widest mb-3">
+                      5 International World Record Recognitions
+                    </p>
+                    {jalKathaRecords.map((rec, i) => (
+                      <div
+                        key={rec}
+                        className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3"
+                      >
+                        <span className="text-[var(--color-secondary)] font-black text-lg">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-white text-sm font-medium">
+                          {rec}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════
+            5. Vision for the Future
+        ══════════════════════════════════════════ */}
+        <section className="container py-20">
+          <div className="max-w-7xl mx-auto space-y-20">
+            {/* Vision */}
+            <div className="text-center max-w-3xl mx-auto">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                  Vision for the Future
+                </span>
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-bold mb-5">
+                Building a{" "}
+                <span className="text-[var(--color-primary)]">
+                  Water Secure India
+                </span>
+              </h2>
+
+              <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                Building on its growing impact, Girganga Parivar Trust continues
+                to expand its mission with the long-term vision of rejuvenating{" "}
+                <strong>1,11,111 water conservation structures</strong> across
+                India.
+              </p>
+
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Through community participation, scientific watershed planning,
+                and collaborative partnerships, the Trust aims to strengthen
+                rural water security, sustainable agriculture, and climate
+                resilience for thousands of villages across the country.
+              </p>
+            </div>
+
+            {/* Timeline */}
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+              {[
+                { year: "2017", icon: "🐄", theme: "Foundation – Gau Seva" },
+                {
+                  year: "2019",
+                  icon: "💧",
+                  theme: "Start of Water Conservation",
+                },
+                { year: "2021", icon: "🏞", theme: "Expansion" },
+                { year: "2024", icon: "🌍", theme: "Regional Movement" },
+                { year: "2025", icon: "📊", theme: "Impact Milestone" },
+                {
+                  year: "Future",
+                  icon: "🚀",
+                  theme: "Vision 1,11,111 Structures",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
+                >
+                  <div className="text-3xl mb-3">{item.icon}</div>
+                  <p className="font-bold text-sm text-[var(--color-primary)]">
+                    {item.year}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">{item.theme}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Leadership */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                  <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                    Leadership & Governance
+                  </span>
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                </div>
+
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-primary)]">
+                  Founder & President
+                </h3>
+
+                <p className="font-semibold text-lg text-gray-900 mb-4">
+                  Mr. Dilipbhai Sakhiya
+                </p>
+
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                  A veteran grassroots leader and water conservation advocate
+                  with more than two decades of community engagement, he
+                  initiated the
+                  <strong> “1,11,111 Jal Sanchay Sankalp”</strong>, a
+                  people-driven movement aimed at restoring water systems
+                  through community participation and decentralized watershed
+                  development.
+                </p>
+
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Under his leadership, the organization has mobilized farmers,
+                  village institutions, youth volunteers, and development
+                  partners to strengthen water security across rural regions.
+                </p>
+
+                <div className="mt-6 border-l-4 border-[var(--color-primary)] pl-4 italic text-gray-600 text-sm">
+                  “Leadership at GGPT is not about hierarchy; it is about
+                  working with communities—structure by structure, village by
+                  village.”
+                </div>
+              </div>
+
+              {/* Founder card */}
+              <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-lg">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-xl bg-[var(--color-primary)] text-white flex items-center justify-center font-bold">
+                    DS
+                  </div>
+                  <div>
+                    <p className="font-bold text-sm">Dilipbhai Sakhiya</p>
+                    <p className="text-xs text-gray-400">
+                      Founder & President · GGPT
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-sm text-gray-500 mt-5 leading-relaxed">
+                  Leading the movement of community-driven water conservation
+                  and rural resilience across drought-prone regions of Gujarat.
+                </p>
+              </div>
+            </div>
+
+            {/* Core Values */}
+            <div>
+              <div className="text-center mb-12">
+                <div className="flex items-center justify-center gap-3 mb-3">
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                  <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                    Core Values
+                  </span>
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                </div>
+
+                <h3 className="text-3xl font-bold">
+                  Principles that{" "}
+                  <span className="text-[var(--color-primary)]">
+                    Guide Our Work
+                  </span>
+                </h3>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                  {
+                    title: "Sustainability",
+                    desc: "GGPT is committed to promoting environmentally sustainable water management practices that restore natural water systems and ensure long-term availability of water resources for agriculture, ecosystems, and rural communities.",
+                  },
+                  {
+                    title: "Community Ownership",
+                    desc: "We believe that lasting change happens when communities actively participate in planning, implementing, and maintaining water conservation initiatives. GGPT works closely with local farmers and village institutions to foster collective responsibility and ownership.",
+                  },
+                  {
+                    title: "Transparency & Accountability",
+                    desc: "GGPT maintains high standards of transparency, ethical governance, and accountability in all its programs, partnerships, and use of resources to build trust with communities, partners, and supporters.",
+                  },
+                  {
+                    title: "Collaboration",
+                    desc: "Addressing water challenges requires collective effort. GGPT collaborates with communities, government institutions, CSR partners, and development organizations to scale effective water conservation solutions.",
+                  },
+                  {
+                    title: "Innovation & Learning",
+                    desc: "GGPT continuously explores innovative approaches and integrates practical knowledge with field experience to improve watershed management and strengthen rural resilience to climate variability.",
+                  },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="bg-white border border-gray-100 rounded-2xl p-7 shadow-sm hover:shadow-xl transition hover:text-[var(--color-primary)]"
+                  >
+                    <h4 className="font-bold text-lg mb-2">{item.title}</h4>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </SmoothScroll>
   );
 }

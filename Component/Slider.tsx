@@ -7,18 +7,20 @@ export default function Slider() {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const sliders = [
+    "/logos/Associate Allied Chemicals_logo.png",
+    "/logos/Balaji Multiflex_logo.jpg",
     "/logos/BALAJI_WAFERS.png",
-    "/logos/UGVCL.png",
-    "/logos/BALAJI.png",
-    "/logos/DML-GROUP.png",
-    "/logos/SHAKTIMAN.png",
-    "/logos/GETCO.png",
-    "/logos/GOPAL-NAMKEEN.png",
-    "/logos/KSP-Auto-Forge-Pvt-Ltd.png",
-    "/logos/SHREE-GIRIRAJ-HOSPITAL.png",
-    "/logos/LADANI-ASSOCIATES-PVT-LTD.png",
+    "/logos/Dil Exim Commodities_logo.png",
+    "/logos/getco_geb_logo.jfif",
+    "/logos/images.png",
+    "/logos/Ministry Of Jal Shakti.png",
+    "/logos/Orbit Bearings_logo.jpg",
     "/logos/PGVCL.png",
-    "/logos/PRASHANT-CASTING-PVT-LTD.gif",
+    "/logos/Rajan Technocast_logo.png",
+    "/logos/Rolex.jfif",
+    "/logos/RTL_logo.png",
+    "/logos/UGVCL.png",
+    "/logos/Vitrag Foundation_logos.png"
   ];
 
   useEffect(() => {

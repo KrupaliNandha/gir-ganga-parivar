@@ -9,613 +9,613 @@ import {
   animate,
 } from "framer-motion";
 import Link from "next/link";
-import { GiRibbonMedal } from "react-icons/gi";
-import { CircleCheckBig } from "lucide-react";
-import { MdOutlineWaterDrop, MdPeople, MdEmojiEvents } from "react-icons/md";
+import Slider from "../Component/Slider";
+import Image from "next/image";
 import SmoothScroll from "../Component/SmothScrolling";
 
 /* ─────────────────────────────────────────────
    COUNT UP
 ───────────────────────────────────────────── */
-interface CountUpProps {
+type CountUpProps = {
   value: number;
   suffix?: string;
-}
-const CountUp: React.FC<CountUpProps> = ({ value, suffix = "" }) => {
+};
+
+const CountUp = ({ value, suffix = "" }: CountUpProps) => {
   const count = useMotionValue(0);
+
   const rounded = useTransform(
     count,
-    (latest: number): string => Math.round(latest).toLocaleString() + suffix,
+    (latest) => Math.round(latest).toLocaleString() + suffix,
   );
+
   useEffect(() => {
-    const animation = animate(count, value, { duration: 2, ease: "easeOut" });
-    return animation.stop;
+    const animation = animate(count, value, {
+      duration: 2.2,
+      ease: "easeOut",
+    });
+
+    return () => animation.stop();
   }, [count, value]);
+
   return <motion.span>{rounded}</motion.span>;
 };
 
 /* ─────────────────────────────────────────────
-   SLIDER DATA
+   PARTNER LOGOS DATA
 ───────────────────────────────────────────── */
-interface Stat {
-  num: number;
-  label: string;
-  suffix?: string;
-}
-interface Slide {
-  id: number;
-  tag: string;
-  headline: [string, string];
-  sub: string;
-  cta: { label: string; href: string };
-  bg: string;
-  stats?: Stat[];
-}
+const partners = [
+  "Ministry of Jal Shakti, Govt. of India",
+  "Paschim Gujarat Vij Company Ltd.",
+  "Uttar Gujarat Vij Company Ltd.",
+  "Gujarat Energy Transmission Corporation Ltd.",
+  "TATA Hitachi Construction Machinery",
+  "Rolex Rings Pvt. Ltd.",
+  "Balaji Wafers Pvt. Ltd.",
+  "Balaji Multiflex Pvt. Ltd.",
+  "Associate Allied Chemicals Pvt. Ltd.",
+  "Dil Exim Commodities Pvt. Ltd.",
+  "Legacy Commodities Pvt. Ltd.",
+  "RTL Enterprise Pvt. Ltd.",
+  "Rajan Technocast Pvt. Ltd.",
+  "Orbit Bearings Pvt. Ltd.",
+  "Vitrag Foundation",
+  "Patoliya & Family",
+];
 
-const slides: Slide[] = [
+const impactStats = [
+  { num: 8357, label: "Water Structures", suffix: "", icon: "💧" },
+  { num: 619, label: "Villages Impacted", suffix: "", icon: "🏘️" },
+  { num: 35, label: "Blocks Covered", suffix: "", icon: "📍" },
+  { num: 8, label: "Districts", suffix: "", icon: "🗺️" },
   {
-    id: 1,
-    tag: "Gir Ganga Parivar Trust · Water Conservation",
-    headline: ["Solution For", "Generations"],
-    sub: "Reviving rivers, recharging groundwater, and securing water for communities across drought-prone Gujarat.",
-    cta: { label: "Discover More", href: "/about-us" },
-    bg: "/image/home/Slide1.png",
-    stats: [
-      { num: 8354, label: "Water Structures", suffix: "+" },
-      { num: 580, label: "Gram Panchayats", suffix: "+" },
-      { num: 18, label: "CSR Excavators", suffix: "+" },
-    ],
-  },
-  {
-    id: 2,
-    tag: "Our Mission · 1,11,111 Structures",
-    headline: ["Every Drop", "Counts"],
-    sub: "Not a single drop of rainwater should flow into the sea. We are building 1,11,111 check dams and bore recharge systems across Gujarat.",
-    cta: { label: "Explore Impact", href: "/impact" },
-    bg: "/image/home/Slide2.png",
-  },
-  {
-    id: 3,
-    tag: "Community · Corporates · Government",
-    headline: ["Reviving Rivers,", "Restoring Life"],
-    sub: "A decade of grassroots partnership with communities, CSR partners, and government agencies restoring watersheds and improving biodiversity in Saurashtra.",
-    cta: { label: "Partner with Us", href: "/partner-with-us-csr" },
-    bg: "/image/home/Slide3.png",
-  },
-  {
-    id: 4,
-    tag: "Global CSR & ESG Awards 2025 Winner",
-    headline: ["Water Security", "For All"],
-    sub: "Recognised globally for our innovative PPP model. Partner with Girganga Parivar Trust to transform arid regions into water-abundant landscapes.",
-    cta: { label: "Support Now", href: "/donate" },
-    bg: "/image/home/Slide4.png",
+    num: 74,
+    label: "Billion Litres Recharge Capacity",
+    suffix: "B+",
+    icon: "💦",
   },
 ];
 
-const INTERVAL_MS = 5000;
-
-const ChevronUp = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="w-[18px] h-[18px]"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polyline points="18 15 12 9 6 15" />
-  </svg>
-);
-const ChevronDown = () => (
-  <svg
-    viewBox="0 0 24 24"
-    className="w-[18px] h-[18px]"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polyline points="6 9 12 15 18 9" />
-  </svg>
-);
+const approaches = [
+  {
+    title: "Water Conservation",
+    desc: "Building check dams, recharge bore wells, and water harvesting structures to prevent every raindrop from flowing to the sea.",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        className="w-7 h-7"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+        <path d="M12 6v6l4 2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Community Participation",
+    desc: "Partnering with 619+ gram panchayats, local leaders, and citizens to drive grassroots-led conservation at scale.",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        className="w-7 h-7"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"
+          strokeLinecap="round"
+        />
+        <circle cx="9" cy="7" r="4" />
+        <path
+          d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Climate Resilience",
+    desc: "Restoring biodiversity, recharging aquifers, and building long-term resilience against drought and climate change.",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        className="w-7 h-7"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+];
 
 /* ─────────────────────────────────────────────
    MAIN COMPONENT
 ───────────────────────────────────────────── */
-const HeroSection = () => {
-  const [current, setCurrent] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const slideTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const progressTimer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const progressRef = useRef(0);
+export default function HomePage() {
+  const [isVisible, setIsVisible] = useState(false);
+  const statsRef = useRef(null);
 
-  const stopAll = () => {
-    if (slideTimer.current) clearInterval(slideTimer.current);
-    if (progressTimer.current) clearInterval(progressTimer.current);
-  };
-
-  const startAuto = useCallback(() => {
-    stopAll();
-    progressRef.current = 0;
-    setProgress(0);
-    const TICK = 50;
-    const step = (100 / INTERVAL_MS) * TICK;
-    progressTimer.current = setInterval(() => {
-      progressRef.current = Math.min(progressRef.current + step, 100);
-      setProgress(progressRef.current);
-    }, TICK);
-    slideTimer.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-      progressRef.current = 0;
-      setProgress(0);
-    }, INTERVAL_MS);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.2 },
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    startAuto();
-    return stopAll;
-  }, [startAuto]);
-
-  const goTo = (index: number) => {
-    setCurrent(((index % slides.length) + slides.length) % slides.length);
-    startAuto();
-  };
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") goTo(current + 1);
-      if (e.key === "ArrowLeft") goTo(current - 1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
-
-  const slide = slides[current];
-  const item = (delay: number) => ({
-    initial: { opacity: 0, y: 22 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.65,
-        delay,
-        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      },
-    },
-    exit: { opacity: 0, y: -10, transition: { duration: 0.28 } },
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] },
   });
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap');
-        .font-caveat   { font-family: 'Caveat', cursive; }
-        .torn-bg::before {
-          content: '';
-          position: absolute;
-          top: -24px; left: 0; right: 0;
-          height: 48px;
-          background: inherit;
-          clip-path: polygon(0 60%, 2% 40%, 5% 55%, 8% 35%, 12% 50%, 16% 30%, 20% 48%, 25% 28%, 30% 46%, 35% 26%, 40% 44%, 45% 24%, 50% 42%, 55% 22%, 60% 40%, 65% 20%, 70% 38%, 75% 18%, 80% 36%, 85% 16%, 90% 34%, 94% 14%, 97% 32%, 100% 20%, 100% 100%, 0 100%);
-        }
-      `}</style>
-
       <SmoothScroll>
         {/* ══════════════════════════════════════════════
-            SECTION 1 — HERO SLIDER
-        ══════════════════════════════════════════════ */}
-        <section className="font-outfit relative w-full min-h-[600px] sm:min-h-[700px] overflow-hidden p-4 sm:p-6 md:p-10">
-          {/* Background crossfade */}
-          <AnimatePresence>
-            <motion.div
-              key={slide.id + "-bg"}
-              className="absolute inset-0"
-              initial={{ opacity: 0, scale: 1.06 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.95, ease: [0.77, 0, 0.175, 1] }}
+          SECTION 1 — HERO
+      ══════════════════════════════════════════════ */}
+        <section className="relative w-full min-h-screen flex items-center overflow-hidden">
+          {/* Background Image */}
+          <img
+            src="/image/home/Donation For Biggest Checkdam.png"
+            alt="Water Conservation"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60"></div>
+
+          {/* Decorative wave bottom */}
+          <div className="absolute bottom-0 left-0 right-0 z-[2]">
+            <svg
+              viewBox="0 0 1440 80"
+              className="w-full"
+              fill="white"
+              preserveAspectRatio="none"
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `linear-gradient(135deg,rgba(18,52,48,0.72) 0%,rgba(10,35,32,0.55) 60%,rgba(0,0,0,0.30) 100%),url('${slide.bg}')`,
-                }}
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Slide content */}
-          {/* mobile: full width with safe padding; tablet+: 75% */}
-          <div className="relative z-[2] h-full flex flex-col justify-center px-8 sm:px-[6vw] w-full sm:w-[85%] md:w-[75%] py-16 sm:py-0">
-            <AnimatePresence mode="wait">
-              <motion.div key={slide.id + "-content"}>
-                {/* Tag */}
-                <motion.span
-                  {...item(0.3)}
-                  className="inline-block text-[10px] sm:text-[clamp(10px,1.1vw,13px)] font-medium tracking-[0.18em] sm:tracking-[0.22em] uppercase text-white/85 mb-3 sm:mb-[18px] pb-2 sm:pb-[10px] border-b border-white/35"
-                >
-                  {slide.tag}
-                </motion.span>
-
-                {/* Headline */}
-                <motion.h1
-                  {...item(0.45)}
-                  className="font-caveat text-[clamp(32px,8vw,82px)] sm:text-[clamp(38px,6.5vw,82px)] font-bold text-white leading-[1.12] mb-4 sm:mb-7"
-                >
-                  {slide.headline[0]} {slide.headline[1]}
-                </motion.h1>
-
-                {/* Sub */}
-                <motion.p
-                  {...item(0.6)}
-                  className="text-[clamp(12px,3.5vw,16px)] sm:text-[clamp(13px,1.3vw,16px)] font-light text-white/80 w-full sm:w-[85%] md:w-[75%] leading-[1.7] mb-6 sm:mb-[42px]"
-                >
-                  {slide.sub}
-                </motion.p>
-
-                {/* CTA */}
-                <motion.div
-                  {...item(0.75)}
-                  className="flex items-center gap-4 sm:gap-[25px]"
-                >
-                  <Link href={slide.cta.href}>
-                    <span className="btn-primary-hero group mt-4 sm:mt-10">
-                      <span className="relative z-10">{slide.cta.label}</span>
-                      <span className="btn-primary-hero-overlay"></span>
-                    </span>
-                  </Link>
-
-                  <div className="hidden xs:block sm:block">
-                    <img
-                      className="h-12 w-12 sm:h-20 sm:w-20"
-                      src="/image/home/main-slider__button-arrow.png"
-                      alt=""
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Stats */}
-                {slide.stats && (
-                  <motion.div
-                    {...item(0.9)}
-                    className="flex flex-wrap gap-5 sm:gap-10 mt-8 sm:mt-[50px]"
-                  >
-                    {slide.stats.map((stat, i) => (
-                      <React.Fragment key={stat.label}>
-                        {i > 0 && (
-                          <div className="w-px bg-white/20 self-stretch hidden xs:block" />
-                        )}
-                        <div>
-                          <p className="font-caveat text-[clamp(22px,6vw,42px)] sm:text-[clamp(26px,3.2vw,42px)] font-bold text-[var(--color-secondary)] leading-none">
-                            <CountUp
-                              value={stat.num}
-                              suffix={stat.suffix || ""}
-                            />
-                          </p>
-                          <p className="text-[9px] sm:text-[clamp(9px,0.9vw,11px)] font-normal tracking-[0.1em] text-white/65 uppercase mt-1">
-                            {stat.label}
-                          </p>
-                        </div>
-                      </React.Fragment>
-                    ))}
-                  </motion.div>
-                )}
-              </motion.div>
-            </AnimatePresence>
+              <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" />
+            </svg>
           </div>
 
-          {/* Dot nav */}
-          <div className="absolute left-3 sm:left-7 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-2">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to slide ${i + 1}`}
-                onClick={() => goTo(i)}
-                className={`w-2 h-2 rounded-full border-0 p-0 cursor-pointer transition-all duration-300 ${
-                  i === current
-                    ? "bg-white scale-[1.3]"
-                    : "bg-white/35 hover:bg-white/70"
-                }`}
-              />
-            ))}
-          </div>
+          {/* Floating accent orbs */}
+          <div className="absolute top-20 right-[15%] w-64 h-64 rounded-full bg-[var(--color-primary)]/10 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-32 left-[10%] w-48 h-48 rounded-full bg-[var(--color-secondary)]/15 blur-3xl pointer-events-none" />
 
-          {/* Arrow nav — hidden on mobile */}
-          <div className="hidden sm:flex absolute right-8 bottom-14 z-10 flex-col gap-2.5">
-            {[
-              { dir: -1 as const, label: "Previous", Icon: ChevronUp },
-              { dir: 1 as const, label: "Next", Icon: ChevronDown },
-            ].map(({ dir, label, Icon }) => (
-              <button
-                key={label}
-                aria-label={label}
-                onClick={() => goTo(current + dir)}
-                className="w-11 h-11 rounded-full border border-white/50 bg-white/[0.08] backdrop-blur-md text-white flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-[var(--color-secondary)] hover:border-[var(--color-secondary)] hover:text-[var(--color-primary)] hover:scale-[1.08]"
+          <div className="container relative z-[3]">
+            <div className="">
+              {/* Eyebrow */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="flex items-center gap-3 mb-6 justify-center"
               >
-                <Icon />
-              </button>
-            ))}
-          </div>
-        </section>
+                <div className="h-px w-10 bg-[var(--color-secondary)] " />
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.25em] uppercase">
+                  Girganga Parivar Trust
+                </span>
+                <div className="h-px w-10 bg-[var(--color-secondary)]" />
+              </motion.div>
 
-        {/* ══════════════════════════════
-            SECTION 2 — INTRO / MISSION & VISION
-        ══════════════════════════════ */}
-        <section className="bg-[var(--color-tertiary)]/50 overflow-hidden">
-          <div className="container">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                {/* LEFT — circular image */}
-                <motion.div
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  className="relative flex items-center justify-center mx-auto w-full max-w-[420px] lg:max-w-none"
-                  style={{ minHeight: 320 }}
+              {/* Heading */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.35 }}
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.08] mb-6 text-center max-w-7xl justify-self-center"
+              >
+                Building a{" "}
+                <span className="relative inline-block text-[var(--color-secondary)]">
+                  Water-Secure
+                  <span className="absolute -bottom-1 left-0 right-0 h-1 bg-[var(--color-secondary)]/40 rounded-full" />
+                </span>{" "}
+                Future for Rural India.
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.55 }}
+                className="text-white/80 text-base sm:text-lg lg:text-xl font-semibold leading-relaxed mb-10 text-center"
+              >
+                Reviving groundwater, strengthening agriculture, and empowering
+                rural communities through decentralized water conservation.
+              </motion.p>
+            </div>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex flex-wrap gap-6 justify-center"
+              >
+                {/* Secondary Button */}
+                <a
+                  href="/partner-with-us-csr"
+                  className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-sm lg:text-base
+    px-10 py-4 bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-[var(--color-secondary)]"
                 >
-                  {/* outer dashed ring */}
-                  <div className="absolute w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border-2 border-dashed border-emerald-200 animate-[spin_30s_linear_infinite]" />
-                  {/* inner ring */}
-                  <div className="absolute w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] rounded-full border border-emerald-100" />
+                  <span className="relative z-10">Partner With Us (CSR) </span>
+                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+                  <span className="btn-secondary-overlay"></span>
+                </a>
 
-                  {/* main circle image */}
-                  <div className="relative w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden shadow-2xl shadow-emerald-900/20 border-4 border-white z-10">
-                    <img
-                      src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80"
-                      alt="Water conservation work"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Award image — top left */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
-                    className="absolute top-0 left-0 z-20"
-                  >
-                    <img
-                      className="rounded-full w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[250px] md:h-[250px]"
-                      src="/image/home/Award_img.png"
-                      alt=""
-                    />
-                  </motion.div>
-
-                  {/* Stat badge — top right */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
-                    className="absolute top-2 right-2 sm:top-6 sm:right-4 md:top-8 md:right-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-primary)] text-white flex flex-col items-center justify-center shadow-xl shadow-emerald-600/30"
-                  >
-                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
-                      90%
-                    </span>
-                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
-                      Water
-                      <br />
-                      Restored
-                    </span>
-                  </motion.div>
-
-                  {/* Stat badge — bottom left */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.55, type: "spring" }}
-                    className="absolute bottom-2 left-2 sm:bottom-6 sm:left-4 md:bottom-8 md:left-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] flex flex-col items-center justify-center shadow-xl shadow-yellow-500/30"
-                  >
-                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
-                      580+
-                    </span>
-                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
-                      Villages
-                      <br />
-                      Covered
-                    </span>
-                  </motion.div>
-                </motion.div>
-
-                {/* RIGHT — content */}
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  className="space-y-5 sm:space-y-6 text-center lg:text-start"
+                {/* Outline Button */}
+                <a
+                  href="/support-a-structure"
+                  className="btn-secondary-outline group text-sm lg:text-base"
                 >
-                  {/* Heading */}
-                  <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                    Mission &amp; Vision <br />
-                    <span className="text-[var(--color-primary)]">
-                      For Gujarat
-                    </span>
-                  </h2>
+                  <span className="relative z-10">Support A Structure</span>
 
-                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
-                    Girganga Parivar Trust (GGPT) is a Gujarat-based
-                    organization working at scale to address water scarcity
-                    through community-led conservation structures across
-                    drought-prone regions.
-                  </p>
+                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
 
-                  {/* Bullet points */}
-                  <ul className="space-y-3">
-                    {[
-                      "Building 1,11,111 check dams & bore recharge systems",
-                      "Community-led grassroots water conservation",
-                      "SDG 6 (Clean Water) & SDG 15 (Life on Land) aligned",
-                    ].map((point) => (
-                      <li
-                        key={point}
-                        className="flex items-center justify-center lg:justify-start gap-3 text-sm text-gray-700"
-                      >
-                        <span className="mt-0.5 w-5 h-5 rounded-full bg-[var(--color-secondary)] flex items-center justify-center shrink-0">
-                          <CircleCheckBig className="w-3 h-3 text-[var(--color-primary)]" />
-                        </span>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
+                  <span className="btn-secondary-outline-overlay"></span>
+                </a>
 
-                  <div className="w-full h-px bg-gray-100" />
+                {/* Outline Button */}
+                <a
+                  href="/support-a-structure"
+                  className="btn-secondary-outline group text-sm lg:text-base"
+                >
+                  <span className="relative z-10">
+                    {" "}
+                    <span className="relative z-10">Contact Us</span>
+                  </span>
 
-                  {/* Mission + Vision cards */}
-                  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6">
-                    <div className="bg-emerald-50 rounded-2xl p-4 sm:p-5 border border-emerald-100">
-                      <div className="w-10 h-10 bg-[var(--color-primary)] rounded-lg flex items-center justify-center text-white font-playfair font-bold text-lg mb-3">
-                        M
-                      </div>
-                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
-                        Our Mission
-                      </h4>
-                      <p className="text-gray-500 text-sm leading-relaxed">
-                        Repair, deepen, and construct 1,11,111 water
-                        conservation structures to maximize rainwater harvesting
-                        across Gujarat.
-                      </p>
-                    </div>
-                    <div className="bg-yellow-50 rounded-2xl p-4 sm:p-5 border border-yellow-100">
-                      <div className="w-10 h-10 bg-[var(--color-secondary)] rounded-lg flex items-center justify-center text-[var(--color-primary)] font-playfair font-bold text-lg mb-3">
-                        V
-                      </div>
-                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
-                        Our Vision
-                      </h4>
-                      <p className="text-gray-500 text-sm leading-relaxed">
-                        Prevent every raindrop from flowing to sea — transform
-                        arid regions into water-abundant, fertile landscapes.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
+                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+
+                  <span className="btn-secondary-outline-overlay"></span>
+                </a>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* ══════════════════════════════
-            SECTION 3 — EXPLORE IMPACT
-        ══════════════════════════════ */}
-        <section className="">
+        {/* ══════════════════════════════════════════════
+          SECTION 2 — IMPACT STATS
+      ══════════════════════════════════════════════ */}
+        <section ref={statsRef} className="bg-white py-0">
           <div className="container">
-            {/* Heading */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-8 sm:mb-12"
+              className="text-center mb-12"
             >
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <img
-                  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=40&h=40&q=80&fit=crop"
-                  alt=""
-                  className="w-5 h-5 rounded-full object-cover"
-                />
-                <span className="text-[var(--color-primary)] text-xs font-bold tracking-[0.2em] uppercase ">
-                  Our Impact Areas
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                  Numbers That Matter
                 </span>
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
               </div>
-              <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
-                Explore Our Impact
+              <h2
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Our Impact,{" "}
+                <span className="text-[var(--color-primary)]">
+                  by the Numbers
+                </span>
               </h2>
             </motion.div>
 
-            {/* 4-col image cards */}
-            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4 mb-8 sm:mb-12">
-              {[
-                {
-                  img: "https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=400&q=80",
-                  label: "Government Partnership",
-                  sub: "Ministry of Water, Govt. of India",
-                  Icon: GiRibbonMedal,
-                },
-                {
-                  img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80",
-                  label: "CSR & ESG Awards",
-                  sub: "Global Awards 2025 Winner",
-                  Icon: MdEmojiEvents,
-                },
-                {
-                  img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80",
-                  label: "Community Driven",
-                  sub: "580+ Gram Panchayats",
-                  Icon: MdPeople,
-                },
-                {
-                  img: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=80",
-                  label: "Support A Structure",
-                  sub: "Fund a check dam today",
-                  Icon: MdOutlineWaterDrop,
-                },
-              ].map((card, i) => (
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+              {impactStats.map((stat, i) => (
                 <motion.div
-                  key={card.label}
+                  key={stat.label}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group cursor-pointer"
+                  transition={{ duration: 0.55, delay: i * 0.07 }}
+                  className="group relative bg-white rounded-2xl p-5 sm:p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 >
-                  <div className="relative overflow-hidden rounded-xl mb-3 aspect-[4/3]">
-                    <img
-                      src={card.img}
-                      alt={card.label}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-emerald-900/0 group-hover:bg-emerald-900/40 transition-colors duration-300 flex items-center justify-center">
-                      <card.Icon className="text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
+                  {/* Hover BG */}
+                  <div className="absolute inset-0 bg-[var(--color-tertiary)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+
+                  <div className="relative z-10">
+                    <div className="text-2xl mb-2">{stat.icon}</div>
+                    <p
+                      className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[var(--color-primary)] leading-none mb-1"
+                      style={{ fontFamily: "Poppins, sans-serif" }}
+                    >
+                      {isVisible ? (
+                        <CountUp value={stat.num} suffix={stat.suffix} />
+                      ) : (
+                        "0"
+                      )}
+                    </p>
+                    <p className="text-gray-500 text-xs sm:text-sm font-medium leading-snug mt-1">
+                      {stat.label}
+                    </p>
+                    <div className="mt-3 h-0.5 w-8 bg-[var(--color-secondary)] rounded-full group-hover:w-16 transition-all duration-400" />
                   </div>
-                  <h4 className="font-playfair font-bold text-gray-900 text-sm leading-snug group-hover:text-[var(--color-primary)] transition-colors">
-                    {card.label}
-                  </h4>
-                  <p className="text-gray-400 text-xs mt-0.5">{card.sub}</p>
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
 
-            {/* ── CTA buttons ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap gap-6 justify-center"
-            >
-              {/* Secondary Button */}
-              <a href="/partner-with-us-csr" className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-sm lg:text-base
-    px-10 py-4 bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-[var(--color-secondary)]">
-                <span className="relative z-10">Partner With Us (CSR) </span>
-                <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-                  →
+        {/* ══════════════════════════════════════════════
+          SECTION 3 — OUR APPROACH
+      ══════════════════════════════════════════════ */}
+        <section className="bg-[var(--color-tertiary)]/50">
+          <div className="container">
+            <motion.div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                  How We Work
                 </span>
-                <span className="btn-secondary-overlay"></span>
-              </a>
-
-              {/* Outline Button */}
-              <a href="/support-a-structure" className="btn-primary-outline group text-sm lg:text-base">
-                <span className="relative z-10">Support A Structure</span>
-
-                <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-
-                <span className="btn-primary-outline-overlay"></span>
-              </a>
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+              </div>
+              <h2
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Our{" "}
+                <span className="text-[var(--color-primary)]">Approach</span>
+              </h2>
             </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {approaches.map((ap, i) => (
+                <motion.div
+                  key={ap.title}
+                  className="group bg-white rounded-2xl p-7 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-400 relative overflow-hidden"
+                >
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-t-2xl" />
+
+                  <div className="w-14 h-14 rounded-xl bg-[var(--color-tertiary)] flex items-center justify-center text-[var(--color-primary)] mb-5 group-hover:bg-[var(--color-primary)] group-hover:text-white transition-colors duration-300">
+                    {ap.icon}
+                  </div>
+                  <h3
+                    className="font-bold text-gray-900 text-lg mb-3"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
+                  >
+                    {ap.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    {ap.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════
+          SECTION 4 — IMPACT HIGHLIGHTS + GUJARAT MAP
+      ══════════════════════════════════════════════ */}
+        <section className="bg-white">
+          <div className="container">
+            <motion.div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                  Geographic Reach
+                </span>
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+                Impact{" "}
+                <span className="text-[var(--color-primary)]">Highlights</span>
+              </h2>
+
+              <p className="text-gray-500 mt-3 text-sm sm:text-base max-w-xl mx-auto">
+                Transforming drought-prone Saurashtra and Gujarat through
+                community-led water structures across 8 districts.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Image Instead of Map */}
+              <motion.div>
+                <img
+                  src="/image/home/Our Approach.png"
+                  alt="Gujarat Impact Map"
+                  className="w-full max-w-full mx-auto object-contain"
+                />
+              </motion.div>
+
+              {/* Highlights */}
+              <motion.div className="space-y-4">
+                {/* Item 1 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-primary)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Water Recharge Capacity
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      74 Billion Litres
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Created through strategically placed check dams and bore
+                      recharge systems.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 2 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-secondary)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Villages Transformed
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      619 Villages
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Rural communities across Saurashtra now have reliable
+                      groundwater access.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 3 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-accent)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Water Structures Built
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      8,357 Structures
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Check dams, bore wells, and allied structures across 35
+                      blocks.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 4 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-greenish)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Mission Target
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      1,11,111 Structures
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Our ambitious goal to ensure not a single raindrop reaches
+                      the sea unused.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════
+          SECTION 5 — OUR PARTNERS
+      ══════════════════════════════════════════════ */}
+        <Slider />
+
+        {/* ══════════════════════════════════════════════
+          SECTION 6 — CALL TO ACTION
+      ══════════════════════════════════════════════ */}
+        <section className="relative overflow-hidden">
+          {/* BG */}
+          <div className="absolute inset-0 bg-cover bg-center bg-[var(--color-primary)] " />{" "}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-secondary)]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="container relative z-[2]">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.div>
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                  <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                    Join the Movement
+                  </span>
+                  <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+                  Be Part of India&apos;s Largest{" "}
+                  <span className="text-[var(--color-secondary)]">
+                    Water Revival
+                  </span>
+                </h2>
+
+                <p className="text-white/75 text-sm sm:text-base lg:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+                  Whether you&apos;re a corporation looking to invest in CSR, or
+                  an individual who cares about water security — there&apos;s a
+                  role for you in our mission.
+                </p>
+
+                <div className="flex flex-wrap gap-4 justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="flex flex-wrap gap-6 justify-center"
+                  >
+                    {/* Secondary Button */}
+
+                    {/* Outline Button */}
+                    <a
+                      href="/support-a-structure"
+                      className="btn-secondary-outline group text-sm lg:text-base"
+                    >
+                      <span className="relative z-10">
+                        {" "}
+                        Partner With Us (CSR){" "}
+                      </span>
+
+                      <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+
+                      <span className="btn-secondary-outline-overlay"></span>
+                    </a>
+
+                    {/* Outline Button */}
+                    <a
+                      href="/support-a-structure"
+                      className="btn-secondary-outline group text-sm lg:text-base"
+                    >
+                      <span className="relative z-10">Support A Structure</span>
+
+                      <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+
+                      <span className="btn-secondary-outline-overlay"></span>
+                    </a>
+
+                    {/* Outline Button */}
+                    <a
+                      href="/support-a-structure"
+                      className="btn-secondary-outline group text-sm lg:text-base"
+                    >
+                      <span className="relative z-10">
+                        {" "}
+                        <span className="relative z-10">Contact Us</span>
+                      </span>
+
+                      <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+
+                      <span className="btn-secondary-outline-overlay"></span>
+                    </a>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
       </SmoothScroll>
     </>
   );
-};
-
-export default HeroSection;
+}
