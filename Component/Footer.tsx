@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedin, FaLinkedinIn } from "react-icons/fa";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 
 export default function Footer() {
@@ -61,8 +61,8 @@ export default function Footer() {
                     label: "Facebook",
                   },
                   {
-                    icon: <FaTwitter size={13} />,
-                    href: "https://x.com/GirgangaT71455",
+                    icon: <FaLinkedinIn size={13} />,
+                    href: "https://in.linkedin.com/in/girganga-parivar-trust-450354287",
                     label: "Twitter",
                   },
                   {
@@ -207,7 +207,7 @@ export default function Footer() {
                     size={13}
                     className="text-[var(--color-primary)] flex-shrink-0"
                   />
-                  info@girgangaparivartrust.com
+                  csr@girgangaparivartrust.com 
                 </a>
                 <a href="/Our-Work">
                   <div className="flex items-start gap-2.5 text-black text-sm cursor-pointer select-none">
@@ -215,7 +215,8 @@ export default function Footer() {
                       size={13}
                       className="text-[var(--color-primary)] flex-shrink-0 mt-0.5"
                     />
-                    <span>Sunstar Chamber, Rajkot - 360005, Gujarat</span>
+                    <span>Decora Capital, 5th Floor, Nr. McDonalds, Above HDFC Bank, Kalawad Road, 
+                      Rajkot - 360005, Gujarat </span>
                   </div>
                 </a>
               </div>

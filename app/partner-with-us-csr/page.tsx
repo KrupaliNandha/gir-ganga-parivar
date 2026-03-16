@@ -1,454 +1,501 @@
 "use client";
-import { FaLeaf, FaQuestionCircle } from "react-icons/fa";
-import { MdReceipt } from "react-icons/md";
+
+import { motion,Variants } from "framer-motion";
+import Link from "next/link";
 import {
+  Briefcase,
   Building2,
+  CheckCircle2,
   Download,
   FileText,
-  LayoutList,
+  FlaskConical,
+  GraduationCap,
+  Landmark,
+  Leaf,
   Mail,
+  Megaphone,
   MessageSquare,
+  Phone,
   User,
 } from "lucide-react";
-import Slider from "../../Component/Slider";
-import SmoothScroll from "../../Component/SmothScrolling";
-import Link from "next/link";
-import { motion } from "framer-motion";
 
-const csrCards = [
+
+// ─── ANIMATION VARIANTS ──────────────────────────────────────────
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+};
+const stagger = { show: { transition: { staggerChildren: 0.12 } } };
+
+// ─── SHARED INLINE STYLES ────────────────────────────────────────
+const inputStyle: React.CSSProperties = {
+  flex: 1, fontSize: ".85rem", border: "none",
+  background: "transparent", outline: "none",
+  fontFamily: "var(--font)", color: "#111827",
+};
+
+const fieldWrapStyle: React.CSSProperties = {
+  display: "flex", alignItems: "center", gap: ".5rem",
+  background: "var(--color-tertiary)",
+  borderRadius: 12, padding: ".7rem 1rem",
+  border: "1.5px solid transparent",
+};
+
+// ─── PRIMITIVES ───────────────────────────────────────────────────
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: ".75rem", marginBottom: "1rem" }}>
+      <span style={{ width: 28, height: 1.5, background: "var(--color-secondary)", display: "block" }} />
+      <span style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: ".25em", textTransform: "uppercase", color: "var(--color-secondary)", fontFamily: "var(--font)" }}>
+        {children}
+      </span>
+      <span style={{ width: 28, height: 1.5, background: "var(--color-secondary)", display: "block" }} />
+    </div>
+  );
+}
+
+function SectionHeader({ eyebrow, title, highlight, subtitle }: { eyebrow: string; title: string; highlight: string; subtitle?: string }) {
+  return (
+    <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 style={{ fontFamily: "var(--font)", fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 700, lineHeight: 1.15, color: "#111827", marginBottom: "1rem" }}>
+        {title} <span style={{ color: "var(--color-primary)" }}>{highlight}</span>
+      </h2>
+      {subtitle && (
+        <p style={{ color: "#6b7280", fontSize: ".92rem", lineHeight: 1.8, maxWidth: 560, margin: "0 auto", fontFamily: "var(--font)" }}>
+          {subtitle}
+        </p>
+      )}
+      <div style={{ width: 48, height: 3, background: "var(--color-secondary)", borderRadius: 99, margin: "1.25rem auto 0" }} />
+    </div>
+  );
+}
+
+function Tag({ children, bg = "var(--color-tertiary)", color = "var(--color-greenish)" }: { children: React.ReactNode; bg?: string; color?: string }) {
+  return (
+    <span style={{ display: "inline-block", background: bg, color, fontSize: ".65rem", fontWeight: 600, letterSpacing: ".1em", textTransform: "uppercase", padding: ".25rem .8rem", borderRadius: 99, marginBottom: ".75rem", fontFamily: "var(--font)" }}>
+      {children}
+    </span>
+  );
+}
+
+function Field({ label, full, children }: { label: string; full?: boolean; children: React.ReactNode }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: ".4rem", ...(full ? { gridColumn: "1 / -1" } : {}) }}>
+      <label style={{ fontSize: ".68rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".1em", color: "var(--color-primary)", fontFamily: "var(--font)" }}>
+        {label}
+      </label>
+      <div style={fieldWrapStyle}>{children}</div>
+    </div>
+  );
+}
+
+// ─── PAGE DATA ───────────────────────────────────────────────────
+const engagementModels = [
   {
-    icon: <FaQuestionCircle className="text-white text-2xl" />,
-    title: "Why GGPT For CSR",
-    number: "01",
-    tag: "Credibility",
-    items: [
-      "CSR-1 & NGO-DARPAN registered",
-      "8,354+ water conservation structures",
-      "Proven execution capacity (18 excavators)",
-      "Transparent reporting & audits",
-      "Community + Government convergence",
-    ],
+    num: "01", icon: "🏗️", title: "Water Conservation Projects",
+    items: ["Check dam construction & deepening (₹4–₹10 lakh/structure)", "Recharge bore wells & percolation pits", "Village watershed restoration", "District / Taluka-level water security projects"],
   },
   {
-    icon: <MdReceipt className="text-white text-2xl" />,
-    title: "What CSR Partners Receive",
-    number: "02",
-    tag: "Benefits",
-    items: [
-      "Utilisation Certificate",
-      "Impact Report (photos, GPS, numbers)",
-      "Branding at site (if applicable)",
-      "Annual / quarterly reporting",
-      "CSR-1 Certificate",
-    ],
+    num: "02", icon: "🌍", title: "Climate & Environmental Programs",
+    items: ["Groundwater recharge programs", "Watershed ecosystem restoration", "Climate adaptation for rural communities", "Village, cluster or district adoption model"],
   },
   {
-    icon: <FaLeaf className="text-white text-2xl" />,
-    title: "CSR Engagement Models",
-    number: "03",
-    tag: "Options",
-    items: [
-      "Sponsorship of check-dam deepening (₹4–₹10 lakh per structure)",
-      "District / Taluka water security projects",
-      "Machinery support (Excavators)",
-      "Multi-year MoU partnerships",
-      "Community + Government convergence",
-    ],
+    num: "03", icon: "🤝", title: "Employee & Partnership Engagement",
+    items: ["Field visits to active project sites", "Volunteer participation in conservation activities", "Awareness programs on sustainable water management", "Multi-year MoU / machinery support partnerships"],
   },
 ];
 
+const govFeatures = [
+  { icon: "💧", title: "Water Conservation & Groundwater Recharge", desc: "GGPT works alongside government departments to build and rejuvenate check dams, recharge systems, and other decentralised water harvesting structures that improve village-level water security in semi-arid regions." },
+  { icon: "🌾", title: "Rural Development Programs", desc: "The Trust collaborates on village-level infrastructure benefiting farmers, livestock, and local ecosystems — including watershed restoration and community-based resource management initiatives." },
+  { icon: "🛠️", title: "Technical & Community Implementation Support", desc: "GGPT brings deep grassroots experience in community mobilisation and village participation — bridging policy intent with effective ground-level action for sustainable water assets." },
+  { icon: "🇮🇳", title: "Alignment with National Water & Climate Priorities", desc: "Programs contribute to national priorities in water conservation, climate resilience, and sustainable rural development, helping scale community-driven models that address groundwater depletion." },
+];
+
+const eduCards = [
+  { Icon: GraduationCap, iconBg: "var(--color-tertiary)", iconColor: "var(--color-primary)", title: "Student Field Exposure & Learning Visits", desc: "Organise field visits to GGPT project sites — check dams, recharge systems and watershed structures — offering practical context for coursework.", items: ["Live site walk-throughs with project engineers", "Practical watershed development exposure", "Rural water management field learning"] },
+  { Icon: FlaskConical,  iconBg: "#fef9c3",               iconColor: "#854d0e",              title: "Research & Academic Collaboration",        desc: "GGPT welcomes joint research on critical water and climate topics with universities and research institutions.",                                  items: ["Groundwater recharge & watershed management", "Climate resilience & rural water governance", "Sustainable agriculture practices"] },
+  { Icon: Briefcase,     iconBg: "var(--color-dark)",     iconColor: "var(--color-primary)", title: "Internships & Student Engagement",          desc: "Hands-on experience in community engagement, environmental management, and rural development for multi-disciplinary students.",                   items: ["Environmental science & engineering students", "Rural development & social science streams", "Live field project participation"] },
+  { Icon: Megaphone,     iconBg: "#fce7f3",               iconColor: "#9d174d",              title: "Awareness & Knowledge Programs",            desc: "Seminars, workshops, and awareness drives encouraging young people to lead in environmental stewardship.",                                       items: ["Water conservation practices workshops", "Climate change adaptation seminars", "Sustainable rural development talks"] },
+];
+
+// ─── PAGE ────────────────────────────────────────────────────────
 export default function Support() {
   return (
-    <>
-      <SmoothScroll>
-        {/* Section - 1 */}
-        <section className="bg-[var(--bg-grn)] font-[var(--font)]">
-          <div className="container">
-            <div className="text-center">
-              <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-                <span className="w-8 h-px bg-[var(--color-secondary)]" />
-                CSR Partnership
-                <span className="w-8 h-px bg-[var(--color-secondary)]" />
+    <div style={{ fontFamily: "var(--font)", background: "#fafafa", overflowX: "hidden" }}>
+
+
+      {/* ══════════════════════════════════
+          1 · HERO
+      ══════════════════════════════════ */}
+      <section style={{ minHeight: "100vh", background: "var(--color-primary)", display: "grid", placeItems: "center", padding: "6rem 2rem 4rem", position: "relative", overflow: "hidden" }}>
+
+        {/* radial glow overlays */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse 60% 60% at 80% 20%, rgba(172,215,243,.25) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 10% 80%, rgba(241,207,105,.15) 0%, transparent 55%)" }} />
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center", position: "relative", zIndex: 1, maxWidth: 1200, width: "100%" }}>
+
+          {/* LEFT */}
+          <motion.div initial="hidden" animate="show" variants={stagger} style={{ display: "flex", flexDirection: "column" }}>
+            <motion.div variants={fadeUp}><Eyebrow>Girganga Parivar Trust</Eyebrow></motion.div>
+
+            <motion.h1 variants={fadeUp} style={{ fontFamily: "var(--font)", fontSize: "clamp(2.8rem,5vw,5rem)", fontWeight: 800, lineHeight: 1.08, color: "#ffffff", marginBottom: "1.5rem" }}>
+              Partner With Us<br />
+              For{" "}
+              <span style={{ color: "var(--color-secondary)", fontStyle: "italic" }}>Water</span>
+              <br />Security
+            </motion.h1>
+
+            <motion.p variants={fadeUp} style={{ color: "rgba(255,255,255,.7)", fontSize: "1rem", lineHeight: 1.75, maxWidth: 480, marginBottom: "2rem" }}>
+              Join hands with GGPT to restore groundwater, revive watersheds, and build climate resilience across rural Gujarat through transparent, community-driven programs.
+            </motion.p>
+
+            {/* pills */}
+            <motion.div variants={fadeUp} style={{ display: "flex", flexWrap: "wrap", gap: ".75rem", marginBottom: "2rem" }}>
+              {["CSR-1 Registered", "NGO-DARPAN", "SDG Aligned", "18 Excavators"].map((p, i) => (
+                <span key={i} style={{ background: i === 0 ? "var(--color-secondary)" : "rgba(255,255,255,.10)", border: `1px solid ${i === 0 ? "var(--color-secondary)" : "rgba(255,255,255,.18)"}`, color: i === 0 ? "var(--color-primary)" : "rgba(255,255,255,.85)", fontWeight: i === 0 ? 700 : 400, fontSize: ".75rem", padding: ".4rem 1rem", borderRadius: 99, fontFamily: "var(--font)" }}>
+                  {p}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* stat grid */}
+            <motion.div variants={fadeUp} style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem" }}>
+              {[{ num: "8,354+", lbl: "Structures Built" }, { num: "3", lbl: "Partner Types" }, { num: "SDG 6·13·15", lbl: "Global Goals" }].map((s, i) => (
+                <div key={i} style={{ background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 16, padding: "1.25rem", textAlign: "center" }}>
+                  <div style={{ fontFamily: "var(--font)", fontSize: "1.6rem", fontWeight: 800, color: "var(--color-secondary)" }}>{s.num}</div>
+                  <div style={{ fontSize: ".62rem", color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: ".1em", marginTop: ".25rem" }}>{s.lbl}</div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* RIGHT – partner type cards */}
+          <motion.div initial="hidden" animate="show" variants={stagger} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+            {[
+              { Icon: Building2,    bg: "rgba(241,207,105,.22)", title: "Corporate Partnerships",    desc: "CSR-driven water conservation — check dams, recharge bores, watershed restoration, employee volunteering & impact reporting." },
+              { Icon: Landmark,     bg: "rgba(172,215,243,.22)", title: "Government Collaboration",  desc: "Public–community convergence for scalable decentralised water management and national climate priority alignment." },
+              { Icon: GraduationCap, bg: "rgba(52,211,153,.18)", title: "Educational Institutes",    desc: "Field visits, research tie-ups, internships, and awareness programs cultivating the next generation of water stewards." },
+            ].map(({ Icon, bg, title, desc }, i) => (
+              <motion.div key={i} variants={fadeUp} style={{ background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 20, padding: "1.5rem 1.75rem", display: "flex", gap: "1.25rem", alignItems: "flex-start", cursor: "default" }}
+                whileHover={{ x: 6, background: "rgba(255,255,255,.13)" }} transition={{ type: "tween", duration: .25 }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: bg, display: "grid", placeItems: "center", flexShrink: 0 }}>
+                  <Icon size={22} color="#ffffff" />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: ".95rem", fontWeight: 600, color: "#ffffff", marginBottom: ".3rem", fontFamily: "var(--font)" }}>{title}</h3>
+                  <p  style={{ fontSize: ".78rem", color: "rgba(255,255,255,.55)", lineHeight: 1.6, fontFamily: "var(--font)" }}>{desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════
+          2 · CORPORATE PARTNERSHIPS
+      ══════════════════════════════════ */}
+      <section style={{ background: "#ffffff", padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
+            <SectionHeader eyebrow="Partnership Type 01" title="Corporate" highlight="Partnerships"
+              subtitle="Your CSR investment creates measurable, auditable groundwater impact. We provide full transparency — from GPS-mapped sites to utilisation certificates." />
+          </motion.div>
+
+          {/* Why GGPT + What partners receive */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2.5rem", marginBottom: "4rem" }}>
+
+            {/* dark gradient card */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              style={{ background: "linear-gradient(135deg, var(--color-primary), var(--color-greenish))", borderRadius: 28, padding: "2.5rem", color: "#ffffff", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", right: -40, bottom: -40, width: 180, height: 180, borderRadius: "50%", background: "rgba(255,255,255,.06)" }} />
+              <Tag bg="rgba(255,255,255,.12)" color="var(--color-secondary)">Why GGPT for CSR?</Tag>
+              <h3 style={{ fontFamily: "var(--font)", fontSize: "1.6rem", fontWeight: 700, marginBottom: "1.5rem", lineHeight: 1.3 }}>Proven Execution.<br />Transparent Impact.</h3>
+              <ul style={{ display: "flex", flexDirection: "column", gap: ".85rem", listStyle: "none" }}>
+                {["CSR-1 & NGO-DARPAN registered", "8,354+ water conservation structures built", "18 excavators – in-house execution capacity", "Transparent audit-ready reporting", "Community + Government convergence model", "GPS-mapped impact dashboards for partners"].map((item, i) => (
+                  <li key={i} style={{ display: "flex", alignItems: "center", gap: ".85rem", fontSize: ".85rem", color: "rgba(255,255,255,.88)", fontFamily: "var(--font)" }}>
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--color-secondary)", flexShrink: 0 }} />{item}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ marginTop: "2rem", paddingTop: "1.5rem", borderTop: "1px solid rgba(255,255,255,.15)" }}>
+                <div style={{ fontFamily: "var(--font)", fontSize: "3rem", fontWeight: 800, color: "var(--color-secondary)" }}>18+</div>
+                <div style={{ fontSize: ".75rem", color: "rgba(255,255,255,.5)", textTransform: "uppercase", letterSpacing: ".1em" }}>Years of grassroots execution</div>
+              </div>
+            </motion.div>
+
+            {/* what partners receive */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <Tag>What CSR Partners Receive</Tag>
+              <h3 style={{ fontFamily: "var(--font)", fontWeight: 700, fontSize: "1.8rem", color: "#111827", marginBottom: "1rem" }}>Full-Spectrum Accountability</h3>
+              <p style={{ color: "#6b7280", lineHeight: 1.8, fontSize: ".88rem", marginBottom: "1.25rem", fontFamily: "var(--font)" }}>
+                Every partner receives comprehensive documentation and ongoing impact communication so your CSR investment is fully auditable.
               </p>
-              <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-                Girganga{" "}
-                <span className="text-[var(--color-primary)]"> Parivar </span>{" "}
-                Trust
-              </h1>
-              <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
-                Work with us to build sustainable water conservation systems
-                across Gujarat. Together we can empower villages and ensure
-                long-term water security.
+              <ul style={{ display: "flex", flexDirection: "column", gap: ".85rem", listStyle: "none", marginBottom: "1.5rem" }}>
+                {["Utilisation Certificate & CSR-1 Certificate", "Geotagged impact report — photos, GPS & numbers", "Branding at project site (where applicable)", "Quarterly or annual progress reporting", "Groundwater recharge estimates & community assessments"].map((item, i) => (
+                  <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: ".85rem", fontSize: ".85rem", color: "#6b7280", fontFamily: "var(--font)" }}>
+                    <CheckCircle2 size={16} color="var(--color-secondary)" style={{ flexShrink: 0, marginTop: 2 }} />{item}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: ".5rem" }}>
+                {[{ label: "💧 SDG 6 – Clean Water", bg: "var(--color-tertiary)", color: "var(--color-primary)" }, { label: "🌡️ SDG 13 – Climate Action", bg: "#fef9c3", color: "#854d0e" }, { label: "🌿 SDG 15 – Life on Land", bg: "var(--color-tertiary)", color: "var(--color-greenish)" }].map((c, i) => (
+                  <span key={i} style={{ background: c.bg, color: c.color, fontSize: ".7rem", fontWeight: 600, padding: ".35rem .9rem", borderRadius: 99, fontFamily: "var(--font)" }}>{c.label}</span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* 3 engagement model cards */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.5rem" }}>
+            {engagementModels.map((card, i) => (
+              <motion.div key={i} variants={fadeUp}
+                style={{ background: "var(--color-tertiary)", borderRadius: 20, padding: "1.75rem", border: "1px solid rgba(0,157,196,.12)", position: "relative" }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,157,196,.12)" }} transition={{ type: "tween", duration: .25 }}>
+                <div style={{ position: "absolute", top: "1rem", right: "1.5rem", fontFamily: "var(--font)", fontSize: "3.5rem", fontWeight: 900, color: "var(--color-dark)", lineHeight: 1, userSelect: "none" }}>{card.num}</div>
+                <div style={{ fontSize: "1.6rem", marginBottom: "1rem" }}>{card.icon}</div>
+                <h4 style={{ fontWeight: 700, fontSize: "1rem", color: "#111827", marginBottom: ".75rem", fontFamily: "var(--font)" }}>{card.title}</h4>
+                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: ".5rem" }}>
+                  {card.items.map((item, j) => (
+                    <li key={j} style={{ fontSize: ".78rem", color: "#6b7280", display: "flex", gap: ".6rem", alignItems: "flex-start", fontFamily: "var(--font)" }}>
+                      <span style={{ color: "var(--color-accent)", fontWeight: 700 }}>›</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* download cards */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", marginTop: "3rem" }}>
+            {[{ Icon: FileText, title: "CSR Proposal", desc: "Detailed plan of our water conservation initiatives.", href: "/Our-Work" }, { Icon: Building2, title: "Company Profile", desc: "Discover our mission, vision and impact journey.", href: "/Our-Work" }].map(({ Icon, title, desc, href }, i) => (
+              <motion.div key={i} variants={fadeUp}
+                style={{ display: "flex", gap: "1rem", alignItems: "flex-start", padding: "1.25rem 1.5rem", background: "var(--color-tertiary)", borderRadius: 18, border: "1px solid rgba(0,157,196,.15)" }}
+                whileHover={{ boxShadow: "0 12px 32px rgba(0,157,196,.12)" }} transition={{ type: "tween", duration: .25 }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(0,157,196,.12)", display: "grid", placeItems: "center", flexShrink: 0 }}>
+                  <Icon size={22} color="var(--color-primary)" />
+                </div>
+                <div>
+                  <h3 style={{ fontWeight: 600, fontSize: ".95rem", color: "var(--color-primary)", fontFamily: "var(--font)" }}>{title}</h3>
+                  <p style={{ fontSize: ".78rem", color: "#6b7280", marginBottom: ".5rem", fontFamily: "var(--font)" }}>{desc}</p>
+                  <Link href={href}>
+                    <button style={{ display: "flex", alignItems: "center", gap: ".4rem", fontSize: ".78rem", fontWeight: 600, color: "var(--color-primary)", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "var(--font)" }}>
+                      <Download size={14} /> Download PDF
+                    </button>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════
+          3 · GOVERNMENT COLLABORATION
+      ══════════════════════════════════ */}
+      <section style={{ background: "var(--color-tertiary)", padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
+            <SectionHeader eyebrow="Partnership Type 02" title="Government" highlight="Collaboration"
+              subtitle="GGPT actively collaborates with government institutions and public sector agencies to expand community-led watershed development across Gujarat." />
+          </motion.div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
+
+            {/* feature list */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+              {govFeatures.map((f, i) => (
+                <motion.div key={i} variants={fadeUp}
+                  style={{ background: "#ffffff", borderRadius: 18, padding: "1.5rem 1.75rem", borderLeft: "4px solid var(--color-primary)" }}
+                  whileHover={{ x: 6 }} transition={{ type: "tween", duration: .25 }}>
+                  <h4 style={{ fontWeight: 600, fontSize: ".95rem", color: "#111827", marginBottom: ".6rem", fontFamily: "var(--font)" }}>{f.icon} {f.title}</h4>
+                  <p  style={{ fontSize: ".82rem", color: "#6b7280", lineHeight: 1.75, fontFamily: "var(--font)" }}>{f.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* callout */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              style={{ background: "linear-gradient(135deg, var(--color-primary), var(--color-greenish))", borderRadius: 24, padding: "2.5rem", color: "#ffffff" }}>
+              <h3 style={{ fontFamily: "var(--font)", fontWeight: 700, fontSize: "1.6rem", marginBottom: "1rem" }}>Strengthening Public–Community Partnerships</h3>
+              <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.78)", lineHeight: 1.8, marginBottom: ".75rem", fontFamily: "var(--font)" }}>
+                Collaboration between government institutions and grassroots organisations plays a vital role in achieving long-term water security.
               </p>
-              <div className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
-            </div>
+              <p style={{ fontSize: ".85rem", color: "rgba(255,255,255,.78)", lineHeight: 1.8, fontFamily: "var(--font)" }}>
+                GGPT continues to work with public agencies to expand water conservation initiatives and ensure rural communities benefit from sustainable and resilient water systems.
+              </p>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: ".75rem", marginTop: "1.5rem" }}>
+                {["Proven convergence with government schemes", "Strong local community mobilisation network", "Technical execution — 18 excavators fleet", "Transparent implementation & documentation", "Scalable decentralised model for replication", "Contribution to national drought-resilience goals"].map((item, i) => (
+                  <li key={i} style={{ fontSize: ".82rem", color: "rgba(255,255,255,.88)", display: "flex", gap: ".6rem", alignItems: "flex-start", fontFamily: "var(--font)" }}>
+                    <span style={{ color: "var(--color-secondary)", fontWeight: 700 }}>✓</span>{item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
 
-            <div className="max-w-7xl mx-auto gap-16 items-center">
-              {/* RIGHT FEATURE CARDS */}
+          </div>
+        </div>
+      </section>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-8">
-                {csrCards.map((card, i) => (
-                  <div
-                    key={i}
-                    className="relative group bg-white rounded-3xl p-7 shadow-md border border-gray-100 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                  >
-                    {/* top gradient bar */}
-                    <div className="absolute top-0 left-0 w-full h-1 rounded-t-3xl bg-[var(--color-primary)]"></div>
 
-                    <div className="flex gap-5">
-                      {/* icon */}
-                      <div className="relative">
-                        <div
-                          className="w-14 h-14 flex items-center justify-center rounded-full text-white text-xl shadow-lg
-          bg-[var(--color-primary)]"
-                        >
-                          {card.icon}
-                        </div>
+      {/* ══════════════════════════════════
+          4 · EDUCATIONAL PARTNERSHIPS
+      ══════════════════════════════════ */}
+      <section style={{ background: "#ffffff", padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
 
-                        {/* glow effect */}
-                        <div className="absolute inset-0 rounded-full blur-xl opacity-30 transition"></div>
-                      </div>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
+            <SectionHeader eyebrow="Partnership Type 03" title="Educational Institute" highlight="Partnerships"
+              subtitle="Connecting academic knowledge with real-world environmental action — engaging students, researchers, and faculty in sustainable water solutions." />
+          </motion.div>
 
-                      <div className="flex-1">
-                        {/* title */}
-                        <h3 className="text-xl font-bold text-[var(--color-primary)] mb-3">
-                          {card.title}
-                        </h3>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "1.5rem" }}>
+            {eduCards.map(({ Icon, iconBg, iconColor, title, desc, items }, i) => (
+              <motion.div key={i} variants={fadeUp}
+                style={{ background: "var(--color-tertiary)", borderRadius: 24, padding: "2rem", border: "1px solid rgba(0,157,196,.1)" }}
+                whileHover={{ y: -5, boxShadow: "0 16px 40px rgba(0,157,196,.10)" }} transition={{ type: "tween", duration: .25 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.25rem" }}>
+                  <div style={{ width: 52, height: 52, borderRadius: 14, background: iconBg, display: "grid", placeItems: "center", flexShrink: 0 }}>
+                    <Icon size={24} color={iconColor} />
+                  </div>
+                  <h4 style={{ fontWeight: 700, fontSize: ".95rem", color: "#111827", fontFamily: "var(--font)" }}>{title}</h4>
+                </div>
+                <p style={{ fontSize: ".82rem", color: "#6b7280", lineHeight: 1.75, marginBottom: ".75rem", fontFamily: "var(--font)" }}>{desc}</p>
+                <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: ".5rem" }}>
+                  {items.map((item, j) => (
+                    <li key={j} style={{ fontSize: ".78rem", color: "#6b7280", display: "flex", gap: ".5rem", alignItems: "flex-start", fontFamily: "var(--font)" }}>
+                      <span style={{ color: "var(--color-secondary)", fontWeight: 700, flexShrink: 0 }}>–</span>{item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
 
-                        {/* list */}
-                        <ul className="space-y-2 text-sm text-gray-600">
-                          {card.items.map((item, index) => (
-                            <li key={index} className="flex gap-3 items-start">
-                              <span className="w-2 h-2 mt-2 rounded-full bg-[var(--color-primary)]"></span>
+            {/* wide closing card */}
+            <motion.div variants={fadeUp}
+              style={{ gridColumn: "1 / -1", background: "linear-gradient(120deg, var(--color-primary), var(--color-greenish))", borderRadius: 24, padding: "3rem", color: "#ffffff" }}>
+              <h4 style={{ fontFamily: "var(--font)", fontWeight: 700, fontSize: "1.8rem", marginBottom: "1rem" }}>Building the Next Generation of Water Stewards</h4>
+              <p style={{ fontSize: ".9rem", color: "rgba(255,255,255,.78)", lineHeight: 1.8, maxWidth: 800, fontFamily: "var(--font)" }}>
+                By working with educational institutions, GGPT aims to inspire students to become responsible environmental citizens and contribute to sustainable water management solutions for the future. Academic partnerships create a virtuous cycle — students gain real-world exposure, GGPT gains fresh research insights, and rural communities benefit from evidence-backed interventions.
+              </p>
+            </motion.div>
+          </motion.div>
 
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════
+          5 · INQUIRY FORM
+      ══════════════════════════════════ */}
+      <section style={{ background: "var(--color-tertiary)", padding: "6rem 2rem" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
+            <SectionHeader eyebrow="Get In Touch" title="Partnership" highlight="Inquiry Form"
+              subtitle="Fill in the details below and our team will respond with a tailored proposal within 2 business days." />
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            style={{ background: "#ffffff", borderRadius: 32, overflow: "hidden", boxShadow: "0 24px 64px rgba(0,157,196,.12)", display: "grid", gridTemplateColumns: "5fr 7fr", maxWidth: 960, margin: "0 auto" }}>
+
+            {/* sidebar */}
+            <div style={{ background: "linear-gradient(160deg, var(--color-primary), var(--color-greenish))", padding: "3rem 2.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div>
+                <Eyebrow>Partner With Us</Eyebrow>
+                <h3 style={{ fontFamily: "var(--font)", fontWeight: 700, fontSize: "1.8rem", color: "#ffffff", lineHeight: 1.3, marginBottom: "1rem" }}>
+                  Build Water Security For Gujarat Villages
+                </h3>
+                <p style={{ fontSize: ".82rem", color: "rgba(255,255,255,.68)", lineHeight: 1.75, fontFamily: "var(--font)" }}>
+                  Whether you&apos;re a corporation seeking impactful CSR, a government agency scaling water programs, or an institution engaging students — we have a model for you.
+                </p>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: ".75rem", marginTop: "2rem" }}>
+                {["Corporate CSR Partnerships", "Government Collaboration", "Educational Institute Tie-Ups", "CSR-1 & NGO-DARPAN Registered"].map((label, i) => (
+                  <div key={i} style={{ background: "rgba(255,255,255,.09)", border: "1px solid rgba(255,255,255,.14)", borderRadius: 12, padding: ".7rem 1rem", fontSize: ".78rem", color: "rgba(255,255,255,.85)", display: "flex", alignItems: "center", gap: ".6rem", fontFamily: "var(--font)" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--color-secondary)", flexShrink: 0 }} />{label}
                   </div>
                 ))}
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Section - 2 */}
-        <section className="bg-[var(--bg-grn)] font-[var(--font)] overflow-hidden">
-          <div className="container">
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-              {/* LEFT CONTENT */}
-              <div className="">
-                {/* heading */}
-                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center lg:justify-start gap-3">
-                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
-                  Documents & Action
-                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
-                </p>
+            {/* form */}
+            <div style={{ padding: "3rem" }}>
+              <h3 style={{ fontFamily: "var(--font)", fontWeight: 700, fontSize: "1.6rem", color: "#111827", marginBottom: ".4rem" }}>Send Your Inquiry</h3>
+              <p style={{ fontSize: ".82rem", color: "#6b7280", marginBottom: "2rem", fontFamily: "var(--font)" }}>We typically respond within 2 business days</p>
 
-                <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center lg:text-start">
-                  Transparency Builds Trust <br />
-                  <span className="text-[var(--color-primary)]">
-                    Trust Builds Impact
-                  </span>
-                </h2>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+                <Field label="Organisation Name">
+                  <Building2 size={16} color="var(--color-primary)" />
+                  <input type="text" placeholder="Your organisation name" style={inputStyle} />
+                </Field>
 
-                {/* paragraph */}
-                <p className="text-gray-500 text-sm lg:max-w-xl mb-10 leading-relaxed text-center lg:text-start">
-                  We believe transparency strengthens partnerships. Explore our
-                  CSR proposal and company profile to understand our mission and
-                  how your support creates sustainable water solutions across
-                  Gujarat.
-                </p>
+                <Field label="Contact Person">
+                  <User size={16} color="var(--color-primary)" />
+                  <input type="text" placeholder="Full name" style={inputStyle} />
+                </Field>
 
-                {/* download cards */}
-                <div className="space-y-5">
-                  {/* CSR Proposal */}
-                  <div className="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-md border border-[var(--color-primary)]/10 hover:shadow-lg transition">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-primary)]/20 text-[var(--color-primary)]">
-                      <LayoutList size={22} />
-                    </div>
+                <Field label="Email Address">
+                  <Mail size={16} color="var(--color-primary)" />
+                  <input type="email" placeholder="example@company.com" style={inputStyle} />
+                </Field>
 
-                    <div>
-                      <h3 className="font-semibold text-[var(--color-primary)]">
-                        CSR Proposal
-                      </h3>
+                <Field label="Phone Number">
+                  <Phone size={16} color="var(--color-primary)" />
+                  <input type="tel" placeholder="10-digit mobile" maxLength={10} style={inputStyle} />
+                </Field>
 
-                      <p className="text-sm text-gray-500 mb-2">
-                        Detailed plan of our water conservation initiatives.
-                      </p>
+                <Field label="Partnership Type" full>
+                  <Leaf size={16} color="var(--color-primary)" />
+                  <select style={inputStyle}>
+                    <option value="">— Select a partnership type —</option>
+                    <option>Corporate CSR Partnership</option>
+                    <option>Government Collaboration</option>
+                    <option>Educational Institute Partnership</option>
+                    <option>Other / Multiple</option>
+                  </select>
+                </Field>
 
-                      <Link href="/Our-Work">
-                        <button className="flex items-center gap-2 text-sm font-medium text-[var(--color-primary)] cursor-pointer">
-                          <Download size={15} />
-                          Download PDF
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
+                <Field label="Subject" full>
+                  <FileText size={16} color="var(--color-primary)" />
+                  <input type="text" placeholder="e.g. Check dam CSR, Research internship, Watershed MoU…" style={inputStyle} />
+                </Field>
 
-                  {/* Company Profile */}
-                  <div className="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-md border border-[var(--color-primary)]/10 hover:shadow-lg transition">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-primary)]/20 text-[var(--color-primary)]">
-                      <Building2 size={22} />
-                    </div>
-
-                    <div>
-                      <h3 className="font-semibold text-[var(--color-primary)]">
-                        Company Profile
-                      </h3>
-
-                      <p className="text-sm text-gray-500 mb-2">
-                        Discover our mission, vision and impact journey.
-                      </p>
-
-                      <a href="/Our-Work">
-                        <button className="flex items-center gap-2 text-sm font-medium text-[var(--color-primary)] cursor-pointer">
-                          <Download size={15} />
-                          Download PDF
-                        </button>
-                      </a>
-                    </div>
+                {/* textarea – custom alignment */}
+                <div style={{ display: "flex", flexDirection: "column", gap: ".4rem", gridColumn: "1 / -1" }}>
+                  <label style={{ fontSize: ".68rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".1em", color: "var(--color-primary)", fontFamily: "var(--font)" }}>
+                    Message &amp; Details
+                  </label>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: ".5rem", background: "var(--color-tertiary)", borderRadius: 12, padding: ".7rem 1rem", border: "1.5px solid transparent" }}>
+                    <MessageSquare size={16} color="var(--color-primary)" style={{ marginTop: 2, flexShrink: 0 }} />
+                    <textarea rows={4} placeholder="Share your CSR budget range, project scope, geographic focus, or any specific questions…" style={{ ...inputStyle, resize: "none" }} />
                   </div>
                 </div>
               </div>
 
-              {/* RIGHT IMAGE */}
-              <div className="relative">
-                <div className="rounded-3xl overflow-hidden shadow-2xl">
-                  <img
-                    src="/image/partner-with-us-csr/CSR.png"
-                    alt="CSR Impact"
-                    className="w-full h-auto md:h-[520px] object-cover"
-                  />
-                </div>
-
-                {/* floating card */}
-                <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-[var(--color-primary)]/10 hidden lg:block">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-secondary)] text-white">
-                      <Building2 size={22} />
-                    </div>
-
-                    <div>
-                      <p className="text-lg font-bold text-[var(--color-secondary)]">
-                        8,354+
-                      </p>
-
-                      <p className="text-xs text-gray-500">Structures Built</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <motion.button type="button"
+                whileHover={{ y: -1, background: "var(--color-greenish)" }}
+                transition={{ type: "tween", duration: .2 }}
+                style={{ marginTop: "1.5rem", width: "100%", padding: "1rem", background: "var(--color-primary)", color: "#ffffff", border: "none", borderRadius: 14, fontFamily: "var(--font)", fontSize: ".95rem", fontWeight: 600, letterSpacing: ".04em", cursor: "pointer" }}>
+                Submit Inquiry →
+              </motion.button>
             </div>
-          </div>
-        </section>
 
-        {/* Section - 3 */}
-        <section className="font-[var(--font)]">
-          <div className="container">
-            <div className=" mx-auto">
-              <div className="text-center mb-16">
-                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center  gap-3">
-                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
-                  Get In Touch
-                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
-                </p>
+          </motion.div>
+        </div>
+      </section>
 
-                <h2 className="text-4xl sm:text-5xl font-bold leading-tight text-black mb-6 text-center">
-                  CSR Partnership
-                  <span className="text-[var(--color-primary)]">
-                    {" "}
-                    Inquiry Form
-                  </span>
-                </h2>
 
-                {/* paragraph */}
-                <p className="text-gray-500 text-lg mb-10 leading-relaxed text-center ">
-                  Partner with us to create sustainable impact. Fill in the
-                  details and our team will get back to you shortly.
-                </p>
-              </div>
-
-              {/* form card */}
-              <div>
-                <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-primary)]/20 flex flex-col md:flex-row">
-                  {/* LEFT IMAGE */}
-                  <div className="md:w-2/5 relative">
-                    <img
-                      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80"
-                      alt="Water structure construction"
-                      className="w-full h-full object-cover max-h-[315px]"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/80 to-transparent" />
-
-                    <div className="absolute bottom-8 left-8 right-8 text-white">
-                      <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-secondary)] mb-2">
-                        CSR Partnership
-                      </p>
-
-                      <h3 className="text-2xl font-bold leading-snug">
-                        Build Water Security <br />
-                        For Gujarat Villages
-                      </h3>
-
-                      <p className="text-sm text-white/80 mt-2">
-                        Partner with us to create sustainable water structures.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* RIGHT FORM */}
-                  <div className="w-full md:w-3/5 bg-white px-8 sm:px-12 py-10 flex flex-col gap-6">
-                    <div>
-                      <h3 className="text-2xl font-bold text-[var(--color-primary)]">
-                        Partner With Us
-                      </h3>
-
-                      <p className="text-gray-500 text-sm mt-1">
-                        Enquire about CSR opportunities
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                      {/* Company */}
-                      <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
-                          Company Name
-                        </label>
-
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
-                          <Building2
-                            size={16}
-                            className="text-[var(--color-primary)]"
-                          />
-
-                          <input
-                            type="text"
-                            placeholder="Your company name"
-                            className="flex-1 text-sm outline-none bg-transparent"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Contact */}
-                      <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
-                          Contact Number
-                        </label>
-
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
-                          <User
-                            size={16}
-                            className="text-[var(--color-primary)]"
-                          />
-
-                          <input
-                            type="tel"
-                            placeholder="Your contact number"
-                            maxLength={10}
-                            pattern="[0-9]{10}"
-                            className="flex-1 text-sm outline-none bg-transparent"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Email */}
-                      <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
-                          Email
-                        </label>
-
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
-                          <Mail
-                            size={16}
-                            className="text-[var(--color-primary)]"
-                          />
-
-                          <input
-                            type="email"
-                            placeholder="exmple@emil.com"
-                            className="flex-1 text-sm outline-none bg-transparent"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Subject */}
-                      <div>
-                        <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
-                          Subject
-                        </label>
-
-                        <div className="flex items-center gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-2 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
-                          <FileText
-                            size={16}
-                            className="text-[var(--color-primary)]"
-                          />
-
-                          <input
-                            type="text"
-                            placeholder="subject details"
-                            className="flex-1 text-sm outline-none bg-transparent"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* TEXTAREA */}
-                    <div>
-                      <label className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wide mb-1 block">
-                        CSR Budget & Details
-                      </label>
-
-                      <div className="flex items-start gap-2 border border-[var(--color-primary)]/20 rounded-xl px-3 py-3 bg-[var(--bg-grn)] focus-within:border-[var(--color-primary)]">
-                        <MessageSquare
-                          size={16}
-                          className="text-[var(--color-primary)] mt-1"
-                        />
-
-                        <textarea
-                          rows={3}
-                          placeholder="Share your CSR budget range and expectations..."
-                          className="flex-1 text-sm outline-none bg-transparent resize-none"
-                        />
-                      </div>
-                    </div>
-
-                    {/* BUTTON */}
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 16 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                      className="w-full"
-                    >
-                      <button
-                        type="submit"
-                        className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
-      font-semibold text-base px-10 py-4 cursor-pointer
-      bg-[var(--color-primary)] text-[var(--color-secondary)]
-      hover:text-[var(--color-primary)] overflow-hidden"
-                      >
-                        <span className="relative z-10 flex gap-2 items-center">
-                          Submit Inquiry →
-                        </span>
-
-                        <span className="btn-primary-overlay"></span>
-                      </button>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section - 4 */}
-        <Slider />
-      </SmoothScroll>
-    </>
+    </div>
   );
 }

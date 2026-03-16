@@ -12,7 +12,8 @@ import {
   FiMail,
   FiSearch,
 } from "react-icons/fi";
-import { FaFacebookF, FaYoutube, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaYoutube, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa6";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -26,7 +27,7 @@ export default function Navbar() {
   const mediaRef = useRef<HTMLLIElement>(null);
 
   const isActive = (path: string) => pathname === path;
-  const isWorkActive = pathname.startsWith("/our-work");
+  const isWorkActive = pathname.startsWith("/Our-Work");
   const isMediaActive = pathname.startsWith("/media");
 
   /* close dropdowns on outside click */
@@ -120,8 +121,8 @@ export default function Navbar() {
                   label: "Instagram",
                 },
                 {
-                  icon: <FaTwitter size={11} />,
-                  href: "https://x.com/GirgangaT71455",
+                  icon: <FaLinkedinIn size={11} />,
+                  href: "https://in.linkedin.com/in/girganga-parivar-trust-450354287",
                   label: "Twitter",
                 },
               ].map(({ icon, href, label }) => (
@@ -209,27 +210,30 @@ export default function Navbar() {
               onMouseEnter={() => setWorkOpen(true)}
               onMouseLeave={() => setWorkOpen(false)}
             >
-              <button
-                type="button"
+              <Link
+                href="/Our-Work"
                 onClick={() => {
-                  setWorkOpen(!workOpen);
+                  setWorkOpen(false);
                   setMediaOpen(false);
                 }}
-                className={`${linkCls(isWorkActive ? "/Our-Work" : "")} gap-1`}
+                className={`${linkCls(isWorkActive ? "/Our-Work" : "")} gap-1 flex items-center`}
               >
                 Our Work
                 <FiChevronDown
                   size={11}
-                  className={`mt-px transition-transform duration-200 ${workOpen ? "rotate-180" : ""}`}
+                  className={`mt-px transition-transform duration-200 ${
+                    workOpen ? "rotate-180" : ""
+                  }`}
                 />
                 <span className={underline(isWorkActive || workOpen, false)} />
-              </button>
+              </Link>
 
               <div className={dropPanel(workOpen)}>
                 <div
                   className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3
-                     bg-white border-l border-t border-slate-100 rotate-45"
+      bg-white border-l border-t border-slate-100 rotate-45"
                 />
+
                 {[{ label: "Impact", href: "/impact" }].map(
                   ({ label, href }) => (
                     <Link
@@ -252,25 +256,29 @@ export default function Navbar() {
               onMouseEnter={() => setMediaOpen(true)}
               onMouseLeave={() => setMediaOpen(false)}
             >
-              <button
-                type="button"
+              <Link
+                href="/media"
                 onClick={() => {
                   setMediaOpen(!mediaOpen);
                   setWorkOpen(false);
                 }}
-                className={`${linkCls(isMediaActive ? "/media" : "")} gap-1`}
+                className={`${linkCls(isMediaActive ? "/media" : "")} gap-1 flex items-center`}
               >
                 Media
                 <FiChevronDown
                   size={11}
-                  className={`mt-px transition-transform duration-200 ${mediaOpen ? "rotate-180" : ""}`}
+                  className={`mt-px transition-transform duration-200 ${
+                    mediaOpen ? "rotate-180" : ""
+                  }`}
                 />
                 <span
                   className={underline(isMediaActive || mediaOpen, false)}
                 />
-              </button>
+              </Link>
+
               <div className={dropPanel(mediaOpen)}>
                 <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
+
                 {[
                   { label: "Photos", href: "/photos" },
                   { label: "Press Release", href: "/press-release" },
@@ -316,12 +324,17 @@ export default function Navbar() {
             <li className="flex items-center ml-5 pl-5 border-l border-slate-200 my-3">
               <Link
                 href="/donate"
-                className="text-[11px] font-extrabold uppercase tracking-[0.15em] px-5 py-2
-                           border border-[var(--color-primary)] text-[var(--color-primary)]
-                           hover:bg-[var(--color-secondary)] hover:border-transparent hover:text-white
-                           rounded-sm transition-all duration-200"
+                className="btn-secondary relative inline-flex items-center justify-center
+      text-[11px] font-extrabold uppercase tracking-[0.15em] px-5 py-2
+      border border-[var(--color-primary)] text-[var(--color-primary)]
+      hover:border-transparent hover:text-white
+      rounded-sm overflow-hidden"
               >
-                Donate
+                <span className="relative z-10 flex items-center gap-1">
+                  Donate
+                </span>
+
+                <span className="btn-secondary-overlay"></span>
               </Link>
             </li>
           </ul>
