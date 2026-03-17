@@ -1,22 +1,14 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import Link from "next/link";
 import {
   Briefcase,
   Building2,
-  CheckCircle2,
-  Download,
-  FileText,
   FlaskConical,
   GraduationCap,
   Landmark,
-  Leaf,
-  Mail,
   Megaphone,
-  MessageSquare,
-  Phone,
-  User,
+  Subtitles,
 } from "lucide-react";
 
 import SmoothScroll from "../../Component/SmothScrolling";
@@ -110,41 +102,31 @@ function Field({
 // ─── PAGE DATA ───────────────────────────────────────────────────
 const engagementModels = [
   {
-    num: "01",
-    icon: "🏗️",
     title: "Water Conservation Projects",
     items: [
-      "Check dam construction & deepening (₹4–₹10 lakh/structure)",
-      "Recharge bore wells & percolation pits",
-      "Village watershed restoration",
-      "District / Taluka-level water security projects",
+      "Check dams",
+      "Recharge bore wells, ",
+      "Percolation pits, ",
+      "Village watershed restoration projects. ",
     ],
   },
   {
-    num: "02",
-    icon: "🌍",
     title: "Climate & Environmental Programs",
     items: [
       "Groundwater recharge programs",
       "Watershed ecosystem restoration",
       "Climate adaptation for rural communities",
-      "Village, cluster or district adoption model",
     ],
   },
   {
-    num: "03",
-    icon: "🤝",
     title: "Employee & Partnership Engagement",
     items: [
-      "Field visits to active project sites",
+      "Field visits to project sites, ",
       "Volunteer participation in conservation activities",
       "Awareness programs on sustainable water management",
-      "Multi-year MoU / machinery support partnerships",
     ],
   },
   {
-    num: "04",
-    icon: "📊",
     title: "Impact Transparency",
     items: [
       "Project progress updates, ",
@@ -186,7 +168,7 @@ const eduCards = [
     iconColor: "text-[var(--color-primary)]",
     iconColorHex: "var(--color-primary)",
     title: "Student Field Exposure & Learning Visits",
-    desc: "Organise field visits to GGPT project sites — check dams, recharge systems and watershed structures — offering practical context for coursework.",
+    desc: "Educational institutions can organize field visits to GGPT project locations where students can observe water conservation structures such as check dams and groundwater recharge systems. These visits help students understand practical approaches to watershed development and rural water management.",
     items: [
       "Live site walk-throughs with project engineers",
       "Practical watershed development exposure",
@@ -199,11 +181,13 @@ const eduCards = [
     iconColor: "text-yellow-800",
     iconColorHex: "#854d0e",
     title: "Research & Academic Collaboration",
-    desc: "GGPT welcomes joint research on critical water and climate topics with universities and research institutions.",
+    desc: "GGPT welcomes collaboration with universities and research institutions for studies related to:",
     items: [
-      "Groundwater recharge & watershed management",
-      "Climate resilience & rural water governance",
-      "Sustainable agriculture practices",
+      "Groundwater recharge, ",
+      "Watershed management, ",
+      "Climate resilience, ",
+      "Rural water governance, ",
+      "⦁	Sustainable agriculture practices. ",
     ],
   },
   {
@@ -212,7 +196,7 @@ const eduCards = [
     iconColor: "text-[var(--color-primary)]",
     iconColorHex: "var(--color-primary)",
     title: "Internships & Student Engagement",
-    desc: "Hands-on experience in community engagement, environmental management, and rural development for multi-disciplinary students.",
+    desc: "Students from various disciplines such as environmental science, rural development, engineering, and social sciences can participate in internships and field projects with GGPT. These opportunities provide hands-on experience in community engagement, environmental management, and development practices.",
     items: [
       "Environmental science & engineering students",
       "Rural development & social science streams",
@@ -225,11 +209,12 @@ const eduCards = [
     iconColor: "text-pink-800",
     iconColorHex: "#9d174d",
     title: "Awareness & Knowledge Programs",
-    desc: "Seminars, workshops, and awareness drives encouraging young people to lead in environmental stewardship.",
+    desc: "GGPT also partners with educational institutions to conduct awareness programs, seminars, and workshops on topics such as:",
     items: [
-      "Water conservation practices workshops",
-      "Climate change adaptation seminars",
-      "Sustainable rural development talks",
+      "Water conservation practices, ",
+      "Climate change adaptation, ",
+      "Sustainable rural development, ",
+      "Community-led environmental initiatives. ",
     ],
   },
 ];
@@ -281,50 +266,38 @@ export default function Support() {
 
                   <motion.h1
                     variants={fadeUp}
-                    className="font-[var(--font)] text-7xl font-extrabold leading-[1.08] text-white mb-6"
+                    className="font-[var(--font)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.08] text-white mb-6"
                   >
-                    Partner With Us
+                    Working Together
                     <br />
                     For{" "}
                     <span className="text-[var(--color-secondary)] italic">
-                      Water
+                      Sustainable
                     </span>
                     <br />
-                    Security
+                    Water Security
                   </motion.h1>
 
                   <motion.p
                     variants={fadeUp}
-                    className="text-white/70 text-base leading-[1.75] lg:max-w-[480px] mb-8 font-[var(--font)]"
+                    className="text-white/70 text-base leading-[1.75] lg:max-w-[580px] mb-8 font-[var(--font)]"
                   >
-                    Join hands with GGPT to restore groundwater, revive
-                    watersheds, and build climate resilience across rural
-                    Gujarat through transparent, community-driven programs.
+                    Girganga Parivar Trust welcomes partnerships with
+                    corporations that are committed to creating meaningful
+                    environmental and social impact. Through collaborative CSR
+                    initiatives, companies can support large-scale water
+                    conservation, groundwater recharge, and climate resilience
+                    programs across rural Gujarat.
                   </motion.p>
-
-                  {/* pills */}
-                  <motion.div
+                  <motion.p
                     variants={fadeUp}
-                    className="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start"
+                    className="text-white/70 text-base leading-[1.75] lg:max-w-[580px] mb-8 font-[var(--font)]"
                   >
-                    {[
-                      "CSR-1 Registered",
-                      "NGO-DARPAN",
-                      "SDG Aligned",
-                      "18 Excavators",
-                    ].map((p, i) => (
-                      <span
-                        key={i}
-                        className={`text-[0.75rem] px-4 py-1.5 rounded-full font-[var(--font)] border ${
-                          i === 0
-                            ? "bg-[var(--color-secondary)] border-[var(--color-secondary)] text-[var(--color-primary)] font-bold"
-                            : "bg-white/10 border-white/20 text-white/85 font-normal"
-                        }`}
-                      >
-                        {p}
-                      </span>
-                    ))}
-                  </motion.div>
+                    GGPT offers a transparent and community-driven
+                    implementation model that enables corporate partners to
+                    directly contribute to improving water security,
+                    agricultural sustainability, and rural livelihoods.
+                  </motion.p>
                 </motion.div>
 
                 {/* RIGHT – partner type cards */}
@@ -400,123 +373,6 @@ export default function Support() {
                 />
               </motion.div>
 
-              {/* Why GGPT + What partners receive */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
-                {/* dark gradient card */}
-                <motion.div
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  className="bg-[var(--color-primary)] rounded-[28px] p-10 text-white relative overflow-hidden"
-                >
-                  <div className="absolute -right-10 -bottom-10 w-[180px] h-[180px] rounded-full bg-white/[0.06]" />
-                  <Tag
-                    bg="bg-white/[0.12]"
-                    color="text-[var(--color-secondary)]"
-                  >
-                    Why GGPT for CSR?
-                  </Tag>
-                  <h3 className="font-[var(--font)] text-[1.6rem] font-bold mb-6 leading-[1.3]">
-                    Proven Execution.
-                    <br />
-                    Transparent Impact.
-                  </h3>
-                  <ul className="flex flex-col gap-3.5 list-none">
-                    {[
-                      "CSR-1 & NGO-DARPAN registered",
-                      "8,354+ water conservation structures built",
-                      "18 excavators – in-house execution capacity",
-                      "Transparent audit-ready reporting",
-                      "Community + Government convergence model",
-                      "GPS-mapped impact dashboards for partners",
-                    ].map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-center gap-3.5 text-[0.85rem] text-white/[0.88] font-[var(--font)]"
-                      >
-                        <span className="w-2 h-2 rounded-full bg-[var(--color-secondary)] shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8 pt-6 border-t border-white/15">
-                    <div className="font-[var(--font)] text-5xl font-extrabold text-[var(--color-secondary)]">
-                      18+
-                    </div>
-                    <div className="text-[0.75rem] text-white/50 uppercase tracking-[0.1em]">
-                      Years of grassroots execution
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* what partners receive */}
-                <motion.div
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  className="flex flex-col justify-center"
-                >
-                  <Tag>What CSR Partners Receive</Tag>
-                  <h3 className="font-[var(--font)] font-bold text-[1.8rem] text-gray-900 mb-4">
-                    Full-Spectrum Accountability
-                  </h3>
-                  <p className="text-gray-500 leading-[1.8] text-[0.88rem] mb-5 font-[var(--font)]">
-                    Every partner receives comprehensive documentation and
-                    ongoing impact communication so your CSR investment is fully
-                    auditable.
-                  </p>
-                  <ul className="flex flex-col gap-3.5 list-none mb-6">
-                    {[
-                      "Utilisation Certificate & CSR-1 Certificate",
-                      "Geotagged impact report — photos, GPS & numbers",
-                      "Branding at project site (where applicable)",
-                      "Quarterly or annual progress reporting",
-                      "Groundwater recharge estimates & community assessments",
-                    ].map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-3.5 text-[0.85rem] text-gray-500 font-[var(--font)]"
-                      >
-                        <CheckCircle2
-                          size={16}
-                          color="var(--color-secondary)"
-                          className="shrink-0 mt-0.5"
-                        />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      {
-                        label: "💧 SDG 6 – Clean Water",
-                        bg: "bg-[var(--color-tertiary)]",
-                        color: "text-[var(--color-primary)]",
-                      },
-                      {
-                        label: "🌡️ SDG 13 – Climate Action",
-                        bg: "bg-yellow-100",
-                        color: "text-yellow-800",
-                      },
-                      {
-                        label: "🌿 SDG 15 – Life on Land",
-                        bg: "bg-[var(--color-tertiary)]",
-                        color: "text-[var(--color-greenish)]",
-                      },
-                    ].map((c, i) => (
-                      <span
-                        key={i}
-                        className={`${c.bg} ${c.color} text-[0.7rem] font-semibold px-3.5 py-1.5 rounded-full font-[var(--font)]`}
-                      >
-                        {c.label}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-
               {/* 3 engagement model cards */}
               <motion.div
                 initial="hidden"
@@ -536,10 +392,6 @@ export default function Support() {
                     }}
                     transition={{ type: "tween", duration: 0.25 }}
                   >
-                    <div className="absolute top-4 right-6 font-[var(--font)] text-[3.5rem] font-black text-[var(--color-dark)] leading-none select-none">
-                      {card.num}
-                    </div>
-                    <div className="text-[1.6rem] mb-4">{card.icon}</div>
                     <h4 className="font-bold text-base text-gray-900 mb-3 font-[var(--font)]">
                       {card.title}
                     </h4>
@@ -556,57 +408,6 @@ export default function Support() {
                         </li>
                       ))}
                     </ul>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              {/* download cards */}
-              <motion.div
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                variants={stagger}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-12"
-              >
-                {[
-                  {
-                    Icon: FileText,
-                    title: "CSR Proposal",
-                    desc: "Detailed plan of our water conservation initiatives.",
-                    href: "/Our-Work",
-                  },
-                  {
-                    Icon: Building2,
-                    title: "Company Profile",
-                    desc: "Discover our mission, vision and impact journey.",
-                    href: "/Our-Work",
-                  },
-                ].map(({ Icon, title, desc, href }, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeUp}
-                    className="flex gap-4 items-start px-6 py-5 bg-[var(--color-tertiary)] rounded-[18px] border border-[rgba(0,157,196,0.15)]"
-                    whileHover={{
-                      boxShadow: "0 12px 32px rgba(0,157,196,.12)",
-                    }}
-                    transition={{ type: "tween", duration: 0.25 }}
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-[rgba(0,157,196,0.12)] grid place-items-center shrink-0">
-                      <Icon size={22} color="var(--color-primary)" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-[0.95rem] text-[var(--color-primary)] font-[var(--font)]">
-                        {title}
-                      </h3>
-                      <p className="text-[0.78rem] text-gray-500 mb-2 font-[var(--font)]">
-                        {desc}
-                      </p>
-                      <Link href={href}>
-                        <button className="flex items-center gap-1.5 text-[0.78rem] font-semibold text-[var(--color-primary)] bg-transparent border-none cursor-pointer p-0 font-[var(--font)]">
-                          <Download size={14} /> Download PDF
-                        </button>
-                      </Link>
-                    </div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -764,7 +565,7 @@ export default function Support() {
                   eyebrow="Partnership Type 03"
                   title="Educational Institute"
                   highlight="Partnerships"
-                  subtitle="Connecting academic knowledge with real-world environmental action — engaging students, researchers, and faculty in sustainable water solutions."
+                  subtitle="Girganga Parivar Trust collaborates with educational institutions to promote awareness, research, and practical learning on water conservation and environmental sustainability. These partnerships aim to engage students, researchers, and faculty members in understanding the challenges of water scarcity and the importance of community-led watershed management."
                 />
               </motion.div>
 
@@ -840,10 +641,7 @@ export default function Support() {
                     By working with educational institutions, GGPT aims to
                     inspire students to become responsible environmental
                     citizens and contribute to sustainable water management
-                    solutions for the future. Academic partnerships create a
-                    virtuous cycle — students gain real-world exposure, GGPT
-                    gains fresh research insights, and rural communities benefit
-                    from evidence-backed interventions.
+                    solutions for the future.
                   </p>
                 </motion.div>
               </motion.div>

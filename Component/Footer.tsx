@@ -31,8 +31,8 @@ export default function Footer() {
                     <Image
                       src="/image/logo.png"
                       alt="Girganga Parivar Trust"
-                      width={56}
-                      height={56}
+                      width={66}
+                      height={66}
                       className="object-contain"
                     />
                   </div>

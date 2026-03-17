@@ -12,7 +12,13 @@ import {
   FiMail,
   FiSearch,
 } from "react-icons/fi";
-import { FaFacebookF, FaYoutube, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaYoutube,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 
 export default function Navbar() {
@@ -167,7 +173,7 @@ export default function Navbar() {
       <nav
         className={`sticky top-0 w-full z-50 bg-white transition-all duration-300 ${scrolled ? "shadow-md" : "border-none"}`}
       >
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+        <div className="max-w-full mx-auto px-6 lg:px-12 flex items-center justify-between">
           {/* ── LEFT: Logo  +  "Parivar Trust" rule ── */}
           <Link
             href="/"
@@ -200,6 +206,14 @@ export default function Navbar() {
               <Link href="/" className={linkCls("/")}>
                 Home
                 <span className={underline(isActive("/"))} />
+              </Link>
+            </li>
+
+            {/* ABOUT US */}
+            <li className="relative group">
+              <Link href="/about-us" className={linkCls("/about-us")}>
+                About Us
+                <span className={underline(isActive("/about-us"))} />
               </Link>
             </li>
 
@@ -247,6 +261,40 @@ export default function Navbar() {
                   ),
                 )}
               </div>
+            </li>
+
+            {/* impact */}
+            <li className="relative group">
+              <Link href="/impact" className={linkCls("/impact")}>
+                Impact
+                <span className={underline(isActive("/impact"))} />
+              </Link>
+            </li>
+
+            {/* ABOUT US */}
+            <li className="relative group">
+              <Link
+                href="/reports-publications"
+                className={linkCls("/reports-publications")}
+              >
+                REPORTS & PUBLICATIONS
+                <span
+                  className={underline(isActive("/reports-publications"))}
+                />
+              </Link>
+            </li>
+
+            {/* ABOUT US */}
+            <li className="relative group">
+              <Link
+                href="/prtners-CSR-collaboration"
+                className={linkCls("/prtners-CSR-collaboration")}
+              >
+                PARTNERS / CSR COLLABORATION
+                <span
+                  className={underline(isActive("/prtners-CSR-collaboration"))}
+                />
+              </Link>
             </li>
 
             {/* MEDIA ▾ */}
@@ -304,18 +352,10 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* ABOUT US */}
-            <li className="relative group">
-              <Link href="/about-us" className={linkCls("/about-us")}>
-                About Us
-                <span className={underline(isActive("/about-us"))} />
-              </Link>
-            </li>
-
             {/* CONTACT */}
             <li className="relative group">
               <Link href="/contact" className={linkCls("/contact")}>
-                Contact
+                GET INVOLVED
                 <span className={underline(isActive("/contact"))} />
               </Link>
             </li>
@@ -500,6 +540,21 @@ export default function Navbar() {
             </Link>
           </li>
 
+          {/* About */}
+          <li>
+            <Link
+              href="/about-us"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/about-us")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              About Us
+            </Link>
+          </li>
+
           {/* Our Work */}
           <li>
             <button
@@ -538,6 +593,8 @@ export default function Navbar() {
             </div>
           </li>
 
+
+
           {/* Media */}
           <li>
             <button
@@ -547,7 +604,7 @@ export default function Navbar() {
                 isMediaActive ? "text-[var(--color-primary)]" : "text-slate-800"
               }`}
             >
-                 Media/News
+              Media/News
               <FiChevronDown
                 className={`transition-transform ${mediaOpen ? "rotate-180" : ""}`}
               />
@@ -616,21 +673,6 @@ export default function Navbar() {
               }`}
             >
               Awards
-            </Link>
-          </li>
-
-          {/* About */}
-          <li>
-            <Link
-              href="/about-us"
-              onClick={() => setMenuOpen(false)}
-              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
-                isActive("/about-us")
-                  ? "text-[var(--color-primary)]"
-                  : "text-slate-800"
-              }`}
-            >
-              About Us
             </Link>
           </li>
 

@@ -172,24 +172,35 @@ export default function Contact() {
 
   return (
     <section className="container py-10">
-      <motion.div className="text-center mb-12">
+      <motion.div className="text-center mb-12 space-y-5">
         <div className="flex items-center justify-center gap-3 mb-3">
           <div className="h-px w-8 bg-[var(--color-secondary)]" />
           <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
-            Form
+            Volunteer With Us
           </span>
           <div className="h-px w-8 bg-[var(--color-secondary)]" />
         </div>
 
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-           Volunteer <span className="text-[var(--color-primary)]">Registration</span> Form
+          Join the Movement{" "}
+          <span className="text-[var(--color-primary)]">for Water </span>{" "}
+          Conservation
         </h2>
-
-        
+        <p className="text-center text-gray-500 max-w-7xl justify-self-center">
+          Volunteers play an important role in strengthening community-led water
+          conservation efforts. By joining Girganga Parivar Trust, you can
+          contribute your time, skills, and energy to support rural communities,
+          promote environmental sustainability, and help build a water-secure
+          future.
+        </p>
+        <p className="text-center text-gray-500 max-w-7xl justify-self-center">
+          Whether you are a student, professional, researcher, or community
+          member, your participation can make a meaningful difference.
+        </p>
       </motion.div>
       <div className="max-w-5xl mx-auto bg-white p-8 rounded-3xl shadow">
         <h1 className="text-3xl font-bold mb-6 text-center">
-          Volunteer Form
+          Volunteer Registration Form
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
