@@ -264,7 +264,7 @@ export default function Navbar() {
                 }}
                 className={`${linkCls(isMediaActive ? "/media" : "")} gap-1 flex items-center`}
               >
-                Media
+                Media/News
                 <FiChevronDown
                   size={11}
                   className={`mt-px transition-transform duration-200 ${
@@ -547,7 +547,7 @@ export default function Navbar() {
                 isMediaActive ? "text-[var(--color-primary)]" : "text-slate-800"
               }`}
             >
-              Media
+                 Media/News
               <FiChevronDown
                 className={`transition-transform ${mediaOpen ? "rotate-180" : ""}`}
               />

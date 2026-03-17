@@ -794,7 +794,7 @@ export default function OurWorkPage() {
       hover:text-[var(--color-primary)] overflow-hidden"
                   >
                     <span className="relative z-10 flex gap-2 items-center">
-                       Contribute Now →
+                      Contribute Now →
                     </span>
 
                     <span className="btn-primary-overlay"></span>
@@ -904,6 +904,115 @@ export default function OurWorkPage() {
                   </div>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════
+                  SECTION 4 — IMPACT HIGHLIGHTS + GUJARAT MAP
+              ══════════════════════════════════════════════ */}
+        <section className="bg-white container"> 
+          <div className="max-w-7xl justify-self-center">
+            <motion.div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                  Geographic Reach
+                </span>
+                <div className="h-px w-8 bg-[var(--color-secondary)]" />
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+                Impact{" "}
+                <span className="text-[var(--color-primary)]">Highlights</span>
+              </h2>
+
+              <p className="text-gray-500 mt-3 text-sm sm:text-base max-w-xl mx-auto">
+                Transforming drought-prone Saurashtra and Gujarat through
+                community-led water structures across 8 districts.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Image Instead of Map */}
+              <motion.div>
+                <img
+                  src="/image/home/Our Approach.png"
+                  alt="Gujarat Impact Map"
+                  className="w-full max-w-full mx-auto object-contain"
+                />
+              </motion.div>
+
+              {/* Highlights */}
+              <motion.div className="space-y-4">
+                {/* Item 1 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-primary)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Water Recharge Capacity
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      74 Billion Litres
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Created through strategically placed check dams and bore
+                      recharge systems.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 2 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-secondary)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Villages Transformed
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      619 Villages
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Rural communities across Saurashtra now have reliable
+                      groundwater access.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 3 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-accent)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Water Structures Built
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      8,357 Structures
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Check dams, bore wells, and allied structures across 35
+                      blocks.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Item 4 */}
+                <div className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[var(--color-primary)]/30 hover:shadow-md transition-all duration-300 group">
+                  <div className="bg-[var(--color-greenish)] w-1.5 rounded-full flex-shrink-0 self-stretch min-h-[3rem] group-hover:w-2 transition-all duration-300" />
+                  <div>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-0.5">
+                      Mission Target
+                    </p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      1,11,111 Structures
+                    </p>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Our ambitious goal to ensure not a single raindrop reaches
+                      the sea unused.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>

@@ -3,444 +3,825 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import SmoothScroll from "../../Component/SmothScrolling";
-import { FaInfoCircle, FaMapMarkerAlt, FaVideo } from "react-icons/fa";
-import Link from "next/link";
 import Image from "next/image";
 
-const images = [
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Pagination,
+  Autoplay,
+  EffectCoverflow,
+  FreeMode,
+} from "swiper/modules";
+import {
+  FaSearchPlus,
+  FaTimes,
+  FaArrowLeft,
+  FaArrowRight,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
+
+// Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
+
+/* ─── Award Images ─── */
+const awardImages = [
   {
-    src: "/image/Media/Construction Work Img-1.jpg",
-    title: "Heavy Machinery Ground Preparation",
-    location: "Rajkot, Gujarat",
+    src: "/image/Award/NGO Award.jpg",
+    caption: "Best NGO Award — Jal Shakti, New Delhi",
+    year: "2026",
   },
   {
-    src: "/image/Media/Construction Work Img-2.jpg",
-    title: "Active Site Excavation",
-    location: "Rajkot, Gujarat",
+    src: "/image/Media/Constructions Work Img-4.jpg",
+    caption: "Indian CSR Award — Brand Honchos",
+    year: "2025",
   },
   {
-    src: "/image/Media/Construction Work Img-3.jpg",
-    title: "Rural Construction Logistics",
-    location: "Rajkot, Gujarat",
+    src: "/image/Media/Constructions Work Img-7.png",
+    caption: "Global CSR & ESG Awards",
+    year: "2025",
   },
   {
-    src: "/image/Media/Construction Work Img-4.jpg",
-    title: "Check Dam Structural Reinforcement",
-    location: "Rajkot, Gujarat",
+    src: "/image/Award/Mayor's Award.jpg",
+    caption: "Mayor Award — Rajkot Municipal Corporation",
+    year: "2024",
   },
   {
-    src: "/image/Media/Construction Work Img-5.jpg",
-    title: "Self-Loading Concrete Mixer in Operation",
-    location: "Rajkot, Gujarat",
+    src: "/image/Award/Jal Pahari Award.jpg",
+    caption: "Jal Prahari — Ministry of Jal Shakti & UNOPS",
+    year: "2023",
+  },
+];
+
+/* ─── Awards Data ─── */
+const awards = [
+  {
+    sr: 1,
+    year: "2026",
+    title: "Best NGO Award 2025 (JSJB 1.0)",
+    agency: "Ministry of Jal Shakti, Government of India",
+    icon: "🏆",
   },
   {
-    src: "/image/Media/Construction Work Img-6.jpg",
-    title: "Heavy Machinery at the Water's Edge",
-    location: "Rajkot, Gujarat",
+    sr: 2,
+    year: "2025",
+    title: "Indian CSR Award",
+    agency: "Brand Honchos",
+    icon: "🥇",
   },
   {
-    src: "/image/Media/Construction Work Img-7.png",
-    title: "Impactful Earthmoving for Groundwater Recharge",
-    location: "Rajkot, Gujarat",
+    sr: 3,
+    year: "2025",
+    title: "Global CSR & ESG Awards 2025",
+    agency: "Narayan Seva Sansthan",
+    icon: "🌍",
   },
   {
-    src: "/image/Media/Construction Work Img-8.jpeg",
-    title: "Structural Wall Concreting with Transit Mixer",
-    location: "Rajkot, Gujarat",
+    sr: 4,
+    year: "2024",
+    title: "Mayor Award",
+    agency: "Rajkot Municipal Corporation, Rajkot",
+    icon: "🏙️",
   },
   {
-    src: "/image/Media/Construction Work Img-9.jpeg",
-    title: "Excavator Desilting and Site Clearance",
-    location: "Rajkot, Gujarat",
+    sr: 5,
+    year: "2023",
+    title: "Jal Prahari",
+    agency: "Ministry of Jal Shakti, Government of India and UNOPS",
+    icon: "💧",
+  },
+];
+
+/* ─── Event Photos ─── */
+const eventPhotos = [
+  {
+    src: "/image/Event/IMG_7531.JPG",
   },
   {
-    src: "/image/Media/Construction Work Img-10.jpg",
-    title: "Manual Finishing of Concrete Slope",
-    location: "Rajkot, Gujarat",
+    src: "/image/Event/IMG_7533.JPG",
   },
   {
-    src: "/image/Media/Construction Work Img-11.jpg",
-    title: "Hyundai Excavator Working in Water Basin",
-    location: "Rajkot, Gujarat",
+    src: "/image/Event/IMG_7535.JPG",
   },
   {
-    src: "/image/Media/Construction Work Img-12.jpg",
-    title: "Supervised Concrete Pour for Water Channel",
-    location: "Rajkot, Gujarat",
+    src: "/image/Event/IMG_7538.JPG",
   },
   {
-    src: "/image/Media/Construction Work Img-13.jpeg",
-    title: "Precision Excavation Near Existing Structures",
-    location: "Rajkot, Gujarat",
+    src: "/image/Event/IMG_7544.JPG",
   },
   {
-    src: "/image/Media/Construction Work Img-14.jpeg",
-    title: "Sany Excavator Loading Tipper Truck",
-    location: "Rajkot, Gujarat",
+    src: "/image/Event/IMG_7614.JPG",
+  },
+  {
+    src: "/image/Event/IMG_7616.JPG",
+  },
+  {
+    src: "/image/Event/IMG_8778.JPG",
+  },
+  {
+    src: "/image/Event/IMG_8781.JPG",
+  },
+  {
+    src: "/image/Event/IMG_8790.JPG",
+  },
+  {
+    src: "/image/Event/IMG_8794.JPG",
+  },
+  {
+    src: "/image/Event/IMG_8797.JPG",
+  },
+
+  {
+    src: "/image/Event/Sequence 01.Still001.jpg",
+  },
+  {
+    src: "/image/Event/Sequence 01.Still002.jpg",
+  },
+  {
+    src: "/image/Event/Sequence 01.Still003.jpg",
+  },
+  {
+    src: "/image/Event/Sequence 01.Still009.jpg",
+  },
+  {
+    src: "/image/Event/Sequence 01.Still010.jpg",
+  },
+  {
+    src: "/image/Event/Sequence 01.Still011.jpg",
+  },
+  {
+    src: "/image/Event/Sequence 01.Still012.jpg",
+  },
+];
+
+const galleryItems = [
+  {
+    img: "/image/press/news1.jpg",
+  },
+  {
+    img: "/image/press/news2.jpg",
+  },
+  {
+    img: "/image/press/news3.jpg",
+  },
+  {
+    img: "/image/press/news4.jpg",
+  },
+  {
+    img: "/image/press/news5.jpg",
+  },
+  {
+    img: "/image/press/news6.jpg",
+  },
+  {
+    img: "/image/press/news7.jpg",
+  },
+  {
+    img: "/image/press/news8.jpg",
+  },
+  {
+    img: "/image/press/news9.jpg",
+  },
+  {
+    img: "/image/press/news10.jpg",
+  },
+  {
+    img: "/image/press/news11.jpg",
+  },
+  {
+    img: "/image/press/news12.jpg",
+  },
+  {
+    img: "/image/press/news13.jpg",
+  },
+  {
+    img: "/image/press/news14.jpg",
+  },
+  {
+    img: "/image/press/news15.jpg",
+  },
+  {
+    img: "/image/press/news16.jpg",
+  },
+  {
+    img: "/image/press/news17.png",
+  },
+  {
+    img: "/image/press/news18.png",
+  },
+  {
+    img: "/image/press/news19.jpeg",
   },
 ];
 
 export default function Media() {
-  const [current, setCurrent] = useState<number>(0);
-  const [direction, setDirection] = useState<number>(1);
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(
-    undefined,
-  );
+  /* ── Award Slider State ── */
+  const [visibleAwards, setVisibleAwards] = useState(false);
+  const awardsRef = useRef<HTMLDivElement>(null);
+  const [activeAward, setActiveAward] = useState(0);
+  const [awardImgDir, setAwardImgDir] = useState(1);
+  const [isAwardHovered, setIsAwardHovered] = useState(false);
+  const awardTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
-  const goTo = (index: number, dir: number = 1) => {
-    setDirection(dir);
-    setCurrent((index + images.length) % images.length);
-  };
+  /* ── Event Slider State ── */
+  const [isEventHovered, setIsEventHovered] = useState(false);
 
+  /* Intersection Observer for triggering animations */
   useEffect(() => {
-    if (isHovered) return;
-    timerRef.current = setInterval(() => {
-      setDirection(1);
-      setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(timerRef.current);
-  }, [isHovered]);
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisibleAwards(true);
+      },
+      { threshold: 0.15 },
+    );
+    if (awardsRef.current) obs.observe(awardsRef.current);
+    return () => obs.disconnect();
+  }, []);
 
-  const prev = () => goTo(current - 1, -1);
-  const next = () => goTo(current + 1, 1);
+  /* Auto-advance Award Images */
+  useEffect(() => {
+    if (isAwardHovered) {
+      clearInterval(awardTimerRef.current);
+      return;
+    }
+    awardTimerRef.current = setInterval(() => {
+      setAwardImgDir(1);
+      setActiveAward((prev) => (prev + 1) % awardImages.length);
+    }, 3500);
+    return () => clearInterval(awardTimerRef.current);
+  }, [isAwardHovered]);
+
+  // Triple images for seamless infinite loop
+  const infinitePhotos = [...eventPhotos, ...eventPhotos, ...eventPhotos];
 
   return (
-    <>
-      <SmoothScroll>
-        {/* Section - 1 */}
-        <section className="container py-20">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <p className="text-[var(--color-secondary)] text-[10px] font-black tracking-[0.35em] uppercase mb-3 flex items-center justify-center gap-3">
-              <span className="w-8 h-px bg-[var(--color-secondary)]" />
-              Media & Impact
-              <span className="w-8 h-px bg-[var(--color-secondary)]" />
-            </p>
-            <h1 className="text-gray-900 text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
-              Reviving Water,{" "}
-              <span className="text-[var(--color-primary)]">Reviving Life</span>
-            </h1>
-            <div className="w-16 h-1 bg-[var(--color-primary)] mx-auto mt-5" />
-          </div>
+    <SmoothScroll>
+      {/* ── HERO ── */}
+      <section className="container ">
+        <div className="text-center mb-2">
+          <p className="text-[var(--color-secondary)] text-[10px] font-black tracking-[0.35em] uppercase mb-3 flex items-center justify-center gap-3">
+            <span className="w-8 h-px bg-[var(--color-secondary)]" />
+            Media & News
+            <span className="w-8 h-px bg-[var(--color-secondary)]" />
+          </p>
+          <h1 className="text-gray-900 text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+            Recognition,{" "}
+            <span className="text-[var(--color-primary)]">
+              Stories & Impact
+            </span>
+          </h1>
+          <div className="w-16 h-1 bg-[var(--color-primary)] mx-auto mt-5" />
+        </div>
+      </section>
 
-          {/* Video Card */}
-          <div className="max-w-5xl mx-auto">
-            <div className="relative group rounded-3xl overflow-hidden border-2 border-[var(--color-dark)] shadow-2xl shadow-[var(--color-primary)]/10">
-              {/* Top accent bar */}
-              <div className="h-1 w-full bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-primary)]" />
-
-              {/* Label bar */}
-              <div className="bg-white border-b border-[var(--color-dark)] px-6 py-3 flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-secondary)]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]" />
-                </div>
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
-                  Water Structure Impact
-                </span>
-                <span className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--color-primary)] bg-[var(--color-tertiary)] border border-[var(--color-primary)] px-2.5 py-1 rounded-full">
-                  YouTube
-                </span>
-              </div>
-
-              {/* Video */}
-              <div className="aspect-video w-full bg-black">
-                <iframe
-                  className="w-full h-full"
-                  src="https://www.youtube.com/embed/EqBlc-0o8tk"
-                  title="Water Structure Impact"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen"
-                  allowFullScreen
-                />
-              </div>
-
-              {/* Bottom info bar */}
-              <div className="bg-white border-t border-[var(--color-dark)] px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[var(--color-tertiary)] border border-[var(--color-dark)] flex items-center justify-center flex-shrink-0">
-                    <span className="text-base">💧</span>
-                  </div>
-                  <div>
-                    <p className="text-xs font-black text-gray-900">
-                      Girganga Parivar Trust
-                    </p>
-                    <p className="text-[10px] text-gray-400 font-medium">
-                      Water Conservation Initiative · Gujarat
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Below card — trust + CTA row */}
-          </div>
-        </section>
-
-        {/* Section - 2 */}
-        <section className="container">
-          <div className="max-w-7xl mx-auto">
-            {/* Heading */}
-            <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <div>
-                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.25em] uppercase mb-3 flex items-center gap-3 justify-center lg:justify-start">
-                  <span className="w-8 h-px bg-[var(--color-secondary)]" />
-                  Explore More
-                </p>
-                <h2 className="text-black text-4xl sm:text-5xl font-bold leading-tight text-center lg:text-start">
-                  Know More{" "}
-                  <span className="text-[var(--color-primary)]">About US</span>
-                </h2>
-              </div>
-              <p className="text-gray-500 text-sm leading-relaxed lg:max-w-xs text-center lg:text-star">
-                Repairing, deepening, and raising check dams. A rainwater
-                harvesting initiative.
+      {/* ── AWARDS ── */}
+      <section className="container" ref={awardsRef}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* LEFT: Award List */}
+          <div className="space-y-3">
+            <div className="mb-10 text-center lg:text-left">
+              <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
+                <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
+                {/* Left side line */}
+                Honours Received
+                <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
               </p>
+
+              <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black leading-tight">
+                Awards &{" "}
+                <span className="text-[var(--color-primary)]">
+                  Recognitions
+                </span>
+              </h2>
             </div>
 
-            {/* Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {[
-                {
-                  img: "/image/Media/About-1.jpg",
-                  label: "Videos",
-                  Icon: FaVideo,
-                  href: "/videos",
-                },
-                {
-                  img: "/image/Media/About-2.jpg",
-                  label: "About Us",
-                  Icon: FaInfoCircle,
-                  href: "/about-us",
-                },
-                {
-                  img: "/image/Media/About-3.jpg",
-                  label: "Structure Locations",
-                  Icon: FaMapMarkerAlt,
-                  href: "/Our-Work",
-                },
-              ].map(({ img, label, Icon, href }) => (
-                <Link key={label} href={href}>
-                  <div
-                    className="group relative bg-[#111815] rounded-2xl overflow-hidden
-                     transition-all duration-300 cursor-pointer"
-                  >
-                    {/* Image */}
-                    <div className="relative aspect-[5/4] overflow-hidden">
-                      <Image
-                        src={img}
-                        alt={label}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-80"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
-
-                      {/* Icon badge */}
-                      <div className="absolute top-4 right-4 w-9 h-9 bg-[var(--color-primary)] rounded-lg flex items-center justify-center shadow-md">
-                        <Icon
-                          className="text-white"
-                          size={16}
-                          strokeWidth={1.5}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Text */}
-                    <div className="p-5">
-                      <h3
-                        className="text-white font-bold text-lg mb-2"
-                        style={{
-                          fontFamily: "'Playfair Display', Georgia, serif",
-                        }}
-                      >
-                        {label}
-                      </h3>
-
-                      <span className="mt-4 inline-flex items-center gap-2 text-[var(--color-secondary)] text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Explore
-                        <span className="w-5 h-px bg-[var(--color-secondary)] group-hover:w-8 transition-all duration-300" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section - 3 */}
-        <section className="container py-20">
-          {/* Heading */}
-          <div className="text-center mb-14">
-            <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
-              <span className="w-8 h-px bg-[var(--color-secondary)]" />
-              Project Progress
-              <span className="w-8 h-px bg-[var(--color-secondary)]" />
-            </p>
-            <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-              Construction{" "}
-              <span className="text-[var(--color-primary)]">Work </span>Images
-            </h1>
-          </div>
-
-          {/* Slider Wrapper */}
-          <div
-            className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden"
-            style={{ height: "clamp(280px, 55vw, 560px)" }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {/* Slides */}
-            <AnimatePresence initial={false} custom={direction}>
+            {awards.map((award, i) => (
               <motion.div
-                key={current}
-                custom={direction}
-                initial={{ x: direction > 0 ? "100%" : "-100%", scale: 1.05 }}
-                animate={{ x: 0, scale: 1 }}
-                exit={{
-                  x: direction > 0 ? "-100%" : "100%",
-                  scale: 0.95,
-                  opacity: 0,
+                key={award.sr}
+                initial={{ opacity: 0, x: -32 }}
+                animate={visibleAwards ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                onClick={() => {
+                  setAwardImgDir(i > activeAward ? 1 : -1);
+                  setActiveAward(i);
                 }}
-                transition={{ duration: 0.75, ease: [0.77, 0, 0.175, 1] }}
-                className="absolute inset-0 w-full h-full"
+                className={`group flex items-start gap-4 rounded-2xl border px-5 py-4 cursor-pointer transition-all duration-300 ${
+                  i === activeAward
+                    ? "bg-[var(--color-primary)] border-[var(--color-primary)] shadow-lg"
+                    : "bg-white border-gray-200"
+                }`}
               >
-                <img
-                  src={images[current].src}
-                  alt={images[current].title}
-                  className="w-full h-full object-cover"
+                <div
+                  className={`flex-shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center font-black ${i === activeAward ? "bg-white/20 text-white" : "bg-gray-50 text-[var(--color-primary)]"}`}
+                >
+                  <span className="text-[10px] opacity-70 uppercase">Year</span>
+                  <span className="text-base">{award.year}</span>
+                </div>
+                <div className="flex-1">
+                  <p
+                    className={`font-black text-base ${i === activeAward ? "text-white" : "text-gray-900"}`}
+                  >
+                    {award.title}
+                  </p>
+                  <p
+                    className={`text-xs ${i === activeAward ? "text-white/70" : "text-gray-500"}`}
+                  >
+                    {award.agency}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* RIGHT: Award Image Slider */}
+          <div
+            className="relative rounded-3xl overflow-hidden border-2 border-gray-100 shadow-xl"
+            style={{ aspectRatio: "4/3" }}
+            onMouseEnter={() => setIsAwardHovered(true)}
+            onMouseLeave={() => setIsAwardHovered(false)}
+          >
+            <AnimatePresence initial={false} custom={awardImgDir}>
+              <motion.div
+                key={activeAward}
+                custom={awardImgDir}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={awardImages[activeAward].src}
+                  alt="Award"
+                  fill
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6 text-white">
+                  <p className="text-lg font-bold leading-tight">
+                    {awardImages[activeAward].caption}
+                  </p>
+                  <span className="text-xs text-[var(--color-primary)] font-bold">
+                    {awardImages[activeAward].year}
+                  </span>
+                </div>
               </motion.div>
             </AnimatePresence>
+          </div>
+        </div>
+      </section>
 
-            {/* Auto-progress bar */}
-            {!isHovered && (
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-white/10 z-10">
-                <motion.div
-                  key={current}
-                  className="h-full bg-[var(--color-primary)]"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 4, ease: "linear" }}
-                />
+      {/* ── Press coverage ── */}
+      <>
+        <section className="container overflow-hidden  bg-white">
+          <div className="mx-auto">
+            {/* ── HEADER SECTION ── */}
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+              <div className="text-center lg:text-left">
+                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
+                  <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>
+                  Event In The Spotlight
+                  <span className="w-8 h-[2px] bg-[var(--color-secondary)] "></span>
+                </p>
+
+                <div className="flex items-center justify-center lg:justify-start gap-4">
+                  <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black whitespace-nowrap uppercase">
+                    Press{" "}
+                    <span className="text-[var(--color-primary)]">
+                      coverage
+                    </span>
+                  </h2>
+                </div>
               </div>
-            )}
 
-            {/* Bottom Content */}
-            <div className="absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-6 md:p-8">
-              {/* Mobile layout: stacked. Desktop: side by side */}
-              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-6">
-                {/* Left: Counter + Title + Location */}
-                <div className="flex-1 min-w-0">
-                  <AnimatePresence mode="wait">
+              {/* DESKTOP NAVIGATION */}
+              <div className="hidden lg:flex gap-4">
+                <button className="custom-prev flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
+                  <FaArrowLeft />
+                </button>
+                <button className="custom-next flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
+                  <FaArrowRight />
+                </button>
+              </div>
+            </div>
+
+            {/* ── SWIPER SLIDER ── */}
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={"auto"}
+              loop={true}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+              }}
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+              navigation={{
+                nextEl: ".custom-next",
+                prevEl: ".custom-prev",
+              }}
+              pagination={{ clickable: true }}
+              className="press-swiper !overflow-visible pb-40"
+            >
+              {galleryItems.map((item, index) => (
+                <SwiperSlide
+                  key={index}
+                  className="!w-[280px] sm:!w-[450px] md:!w-[550px]"
+                >
+                  {({ isActive }) => (
                     <motion.div
-                      key={current}
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -12 }}
-                      transition={{ duration: 0.4, delay: 0.2 }}
+                      animate={{
+                        scale: isActive ? 1 : 0.85,
+                        opacity: isActive ? 1 : 0.4,
+                      }}
+                      transition={{ duration: 0.5 }}
+                      className="relative group cursor-pointer"
+                      onClick={() => setSelectedImg(item.img)}
                     >
-                      {/* Counter */}
-                      <div className="flex items-center gap-3 mb-2 sm:mb-3">
-                        <span className="text-[var(--color-primary)] font-black text-2xl sm:text-3xl leading-none font-mono">
-                          {String(current + 1).padStart(2, "0")}
-                        </span>
-                        <div className="flex flex-col gap-1">
-                          <div className="w-8 sm:w-10 h-px bg-white/40" />
-                          <span className="text-white/40 text-[10px] font-bold tracking-widest">
-                            {String(images.length).padStart(2, "0")}
-                          </span>
+                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 shadow-xl">
+                        <img
+                          src={item.img}
+                          alt="press coverage"
+                          className="w-full h-full object-cover transition-all duration-700"
+                        />
+
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                          <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
+                            <FaSearchPlus className="text-white text-xl" />
+                          </div>
                         </div>
                       </div>
-
-                      {/* Title */}
-                      <h2
-                        className="text-white text-lg sm:text-2xl md:text-3xl font-bold leading-snug max-w-xs sm:max-w-md truncate sm:whitespace-normal"
-                        style={{
-                          fontFamily: "'Playfair Display', Georgia, serif",
-                        }}
-                      >
-                        {images[current].title}
-                      </h2>
-
-                      {/* Location pill */}
-                      <div className="mt-2 sm:mt-3 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]" />
-                        <span className="text-white/70 text-[10px] font-semibold tracking-widest uppercase truncate max-w-[160px] sm:max-w-none">
-                          {images[current].location}
-                        </span>
-                      </div>
                     </motion.div>
-                  </AnimatePresence>
-                </div>
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
 
-                {/* Right: Nav buttons + dots */}
-                <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-end gap-3 sm:gap-4 flex-shrink-0">
-                  {/* Prev / Next */}
-                  <div className="flex gap-2">
-                    <button
-                      onClick={prev}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] transition-all duration-300"
-                      aria-label="Previous"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="15 18 9 12 15 6" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={next}
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--color-primary)] border border-[var(--color-primary)] flex items-center justify-center text-white transition-all duration-300"
-                      aria-label="Next"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Dot indicators */}
-                  <div className="flex gap-1.5 items-center">
-                    {images.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => goTo(i, i > current ? 1 : -1)}
-                        className={`h-1 rounded-full transition-all duration-500 ${
-                          i === current
-                            ? "w-6 sm:w-8 bg-[var(--color-primary)]"
-                            : "w-1.5 bg-white/30 hover:bg-white/60"
-                        }`}
-                        aria-label={`Slide ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+            {/* MOBILE NAVIGATION: Moblie screen button */}
+            <div className="flex lg:hidden gap-4 justify-center mt-23">
+              <button className="custom-prev flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
+                <FaArrowLeft />
+              </button>
+              <button className="custom-next flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
+                <FaArrowRight />
+              </button>
             </div>
           </div>
         </section>
-      </SmoothScroll>
-    </>
+
+        {/* ── LIGHTBOX ── */}
+        <AnimatePresence>
+          {selectedImg && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] bg-white/90 backdrop-blur-xl flex items-center justify-center p-4"
+              onClick={() => setSelectedImg(null)}
+            >
+              <button className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white">
+                <FaTimes />
+              </button>
+              <motion.img
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                src={selectedImg}
+                className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <style jsx global>{`
+          /* Pagination Dots Fix */
+          .press-swiper .swiper-pagination {
+            bottom: -80px !important;
+          }
+          .press-swiper .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: #333;
+            opacity: 0.2;
+            transition: all 0.3s ease;
+          }
+          .press-swiper .swiper-pagination-bullet-active {
+            width: 35px;
+            border-radius: 20px;
+            background: var(--color-primary) !important;
+            opacity: 1;
+          }
+        `}</style>
+
+        {/* ── Modern Lightbox ── */}
+        <AnimatePresence>
+          {selectedImg && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] bg-white/80 backdrop-blur-xl flex items-center justify-center p-4"
+              onClick={() => setSelectedImg(null)}
+            >
+              <button className="absolute top-10 right-10 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white hover:rotate-90 transition-transform duration-500">
+                <FaTimes />
+              </button>
+
+              <motion.div
+                initial={{ y: 50, opacity: 0, scale: 0.9 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: 50, opacity: 0, scale: 0.9 }}
+                className="relative max-w-5xl w-full h-[85vh] flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={selectedImg}
+                  className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_40px_100px_rgba(0,0,0,0.2)]"
+                  alt="Press Zoom"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <style jsx global>{`
+          .press-swiper .swiper-pagination {
+            bottom: -40px !important;
+          }
+          .press-swiper .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: #ccc;
+            opacity: 1;
+            transition: all 0.3s;
+          }
+          .press-swiper .swiper-pagination-bullet-active {
+            width: 40px;
+            border-radius: 20px;
+            background: var(--color-primary);
+          }
+        `}</style>
+      </>
+
+      {/* ── EVENT PHOTOS ── */}
+      <section className="container overflow-hidden ">
+        <div className="mb-8">
+          {/* TOP SMALL LABEL WITH LEFT LINE */}
+          <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
+            <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
+            {/* Left side line */}
+            Event
+            <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
+          </p>
+
+          {/* MAIN HEADING WITH RIGHT SLIDE LINE */}
+          <div className="flex items-center justify-center lg:justify-start gap-4">
+            <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black whitespace-nowrap">
+              Event <span className="text-[var(--color-primary)]">Photos</span>
+            </h2>
+          </div>
+        </div>
+
+        <div className=" relative flex">
+          <motion.div
+            className="flex gap-5"
+            animate={{ x: isEventHovered ? undefined : ["0%", "-33.33%"] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 100,
+                ease: "linear",
+              },
+            }}
+            style={{ width: "max-content" }}
+          >
+            {infinitePhotos.map((photo, i) => (
+              <div
+                key={i}
+                className="group relative w-[300px] md:w-[400px] h-[350px] md:h-[450px] mx-auto rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 border border-gray-100"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.src}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-70 group-hover:opacity-90" />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── News articles ── */}
+      <>
+        <section className="container overflow-hidden  bg-white">
+          <div className="mx-auto">
+            {/* ── HEADER SECTION ── */}
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+              <div className="text-center lg:text-left">
+                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
+                  <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>
+                  Event In The Spotlight
+                  <span className="w-8 h-[2px] bg-[var(--color-secondary)] "></span>
+                </p>
+
+                <div className="flex items-center justify-center lg:justify-start gap-4">
+                  <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black whitespace-nowrap uppercase">
+                    News{" "}
+                    <span className="text-[var(--color-primary)]">
+                      Articles
+                    </span>
+                  </h2>
+                </div>
+              </div>
+
+              {/* DESKTOP NAVIGATION */}
+              <div className="hidden lg:flex gap-4">
+                <button className="custom-prev flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
+                  <FaArrowLeft />
+                </button>
+                <button className="custom-next flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
+                  <FaArrowRight />
+                </button>
+              </div>
+            </div>
+
+            {/* ── SWIPER SLIDER ── */}
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={"auto"}
+              loop={true}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+              }}
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+              navigation={{
+                nextEl: ".custom-next",
+                prevEl: ".custom-prev",
+              }}
+              pagination={{ clickable: true }}
+              className="press-swiper !overflow-visible pb-40"
+            >
+              {galleryItems.map((item, index) => (
+                <SwiperSlide
+                  key={index}
+                  className="!w-[280px] sm:!w-[450px] md:!w-[550px]"
+                >
+                  {({ isActive }) => (
+                    <motion.div
+                      animate={{
+                        scale: isActive ? 1 : 0.85,
+                        opacity: isActive ? 1 : 0.4,
+                      }}
+                      transition={{ duration: 0.5 }}
+                      className="relative group cursor-pointer"
+                      onClick={() => setSelectedImg(item.img)}
+                    >
+                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 shadow-xl">
+                        <img
+                          src={item.img}
+                          alt="press coverage"
+                          className="w-full h-full object-cover transition-all duration-700"
+                        />
+
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                          <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
+                            <FaSearchPlus className="text-white text-xl" />
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* MOBILE NAVIGATION: Moblie screen button */}
+            <div className="flex lg:hidden gap-4 justify-center mt-23">
+              <button className="custom-prev flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
+                <FaArrowLeft />
+              </button>
+              <button className="custom-next flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
+                <FaArrowRight />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* ── LIGHTBOX ── */}
+        <AnimatePresence>
+          {selectedImg && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] bg-white/90 backdrop-blur-xl flex items-center justify-center p-4"
+              onClick={() => setSelectedImg(null)}
+            >
+              <button className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white">
+                <FaTimes />
+              </button>
+              <motion.img
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                src={selectedImg}
+                className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <style jsx global>{`
+          /* Pagination Dots Fix */
+          .press-swiper .swiper-pagination {
+            bottom: -80px !important;
+          }
+          .press-swiper .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: #333;
+            opacity: 0.2;
+            transition: all 0.3s ease;
+          }
+          .press-swiper .swiper-pagination-bullet-active {
+            width: 35px;
+            border-radius: 20px;
+            background: var(--color-primary) !important;
+            opacity: 1;
+          }
+        `}</style>
+
+        {/* ── Modern Lightbox ── */}
+        <AnimatePresence>
+          {selectedImg && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] bg-white/80 backdrop-blur-xl flex items-center justify-center p-4"
+              onClick={() => setSelectedImg(null)}
+            >
+              <button className="absolute top-10 right-10 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white hover:rotate-90 transition-transform duration-500">
+                <FaTimes />
+              </button>
+
+              <motion.div
+                initial={{ y: 50, opacity: 0, scale: 0.9 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+
+                
+                exit={{ y: 50, opacity: 0, scale: 0.9 }}
+                className="relative max-w-5xl w-full h-[85vh] flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                  src={selectedImg}
+                  className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_40px_100px_rgba(0,0,0,0.2)]"
+                  alt="Press Zoom"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <style jsx global>{`
+          .press-swiper .swiper-pagination {
+            bottom: -40px !important;
+          }
+          .press-swiper .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: #ccc;
+            opacity: 1;
+            transition: all 0.3s;
+          }
+          .press-swiper .swiper-pagination-bullet-active {
+            width: 40px;
+            border-radius: 20px;
+            background: var(--color-primary);
+          }
+        `}</style>
+      </>
+    </SmoothScroll>
   );
 }

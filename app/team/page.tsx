@@ -1,228 +1,372 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
-
-<svg
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth={1.8}
-  className="w-5 h-5"
->
-  <rect x="2" y="4" width="20" height="16" rx="2" />
-  <path d="M2 8l10 6 10-6" />
-</svg>;
-
-const CheckIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="white"
-    strokeWidth={2.5}
-    className="w-9 h-9"
-  >
-    <path d="M20 6L9 17l-5-5" />
-  </svg>
-);
-
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface FormState {
   name: string;
-  email: string;
+  dob: string;
+  gender: string;
   phone: string;
-  subject: string;
-  message: string;
+  email: string;
+  city: string;
+  state: string;
+  qualification: string;
+  field: string;
+  organization: string;
+  interests: string[];
+  volunteeringType: string;
+  availability: string;
+  reason: string;
+  skills: string;
+  declaration: boolean;
 }
 
-// ─── Contact Form ─────────────────────────────────────────────────────────────
-function ContactForm() {
+function CustomSelect({
+  name,
+  placeholder,
+  options,
+  onChange,
+}: {
+  name: string;
+  placeholder: string;
+  options: string[];
+  onChange: (name: string, value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const handleSelect = (val: string) => {
+    setSelected(val);
+    onChange(name, val);
+    setOpen(false);
+  };
+
+  return (
+    <div ref={ref} className="relative w-full">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+      >
+        <span className={selected ? "text-slate-800" : "text-slate-400"}>
+          {selected || placeholder}
+        </span>
+        <svg
+          className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+            open ? "rotate-180" : "rotate-0"
+          }`}
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="4 6 8 10 12 6" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute z-50 top-[calc(100%+6px)] left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-md overflow-hidden">
+          {options.map((opt) => (
+            <div
+              key={opt}
+              onClick={() => handleSelect(opt)}
+              className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 ${
+                selected === opt
+                  ? "text-blue-600 font-medium"
+                  : "text-slate-700"
+              }`}
+            >
+              {opt}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function Contact() {
   const [form, setForm] = useState<FormState>({
     name: "",
-    email: "",
+    dob: "",
+    gender: "",
     phone: "",
-    subject: "",
-    message: "",
+    email: "",
+    city: "",
+    state: "",
+    qualification: "",
+    field: "",
+    organization: "",
+    interests: [],
+    volunteeringType: "",
+    availability: "",
+    reason: "",
+    skills: "",
+    declaration: false,
   });
-  const [sent, setSent] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const inputClass =
+    "w-full px-4 py-3 rounded-xl border border-slate-200 text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]";
 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
-  ) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckbox = (value: string) => {
+    setForm((prev) => ({
+      ...prev,
+      interests: prev.interests.includes(value)
+        ? prev.interests.filter((i) => i !== value)
+        : [...prev.interests, value],
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!form.declaration) {
+      alert("Please accept declaration");
+      return;
+    }
+
     setLoading(true);
-    // Replace with your actual form submission logic / API call
     await new Promise((r) => setTimeout(r, 1200));
+
+    console.log(form);
     setLoading(false);
     setSent(true);
   };
 
-  const inputClass =
-    "w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition-shadow bg-slate-50 focus:bg-white";
+  if (sent) {
+    return (
+      <div className="text-center py-20 text-green-600 font-bold text-xl">
+        ✅ Application Submitted Successfully!
+      </div>
+    );
+  }
 
   return (
-    <section className="container">
-      <div className="max-w-7xl mx-auto space-y-10">
-        <section className=" text-center mb-10">
-          <p
-            className="text-[var(--color-secondary)]
- text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
-          >
-            <span
-              className="w-8 h-px bg-[var(--color-secondary)]
-"
-            />
+    <section className="container py-10">
+      <motion.div className="text-center mb-12">
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="h-px w-8 bg-[var(--color-secondary)]" />
+          <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
             Form
-            <span
-              className="w-8 h-px bg-[var(--color-secondary)]
-"
-            />
-          </p>
-          <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-            Volunteer{" "}
-            <span className="text-[var(--color-primary)]">Application</span>
-          </h1>
-        </section>
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-          {/* ── Left: Volunteer Content ── */}
-          <div className="lg:col-span-2 space-y-6 items-center">
-            <div>
-              <div className="w-12 h-1 bg-[var(--color-primary)] rounded-full mt-4 justify-self-center lg:justify-self-start"></div>
-            </div>
-
-            <h2 className="text-2xl font-black text-slate-900 mt-2 leading-tight text-center lg:text-start">
-              Volunteer Application Form
-            </h2>
-
-            <p className="text-slate-500 leading-relaxed text-lg text-center lg:text-start">
-              Join Gir Ganga Parivar Trust as a volunteer and help us build a
-              water-secure Saurashtra. Your support can make a real difference
-              in water conservation and rural development.
-            </p>
-
-            <p className="text-slate-500 leading-relaxed text-lg text-center lg:text-start">
-              Fill out this form to become part of our mission and contribute
-              towards sustainable water management projects across Gujarat.
-            </p>
-          </div>
-
-          {/* ── Right: Form ── */}
-
-          <div className="lg:col-span-3">
-            <div className="bg-white rounded-3xl shadow-lg border border-slate-100 p-8">
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-1.5">
-                      Full Name *
-                    </label>
-
-                    <input
-                      required
-                      type="text"
-                      name="name"
-                      value={form.name}
-                      onChange={handleChange}
-                      placeholder="Your Name"
-                      className={inputClass}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-1.5">
-                      Email Address *
-                    </label>
-
-                    <input
-                      required
-                      type="email"
-                      name="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="you@example.com"
-                      className={inputClass}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-1.5">
-                      Phone Number *
-                    </label>
-
-                    <input
-                      required
-                      type="tel"
-                      name="phone"
-                      value={form.phone}
-                      onChange={handleChange}
-                      placeholder="+91 90000 00000"
-                      className={inputClass}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-1.5">
-                      Subject *
-                    </label>
-
-                    <input
-                      required
-                      type="text"
-                      name="subject"
-                      value={form.subject}
-                      onChange={handleChange}
-                      placeholder="Subject"
-                      className={inputClass}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-1.5">
-                    Message *
-                  </label>
-
-                  <textarea
-                    required
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
-                    rows={5}
-                    placeholder="Tell us how you want to help..."
-                    className={inputClass}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-[var(--color-primary)] text-white font-bold py-3.5 rounded-xl shadow-lg"
-                >
-                  {loading ? "Submitting..." : "Submit Application"}
-                </button>
-              </form>
-            </div>
-          </div>
+          </span>
+          <div className="h-px w-8 bg-[var(--color-secondary)]" />
         </div>
+
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+           Volunteer <span className="text-[var(--color-primary)]">Registration</span> Form
+        </h2>
+
+        
+      </motion.div>
+      <div className="max-w-5xl mx-auto bg-white p-8 rounded-3xl shadow">
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Volunteer Form
+        </h1>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* PERSONAL INFO */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            <input
+              name="name"
+              placeholder="Full Name"
+              onChange={handleChange}
+              className={inputClass}
+              required
+            />
+            <input
+              type="date"
+              name="dob"
+              onChange={handleChange}
+              className={inputClass}
+              required
+            />
+
+            {/* ✅ Gender - Custom Select with rotating arrow */}
+            <CustomSelect
+              name="gender"
+              placeholder="Gender"
+              options={["Male", "Female", "Prefer not to say"]}
+              onChange={handleSelectChange}
+            />
+
+            <input
+              name="phone"
+              placeholder="Phone"
+              onChange={handleChange}
+              className={inputClass}
+              required
+            />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              onChange={handleChange}
+              className={inputClass}
+              required
+            />
+            <input
+              name="city"
+              placeholder="City"
+              onChange={handleChange}
+              className={inputClass}
+            />
+            <input
+              name="state"
+              placeholder="State"
+              onChange={handleChange}
+              className={inputClass}
+            />
+          </div>
+
+          {/* EDUCATION */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* ✅ Qualification - Custom Select with rotating arrow */}
+            <CustomSelect
+              name="qualification"
+              placeholder="Qualification"
+              options={[
+                "School",
+                "Diploma",
+                "Graduate",
+                "Postgraduate",
+                "Doctorate",
+              ]}
+              onChange={handleSelectChange}
+            />
+
+            <input
+              name="field"
+              placeholder="Field / Profession"
+              onChange={handleChange}
+              className={inputClass}
+            />
+            <input
+              name="organization"
+              placeholder="Organization"
+              onChange={handleChange}
+              className={inputClass}
+            />
+          </div>
+
+          {/* INTERESTS */}
+          <div>
+            <p className="font-semibold mb-2">Areas of Interest</p>
+            <div className="grid sm:grid-cols-2 gap-2">
+              {[
+                "Water conservation awareness campaigns",
+                "Field visits and village activities",
+                "Community mobilization",
+                "Research and documentation",
+                "Social media and communication",
+                "Event Support",
+                "Environmental education programs",
+                "Technical support (engineering / water structures)",
+              ].map((item) => (
+                <label key={item} className="flex gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    onChange={() => handleCheckbox(item)}
+                  />
+                  {item}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* AVAILABILITY */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* ✅ Volunteering Type - Custom Select with rotating arrow */}
+            <CustomSelect
+              name="volunteeringType"
+              placeholder="Volunteering Type"
+              options={[
+                "Short-term volunteering",
+                "Long-term volunteering",
+                "Internship",
+                "Event-based volunteering",
+              ]}
+              onChange={handleSelectChange}
+            />
+
+            {/* ✅ Availability - Custom Select with rotating arrow */}
+            <CustomSelect
+              name="availability"
+              placeholder="Availability"
+              options={[
+                "Few hours per week",
+                "Weekends only",
+                "Project-based",
+                "Flexible",
+              ]}
+              onChange={handleSelectChange}
+            />
+          </div>
+
+          {/* TEXT AREAS */}
+          <textarea
+            name="reason"
+            placeholder="Why do you want to volunteer?"
+            onChange={handleChange}
+            className={inputClass}
+          />
+          <textarea
+            name="skills"
+            placeholder="Your Skills"
+            onChange={handleChange}
+            className={inputClass}
+          />
+
+          {/* DECLARATION */}
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={form.declaration}
+              onChange={(e) =>
+                setForm({ ...form, declaration: e.target.checked })
+              }
+            />
+            I confirm the information is correct
+          </label>
+
+          {/* BUTTON */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[var(--color-primary)] text-white py-3 rounded-xl font-bold"
+          >
+            {loading ? "Submitting..." : "Submit Application"}
+          </button>
+        </form>
       </div>
     </section>
-  );
-}
-
-// ─── Page Export ──────────────────────────────────────────────────────────────
-export default function Contact() {
-  return (
-    <div className="h-auto">
-      <main>
-        <ContactForm />
-      </main>
-    </div>
   );
 }
