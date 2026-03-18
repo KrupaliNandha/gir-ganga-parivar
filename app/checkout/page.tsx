@@ -89,43 +89,16 @@ export default function DonationCheckout() {
   return (
     <div className="min-h-screen bg-[var(--color-tertiary)]">
       {/* ── Progress Bar ── */}
-      {/* <div className="bg-white border-b border-[var(--color-dark)]">
-        <div className="max-w-6xl mx-auto px-6 py-5">
-          <div className="flex items-center gap-3 text-xs">
-            {[
-              { step: 1, label: "Choose Amount", done: true },
-              { step: 2, label: "Donor Details", active: true },
-              { step: 3, label: "Payment", done: false },
-            ].map((s, i) => (
-              <div key={s.step} className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-black transition-all ${
-                    s.done ? "bg-[var(--color-primary)] text-white" :
-                    s.active ? "bg-[var(--color-primary)] text-white ring-4 ring-[var(--color-primary)]/20" :
-                    "bg-[var(--color-dark)] text-gray-400"
-                  }`}>
-                    {s.done && !s.active ? "✓" : s.step}
-                  </div>
-                  <span className={`font-bold ${s.active ? "text-[var(--color-primary)]" : s.done ? "text-gray-600" : "text-gray-400"}`}>
-                    {s.label}
-                  </span>
-                </div>
-                {i < 2 && <div className="w-12 h-px bg-[var(--color-dark)]" />}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
-
+     
       <div className="bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-8">
         <div className="max-w-6xl mx-auto">
-          <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center gap-2 mb-2">
+          <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center justify-center lg:justify-start gap-2 mb-2">
             <span className="w-5 h-px bg-[var(--color-secondary)]" />
             Donation Check Out
             <span className="w-5 h-px bg-[var(--color-secondary)]" />
           </p>
-          <div className="flex items-baseline gap-3">
-            <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
+          <div className="flex items-baseline justify-center lg:justify-start gap-3">
+            <h1 className="text-3xl md:text-4xl font-black text-gray-900  tracking-tight">
               Check Out
             </h1>
           </div>
@@ -443,10 +416,7 @@ export default function DonationCheckout() {
             </div>
 
             {/* CTA */}
-            {/* <button className="w-full bg-[var(--color-primary)] hover:bg-[#007fa3] text-white py-4 rounded-2xl font-black text-sm transition-all duration-200 shadow-xl shadow-[var(--color-primary)]/20 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
-              <span>💙</span>
-              Donate {formatted(rawAmount)} Now
-            </button> */}
+            
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}

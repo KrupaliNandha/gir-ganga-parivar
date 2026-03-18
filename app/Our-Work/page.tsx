@@ -770,13 +770,7 @@ export default function OurWorkPage() {
                   </span>
                 </p>
               </div>
-              {/* <Link
-                href="/donate"
-                className="shrink-0 bg-[var(--color-primary)]
-                  text-white font-bold px-7 py-3 rounded-xl shadow-lg hover:-translate-y-0.5 transition-all duration-200 text-sm whitespace-nowrap"
-              >
-                Contribute Now →
-              </Link> */}
+           
 
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -789,7 +783,7 @@ export default function OurWorkPage() {
                   <button
                     type="submit"
                     className="btn-primary  group relative  gap-2
-      font-semibold text-base px-10 py-4 cursor-pointer
+      font-semibold text-xs md:text-base px-10 py-4 cursor-pointer
       bg-[var(--color-primary)] text-[var(--color-secondary)]
       hover:text-[var(--color-primary)] overflow-hidden"
                   >

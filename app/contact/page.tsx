@@ -7,6 +7,7 @@ import {
   FaLinkedinIn,
   FaYoutube,
 } from "react-icons/fa";
+import SmoothScroll from "../../Component/SmothScrolling";
 
 /* ─── Animation Variants ───────────────────────── */
 
@@ -378,161 +379,165 @@ export default function Contact() {
 
   return (
     <>
-      {/* Heading */}
+      <SmoothScroll>
+        {/* Heading */}
 
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={stagger}
-        className="pt-16 pb-6 text-center container space-y-5"
-      >
-        <motion.p
-          variants={fadeUp}
-          className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={stagger}
+          className="pt-16 pb-6 text-center container space-y-5"
         >
-          <span className="w-8 h-px bg-[var(--color-secondary)]" />
-          CONTACT FORM
-          <span className="w-8 h-px bg-[var(--color-secondary)]" />
-        </motion.p>
+          <motion.p
+            variants={fadeUp}
+            className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+          >
+            <span className="w-8 h-px bg-[var(--color-secondary)]" />
+            CONTACT FORM
+            <span className="w-8 h-px bg-[var(--color-secondary)]" />
+          </motion.p>
 
-        <motion.h1 variants={fadeUp} className="text-5xl font-bold">
-          <span className="text-[var(--color-primary)]">Get In Touch</span>
-        </motion.h1>
+          <motion.h1 variants={fadeUp} className="text-5xl font-bold">
+            <span className="text-[var(--color-primary)]">Get In Touch</span>
+          </motion.h1>
 
-        <motion.p
-          variants={fadeUp}
-          className="text-gray-500 text-sm mt-5 max-w-xl mx-auto"
-        >
-          Feel free to contact us. Submit your queries here and we will get back
-          to you soon.
-        </motion.p>
+          <motion.p
+            variants={fadeUp}
+            className="text-gray-500 text-sm mt-5 max-w-xl mx-auto"
+          >
+            Feel free to contact us. Submit your queries here and we will get
+            back to you soon.
+          </motion.p>
 
-        {/* Socials */}
-        <motion.div className="flex gap-2.5 justify-center" variants={fadeUp}>
-          <div className="flex gap-3">
-            {[
-              {
-                icon: <FaFacebookF size={13} />,
-                href: "https://www.facebook.com/profile.php?id=100083921712230",
-                label: "Facebook",
-              },
-              {
-                icon: <FaLinkedinIn size={13} />,
-                href: "https://in.linkedin.com/in/girganga-parivar-trust-450354287",
-                label: "LinkedIn",
-              },
-              {
-                icon: <FaInstagram size={13} />,
-                href: "https://www.instagram.com/girgangaparivartrust/",
-                label: "Instagram",
-              },
-              {
-                icon: <FaYoutube size={13} />,
-                href: "https://www.youtube.com/@girgangaparivartrust",
-                label: "YouTube",
-              },
-            ].map(({ icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="group"
-              >
-                <span
-                  className="w-9 h-9 rounded-lg bg-[var(--color-tertiary)] border-2 border-[var(--color-primary)]
+          {/* Socials */}
+          <motion.div className="flex gap-2.5 justify-center" variants={fadeUp}>
+            <div className="flex gap-3">
+              {[
+                {
+                  icon: <FaFacebookF size={13} />,
+                  href: "https://www.facebook.com/profile.php?id=100083921712230",
+                  label: "Facebook",
+                },
+                {
+                  icon: <FaLinkedinIn size={13} />,
+                  href: "https://in.linkedin.com/in/girganga-parivar-trust-450354287",
+                  label: "LinkedIn",
+                },
+                {
+                  icon: <FaInstagram size={13} />,
+                  href: "https://www.instagram.com/girgangaparivartrust/",
+                  label: "Instagram",
+                },
+                {
+                  icon: <FaYoutube size={13} />,
+                  href: "https://www.youtube.com/@girgangaparivartrust",
+                  label: "YouTube",
+                },
+              ].map(({ icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="group"
+                >
+                  <span
+                    className="w-9 h-9 rounded-lg bg-[var(--color-tertiary)] border-2 border-[var(--color-primary)]
           backdrop-blur-sm flex items-center justify-center text-[var(--color-primary)]
           hover:bg-[var(--color-primary)] hover:text-white transition"
-                >
-                  {icon}
-                </span>
-              </a>
-            ))}
-          </div>
+                  >
+                    {icon}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full"
+          />
         </motion.div>
 
-        <motion.div
-          variants={fadeUp}
-          className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full"
-        />
-      </motion.div>
+        {/* Contact Section */}
 
-      {/* Contact Section */}
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="max-w-6xl mx-auto bg-[var(--color-tertiary)] rounded-3xl shadow-md border p-8 md:p-12"
+          >
+            <ContactCards />
 
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="max-w-6xl mx-auto bg-[var(--color-tertiary)] rounded-3xl shadow-md border p-8 md:p-12"
-        >
-          <ContactCards />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Map */}
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Map */}
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="rounded-2xl overflow-hidden border shadow-sm min-h-[440px]"
+              >
+                <iframe
+                  src="https://www.google.com/maps?q=GirGanga+Parivar+Trust+Rajkot&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: "440px" }}
+                  loading="lazy"
+                />
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="rounded-2xl overflow-hidden border shadow-sm min-h-[440px]"
-            >
-              <iframe
-                src="https://www.google.com/maps?q=GirGanga+Parivar+Trust+Rajkot&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0, minHeight: "440px" }}
-                loading="lazy"
-              />
-            </motion.div>
+              {/* Forms */}
 
-            {/* Forms */}
+              <motion.div
+                initial={{ opacity: 0, x: 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                {/* Form Switch Buttons */}
 
-            <motion.div
-              initial={{ opacity: 0, x: 60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              {/* Form Switch Buttons */}
+                <div className="flex gap-3 mb-6 flex-wrap">
+                  <button
+                    onClick={() => setFormType("contact")}
+                    className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "contact" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
+                  >
+                    Contact
+                  </button>
 
-              <div className="flex gap-3 mb-6 flex-wrap">
-                <button
-                  onClick={() => setFormType("contact")}
-                  className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "contact" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
-                >
-                  Contact
-                </button>
+                  <button
+                    onClick={() => setFormType("volunteer")}
+                    className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "volunteer" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
+                  >
+                    Volunteer
+                  </button>
 
-                <button
-                  onClick={() => setFormType("volunteer")}
-                  className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "volunteer" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
-                >
-                  Volunteer
-                </button>
+                  <button
+                    onClick={() => setFormType("partnership")}
+                    className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "partnership" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
+                  >
+                    Partnership
+                  </button>
+                </div>
 
-                <button
-                  onClick={() => setFormType("partnership")}
-                  className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "partnership" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
-                >
-                  Partnership
-                </button>
-              </div>
-
-              <AnimatePresence mode="wait">
-                {formType === "contact" && <ContactForm key="contact" />}
-                {formType === "volunteer" && <VolunteerForm key="volunteer" />}
-                {formType === "partnership" && (
-                  <PartnershipForm key="partnership" />
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
+                <AnimatePresence mode="wait">
+                  {formType === "contact" && <ContactForm key="contact" />}
+                  {formType === "volunteer" && (
+                    <VolunteerForm key="volunteer" />
+                  )}
+                  {formType === "partnership" && (
+                    <PartnershipForm key="partnership" />
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </SmoothScroll>
     </>
   );
 }

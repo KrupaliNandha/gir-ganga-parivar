@@ -66,12 +66,12 @@ export default function CartPage() {
       {/* ── Page Header ── */}
       <div className="bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-8">
         <div className="max-w-6xl mx-auto">
-          <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center gap-2 mb-2">
+          <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center justify-center lg:justify-start gap-2 mb-2">
             <span className="w-5 h-px bg-[var(--color-secondary)]" />
             Donation Cart
             <span className="w-5 h-px bg-[var(--color-secondary)]" />
           </p>
-          <div className="flex items-baseline gap-3">
+          <div className="flex items-baseline justify-center lg:justify-start gap-3">
             <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
               Your Cart
             </h1>
@@ -80,9 +80,9 @@ export default function CartPage() {
       </div>
 
       {/* ── Main Layout ── */}
-      <div className="max-w-6xl mx-auto px-6 md:px-12 mt-10 flex flex-col lg:flex-row gap-8 items-start">
+      <div className="max-w-6xl mx-auto px-6 md:px-12 mt-10 flex flex-col justify-self-center lg:flex-row gap-8 items-start">
         {/* ── LEFT: Cart Item ── */}
-        <div className="flex-1 min-w-0 space-y-4">
+        <div className="flex-1  space-y-4">
           {/* Column headers — desktop */}
           <div className="hidden md:grid grid-cols-[1fr_150px_100px_140px] px-6 pb-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
             <span>Donation</span>
@@ -108,7 +108,7 @@ export default function CartPage() {
             </button>
 
             {/* Product Info */}
-            <div className="flex items-center gap-4 w-full min-w-0">
+            <div className="flex flex-col lg:flex-row items-center gap-4 w-full min-w-0">
               <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
                 <img
                   src={cartItem.img}
@@ -117,13 +117,15 @@ export default function CartPage() {
                 />
               </div>
               <div className="min-w-0">
-                <span className="inline-block text-[9px] font-black uppercase tracking-widest text-[var(--color-primary)] bg-[var(--color-tertiary)] border border-[var(--color-dark)] px-2 py-0.5 rounded-full mb-1.5">
-                  Donation
-                </span>
-                <p className="text-sm font-black text-gray-900 leading-snug line-clamp-2">
+                <div className="justify-self-center lg:justify-self-start">
+                  <span className="inline-block text-[9px] font-black uppercase tracking-widest text-[var(--color-primary)] bg-[var(--color-tertiary)] border border-[var(--color-dark)] px-2 py-0.5 rounded-full mb-1.5">
+                    Donation
+                  </span>
+                </div>
+                <p className="text-sm font-black text-gray-900 leading-snug text-center lg:text-start line-clamp-2">
                   {cartItem.title}
                 </p>
-                <p className="text-[10px] text-gray-400 mt-1 font-medium">
+                <p className="text-[10px] text-gray-400 mt-1 font-medium text-center lg:text-start">
                   ID: #{cartItem.id.slice(0, 24)}…
                 </p>
               </div>
@@ -165,12 +167,15 @@ export default function CartPage() {
 
             {/* Subtotal */}
             <div className="text-right w-full md:w-auto pr-2">
-              <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest md:hidden mb-1">
+              <p className="text-[10px] text-gray-400 font-black text-center  uppercase tracking-widest md:hidden mb-1">
                 Subtotal
               </p>
-              <span className="text-lg font-black text-[var(--color-primary)]">
+              <div className="justify-self-center lg:justify-self-start">
+                 <span className="text-lg font-black text-[var(--color-primary)]">
                 {formatted(subtotal)}
               </span>
+              </div>
+             
             </div>
           </div>
 
@@ -234,7 +239,7 @@ export default function CartPage() {
                   <button
                     type="submit"
                     className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
-      font-semibold text-base px-10 py-4 cursor-pointer
+      font-semibold text-xs md:text-base px-10 py-4 cursor-pointer
       bg-[var(--color-primary)] text-[var(--color-secondary)]
       hover:text-[var(--color-primary)] overflow-hidden"
                   >

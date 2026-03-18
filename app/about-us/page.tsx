@@ -273,7 +273,7 @@ export default function AboutPage() {
             <motion.div initial="hidden" animate="visible" variants={stagger}>
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                 <div className="h-px w-8 bg-[var(--color-secondary)]" />
-                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase text-center">
                   About Girganga Parivar Trust
                 </span>
                 <div className="h-px w-8 bg-[var(--color-secondary)]" />
@@ -923,9 +923,11 @@ export default function AboutPage() {
                     key={i}
                     className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
                   >
-                    <Icon className="text-5xl mb-3 text-[var(--color-primary)] bg-[var(--color-tertiary)] p-3 rounded-full
+                    <Icon
+                      className="text-5xl mb-3 text-[var(--color-primary)] bg-[var(--color-tertiary)] p-3 rounded-full
                     
-                    mx-auto" />
+                    mx-auto"
+                    />
 
                     <p className="font-bold text-sm text-[var(--color-primary)]">
                       {item.year}
@@ -941,7 +943,7 @@ export default function AboutPage() {
               <div>
                 <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                   <div className="h-px w-8 bg-[var(--color-secondary)]" />
-                  <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+                  <span className="text-[var(--color-secondary)] text-xs font-bold text-center tracking-[0.22em] uppercase">
                     Leadership & Governance
                   </span>
                   <div className="h-px w-8 bg-[var(--color-secondary)]" />

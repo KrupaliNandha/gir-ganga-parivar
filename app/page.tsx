@@ -205,7 +205,7 @@ export default function HomePage() {
                 className="flex items-center gap-3 mb-6 justify-center"
               >
                 <div className="h-px w-10 bg-[var(--color-secondary)] " />
-                <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.25em] uppercase">
+                <span className="text-[var(--color-secondary)] text-xs font-bold text-center tracking-[0.25em] uppercase">
                   Girganga Parivar Trust
                 </span>
                 <div className="h-px w-10 bg-[var(--color-secondary)]" />
@@ -565,11 +565,11 @@ export default function HomePage() {
                     {/* Outline Button */}
                     <a
                       href="/partner-with-us-csr"
-                      className="btn-secondary-outline group text-sm lg:text-base"
+                      className="btn-secondary-outline group text-xs lg:text-base"
                     >
                       <span className="relative z-10">
-                        {" "}
-                        Partner With Us (CSR){" "}
+                 
+                        Partner With Us (CSR)
                       </span>
 
                       <span className="relative z-10 group-hover:translate-x-1 transition-transform">
