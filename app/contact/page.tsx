@@ -1,6 +1,12 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence,  Variants } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 
 /* ─── Animation Variants ───────────────────────── */
 
@@ -18,28 +24,58 @@ const stagger: Variants = {
 
 function MapPinIcon({ filled = false }) {
   return (
-    <svg viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth={1.8} className="w-7 h-7">
+    <svg
+      viewBox="0 0 24 24"
+      fill={filled ? "currentColor" : "none"}
+      stroke="currentColor"
+      strokeWidth={1.8}
+      className="w-7 h-7"
+    >
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-      <circle cx="12" cy="9" r="2.5" fill={filled ? "white" : "none"} stroke={filled ? "none" : "currentColor"} />
+      <circle
+        cx="12"
+        cy="9"
+        r="2.5"
+        fill={filled ? "white" : "none"}
+        stroke={filled ? "none" : "currentColor"}
+      />
     </svg>
   );
 }
 
 const PhoneIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-7 h-7">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    className="w-7 h-7"
+  >
     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
   </svg>
 );
 
 const MailIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-7 h-7">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    className="w-7 h-7"
+  >
     <rect x="2" y="4" width="20" height="16" rx="2" />
     <path d="M2 8l10 6 10-6" />
   </svg>
 );
 
 const SendIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    className="w-4 h-4"
+  >
     <line x1="22" y1="2" x2="11" y2="13" />
     <polygon points="22 2 15 22 11 13 2 9 22 2" />
   </svg>
@@ -125,7 +161,11 @@ function ContactForm() {
       <input required placeholder="Phone Number" className={inputClass} />
       <input placeholder="Subject" className={inputClass} />
 
-      <textarea rows={4} placeholder="Message" className={inputClass + " resize-none"} />
+      <textarea
+        rows={4}
+        placeholder="Message"
+        className={inputClass + " resize-none"}
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -344,9 +384,12 @@ export default function Contact() {
         initial="hidden"
         animate="show"
         variants={stagger}
-        className="pt-16 pb-6 text-center container"
+        className="pt-16 pb-6 text-center container space-y-5"
       >
-        <motion.p variants={fadeUp} className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3">
+        <motion.p
+          variants={fadeUp}
+          className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+        >
           <span className="w-8 h-px bg-[var(--color-secondary)]" />
           CONTACT FORM
           <span className="w-8 h-px bg-[var(--color-secondary)]" />
@@ -356,12 +399,63 @@ export default function Contact() {
           <span className="text-[var(--color-primary)]">Get In Touch</span>
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="text-gray-500 text-sm mt-5 max-w-xl mx-auto">
+        <motion.p
+          variants={fadeUp}
+          className="text-gray-500 text-sm mt-5 max-w-xl mx-auto"
+        >
           Feel free to contact us. Submit your queries here and we will get back
           to you soon.
         </motion.p>
 
-        <motion.div variants={fadeUp} className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full" />
+        {/* Socials */}
+        <motion.div className="flex gap-2.5 justify-center" variants={fadeUp}>
+          <div className="flex gap-3">
+            {[
+              {
+                icon: <FaFacebookF size={13} />,
+                href: "https://www.facebook.com/profile.php?id=100083921712230",
+                label: "Facebook",
+              },
+              {
+                icon: <FaLinkedinIn size={13} />,
+                href: "https://in.linkedin.com/in/girganga-parivar-trust-450354287",
+                label: "LinkedIn",
+              },
+              {
+                icon: <FaInstagram size={13} />,
+                href: "https://www.instagram.com/girgangaparivartrust/",
+                label: "Instagram",
+              },
+              {
+                icon: <FaYoutube size={13} />,
+                href: "https://www.youtube.com/@girgangaparivartrust",
+                label: "YouTube",
+              },
+            ].map(({ icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="group"
+              >
+                <span
+                  className="w-9 h-9 rounded-lg bg-[var(--color-tertiary)] border-2 border-[var(--color-primary)]
+          backdrop-blur-sm flex items-center justify-center text-[var(--color-primary)]
+          hover:bg-[var(--color-primary)] hover:text-white transition"
+                >
+                  {icon}
+                </span>
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={fadeUp}
+          className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full"
+        />
       </motion.div>
 
       {/* Contact Section */}
@@ -377,7 +471,6 @@ export default function Contact() {
           <ContactCards />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
             {/* Map */}
 
             <motion.div
@@ -407,15 +500,24 @@ export default function Contact() {
               {/* Form Switch Buttons */}
 
               <div className="flex gap-3 mb-6 flex-wrap">
-                <button onClick={() => setFormType("contact")} className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "contact" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}>
+                <button
+                  onClick={() => setFormType("contact")}
+                  className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "contact" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
+                >
                   Contact
                 </button>
 
-                <button onClick={() => setFormType("volunteer")} className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "volunteer" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}>
+                <button
+                  onClick={() => setFormType("volunteer")}
+                  className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "volunteer" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
+                >
                   Volunteer
                 </button>
 
-                <button onClick={() => setFormType("partnership")} className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "partnership" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}>
+                <button
+                  onClick={() => setFormType("partnership")}
+                  className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "partnership" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
+                >
                   Partnership
                 </button>
               </div>
@@ -423,9 +525,10 @@ export default function Contact() {
               <AnimatePresence mode="wait">
                 {formType === "contact" && <ContactForm key="contact" />}
                 {formType === "volunteer" && <VolunteerForm key="volunteer" />}
-                {formType === "partnership" && <PartnershipForm key="partnership" />}
+                {formType === "partnership" && (
+                  <PartnershipForm key="partnership" />
+                )}
               </AnimatePresence>
-
             </motion.div>
           </div>
         </motion.div>

@@ -7,6 +7,14 @@ import SmoothScroll from "../../Component/SmothScrolling";
 import Link from "next/link";
 import Image from "next/image";
 import { Variants } from "framer-motion";
+import { FaCow } from "react-icons/fa6";
+import {
+  FaChartBar,
+  FaGlobeAsia,
+  FaMountain,
+  FaRocket,
+  FaTint,
+} from "react-icons/fa";
 
 /* ─────────────────────────────────────
    Shared animation helpers
@@ -646,7 +654,7 @@ export default function AboutPage() {
                       <span className="w-7 h-7 rounded-lg bg-[var(--color-tertiary)] flex items-center justify-center text-sm">
                         🐄
                       </span>
-                      Founded with Gau Seva
+                      Founded with Gau Sevaz
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
                       Began with cattle welfare and rural livelihood support,
@@ -893,34 +901,41 @@ export default function AboutPage() {
             {/* Timeline */}
             <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
               {[
-                { year: "2017", icon: "🐄", theme: "Foundation – Gau Seva" },
+                { year: "2017", icon: FaCow, theme: "Foundation – Gau Seva" },
                 {
                   year: "2019",
-                  icon: "💧",
+                  icon: FaTint,
                   theme: "Start of Water Conservation",
                 },
-                { year: "2021", icon: "🏞", theme: "Expansion" },
-                { year: "2024", icon: "🌍", theme: "Regional Movement" },
-                { year: "2025", icon: "📊", theme: "Impact Milestone" },
+                { year: "2021", icon: FaMountain, theme: "Expansion" },
+                { year: "2024", icon: FaGlobeAsia, theme: "Regional Movement" },
+                { year: "2025", icon: FaChartBar, theme: "Impact Milestone" },
                 {
                   year: "Future",
-                  icon: "🚀",
+                  icon: FaRocket,
                   theme: "Vision 1,11,111 Structures",
                 },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
-                >
-                  <div className="text-3xl mb-3">{item.icon}</div>
-                  <p className="font-bold text-sm text-[var(--color-primary)]">
-                    {item.year}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1">{item.theme}</p>
-                </div>
-              ))}
-            </div>
+              ].map((item, i) => {
+                const Icon = item.icon; // 👈 important
 
+                return (
+                  <div
+                    key={i}
+                    className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
+                  >
+                    <Icon className="text-5xl mb-3 text-[var(--color-primary)] bg-[var(--color-tertiary)] p-3 rounded-full
+                    
+                    mx-auto" />
+
+                    <p className="font-bold text-sm text-[var(--color-primary)]">
+                      {item.year}
+                    </p>
+
+                    <p className="text-xs text-gray-500 mt-1">{item.theme}</p>
+                  </div>
+                );
+              })}
+            </div>
             {/* Leadership */}
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -932,20 +947,30 @@ export default function AboutPage() {
                   <div className="h-px w-8 bg-[var(--color-secondary)]" />
                 </div>
 
+                {/* ✅ NEW ADDED CONTENT */}
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                  The work of Girganga Parivar Trust is guided by a committed
+                  Board of Trustees with experience in agriculture, rural
+                  development, community mobilization, and financial management.
+                  The Board provides strategic direction while ensuring
+                  transparency, accountability, and long-term sustainability of
+                  the organization’s mission.
+                </p>
+
                 <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-primary)]">
                   Founder & President
                 </h3>
 
                 <p className="font-semibold text-lg text-gray-900 mb-4">
-                  Mr. Dilipbhai Sakhiya
+                  Mr. DILIPBHAI SAKHIYA
                 </p>
 
+                {/* Existing content */}
                 <p className="text-gray-500 text-sm leading-relaxed mb-4">
                   A veteran grassroots leader and water conservation advocate
                   with more than two decades of community engagement, he
-                  initiated the
-                  <strong> “1,11,111 Jal Sanchay Sankalp”</strong>, a
-                  people-driven movement aimed at restoring water systems
+                  initiated the <strong>“1,11,111 Jal Sanchay Sankalp”</strong>,
+                  a people-driven movement aimed at restoring water systems
                   through community participation and decentralized watershed
                   development.
                 </p>
@@ -953,9 +978,11 @@ export default function AboutPage() {
                 <p className="text-gray-500 text-sm leading-relaxed">
                   Under his leadership, the organization has mobilized farmers,
                   village institutions, youth volunteers, and development
-                  partners to strengthen water security across rural regions.
+                  partners to collectively work toward strengthening water
+                  security across rural regions.
                 </p>
 
+                {/* Quote */}
                 <div className="mt-6 border-l-4 border-[var(--color-primary)] pl-4 italic text-gray-600 text-sm">
                   “Leadership at GGPT is not about hierarchy; it is about
                   working with communities—structure by structure, village by

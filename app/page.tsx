@@ -274,7 +274,7 @@ export default function HomePage() {
 
                 {/* Outline Button */}
                 <a
-                  href="/support-a-structure"
+                  href="/contact"
                   className="btn-secondary-outline group text-sm lg:text-base"
                 >
                   <span className="relative z-10">
@@ -564,7 +564,7 @@ export default function HomePage() {
 
                     {/* Outline Button */}
                     <a
-                      href="/support-a-structure"
+                      href="/partner-with-us-csr"
                       className="btn-secondary-outline group text-sm lg:text-base"
                     >
                       <span className="relative z-10">
@@ -595,7 +595,7 @@ export default function HomePage() {
 
                     {/* Outline Button */}
                     <a
-                      href="/support-a-structure"
+                      href="/contact"
                       className="btn-secondary-outline group text-sm lg:text-base"
                     >
                       <span className="relative z-10">

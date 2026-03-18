@@ -233,11 +233,11 @@ export default function Footer() {
             <p className="flex flex-wrap items-center justify-center gap-1.5">
               Made with <span className="text-[var(--color-primary)]">♥</span>{" "}
               for Water Conservation ·{" "}
-              <a href="/page.tsx">
+              <Link href="/">
                 <span className="text-[var(--color-primary)] ">
                   Girganga Parivar Trust © 2026
                 </span>
-              </a>
+              </Link>
             </p>
           </div>
         </div>

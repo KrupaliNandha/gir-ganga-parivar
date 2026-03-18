@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import SmoothScroll from "../../Component/SmothScrolling";
+import { FaFlag, FaSeedling, FaTools, FaWater } from "react-icons/fa";
 
 // ─── ANIMATION VARIANTS ──────────────────────────────────────────
 const fadeUp: Variants = {
@@ -45,16 +46,21 @@ function SectionHeader({
   subtitle?: string;
 }) {
   return (
-    <div className="text-center mb-16">
+    <div className="text-center mb-16 space-y-5">
       <Eyebrow>{eyebrow}</Eyebrow>
       <h2 className="font-[var(--font)] text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.15] text-gray-900 mb-4">
         {title} <span className="text-[var(--color-primary)]">{highlight}</span>
       </h2>
       {subtitle && (
-        <p className="text-gray-500 text-[0.92rem] leading-[1.8] max-w-[560px] mx-auto font-[var(--font)]">
+        <p className="text-gray-500 text-[0.92rem] leading-[1.8] mx-auto font-[var(--font)]">
           {subtitle}
         </p>
       )}
+      <p className="text-gray-500 text-[0.92rem] leading-[1.8] mx-auto font-[var(--font)]">
+        Through these collaborations, GGPT helps connect academic knowledge with
+        real-world environmental action in rural communities.
+      </p>
+
       <div className="w-12 h-[3px] bg-[var(--color-secondary)] rounded-full mx-auto mt-5" />
     </div>
   );
@@ -103,31 +109,44 @@ function Field({
 const engagementModels = [
   {
     title: "Water Conservation Projects",
+    topText:
+      "Corporations can support the construction and rejuvenation of decentralized water harvesting structures such as:",
     items: [
       "Check dams",
-      "Recharge bore wells, ",
-      "Percolation pits, ",
-      "Village watershed restoration projects. ",
+      "Recharge bore wells",
+      "Percolation pits",
+      "Village watershed restoration projects",
     ],
+    bottomText:
+      "These interventions significantly improve groundwater recharge and agricultural productivity in drought-prone regions.",
   },
   {
     title: "Climate & Environmental Programs",
+    topText:
+      "Companies can collaborate with GGPT to implement climate resilience initiatives aligned with environmental sustainability goals, including:",
     items: [
       "Groundwater recharge programs",
       "Watershed ecosystem restoration",
       "Climate adaptation for rural communities",
     ],
+    bottomText:
+      "These initiatives contribute directly to long-term ecological sustainability.",
   },
   {
     title: "Employee & Partnership Engagement",
+    topText: "Companies may also engage their employees through:",
     items: [
       "Field visits to project sites, ",
       "Volunteer participation in conservation activities",
       "Awareness programs on sustainable water management",
     ],
+    bottomText:
+      "This strengthens employee engagement while contributing to meaningful social impact.",
   },
   {
     title: "Impact Transparency",
+    topText:
+      "GGPT provides corporate partners with clear and credible reporting, including:",
     items: [
       "Project progress updates, ",
       "Geographic impact maps, ",
@@ -135,29 +154,34 @@ const engagementModels = [
       "Groundwater recharge estimates, ",
       "Community impact assessments. ",
     ],
+    bottomText: "This ensures transparency and measurable CSR outcomes.",
   },
 ];
 
 const govFeatures = [
   {
-    icon: "💧",
+    icon: <FaWater />,
     title: "Water Conservation & Groundwater Recharge",
-    desc: "GGPT works alongside government departments to build and rejuvenate check dams, recharge systems, and other decentralised water harvesting structures that improve village-level water security in semi-arid regions.",
+    desc: "GGPT works alongside government departments to support initiatives that improve groundwater availability through the construction and rejuvenation of water harvesting structures such as check dams and recharge systems.",
+    dec: "These efforts help strengthen village-level water security and support drought resilience in semi-arid regions.",
   },
   {
-    icon: "🌾",
+    icon: <FaSeedling />,
     title: "Rural Development Programs",
-    desc: "The Trust collaborates on village-level infrastructure benefiting farmers, livestock, and local ecosystems — including watershed restoration and community-based resource management initiatives.",
+    desc: "The Trust collaborates with government agencies involved in rural development to support village-level infrastructure that benefits farmers, livestock, and local ecosystems.",
+    dec: "This includes participation in watershed restoration activities and community-based resource management initiatives.",
   },
   {
-    icon: "🛠️",
+    icon: <FaTools />,
     title: "Technical & Community Implementation Support",
-    desc: "GGPT brings deep grassroots experience in community mobilisation and village participation — bridging policy intent with effective ground-level action for sustainable water assets.",
+    desc: "GGPT brings strong grassroots experience in mobilizing local communities, facilitating village participation, and ensuring long-term sustainability of water conservation assets.",
+    dec: "Through this approach, the Trust supports government initiatives by helping translate policy and program objectives into effective ground-level action.",
   },
   {
-    icon: "🇮🇳",
+    icon: <FaFlag />,
     title: "Alignment with National Water & Climate Priorities",
-    desc: "Programs contribute to national priorities in water conservation, climate resilience, and sustainable rural development, helping scale community-driven models that address groundwater depletion.",
+    desc: "GGPT’s programs contribute to broader national priorities related to water conservation, climate resilience, and sustainable rural development.",
+    dec: "By working together with government institutions, the Trust helps scale community-driven models that address groundwater depletion and strengthen environmental sustainability.",
   },
 ];
 
@@ -358,7 +382,7 @@ export default function Support() {
           2 · CORPORATE PARTNERSHIPS
       ══════════════════════════════════ */}
           <section className="container bg-white py-24 px-8">
-            <div className="max-w-7xl mx-auto">
+            <div className=" mx-auto">
               <motion.div
                 initial="hidden"
                 whileInView="show"
@@ -379,7 +403,7 @@ export default function Support() {
                 whileInView="show"
                 viewport={{ once: true }}
                 variants={stagger}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
               >
                 {engagementModels.map((card, i) => (
                   <motion.div
@@ -395,6 +419,11 @@ export default function Support() {
                     <h4 className="font-bold text-base text-gray-900 mb-3 font-[var(--font)]">
                       {card.title}
                     </h4>
+
+                    <p className="text-sm text-slate-600 mb-3">
+                      {card.topText}
+                    </p>
+
                     <ul className="list-none flex flex-col gap-2">
                       {card.items.map((item, j) => (
                         <li
@@ -408,6 +437,10 @@ export default function Support() {
                         </li>
                       ))}
                     </ul>
+
+                    <p className="text-sm text-slate-600 mt-3">
+                      {card.bottomText}
+                    </p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -489,15 +522,23 @@ export default function Support() {
                     <motion.div
                       key={i}
                       variants={fadeUp}
-                      className="bg-white rounded-[18px] px-7 py-6 border-l-4 border-[var(--color-primary)]"
+                      className="bg-white rounded-[18px] px-7 py-6 border-l-4 border-[var(--color-primary)] space-y-5"
                       whileHover={{ x: 6 }}
                       transition={{ type: "tween", duration: 0.25 }}
                     >
-                      <h4 className="font-semibold text-[0.95rem] text-gray-900 mb-2.5 font-[var(--font)]">
-                        {f.icon} {f.title}
+                      <h4 className="font-semibold text-[0.95rem] flex gap-3 items-center  text-gray-900 mb-2.5 font-[var(--font)]">
+                        <div className="text-[var(--color-primary)] bg-[var(--color-tertiary)] p-2 border border-[var(--color-primary)]">
+                          {f.icon}
+                        </div>
+
+                        {f.title}
                       </h4>
                       <p className="text-[0.82rem] text-gray-500 leading-[1.75] font-[var(--font)]">
                         {f.desc}
+                      </p>
+
+                      <p className="text-[0.82rem] text-gray-500 leading-[1.75] font-[var(--font)]">
+                        {f.dec}
                       </p>
                     </motion.div>
                   ))}

@@ -16,8 +16,13 @@ import {
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [workOpen, setWorkOpen] = useState(false);
-  const [mediaOpen, setMediaOpen] = useState(false);
+
+  // ✅ FIX: Separate states for desktop and mobile
+  const [desktopWorkOpen, setDesktopWorkOpen] = useState(false);
+  const [desktopMediaOpen, setDesktopMediaOpen] = useState(false);
+  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
+  const [mobileMediaOpen, setMobileMediaOpen] = useState(false);
+
   const [scrolled, setScrolled] = useState(false);
 
   const workRef = useRef<HTMLLIElement>(null);
@@ -31,9 +36,9 @@ export default function Navbar() {
   useEffect(() => {
     const handle = (e: MouseEvent) => {
       if (workRef.current && !workRef.current.contains(e.target as Node))
-        setWorkOpen(false);
+        setDesktopWorkOpen(false);
       if (mediaRef.current && !mediaRef.current.contains(e.target as Node))
-        setMediaOpen(false);
+        setDesktopMediaOpen(false);
     };
     document.addEventListener("mousedown", handle);
     return () => document.removeEventListener("mousedown", handle);
@@ -46,13 +51,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* lock body scroll when mobile menu open */
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
+      // ✅ Reset mobile dropdowns when menu closes
+      setMobileWorkOpen(false);
+      setMobileMediaOpen(false);
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -104,7 +112,7 @@ export default function Navbar() {
           TOP BAR
       ══════════════════════════════════════════════ */}
       <div className="w-full bg-[#f0ede6] border-b border-[#e2ddd4] relative z-50">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-10 flex items-center justify-between">
+        <div className="max-w-full mx-auto px-6 lg:px-12 h-10 flex items-center justify-between">
           {/* Left: welcome + socials */}
           <div className="flex items-center gap-5">
             <span className="hidden sm:block text-[12px] text-slate-500 font-medium tracking-wide">
@@ -130,7 +138,7 @@ export default function Navbar() {
                 {
                   icon: <FaLinkedinIn size={11} />,
                   href: "https://in.linkedin.com/in/girganga-parivar-trust-450354287",
-                  label: "Twitter",
+                  label: "LinkedIn",
                 },
               ].map(({ icon, href, label }) => (
                 <a
@@ -166,16 +174,18 @@ export default function Navbar() {
             </a>
           </div>
         </div>
-      </div>{" "}
+      </div>
+
       {/* ══════════════════════════════════════════════
-          MAIN NAV  ——  Selvatika style
-          [ Logo + name ]              [ links … Donate ]
+          MAIN NAV
       ══════════════════════════════════════════════ */}
       <nav
-        className={`sticky top-0 w-full z-50 bg-white transition-all duration-300 ${scrolled ? "shadow-md" : "border-none"}`}
+        className={`sticky top-0 w-full z-50 bg-white transition-all duration-300 ${
+          scrolled ? "shadow-md" : "border-none"
+        }`}
       >
         <div className="max-w-full mx-auto px-6 lg:px-12 flex items-center justify-between">
-          {/* ── LEFT: Logo  +  "Parivar Trust" rule ── */}
+          {/* Logo */}
           <Link
             href="/"
             className="flex flex-col items-center py-3 flex-shrink-0"
@@ -188,9 +198,12 @@ export default function Navbar() {
               className="transition-all duration-300 object-contain"
               priority
             />
-            {/* brand-name strip — hidden when scrolled (mimics Selvatika) */}
             <div
-              className={`flex items-center gap-1.5 mt-1 transition-all duration-300 ${scrolled ? "opacity-0 max-h-0 overflow-hidden" : "opacity-100 max-h-6"}`}
+              className={`flex items-center gap-1.5 mt-1 transition-all duration-300 ${
+                scrolled
+                  ? "opacity-0 max-h-0 overflow-hidden"
+                  : "opacity-100 max-h-6"
+              }`}
             >
               <span className="block h-px w-4 bg-slate-300" />
               <span className="text-[8px] font-black tracking-[0.28em] uppercase text-slate-400 whitespace-nowrap">
@@ -200,7 +213,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* ── RIGHT: Nav links ── */}
+          {/* Desktop Nav links */}
           <ul className="hidden lg:flex items-stretch">
             {/* HOME */}
             <li className="relative group">
@@ -218,19 +231,18 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* OUR WORK ▾ */}
-
+            {/* OUR WORK ▾ — ✅ uses desktopWorkOpen */}
             <li
               className="relative"
               ref={workRef}
-              onMouseEnter={() => setWorkOpen(true)}
-              onMouseLeave={() => setWorkOpen(false)}
+              onMouseEnter={() => setDesktopWorkOpen(true)}
+              onMouseLeave={() => setDesktopWorkOpen(false)}
             >
               <Link
                 href="/Our-Work"
                 onClick={() => {
-                  setWorkOpen(!workOpen);
-                  setWorkOpen(false);
+                  setDesktopWorkOpen(!desktopWorkOpen);
+                  setDesktopMediaOpen(false);
                 }}
                 className={`${linkCls(isWorkActive ? "/Our-Work" : "")} gap-1 flex items-center`}
               >
@@ -238,21 +250,22 @@ export default function Navbar() {
                 <FiChevronDown
                   size={11}
                   className={`mt-px transition-transform duration-200 ${
-                    workOpen ? "rotate-180" : ""
+                    desktopWorkOpen ? "rotate-180" : ""
                   }`}
                 />
-                <span className={underline(isWorkActive || workOpen, false)} />
+                <span
+                  className={underline(isWorkActive || desktopWorkOpen, false)}
+                />
               </Link>
 
-              <div className={dropPanel(workOpen)}>
+              <div className={dropPanel(desktopWorkOpen)}>
                 <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
-
-                {[{ label: "Impact", href:"/impact" }].map(
+                {[{ label: "Impact", href: "/impact" }].map(
                   ({ label, href }) => (
                     <Link
                       key={href}
                       href={href}
-                      onClick={() => setWorkOpen(false)}
+                      onClick={() => setDesktopWorkOpen(false)}
                       className={dropCls(href)}
                     >
                       {label}
@@ -262,7 +275,7 @@ export default function Navbar() {
               </div>
             </li>
 
-            {/* impact */}
+            {/* IMPACT */}
             <li className="relative group">
               <Link href="/impact" className={linkCls("/impact")}>
                 Impact
@@ -270,18 +283,13 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* REPORTS & PUBLICATIONS */}
+            {/* REPORTS & PUBLICATIONS
             <li className="relative group">
-              <Link
-                href="/reports-publications"
-                className={linkCls("/reports-publications")}
-              >
+              <Link href="/reports-publications" className={linkCls("/reports-publications")}>
                 REPORTS/PUBLICATIONS
-                <span
-                  className={underline(isActive("/reports-publications"))}
-                />
+                <span className={underline(isActive("/reports-publications"))} />
               </Link>
-            </li>
+            </li> */}
 
             {/* PARTNERS / CSR COLLABORATION */}
             <li className="relative group">
@@ -294,18 +302,18 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* MEDIA ▾ */}
+            {/* MEDIA ▾ — ✅ uses desktopMediaOpen */}
             <li
               className="relative"
               ref={mediaRef}
-              onMouseEnter={() => setMediaOpen(true)}
-              onMouseLeave={() => setMediaOpen(false)}
+              onMouseEnter={() => setDesktopMediaOpen(true)}
+              onMouseLeave={() => setDesktopMediaOpen(false)}
             >
               <Link
                 href="/media"
                 onClick={() => {
-                  setMediaOpen(!mediaOpen);
-                  setWorkOpen(false);
+                  setDesktopMediaOpen(!desktopMediaOpen);
+                  setDesktopWorkOpen(false);
                 }}
                 className={`${linkCls(isMediaActive ? "/media" : "")} gap-1 flex items-center`}
               >
@@ -313,17 +321,19 @@ export default function Navbar() {
                 <FiChevronDown
                   size={11}
                   className={`mt-px transition-transform duration-200 ${
-                    mediaOpen ? "rotate-180" : ""
+                    desktopMediaOpen ? "rotate-180" : ""
                   }`}
                 />
                 <span
-                  className={underline(isMediaActive || mediaOpen, false)}
+                  className={underline(
+                    isMediaActive || desktopMediaOpen,
+                    false,
+                  )}
                 />
               </Link>
 
-              <div className={dropPanel(mediaOpen)}>
+              <div className={dropPanel(desktopMediaOpen)}>
                 <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
-
                 {[
                   { label: "Photos", href: "/photos" },
                   { label: "Press Release", href: "/press-release" },
@@ -332,7 +342,7 @@ export default function Navbar() {
                   <Link
                     key={href}
                     href={href}
-                    onClick={() => setMediaOpen(false)}
+                    onClick={() => setDesktopMediaOpen(false)}
                     className={dropCls(href)}
                   >
                     {label}
@@ -357,20 +367,19 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* DONATE — vertical rule + outlined square button */}
+            {/* DONATE */}
             <li className="flex items-center ml-5 pl-5 border-l border-slate-200 my-3">
               <Link
                 href="/donate"
                 className="btn-secondary relative inline-flex items-center justify-center
-      text-[11px] font-extrabold uppercase tracking-[0.15em] px-5 py-2
-      border border-[var(--color-primary)] text-[var(--color-primary)]
-      hover:border-transparent hover:text-white
-      rounded-sm overflow-hidden"
+                  text-[11px] font-extrabold uppercase tracking-[0.15em] px-5 py-2
+                  border border-[var(--color-primary)] text-[var(--color-primary)]
+                  hover:border-transparent hover:text-white
+                  rounded-sm overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-1">
                   Donate
                 </span>
-
                 <span className="btn-secondary-overlay"></span>
               </Link>
             </li>
@@ -404,17 +413,18 @@ export default function Navbar() {
           </svg>
         </div>
       </nav>
+
       {/* ══════════════════════════════════════════════
           MOBILE FULLSCREEN MENU
       ══════════════════════════════════════════════ */}
       <div
-        className={`fixed inset-0 bg-white z-[9999] flex flex-col lg:hidden
+        className={`fixed inset-0 bg-white z-[9999] flex flex-col lg:hidden overflow-hidden
                        transition-all duration-500
                        ${menuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"}`}
       >
-        <div className="w-full bg-[#f0ede6] border-b border-[#e2ddd4] relative z-50">
+        {/* Mobile Top Bar */}
+        <div className="w-full bg-[#f0ede6] border-b border-[#e2ddd4] relative z-50 flex-shrink-0">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-10 flex items-center justify-between">
-            {/* Left: welcome + socials */}
             <div className="flex items-center gap-5">
               <span className="hidden sm:block text-[12px] text-slate-500 font-medium tracking-wide">
                 Welcome to Gir Ganga Parivar Trust
@@ -455,8 +465,6 @@ export default function Navbar() {
                 ))}
               </div>
             </div>
-
-            {/* Right: email · phone */}
             <div className="flex items-center gap-4 text-[12px] text-slate-500 font-medium">
               <a
                 href="mailto:info@girgangaparivartrust.com"
@@ -475,9 +483,10 @@ export default function Navbar() {
               </a>
             </div>
           </div>
-        </div>{" "}
-        {/* Top row */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100">
+        </div>
+
+        {/* Mobile Header: Logo + Close */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 relative flex-shrink-0">
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -507,7 +516,7 @@ export default function Navbar() {
             <FiX size={28} />
           </button>
 
-          <div className="absolute top-36 left-0 right-0 h-4 overflow-hidden">
+          <div className="absolute top-27 left-0 right-0 h-4 overflow-hidden pointer-events-none">
             <svg
               className="w-full h-full"
               viewBox="0 0 1200 12"
@@ -522,14 +531,15 @@ export default function Navbar() {
             </svg>
           </div>
         </div>
-        {/* Link list */}
+
+        {/* Mobile Link list */}
         <ul className="flex-1 overflow-y-auto px-6 py-6 md:text-xl">
           {/* Home */}
           <li>
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/") ? "text-[var(--color-primary)]" : "text-slate-800"
               }`}
             >
@@ -542,7 +552,7 @@ export default function Navbar() {
             <Link
               href="/about-us"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/about-us")
                   ? "text-[var(--color-primary)]"
                   : "text-slate-800"
@@ -552,41 +562,69 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Our Work */}
+          {/* Our Work — ✅ uses mobileWorkOpen ONLY */}
           <li>
-            <button
-              type="button"
-              onClick={() => setWorkOpen(!workOpen)}
-              className={`w-full flex items-center justify-between py-3.5  font-bold border-b border-slate-50 tracking-wide ${
-                isWorkActive ? "text-[var(--color-primary)]" : "text-slate-800"
-              }`}
-            >
-              Our Work
-              <FiChevronDown
-                className={`transition-transform ${workOpen ? "rotate-180" : ""}`}
-              />
-            </button>
+            <div className="flex flex-col border-b border-slate-50">
+              <div className="flex items-center justify-between w-full py-3.5">
+                <Link
+                  href="/Our-Work"
+                  onClick={() => {
+                    setMobileMediaOpen(false);
+                    setMenuOpen(false);
+                    setMobileWorkOpen(false);
+                  }}
+                  className={`text-lg font-bold tracking-wide flex-1 ${
+                    isWorkActive
+                      ? "text-[var(--color-primary)]"
+                      : "text-slate-800"
+                  }`}
+                >
+                  Our Work
+                </Link>
 
-            <div
-              className={`overflow-hidden transition-all ${
-                workOpen ? "max-h-36 py-2" : "max-h-0"
-              }`}
-            >
-              <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
-                <li>
-                  <Link
-                    href="/impact"
-                    onClick={() => setMenuOpen(false)}
-                    className={`text-[15px] font-semibold ${
-                      isActive("/impact")
-                        ? "text-[var(--color-primary)]"
-                        : "text-slate-500"
-                    }`}
-                  >
-                    Impact
-                  </Link>
-                </li>
-              </ul>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileWorkOpen((prev) => !prev);
+                    setMobileMediaOpen(false);
+                  }}
+                  className="pl-4 py-1"
+                >
+                  <FiChevronDown
+                    className={`text-xl transition-transform duration-300 
+                      ${mobileWorkOpen ? "rotate-180" : "rotate-0"} 
+                      ${mobileWorkOpen ? "text-[var(--color-primary)]" : "text-slate-400"}`}
+                  />
+                </button>
+              </div>
+
+              {/* Dropdown Content */}
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  mobileWorkOpen
+                    ? "max-h-40 opacity-100 pb-4"
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <ul className="pl-5 space-y-4 border-l-2 border-[var(--color-primary)] ml-1 mt-1">
+                  <li>
+                    <Link
+                      href="/impact"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setMobileWorkOpen(false);
+                      }}
+                      className={`text-[15px] font-semibold block transition-colors ${
+                        isActive("/impact")
+                          ? "text-[var(--color-primary)]"
+                          : "text-slate-500 hover:text-slate-800"
+                      }`}
+                    >
+                      Impact
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </li>
 
@@ -595,7 +633,7 @@ export default function Navbar() {
             <Link
               href="/impact"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/impact")
                   ? "text-[var(--color-primary)]"
                   : "text-slate-800"
@@ -605,60 +643,76 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* REPORTS & PUBLICATIONS */}
+          {/* Reports & Publications
           <li>
             <Link
               href="/reports-publications"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
-                isActive("/reports-publications")
-                  ? "text-[var(--color-primary)]"
-                  : "text-slate-800"
+              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/reports-publications") ? "text-[var(--color-primary)]" : "text-slate-800"
               }`}
             >
               REPORTS & PUBLICATIONS
             </Link>
-          </li>
+          </li> */}
 
-          {/* PARTNERS / CSR COLLABORATION */}
+          {/* Partners / CSR */}
           <li>
             <Link
               href="/partner-with-us-csr"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/partner-with-us-csr")
                   ? "text-[var(--color-primary)]"
                   : "text-slate-800"
               }`}
             >
-              PARTNERS / CSR COLLABORATION
+              Partners / CSR Collaboration
             </Link>
           </li>
 
-          {/* Media */}
+          {/* Media/News — ✅ uses mobileMediaOpen ONLY */}
           <li className="relative">
-            <button
-              type="button"
-              onClick={() => {
-                setMediaOpen((prev) => !prev);
-                setWorkOpen(false);
-              }}
-              className={`relative z-10 w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
-                isMediaActive ? "text-[var(--color-primary)]" : "text-slate-800"
-              }`}
-            >
-              Media/News
-              <FiChevronDown
-                className={`transition-transform duration-300 ${
-                  mediaOpen ? "rotate-180" : "rotate-0"
+            <div className="flex items-center justify-between w-full py-3.5 border-b border-slate-50">
+              {/* ✅ Link for page navigation */}
+              <Link
+                href="/media" // 👈 your main page route
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileMediaOpen(false);
+                  setMobileWorkOpen(false);
+                }}
+                className={`text-lg font-bold tracking-wide flex-1 ${
+                  isMediaActive
+                    ? "text-[var(--color-primary)]"
+                    : "text-slate-800"
                 }`}
-              />
-            </button>
+              >
+                Media/News
+              </Link>
 
-            {/* DROPDOWN */}
+              {/* ✅ Button for dropdown */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation(); // 👈 important
+                  setMobileMediaOpen((prev) => !prev);
+                  setMobileWorkOpen(false);
+                }}
+                className="pl-4 py-1"
+              >
+                <FiChevronDown
+                  className={`transition-transform duration-300 ${
+                    mobileMediaOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Dropdown */}
             <div
               className={`overflow-hidden transition-all duration-300 ${
-                mediaOpen ? "max-h-60 py-2" : "max-h-0"
+                mobileMediaOpen ? "max-h-60 py-2" : "max-h-0"
               }`}
             >
               <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
@@ -667,13 +721,9 @@ export default function Navbar() {
                     href="/photos"
                     onClick={() => {
                       setMenuOpen(false);
-                      setMediaOpen(false); // close after click
+                      setMobileMediaOpen(false);
                     }}
-                    className={`text-[15px] font-semibold ${
-                      isActive("/photos")
-                        ? "text-[var(--color-primary)]"
-                        : "text-slate-500"
-                    }`}
+                    className="text-[15px] font-semibold text-slate-500"
                   >
                     Photos
                   </Link>
@@ -684,13 +734,9 @@ export default function Navbar() {
                     href="/press-release"
                     onClick={() => {
                       setMenuOpen(false);
-                      setMediaOpen(false);
+                      setMobileMediaOpen(false);
                     }}
-                    className={`text-[15px] font-semibold ${
-                      isActive("/press-release")
-                        ? "text-[var(--color-primary)]"
-                        : "text-slate-500"
-                    }`}
+                    className="text-[15px] font-semibold text-slate-500"
                   >
                     Press Release
                   </Link>
@@ -701,13 +747,9 @@ export default function Navbar() {
                     href="/videos"
                     onClick={() => {
                       setMenuOpen(false);
-                      setMediaOpen(false);
+                      setMobileMediaOpen(false);
                     }}
-                    className={`text-[15px] font-semibold ${
-                      isActive("/videos")
-                        ? "text-[var(--color-primary)]"
-                        : "text-slate-500"
-                    }`}
+                    className="text-[15px] font-semibold text-slate-500"
                   >
                     Videos
                   </Link>
@@ -715,12 +757,13 @@ export default function Navbar() {
               </ul>
             </div>
           </li>
+
           {/* Awards */}
           <li>
             <Link
               href="/awards"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/awards")
                   ? "text-[var(--color-primary)]"
                   : "text-slate-800"
@@ -741,12 +784,13 @@ export default function Navbar() {
                   : "text-slate-800"
               }`}
             >
-              GET INVOLVED
+              Get Involved
             </Link>
           </li>
         </ul>
+
         {/* Bottom: contact info + donate CTA */}
-        <div className="px-6 pb-8 pt-4 border-t border-slate-100 space-y-3">
+        <div className="px-6 pb-8 pt-4 border-t border-slate-100 space-y-3 flex-shrink-0">
           <a
             href="tel:+919409692693"
             className="flex items-center gap-3 text-slate-700 font-semibold text-sm"

@@ -11,14 +11,13 @@ export default function Slider() {
     "/logos/Balaji Multiflex_logo.jpg",
     "/logos/BALAJI_WAFERS.png",
     "/logos/Dil Exim Commodities_logo.png",
-    "/logos/getco_geb_logo.jfif",
+    "/logos/getco_geb_logo.png",
     "/logos/images.png",
     "/logos/Ministry Of Jal Shakti.png",
     "/logos/Orbit Bearings_logo.jpg",
     "/logos/PGVCL.png",
     "/logos/Rajan Technocast_logo.png",
-    "/logos/Rolex.jfif",
-    "/logos/RTL_logo.png",
+    "/logos/Rolex.png",
     "/logos/UGVCL.png",
     "/logos/Vitrag Foundation_logos.png"
   ];
