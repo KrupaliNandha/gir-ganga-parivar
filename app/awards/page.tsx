@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import SmoothScroll from "../../Component/SmothScrolling";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion"; // AnimatePresence ઉમેર્યું
+import { FiPlus, FiX } from "react-icons/fi"; // આઈકોન્સ ઉમેર્યા
 
 type Award = {
   id: number;
@@ -55,6 +56,14 @@ const awards: Award[] = [
     badge: "Best NGO",
     year: "2025",
   },
+  {
+    id: 6,
+    title: "Jal Shanay & Jan Bhagidari Award",
+    image: "/image/Award/jan bhagidari award.png",
+    dic: "Jal Shanay & Jan Bhagidari Award",
+    badge: "Jal Shanay & Jan Bhagidari Award",
+    year: "2025",
+  },
 ];
 
 const newsUrl =
@@ -76,77 +85,81 @@ function useInView(threshold = 0.15) {
   return { ref, inView };
 }
 
-function AwardCard({ award, index }: { award: Award; index: number }) {
+// ── AwardCard Component ──
+function AwardCard({
+  award,
+  index,
+  onImageClick,
+}: {
+  award: Award;
+  index: number;
+  onImageClick: (img: string) => void;
+}) {
   const { ref, inView } = useInView();
 
   return (
     <div
       ref={ref}
-      className=" group relative bg-white rounded-3xl overflow-hidden flex flex-col"
+      className="group relative bg-white rounded-3xl overflow-hidden flex flex-col cursor-pointer transition-all duration-300 hover:shadow-lg border border-[#e6f4ee]"
+      onClick={() => onImageClick(award.image)}
       style={{
         boxShadow:
           "0 2px 24px 0 rgba(16,185,129,0.07), 0 1px 4px 0 rgba(0,0,0,0.05)",
-        border: "1.5px solid #e6f4ee",
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(32px)",
         transition: `opacity 0.6s ease, transform 0.6s ease`,
         transitionDelay: `${index * 90}ms`,
       }}
     >
-      {/* Image */}
-      <div className="relative w-full h-70 overflow-hidden">
+      {/* Image Container with Hover Overlay & Plus Sign */}
+      <div className="relative w-full h-72 overflow-hidden">
         <Image
           src={award.image}
           alt={award.title}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          
+          className="object-cover transition-transform duration-300"
         />
+
+        {/* Hover Overlay with Plus Sign */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
+            <FiPlus className="text-white text-3xl" />
+          </div>
+        </div>
+
+        {/* Gradient Overlay for style (static) */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 55%)",
+              "linear-gradient(to top, rgba(0,0,0,0.1) 0%, transparent 45%)",
           }}
         />
       </div>
 
       {/* Body */}
-      <div className="flex flex-col flex-1 px-5 py-5 gap-2">
+      <div className="flex flex-col flex-1 px-5 py-6 gap-2 bg-white">
         <span className="self-start text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full border border-[var(--color-primary)] select-none bg-[var(--color-primary)]/10 text-[var(--color-primary)]">
           {award.badge}
         </span>
 
-        <h3 className="text-gray-900 font-bold text-base leading-snug mt-1 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+        <h3 className="text-gray-900 font-bold text-lg leading-snug mt-2 group-hover:text-[var(--color-primary)] transition-colors duration-300">
           {award.title}
         </h3>
 
-        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 flex-1">
+        <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 flex-1 mt-1">
           {award.dic}
         </p>
-
-        <div
-          className="mt-4 h-[2px] rounded-full bg-[var(--color-primary)] transition-all duration-500"
-          style={{ width: "0%" }}
-          ref={(el: HTMLDivElement | null) => {
-            if (el) {
-              el.parentElement?.parentElement?.addEventListener(
-                "mouseenter",
-                () => (el.style.width = "100%"),
-              );
-              el.parentElement?.parentElement?.addEventListener(
-                "mouseleave",
-                () => (el.style.width = "0%"),
-              );
-            }
-          }}
-        />
       </div>
     </div>
   );
 }
 
+// ── Main AwardsSection Component ──
 export default function AwardsSection() {
   const { ref: headingRef, inView: headingVisible } = useInView(0.2);
+  const [selectedImg, setSelectedImg] = useState<string | null>(null); 
 
   return (
     <SmoothScroll>
@@ -162,9 +175,8 @@ export default function AwardsSection() {
             <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
               Awards Received by{" "}
               <span className="text-[var(--color-primary)]">
-                {" "}
-                Girganga Parivar{" "}
-              </span>{" "}
+                Girganga Parivar
+              </span>
             </h1>
             <p className="text-gray-500 text-sm mt-5 max-w-xl mx-auto leading-relaxed">
               Nationally recognized for outstanding contributions to water
@@ -195,10 +207,7 @@ export default function AwardsSection() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="text-center rounded-2xl py-6 px-3 bg-white shadow-sm"
-                style={{
-                  background: "#fff",
-                }}
+                className="text-center rounded-2xl py-6 px-3 bg-white shadow-sm border border-[#e6f4ee]"
               >
                 <p
                   className="font-extrabold text-[var(--color-primary)]"
@@ -215,85 +224,58 @@ export default function AwardsSection() {
             ))}
           </div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          {/* Cards with props pass */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 pb-20">
             {awards.map((award, index) => (
-              <AwardCard key={award.id} award={award} index={index} />
+              <AwardCard
+                key={award.id}
+                award={award}
+                index={index}
+                onImageClick={setSelectedImg} 
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Featured News Banner ── */}
-      <section className="container  ">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative rounded-3xl overflow-hidden flex flex-col sm:flex-row items-stretch border border-[var(--color-primary)]">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 px-7 py-8 flex-1 bg-[var(--color-tertiary)]">
-              <div className="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center bg-[var(--color-tertiary)] border border-[var(--color-primary)]">
-                <svg
-                  className="w-7 h-7 text-[var(--color-primary)]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.8}
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                  />
-                </svg>
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-gray-900 font-bold text-lg sm:text-xl leading-snug">
-                  Girganga Parivar Trust —{" "}
-                  <span className="text-[var(--color-primary)]">
-                    Champion of Global CSR &amp; ESG 2025
-                  </span>
-                </h3>
-                <p className="mt-1.5 text-gray-400 text-sm leading-relaxed">
-                  Read the full coverage on DevDiscourse about our recognition
-                  for Water Conservation leadership and sustainable
-                  environmental impact.
-                </p>
-              </div>
+      {/* ── Lightbox for Single Image (AnimatePresence) ── */}
+      <AnimatePresence>
+        {selectedImg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[999] bg-white/90 backdrop-blur-xl flex items-center justify-center p-4 cursor-zoom-out"
+            onClick={() => setSelectedImg(null)} 
+          >
+            {/* Close Button */}
+            <button
+              className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white hover:scale-110 transition-transform"
+              onClick={() => setSelectedImg(null)}
+            >
+              <FiX size={24} />
+            </button>
 
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex flex-wrap gap-6 justify-center"
-              >
-                {/* Secondary Button */}
-                <a
-                  href="/partner-with-us-csr"
-                  className="btn-primary groupinline-flex items-center gap-2 font-semibold text-base
-  px-10 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)] flex"
-                >
-                  <span className="relative z-10">Latest News</span>
-
-                  <svg
-                    className="w-4 h-4 relative z-10"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-
-                  <span className="btn-primary-overlay"></span>
-                </a>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
+            {/* Image Containter with Scale Animation */}
+            <motion.div
+              initial={{ scale: 0.9, y: 30, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 30, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="relative max-w-7xl w-full h-[80vh] flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()} 
+            >
+              <Image
+                src={selectedImg}
+                alt="Award Zoom"
+                fill
+                className="object-contain rounded-2xl"
+                priority
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </SmoothScroll>
   );
 }

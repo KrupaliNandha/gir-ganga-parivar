@@ -4,14 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  FiChevronDown,
-  FiMenu,
-  FiX,
-  FiPhone,
-  FiMail,
-  FiSearch,
-} from "react-icons/fi";
+import { FiChevronDown, FiMenu, FiX, FiPhone, FiMail } from "react-icons/fi";
 import {
   FaFacebookF,
   FaYoutube,
@@ -19,14 +12,12 @@ import {
   FaTwitter,
   FaLinkedinIn,
 } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa6";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
   const [mediaOpen, setMediaOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const workRef = useRef<HTMLLIElement>(null);
@@ -55,7 +46,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ─── helpers ─────────────────────────────────────── */
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [menuOpen]);
 
   /* Animated underline that grows from left */
   const underline = (active: boolean, hoverGroup = true) =>
@@ -218,8 +219,9 @@ export default function Navbar() {
             </li>
 
             {/* OUR WORK ▾ */}
+
             <li
-              className="relative group"
+              className="relative"
               ref={workRef}
               onMouseEnter={() => setWorkOpen(true)}
               onMouseLeave={() => setWorkOpen(false)}
@@ -227,8 +229,8 @@ export default function Navbar() {
               <Link
                 href="/Our-Work"
                 onClick={() => {
+                  setWorkOpen(!workOpen);
                   setWorkOpen(false);
-                  setMediaOpen(false);
                 }}
                 className={`${linkCls(isWorkActive ? "/Our-Work" : "")} gap-1 flex items-center`}
               >
@@ -243,12 +245,9 @@ export default function Navbar() {
               </Link>
 
               <div className={dropPanel(workOpen)}>
-                <div
-                  className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3
-      bg-white border-l border-t border-slate-100 rotate-45"
-                />
+                <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
 
-                {[{ label: "Impact", href: "/impact" }].map(
+                {[{ label: "Impact", href:"/impact" }].map(
                   ({ label, href }) => (
                     <Link
                       key={href}
@@ -271,29 +270,27 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* ABOUT US */}
+            {/* REPORTS & PUBLICATIONS */}
             <li className="relative group">
               <Link
                 href="/reports-publications"
                 className={linkCls("/reports-publications")}
               >
-                REPORTS & PUBLICATIONS
+                REPORTS/PUBLICATIONS
                 <span
                   className={underline(isActive("/reports-publications"))}
                 />
               </Link>
             </li>
 
-            {/* ABOUT US */}
+            {/* PARTNERS / CSR COLLABORATION */}
             <li className="relative group">
               <Link
-                href="/prtners-CSR-collaboration"
-                className={linkCls("/prtners-CSR-collaboration")}
+                href="/partner-with-us-csr"
+                className={linkCls("/partner-with-us-csr")}
               >
-                PARTNERS / CSR COLLABORATION
-                <span
-                  className={underline(isActive("/prtners-CSR-collaboration"))}
-                />
+                PARTNERS/CSR COLLABORATION
+                <span className={underline(isActive("/partner-with-us-csr"))} />
               </Link>
             </li>
 
@@ -489,8 +486,8 @@ export default function Navbar() {
             <Image
               src="/image/logo.png"
               alt="Gir Ganga Parivar Trust"
-              width={62}
-              height={62}
+              width={66}
+              height={66}
               className="object-contain"
             />
             <div className="flex items-center gap-1.5 mt-1">
@@ -526,13 +523,13 @@ export default function Navbar() {
           </div>
         </div>
         {/* Link list */}
-        <ul className="flex-1 overflow-y-auto px-6 py-6">
+        <ul className="flex-1 overflow-y-auto px-6 py-6 md:text-xl">
           {/* Home */}
           <li>
             <Link
               href="/"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/") ? "text-[var(--color-primary)]" : "text-slate-800"
               }`}
             >
@@ -545,7 +542,7 @@ export default function Navbar() {
             <Link
               href="/about-us"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/about-us")
                   ? "text-[var(--color-primary)]"
                   : "text-slate-800"
@@ -560,7 +557,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setWorkOpen(!workOpen)}
-              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+              className={`w-full flex items-center justify-between py-3.5  font-bold border-b border-slate-50 tracking-wide ${
                 isWorkActive ? "text-[var(--color-primary)]" : "text-slate-800"
               }`}
             >
@@ -593,33 +590,85 @@ export default function Navbar() {
             </div>
           </li>
 
+          {/* Impact */}
+          <li>
+            <Link
+              href="/impact"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/impact")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              Impact
+            </Link>
+          </li>
 
+          {/* REPORTS & PUBLICATIONS */}
+          <li>
+            <Link
+              href="/reports-publications"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/reports-publications")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              REPORTS & PUBLICATIONS
+            </Link>
+          </li>
+
+          {/* PARTNERS / CSR COLLABORATION */}
+          <li>
+            <Link
+              href="/partner-with-us-csr"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/partner-with-us-csr")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              PARTNERS / CSR COLLABORATION
+            </Link>
+          </li>
 
           {/* Media */}
-          <li>
+          <li className="relative">
             <button
               type="button"
-              onClick={() => setMediaOpen(!mediaOpen)}
-              className={`w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+              onClick={() => {
+                setMediaOpen((prev) => !prev);
+                setWorkOpen(false);
+              }}
+              className={`relative z-10 w-full flex items-center justify-between py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
                 isMediaActive ? "text-[var(--color-primary)]" : "text-slate-800"
               }`}
             >
               Media/News
               <FiChevronDown
-                className={`transition-transform ${mediaOpen ? "rotate-180" : ""}`}
+                className={`transition-transform duration-300 ${
+                  mediaOpen ? "rotate-180" : "rotate-0"
+                }`}
               />
             </button>
 
+            {/* DROPDOWN */}
             <div
-              className={`overflow-hidden transition-all ${
-                mediaOpen ? "max-h-52 py-2" : "max-h-0"
+              className={`overflow-hidden transition-all duration-300 ${
+                mediaOpen ? "max-h-60 py-2" : "max-h-0"
               }`}
             >
               <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
                 <li>
                   <Link
                     href="/photos"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMediaOpen(false); // close after click
+                    }}
                     className={`text-[15px] font-semibold ${
                       isActive("/photos")
                         ? "text-[var(--color-primary)]"
@@ -633,7 +682,10 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/press-release"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMediaOpen(false);
+                    }}
                     className={`text-[15px] font-semibold ${
                       isActive("/press-release")
                         ? "text-[var(--color-primary)]"
@@ -647,7 +699,10 @@ export default function Navbar() {
                 <li>
                   <Link
                     href="/videos"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMediaOpen(false);
+                    }}
                     className={`text-[15px] font-semibold ${
                       isActive("/videos")
                         ? "text-[var(--color-primary)]"
@@ -660,13 +715,12 @@ export default function Navbar() {
               </ul>
             </div>
           </li>
-
           {/* Awards */}
           <li>
             <Link
               href="/awards"
               onClick={() => setMenuOpen(false)}
-              className={`block py-3.5 text-lg font-bold border-b border-slate-50 tracking-wide ${
+              className={`block py-3.5  font-bold border-b border-slate-50 tracking-wide ${
                 isActive("/awards")
                   ? "text-[var(--color-primary)]"
                   : "text-slate-800"
@@ -687,7 +741,7 @@ export default function Navbar() {
                   : "text-slate-800"
               }`}
             >
-              Contact
+              GET INVOLVED
             </Link>
           </li>
         </ul>

@@ -255,9 +255,9 @@ export default function Donate() {
                   type="submit"
                   onClick={handleDonate}
                   className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
-                  font-semibold text-base px-10 py-4 cursor-pointer
+                  font-semibold text-xs sm:text-base px-10 py-4 cursor-pointer
                   bg-[var(--color-primary)] text-[var(--color-secondary)]
-                  hover:text-[var(--color-primary)] overflow-hidden"
+                  hover:text-[var(--color-primary)] overflow-hidden "
                 >
                   <span className="relative z-10 flex gap-2 items-center">
                     Donate ₹
@@ -307,7 +307,7 @@ export default function Donate() {
 
       {/* Section - 2 */}
       <section className="container min-h-screen relative overflow-hidden">
-        <div className="container mx-auto relative ">
+        <div className="  relative ">
           {/* Header */}
           <div className="mb-16 text-center">
             <p

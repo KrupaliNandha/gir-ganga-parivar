@@ -11,15 +11,12 @@ import {
   Pagination,
   Autoplay,
   EffectCoverflow,
-  FreeMode,
 } from "swiper/modules";
 import {
   FaSearchPlus,
   FaTimes,
   FaArrowLeft,
   FaArrowRight,
-  FaChevronLeft,
-  FaChevronRight,
 } from "react-icons/fa";
 
 // Swiper styles
@@ -46,6 +43,11 @@ const awardImages = [
     year: "2025",
   },
   {
+    src: "/image/Award/jan bhagidari award.png",
+    caption: "Jal shancay & Jan Bhagidari Award",
+    year: "2025",
+  },
+  {
     src: "/image/Award/Mayor's Award.jpg",
     caption: "Mayor Award — Rajkot Municipal Corporation",
     year: "2024",
@@ -64,35 +66,36 @@ const awards = [
     year: "2026",
     title: "Best NGO Award 2025 (JSJB 1.0)",
     agency: "Ministry of Jal Shakti, Government of India",
-    icon: "🏆",
   },
   {
     sr: 2,
     year: "2025",
     title: "Indian CSR Award",
     agency: "Brand Honchos",
-    icon: "🥇",
   },
   {
     sr: 3,
     year: "2025",
     title: "Global CSR & ESG Awards 2025",
     agency: "Narayan Seva Sansthan",
-    icon: "🌍",
   },
   {
     sr: 4,
-    year: "2024",
-    title: "Mayor Award",
-    agency: "Rajkot Municipal Corporation, Rajkot",
-    icon: "🏙️",
+    year: "2025",
+    title: "Jal shancay & Jan Bhagidari Award",
+    agency: "Jal shancay & Jan Bhagidari Award",
   },
   {
     sr: 5,
+    year: "2024",
+    title: "Mayor Award",
+    agency: "Rajkot Municipal Corporation, Rajkot",
+  },
+  {
+    sr: 6,
     year: "2023",
     title: "Jal Prahari",
     agency: "Ministry of Jal Shakti, Government of India and UNOPS",
-    icon: "💧",
   },
 ];
 
@@ -423,6 +426,7 @@ export default function Media() {
                 stretch: 0,
                 depth: 100,
                 modifier: 2.5,
+                slideShadows: false,
               }}
               autoplay={{ delay: 4000, disableOnInteraction: false }}
               navigation={{
@@ -440,14 +444,14 @@ export default function Media() {
                   {({ isActive }) => (
                     <motion.div
                       animate={{
-                        scale: isActive ? 1 : 0.85,
-                        opacity: isActive ? 1 : 0.4,
+                        scale: isActive ? 1 : 0.9,
+                        opacity: isActive ? 1 : 0.7,
                       }}
                       transition={{ duration: 0.5 }}
                       className="relative group cursor-pointer"
                       onClick={() => setSelectedImg(item.img)}
                     >
-                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 shadow-xl">
+                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 ">
                         <img
                           src={item.img}
                           alt="press coverage"
@@ -641,7 +645,7 @@ export default function Media() {
                   <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black whitespace-nowrap uppercase">
                     News{" "}
                     <span className="text-[var(--color-primary)]">
-                      Articles
+                      articles
                     </span>
                   </h2>
                 </div>
@@ -671,6 +675,7 @@ export default function Media() {
                 stretch: 0,
                 depth: 100,
                 modifier: 2.5,
+                slideShadows: false,
               }}
               autoplay={{ delay: 4000, disableOnInteraction: false }}
               navigation={{
@@ -688,14 +693,14 @@ export default function Media() {
                   {({ isActive }) => (
                     <motion.div
                       animate={{
-                        scale: isActive ? 1 : 0.85,
-                        opacity: isActive ? 1 : 0.4,
+                        scale: isActive ? 1 : 0.9,
+                        opacity: isActive ? 1 : 0.7,
                       }}
                       transition={{ duration: 0.5 }}
                       className="relative group cursor-pointer"
                       onClick={() => setSelectedImg(item.img)}
                     >
-                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 shadow-xl">
+                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 ">
                         <img
                           src={item.img}
                           alt="press coverage"
@@ -788,8 +793,6 @@ export default function Media() {
               <motion.div
                 initial={{ y: 50, opacity: 0, scale: 0.9 }}
                 animate={{ y: 0, opacity: 1, scale: 1 }}
-
-                
                 exit={{ y: 50, opacity: 0, scale: 0.9 }}
                 className="relative max-w-5xl w-full h-[85vh] flex items-center justify-center"
                 onClick={(e) => e.stopPropagation()}

@@ -109,6 +109,54 @@ export default function JalMandirSection() {
         </div>
       </section>
 
+      <section className="container bg-[var(--color-tertiary)] w-full ">
+        <div className="max-w-[1200px] mx-auto">
+          {/* Section Heading */}
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800">
+              Our Impact &  <span className="text-[var(--color-primary)]">Water Conservation Insights</span>
+            </h2>
+            <p className="text-slate-500 mt-2 text-sm sm:text-base">
+              A quick overview of our district-level impact and structure
+              distribution
+            </p>
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
+            {/* Card 1 */}
+            <div className="overflow-hidden rounded-xl transition text-center">
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-800 py-4">
+                District-Level Impact Overview
+              </h3>
+
+              <div className="overflow-hidden">
+                <img
+                  src="/image/partner-with-us-csr/district impact.png"
+                  alt="District Impact"
+                  className="w-full h-auto object-cover "
+                />
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="overflow-hidden rounded-xltransition text-center">
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-800 py-4 px-3">
+                Water Structure Distribution (%)
+              </h3>
+
+              <div className="overflow-hidden">
+                <img
+                  src="/image/partner-with-us-csr/recharge structures.png"
+                  alt="Structure Distribution"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* IMPACT DETAILS */}
       <section className="container bg-[var(--color-tertiary)] py-20">
         <div className="grid md:grid-cols-2 gap-12 max-w-7xl justify-self-center">

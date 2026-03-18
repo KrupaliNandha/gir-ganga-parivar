@@ -7,7 +7,7 @@ import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-[var(--color-tertiary)] text-black">
+    <footer className=" relative w-full overflow-hidden bg-[var(--color-tertiary)] text-black">
       {/* ── Dark overlay so text is readable over image ── */}
       <div className="absolute inset-0" />
 
@@ -21,7 +21,7 @@ export default function Footer() {
         />
 
         {/* ── 4-column grid ── */}
-        <div className="max-w-[1500px] mx-auto px-8 lg:px-16 pb-10">
+        <div className="container mx-auto px-8 lg:px-16 pb-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Brand */}
             <div className="flex flex-col">
