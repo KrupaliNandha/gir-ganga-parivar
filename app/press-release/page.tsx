@@ -2,6 +2,7 @@
 
 import SmoothScroll from "../../Component/SmothScrolling";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const galleryItems = [
   {
@@ -100,11 +101,12 @@ export default function Products() {
                 className="relative w-full group"
               >
                 {/* Image */}
-                <img
+                <Image
                   src={item.img}
+                  alt={item.img || "Project image"}
                   width={500}
                   height={500}
-                  className="w-full h-full border p-3 shadow-lg object-fix rounded-xl"
+                  className="w-full h-full object-cover border p-3 shadow-lg rounded-xl"
                 />
               </div>
             ))}

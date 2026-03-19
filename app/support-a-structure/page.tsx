@@ -236,9 +236,9 @@ export default function SupportAStructure() {
                     <Image
                       src={s.icon}
                       alt={s.alt}
-                      width={32}
+                      width={45}
                       height={32}
-                      className="object-contain w-8 h-8"
+                      className="object-contain w-10 h-8"
                     />
                   </div>
                   <div>
@@ -521,10 +521,12 @@ ${
                 className="relative flex justify-center"
               >
                 {/* IMAGE */}
-                <img
+                <Image
                   src="/image/support-a-structure/water-structure.png"
                   alt="Water Structure"
-                  className="w-full max-w-[620px] h-full lg:h-[600px] object-cover rounded-2xl shadow-xl"
+                  width={700}
+                  height={200}
+                  className="w-full h-auto lg:h-150  object-cover rounded-2xl shadow-xl"
                 />
 
                 {/* IMPACT CARD */}
@@ -595,10 +597,12 @@ ${
                 <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-primary)]/20 flex flex-col md:flex-row">
                   {/* LEFT IMAGE */}
                   <div className="md:w-2/5 relative">
-                    <img
-                      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80"
+                    <Image
+                      src="/image/partner-with-us-csr/CSRform.png"
                       alt="Water structure construction"
-                      className="w-full h-full object-cover max-h-[315px]"
+                      width={800}
+                      height={315}
+                      className="w-full h-auto object-cover"
                     />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/60 to-transparent" />

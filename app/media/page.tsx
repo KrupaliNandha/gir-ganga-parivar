@@ -4,26 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import SmoothScroll from "../../Component/SmothScrolling";
 import Image from "next/image";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Autoplay,
-  EffectCoverflow,
-} from "swiper/modules";
 import {
   FaSearchPlus,
   FaTimes,
   FaArrowLeft,
   FaArrowRight,
 } from "react-icons/fa";
-
-// Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-coverflow";
+import { FaShareAlt, FaDownload } from "react-icons/fa";
 
 /* ─── Award Images ─── */
 const awardImages = [
@@ -67,12 +54,7 @@ const awards = [
     title: "Best NGO Award 2025 (JSJB 1.0)",
     agency: "Ministry of Jal Shakti, Government of India",
   },
-  {
-    sr: 2,
-    year: "2025",
-    title: "Indian CSR Award",
-    agency: "Brand Honchos",
-  },
+  { sr: 2, year: "2025", title: "Indian CSR Award", agency: "Brand Honchos" },
   {
     sr: 3,
     year: "2025",
@@ -101,125 +83,168 @@ const awards = [
 
 /* ─── Event Photos ─── */
 const eventPhotos = [
-  {
-    src: "/image/Event/IMG_7531.JPG",
-  },
-  {
-    src: "/image/Event/IMG_7533.JPG",
-  },
-  {
-    src: "/image/Event/IMG_7535.JPG",
-  },
-  {
-    src: "/image/Event/IMG_7538.JPG",
-  },
-  {
-    src: "/image/Event/IMG_7544.JPG",
-  },
-  {
-    src: "/image/Event/IMG_7614.JPG",
-  },
-  {
-    src: "/image/Event/IMG_7616.JPG",
-  },
-  {
-    src: "/image/Event/IMG_8778.JPG",
-  },
-  {
-    src: "/image/Event/IMG_8781.JPG",
-  },
-  {
-    src: "/image/Event/IMG_8790.JPG",
-  },
-  {
-    src: "/image/Event/IMG_8794.JPG",
-  },
-  {
-    src: "/image/Event/IMG_8797.JPG",
-  },
-
-  {
-    src: "/image/Event/Sequence 01.Still001.jpg",
-  },
-  {
-    src: "/image/Event/Sequence 01.Still002.jpg",
-  },
-  {
-    src: "/image/Event/Sequence 01.Still003.jpg",
-  },
-  {
-    src: "/image/Event/Sequence 01.Still009.jpg",
-  },
-  {
-    src: "/image/Event/Sequence 01.Still010.jpg",
-  },
-  {
-    src: "/image/Event/Sequence 01.Still011.jpg",
-  },
-  {
-    src: "/image/Event/Sequence 01.Still012.jpg",
-  },
+  { src: "/image/Event/IMG_7531.JPG" },
+  { src: "/image/Event/IMG_7533.JPG" },
+  { src: "/image/Event/IMG_7535.JPG" },
+  { src: "/image/Event/IMG_7538.JPG" },
+  { src: "/image/Event/IMG_7544.JPG" },
+  { src: "/image/Event/IMG_7614.JPG" },
+  { src: "/image/Event/IMG_7616.JPG" },
+  { src: "/image/Event/IMG_8778.JPG" },
+  { src: "/image/Event/IMG_8781.JPG" },
+  { src: "/image/Event/IMG_8790.JPG" },
+  { src: "/image/Event/IMG_8794.JPG" },
+  { src: "/image/Event/IMG_8797.JPG" },
+  { src: "/image/Event/Sequence 01.Still001.jpg" },
+  { src: "/image/Event/Sequence 01.Still002.jpg" },
+  { src: "/image/Event/Sequence 01.Still003.jpg" },
+  { src: "/image/Event/Sequence 01.Still009.jpg" },
+  { src: "/image/Event/Sequence 01.Still010.jpg" },
+  { src: "/image/Event/Sequence 01.Still011.jpg" },
+  { src: "/image/Event/Sequence 01.Still012.jpg" },
 ];
 
+/* ─── Press / News Gallery ─── */
 const galleryItems = [
-  {
-    img: "/image/press/news1.jpg",
-  },
-  {
-    img: "/image/press/news2.jpg",
-  },
-  {
-    img: "/image/press/news3.jpg",
-  },
-  {
-    img: "/image/press/news4.jpg",
-  },
-  {
-    img: "/image/press/news5.jpg",
-  },
-  {
-    img: "/image/press/news6.jpg",
-  },
-  {
-    img: "/image/press/news7.jpg",
-  },
-  {
-    img: "/image/press/news8.jpg",
-  },
-  {
-    img: "/image/press/news9.jpg",
-  },
-  {
-    img: "/image/press/news10.jpg",
-  },
-  {
-    img: "/image/press/news11.jpg",
-  },
-  {
-    img: "/image/press/news12.jpg",
-  },
-  {
-    img: "/image/press/news13.jpg",
-  },
-  {
-    img: "/image/press/news14.jpg",
-  },
-  {
-    img: "/image/press/news15.jpg",
-  },
-  {
-    img: "/image/press/news16.jpg",
-  },
-  {
-    img: "/image/press/news17.png",
-  },
-  {
-    img: "/image/press/news18.png",
-  },
-  {
-    img: "/image/press/news19.jpeg",
-  },
+  { img: "/image/press/news1.jpg" },
+  { img: "/image/press/news2.jpg" },
+  { img: "/image/press/news3.jpg" },
+  { img: "/image/press/news4.jpg" },
+  { img: "/image/press/news5.jpg" },
+  { img: "/image/press/news6.jpg" },
+  { img: "/image/press/news7.jpg" },
+  { img: "/image/press/news8.jpg" },
+  { img: "/image/press/news9.jpg" },
+  { img: "/image/press/news10.jpg" },
+  { img: "/image/press/news11.jpg" },
+  { img: "/image/press/news12.jpg" },
+  { img: "/image/press/news13.jpg" },
+  { img: "/image/press/news14.jpg" },
+  { img: "/image/press/news15.jpg" },
+  { img: "/image/press/news16.jpg" },
+  { img: "/image/press/news17.png" },
+  { img: "/image/press/news18.png" },
+  { img: "/image/press/news19.jpeg" },
 ];
+
+/* ─── Shared Lightbox ─── */
+function Lightbox({
+  images,
+  activeIndex,
+  onClose,
+}: {
+  images: string[];
+  activeIndex: number;
+  onClose: () => void;
+}) {
+  const [index, setIndex] = useState(activeIndex);
+
+  /* Download (no fetch → faster for local images) */
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = images[index];
+    link.download = `image-${index + 1}.jpg`;
+    link.click();
+  };
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIndex((i) => (i - 1 + images.length) % images.length);
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIndex((i) => (i + 1) % images.length);
+  };
+
+  /* Keyboard navigation */
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft")
+        setIndex((i) => (i - 1 + images.length) % images.length);
+      if (e.key === "ArrowRight") setIndex((i) => (i + 1) % images.length);
+    };
+
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [images.length, onClose]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-lg flex items-center justify-center p-4"
+      onClick={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {/* Top Actions */}
+      <div className="absolute top-6 right-6 flex gap-3 z-20">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDownload();
+          }}
+          className="w-11 h-11 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white hover:bg-[var(--color-primary)] transition"
+        >
+          <FaDownload />
+        </button>
+
+        <button
+          onClick={onClose}
+          className="w-11 h-11 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white hover:rotate-90 transition"
+        >
+          <FaTimes />
+        </button>
+      </div>
+
+      {/* Prev */}
+      <button
+        onClick={prev}
+        className="absolute left-4 sm:left-8 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white hover:bg-[var(--color-primary)] transition"
+      >
+        <FaArrowLeft />
+      </button>
+
+      {/* Next */}
+      <button
+        onClick={next}
+        className="absolute right-4 sm:right-8 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white hover:bg-[var(--color-primary)] transition"
+      >
+        <FaArrowRight />
+      </button>
+
+      {/* Image */}
+      <div
+        className="relative w-full max-w-5xl h-[82vh]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Image
+          src={images[index]}
+          alt="preview"
+          fill
+          className="object-contain rounded-2xl"
+        />
+      </div>
+
+      {/* Counter */}
+      <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/50 text-sm tracking-widest">
+        {index + 1} / {images.length}
+      </p>
+    </motion.div>
+  );
+}
+
+/* ─── Section Label ─── */
+function SectionLabel({ label }: { label: string }) {
+  return (
+    <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
+      <span className="w-8 h-[2px] bg-[var(--color-secondary)]" />
+      {label}
+      <span className="w-8 h-[2px] bg-[var(--color-secondary)]" />
+    </p>
+  );
+}
 
 export default function Media() {
   /* ── Award Slider State ── */
@@ -229,12 +254,18 @@ export default function Media() {
   const [awardImgDir, setAwardImgDir] = useState(1);
   const [isAwardHovered, setIsAwardHovered] = useState(false);
   const awardTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
 
-  /* ── Event Slider State ── */
+  /* ── Lightbox state (shared) ── */
+  const [lightbox, setLightbox] = useState<{
+    images: string[];
+    index: number;
+  } | null>(null);
+
+  /* ── Event strip hover ── */
   const [isEventHovered, setIsEventHovered] = useState(false);
 
-  /* Intersection Observer for triggering animations */
+  /* Intersection Observer */
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([entry]) => {
@@ -246,7 +277,7 @@ export default function Media() {
     return () => obs.disconnect();
   }, []);
 
-  /* Auto-advance Award Images */
+  /* Award auto-advance */
   useEffect(() => {
     if (isAwardHovered) {
       clearInterval(awardTimerRef.current);
@@ -259,13 +290,14 @@ export default function Media() {
     return () => clearInterval(awardTimerRef.current);
   }, [isAwardHovered]);
 
-  // Triple images for seamless infinite loop
   const infinitePhotos = [...eventPhotos, ...eventPhotos, ...eventPhotos];
+
+  const pressImages = galleryItems.map((g) => g.img);
 
   return (
     <SmoothScroll>
       {/* ── HERO ── */}
-      <section className="container ">
+      <section className="container">
         <div className="text-center mb-2">
           <p className="text-[var(--color-secondary)] text-[10px] font-black tracking-[0.35em] uppercase mb-3 flex items-center justify-center gap-3">
             <span className="w-8 h-px bg-[var(--color-secondary)]" />
@@ -288,13 +320,7 @@ export default function Media() {
           {/* LEFT: Award List */}
           <div className="space-y-3">
             <div className="mb-10 text-center lg:text-left">
-              <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
-                <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
-                {/* Left side line */}
-                Honours Received
-                <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
-              </p>
-
+              <SectionLabel label="Honours Received" />
               <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black leading-tight">
                 Awards &{" "}
                 <span className="text-[var(--color-primary)]">
@@ -341,7 +367,7 @@ export default function Media() {
             ))}
           </div>
 
-          {/* RIGHT: Award Image Slider */}
+          {/* RIGHT: Award Image */}
           <div
             className="relative rounded-3xl overflow-hidden border-2 border-gray-100 shadow-xl"
             style={{ aspectRatio: "4/3" }}
@@ -379,216 +405,101 @@ export default function Media() {
         </div>
       </section>
 
-      {/* ── Press coverage ── */}
-      <>
-        <section className="container overflow-hidden  bg-white">
-          <div className="mx-auto">
-            {/* ── HEADER SECTION ── */}
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
-              <div className="text-center lg:text-left">
-                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
-                  <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>
-                  Event In The Spotlight
-                  <span className="w-8 h-[2px] bg-[var(--color-secondary)] "></span>
-                </p>
+      {/* ── PRESS COVERAGE ── */}
+      <section className="container bg-white">
+        <div className="mb-8">  
+          <SectionLabel label="Event In The Spotlight" />
+          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-center lg:text-start">
+            Press{" "}
+            <span className="text-[var(--color-primary)]">
+              Coverage <br /> GALLERY
+            </span>
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
+          {/* LEFT: Heading + small grid */}
+          <div className="order-2 lg:order-1">
+            {/* Small thumbnails — 5 columns */}
+            <div className="grid grid-cols-4 gap-3  ">
+              {galleryItems.slice(1).map((item, index) => {
+                const realIndex = index + 1;
+                const isActive = featuredIndex === realIndex;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className={`relative group cursor-pointer rounded-xl overflow-hidden bg-gray-100 transition-all duration-300 ${
+                      isActive
+                        ? "ring-2 ring-[var(--color-primary)] ring-offset-2 scale-[0.96]"
+                        : "hover:scale-[0.96] hover:ring-1 hover:ring-gray-300 hover:ring-offset-1"
+                    }`}
+                    onClick={() => setFeaturedIndex(realIndex)}
+                  >
+                    <div className="relative w-full h-[60px] sm:h-[110px]">
+                      <Image
+                        src={item.img}
+                        alt={`Press ${realIndex + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      {/* Active tint */}
+                      {isActive && (
+                        <div className="absolute inset-0 bg-[var(--color-primary)]/25" />
+                      )}
+                      {/* Hover tint */}
+                      {!isActive && (
+                        <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
 
-                <div className="flex items-center justify-center lg:justify-start gap-4">
-                  <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black whitespace-nowrap uppercase">
-                    Press{" "}
-                    <span className="text-[var(--color-primary)]">
-                      coverage
-                    </span>
-                  </h2>
+          {/* RIGHT: Large featured image — updates on thumbnail click */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={featuredIndex}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.35 }}
+              className="relative group cursor-pointer rounded-2xl overflow-hidden bg-gray-100 h-[350px] sm:h-[480px] lg:h-[760px] border p-5 order-1 lg:order-2"
+              onClick={() =>
+                setLightbox({ images: pressImages, index: featuredIndex })
+              }
+            >
+              <Image
+                src={galleryItems[featuredIndex].img}
+                alt="Press coverage featured"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+
+              {/* Zoom on hover */}
+              <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
+                <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40">
+                  <FaSearchPlus className="text-white text-lg" />
                 </div>
               </div>
 
-              {/* DESKTOP NAVIGATION */}
-              <div className="hidden lg:flex gap-4">
-                <button className="custom-prev flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
-                  <FaArrowLeft />
-                </button>
-                <button className="custom-next flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
-                  <FaArrowRight />
-                </button>
+              {/* Counter badge */}
+              <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                {featuredIndex + 1} / {galleryItems.length}
               </div>
-            </div>
-
-            {/* ── SWIPER SLIDER ── */}
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-              effect={"coverflow"}
-              grabCursor={true}
-              centeredSlides={true}
-              slidesPerView={"auto"}
-              loop={true}
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 2.5,
-                slideShadows: false,
-              }}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              navigation={{
-                nextEl: ".custom-next",
-                prevEl: ".custom-prev",
-              }}
-              pagination={{ clickable: true }}
-              className="press-swiper !overflow-visible pb-40"
-            >
-              {galleryItems.map((item, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="!w-[280px] sm:!w-[450px] md:!w-[550px]"
-                >
-                  {({ isActive }) => (
-                    <motion.div
-                      animate={{
-                        scale: isActive ? 1 : 0.9,
-                        opacity: isActive ? 1 : 0.7,
-                      }}
-                      transition={{ duration: 0.5 }}
-                      className="relative group cursor-pointer"
-                      onClick={() => setSelectedImg(item.img)}
-                    >
-                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 ">
-                        <img
-                          src={item.img}
-                          alt="press coverage"
-                          className="w-full h-full object-cover transition-all duration-700"
-                        />
-
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                          <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
-                            <FaSearchPlus className="text-white text-xl" />
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            {/* MOBILE NAVIGATION: Moblie screen button */}
-            <div className="flex lg:hidden gap-4 justify-center mt-23">
-              <button className="custom-prev flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
-                <FaArrowLeft />
-              </button>
-              <button className="custom-next flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
-                <FaArrowRight />
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* ── LIGHTBOX ── */}
-        <AnimatePresence>
-          {selectedImg && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] bg-white/90 backdrop-blur-xl flex items-center justify-center p-4"
-              onClick={() => setSelectedImg(null)}
-            >
-              <button className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white">
-                <FaTimes />
-              </button>
-              <motion.img
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                src={selectedImg}
-                className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              />
             </motion.div>
-          )}
-        </AnimatePresence>
+          </AnimatePresence>
+        </div>
+      </section>
 
-        <style jsx global>{`
-          /* Pagination Dots Fix */
-          .press-swiper .swiper-pagination {
-            bottom: -80px !important;
-          }
-          .press-swiper .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            background: #333;
-            opacity: 0.2;
-            transition: all 0.3s ease;
-          }
-          .press-swiper .swiper-pagination-bullet-active {
-            width: 35px;
-            border-radius: 20px;
-            background: var(--color-primary) !important;
-            opacity: 1;
-          }
-        `}</style>
-
-        {/* ── Modern Lightbox ── */}
-        <AnimatePresence>
-          {selectedImg && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] bg-white/80 backdrop-blur-xl flex items-center justify-center p-4"
-              onClick={() => setSelectedImg(null)}
-            >
-              <button className="absolute top-10 right-10 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white hover:rotate-90 transition-transform duration-500">
-                <FaTimes />
-              </button>
-
-              <motion.div
-                initial={{ y: 50, opacity: 0, scale: 0.9 }}
-                animate={{ y: 0, opacity: 1, scale: 1 }}
-                exit={{ y: 50, opacity: 0, scale: 0.9 }}
-                className="relative max-w-5xl w-full h-[85vh] flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img
-                  src={selectedImg}
-                  className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_40px_100px_rgba(0,0,0,0.2)]"
-                  alt="Press Zoom"
-                />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <style jsx global>{`
-          .press-swiper .swiper-pagination {
-            bottom: -40px !important;
-          }
-          .press-swiper .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            background: #ccc;
-            opacity: 1;
-            transition: all 0.3s;
-          }
-          .press-swiper .swiper-pagination-bullet-active {
-            width: 40px;
-            border-radius: 20px;
-            background: var(--color-primary);
-          }
-        `}</style>
-      </>
-
-      {/* ── EVENT PHOTOS ── */}
-      <section className="container overflow-hidden ">
+      {/* ── EVENT PHOTOS (infinite marquee strip — unchanged) ── */}
+      <section className="container overflow-hidden">
         <div className="mb-8">
-          {/* TOP SMALL LABEL WITH LEFT LINE */}
-          <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
-            <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
-            {/* Left side line */}
-            Event
-            <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>{" "}
-          </p>
-
-          {/* MAIN HEADING WITH RIGHT SLIDE LINE */}
+          <SectionLabel label="Event" />
           <div className="flex items-center justify-center lg:justify-start gap-4">
             <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black whitespace-nowrap">
               Event <span className="text-[var(--color-primary)]">Photos</span>
@@ -596,7 +507,11 @@ export default function Media() {
           </div>
         </div>
 
-        <div className=" relative flex">
+        <div
+          className="relative flex"
+          onMouseEnter={() => setIsEventHovered(true)}
+          onMouseLeave={() => setIsEventHovered(false)}
+        >
           <motion.div
             className="flex gap-5"
             animate={{ x: isEventHovered ? undefined : ["0%", "-33.33%"] }}
@@ -613,218 +528,135 @@ export default function Media() {
             {infinitePhotos.map((photo, i) => (
               <div
                 key={i}
-                className="group relative w-[300px] md:w-[400px] h-[350px] md:h-[450px] mx-auto rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 border border-gray-100"
+                className="group relative w-[300px] md:w-[400px] h-[350px] md:h-[450px] rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 border border-gray-100"
+                onClick={() => {
+                  const realIndex = i % eventPhotos.length;
+                  setLightbox({
+                    images: eventPhotos.map((p) => p.src),
+                    index: realIndex,
+                  });
+                }}
               >
                 <Image
                   src={photo.src}
-                  alt={photo.src}
+                  alt={`Event photo ${i}`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-70 group-hover:opacity-90" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40">
+                    <FaSearchPlus className="text-white text-base" />
+                  </div>
+                </div>
               </div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ── News articles ── */}
-      <>
-        <section className="container overflow-hidden  bg-white">
-          <div className="mx-auto">
-            {/* ── HEADER SECTION ── */}
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
-              <div className="text-center lg:text-left">
-                <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-2 flex items-center justify-center lg:justify-start gap-3">
-                  <span className="w-8 h-[2px] bg-[var(--color-secondary)]"></span>
-                  Event In The Spotlight
-                  <span className="w-8 h-[2px] bg-[var(--color-secondary)] "></span>
-                </p>
+      {/* ── NEWS ARTICLES GALLERY ── */}
+      <section className="container bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
+          {/* LEFT: Heading + small grid */}
+          <div>
+            <div className="mb-8">
+              <SectionLabel label="Event In The Spotlight" />
+              <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-center lg:text-start">
+                NEWS{" "}
+                <span className="text-[var(--color-primary)]">
+                  ARTICLES <br /> GALLERY
+                </span>
+              </h2>
+            </div>
 
-                <div className="flex items-center justify-center lg:justify-start gap-4">
-                  <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black whitespace-nowrap uppercase">
-                    News{" "}
-                    <span className="text-[var(--color-primary)]">
-                      articles
-                    </span>
-                  </h2>
+            {/* Small thumbnails — 5 columns */}
+            <div className="grid grid-cols-4 gap-3 ">
+              {galleryItems.slice(1).map((item, index) => {
+                const realIndex = index + 1;
+                const isActive = featuredIndex === realIndex;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className={`relative group cursor-pointer rounded-xl overflow-hidden bg-gray-100 transition-all duration-300 ${
+                      isActive
+                        ? "ring-2 ring-[var(--color-primary)] ring-offset-2 scale-[0.96]"
+                        : "hover:scale-[0.96] hover:ring-1 hover:ring-gray-300 hover:ring-offset-1"
+                    }`}
+                    onClick={() => setFeaturedIndex(realIndex)}
+                  >
+                    <div className="relative w-full h-[60px] sm:h-[110px]">
+                      <Image
+                        src={item.img}
+                        alt={`Press ${realIndex + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      {/* Active tint */}
+                      {isActive && (
+                        <div className="absolute inset-0 bg-[var(--color-primary)]/25" />
+                      )}
+                      {/* Hover tint */}
+                      {!isActive && (
+                        <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* RIGHT: Large featured image — updates on thumbnail click */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={featuredIndex}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.35 }}
+              className="relative group cursor-pointer rounded-2xl overflow-hidden bg-gray-100 h-[400px] sm:h-[480px] lg:h-[760px] border p-5"
+              onClick={() =>
+                setLightbox({ images: pressImages, index: featuredIndex })
+              }
+            >
+              <Image
+                src={galleryItems[featuredIndex].img}
+                alt="Press coverage featured"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+
+              {/* Zoom on hover */}
+              <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
+                <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40">
+                  <FaSearchPlus className="text-white text-lg" />
                 </div>
               </div>
 
-              {/* DESKTOP NAVIGATION */}
-              <div className="hidden lg:flex gap-4">
-                <button className="custom-prev flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
-                  <FaArrowLeft />
-                </button>
-                <button className="custom-next flex items-center justify-center w-14 h-14 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:text-white transition-all duration-300">
-                  <FaArrowRight />
-                </button>
+              {/* Counter badge */}
+              <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
+                {featuredIndex + 1} / {galleryItems.length}
               </div>
-            </div>
-
-            {/* ── SWIPER SLIDER ── */}
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
-              effect={"coverflow"}
-              grabCursor={true}
-              centeredSlides={true}
-              slidesPerView={"auto"}
-              loop={true}
-              coverflowEffect={{
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 2.5,
-                slideShadows: false,
-              }}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              navigation={{
-                nextEl: ".custom-next",
-                prevEl: ".custom-prev",
-              }}
-              pagination={{ clickable: true }}
-              className="press-swiper !overflow-visible pb-40"
-            >
-              {galleryItems.map((item, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="!w-[280px] sm:!w-[450px] md:!w-[550px]"
-                >
-                  {({ isActive }) => (
-                    <motion.div
-                      animate={{
-                        scale: isActive ? 1 : 0.9,
-                        opacity: isActive ? 1 : 0.7,
-                      }}
-                      transition={{ duration: 0.5 }}
-                      className="relative group cursor-pointer"
-                      onClick={() => setSelectedImg(item.img)}
-                    >
-                      <div className="relative h-[380px] sm:h-[570px] w-full bg-gray-100 rounded-[2rem] overflow-hidden border border-gray-100 ">
-                        <img
-                          src={item.img}
-                          alt="press coverage"
-                          className="w-full h-full object-cover transition-all duration-700"
-                        />
-
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                          <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
-                            <FaSearchPlus className="text-white text-xl" />
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </SwiperSlide>
-              ))}
-            </Swiper>
-
-            {/* MOBILE NAVIGATION: Moblie screen button */}
-            <div className="flex lg:hidden gap-4 justify-center mt-23">
-              <button className="custom-prev flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
-                <FaArrowLeft />
-              </button>
-              <button className="custom-next flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 hover:bg-[var(--color-primary)] hover:text-white transition-all">
-                <FaArrowRight />
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* ── LIGHTBOX ── */}
-        <AnimatePresence>
-          {selectedImg && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] bg-white/90 backdrop-blur-xl flex items-center justify-center p-4"
-              onClick={() => setSelectedImg(null)}
-            >
-              <button className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white">
-                <FaTimes />
-              </button>
-              <motion.img
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                src={selectedImg}
-                className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              />
             </motion.div>
-          )}
-        </AnimatePresence>
+          </AnimatePresence>
+        </div>
+      </section>
 
-        <style jsx global>{`
-          /* Pagination Dots Fix */
-          .press-swiper .swiper-pagination {
-            bottom: -80px !important;
-          }
-          .press-swiper .swiper-pagination-bullet {
-            width: 10px;
-            height: 10px;
-            background: #333;
-            opacity: 0.2;
-            transition: all 0.3s ease;
-          }
-          .press-swiper .swiper-pagination-bullet-active {
-            width: 35px;
-            border-radius: 20px;
-            background: var(--color-primary) !important;
-            opacity: 1;
-          }
-        `}</style>
-
-        {/* ── Modern Lightbox ── */}
-        <AnimatePresence>
-          {selectedImg && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[9999] bg-white/80 backdrop-blur-xl flex items-center justify-center p-4"
-              onClick={() => setSelectedImg(null)}
-            >
-              <button className="absolute top-10 right-10 w-12 h-12 flex items-center justify-center rounded-full bg-black text-white hover:rotate-90 transition-transform duration-500">
-                <FaTimes />
-              </button>
-
-              <motion.div
-                initial={{ y: 50, opacity: 0, scale: 0.9 }}
-                animate={{ y: 0, opacity: 1, scale: 1 }}
-                exit={{ y: 50, opacity: 0, scale: 0.9 }}
-                className="relative max-w-5xl w-full h-[85vh] flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img
-                  src={selectedImg}
-                  className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_40px_100px_rgba(0,0,0,0.2)]"
-                  alt="Press Zoom"
-                />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <style jsx global>{`
-          .press-swiper .swiper-pagination {
-            bottom: -40px !important;
-          }
-          .press-swiper .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            background: #ccc;
-            opacity: 1;
-            transition: all 0.3s;
-          }
-          .press-swiper .swiper-pagination-bullet-active {
-            width: 40px;
-            border-radius: 20px;
-            background: var(--color-primary);
-          }
-        `}</style>
-      </>
+      {/* ── SHARED LIGHTBOX ── */}
+      <AnimatePresence>
+        {lightbox && (
+          <Lightbox
+            images={lightbox.images}
+            activeIndex={lightbox.index}
+            onClose={() => setLightbox(null)}
+          />
+        )}
+      </AnimatePresence>
     </SmoothScroll>
   );
 }

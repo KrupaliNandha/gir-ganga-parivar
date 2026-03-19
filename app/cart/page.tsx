@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type CartItem = {
   id: string;
@@ -62,9 +63,9 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-tertiary)] pb-20">
+    <div className="container min-h-screen bg-[var(--color-tertiary)] pb-20">
       {/* ── Page Header ── */}
-      <div className="bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-8">
+      <div className="bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-4">
         <div className="max-w-6xl mx-auto">
           <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center justify-center lg:justify-start gap-2 mb-2">
             <span className="w-5 h-px bg-[var(--color-secondary)]" />
@@ -80,11 +81,11 @@ export default function CartPage() {
       </div>
 
       {/* ── Main Layout ── */}
-      <div className="max-w-6xl mx-auto px-6 md:px-12 mt-10 flex flex-col justify-self-center lg:flex-row gap-8 items-start">
+      <div className="max-w-7xl mx-auto  mt-10 flex flex-col justify-self-center lg:flex-row gap-8">
         {/* ── LEFT: Cart Item ── */}
         <div className="flex-1  space-y-4">
           {/* Column headers — desktop */}
-          <div className="hidden md:grid grid-cols-[1fr_150px_100px_140px] px-6 pb-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
+          <div className="hidden md:grid grid-cols-[1fr_150px_100px _140px] px-6 pb-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
             <span>Donation</span>
             <span className="text-center">Amount</span>
             <span className="text-center">Quantity</span>
@@ -110,10 +111,12 @@ export default function CartPage() {
             {/* Product Info */}
             <div className="flex flex-col lg:flex-row items-center gap-4 w-full min-w-0">
               <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
-                <img
+                <Image
                   src={cartItem.img}
                   alt={cartItem.title}
-                  className="w-full h-full object-cover"
+                  width={100}
+                  height={100}
+                  className="object-cover rounded-2xl h-20 w-20"
                 />
               </div>
               <div className="min-w-0">
@@ -171,11 +174,10 @@ export default function CartPage() {
                 Subtotal
               </p>
               <div className="justify-self-center lg:justify-self-start">
-                 <span className="text-lg font-black text-[var(--color-primary)]">
-                {formatted(subtotal)}
-              </span>
+                <span className="text-lg font-black text-[var(--color-primary)]">
+                  {formatted(subtotal)}
+                </span>
               </div>
-             
             </div>
           </div>
 

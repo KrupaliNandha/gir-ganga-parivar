@@ -1,14 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useMotionValue,
-  useTransform,
-  animate,
-} from "framer-motion";
-import Link from "next/link";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import Slider from "../Component/Slider";
 import Image from "next/image";
 import SmoothScroll from "../Component/SmothScrolling";
@@ -170,10 +163,12 @@ export default function HomePage() {
       ══════════════════════════════════════════════ */}
         <section className="relative w-full min-h-screen flex items-center overflow-hidden">
           {/* Background Image */}
-          <img
+          <Image
             src="/image/home/Donation For Biggest Checkdam.png"
             alt="Water Conservation"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            priority
+            className="object-cover"
           />
 
           {/* Dark Overlay */}
@@ -221,7 +216,7 @@ export default function HomePage() {
                 Building a{" "}
                 <span className="relative inline-block text-[var(--color-secondary)]">
                   Water-Secure
-                  <span className="absolute -bottom-1 left-0 right-0 h-1 bg-[var(--color-secondary)]/40 rounded-full" />
+                  <span className="md:block hidden absolute -bottom-1 left-0 right-0 h-1 bg-[var(--color-secondary)]/40 rounded-full" />
                 </span>{" "}
                 Future for Rural India.
               </motion.h1>
@@ -435,10 +430,12 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Image Instead of Map */}
               <motion.div>
-                <img
+                <Image
                   src="/image/home/Our Approach.png"
                   alt="Gujarat Impact Map"
-                  className="w-full max-w-full mx-auto object-contain"
+                  width={800}
+                  height={500}
+                  className="w-full h-auto object-contain mx-auto"
                 />
               </motion.div>
 
@@ -568,7 +565,6 @@ export default function HomePage() {
                       className="btn-secondary-outline group text-xs lg:text-base"
                     >
                       <span className="relative z-10">
-                 
                         Partner With Us (CSR)
                       </span>
 

@@ -13,6 +13,7 @@ import {
 
 import SmoothScroll from "../../Component/SmothScrolling";
 import { FaFlag, FaSeedling, FaTools, FaWater } from "react-icons/fa";
+import Image from "next/image";
 
 // ─── ANIMATION VARIANTS ──────────────────────────────────────────
 const fadeUp: Variants = {
@@ -473,9 +474,11 @@ export default function Support() {
                     key={index}
                     className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition"
                   >
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.title}
+                      width={600}
+                      height={400}
                       className="w-full h-auto object-contain mb-4 rounded-2xl"
                     />
 

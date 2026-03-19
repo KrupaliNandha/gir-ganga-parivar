@@ -99,9 +99,10 @@ function HeroSlider() {
           transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
           className="absolute inset-0"
         >
-          <img
+          <Image
             src={images[current].src}
             alt={images[current].title}
+            fill
             className="w-full h-full object-cover"
           />
           {/* Gradient overlay */}
@@ -173,9 +174,10 @@ function GalleryCard({ img, i }: { img: { src: string; title: string; tag: strin
       className={`group relative overflow-hidden rounded-2xl cursor-pointer ${isTall ? "sm:row-span-2" : ""}`}
       
     >
-      <img
+      <Image
         src={img.src}
         alt={img.title}
+        fill
         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
         style={{ position: "absolute", inset: 0 }}
       />
@@ -260,9 +262,10 @@ export default function Media() {
                 transition={{ duration: 0.45, delay: (i % 2) * 0.08 }}
                 className="group relative overflow-hidden rounded-2xl h-56 cursor-pointer"
               >
-                <img
+                <Image
                   src={img.src}
                   alt={img.title}
+                  fill
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 absolute inset-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" />

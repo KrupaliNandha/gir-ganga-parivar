@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import SmoothScroll from "../../Component/SmothScrolling";
+import Image from "next/image";
+import { FaDownload, FaTimes } from "react-icons/fa";
 
+/* ─── DATA ─── */
 const galleryItems = [
   {
     img: "/image/photos/photos - 1.jpg",
@@ -75,100 +79,180 @@ const galleryItems = [
   { img: "/image/photos/photos - 26.jpeg", title: "Earthmoving Operation" },
 ];
 
-// Mosaic pattern: defines col-span and row-span for each card in a repeating 12-item group
-// Matches the reference image's varied mosaic grid
+/* ─── MOSAIC ─── */
 const mosaicPattern = [
-  { colSpan: "col-span-2", rowSpan: "row-span-2" }, // 0: large square
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 1: small
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 2: small
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 3: small
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 4: small
+  "lg:col-span-2 lg:row-span-2",
+  "lg:col-span-1 lg:row-span-1",
+  "lg:col-span-1 lg:row-span-1",
+  "lg:col-span-1 lg:row-span-1",
+  "lg:col-span-1 lg:row-span-1",
 
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 1: small
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 2: small
-  { colSpan: "col-span-2", rowSpan: "row-span-2" }, // large square
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 3: small
-  { colSpan: "col-span-1", rowSpan: "row-span-1" }, // 4: small
+  "lg:col-span-1 lg:row-span-1",
+  "lg:col-span-1 lg:row-span-1",
+  "lg:col-span-2 lg:row-span-2",
+  "lg:col-span-1 lg:row-span-1",
+  "lg:col-span-1 lg:row-span-1",
 ];
 
-export default function Photos() {
+/* ─── LIGHTBOX ─── */
+function Lightbox({
+  images,
+  startIndex,
+  onClose,
+}: {
+  images: string[];
+  startIndex: number;
+  onClose: () => void;
+}) {
+  const [current, setCurrent] = useState(startIndex);
+
+  const next = (e: any) => {
+    e.stopPropagation();
+    setCurrent((prev) => (prev + 1) % images.length);
+  };
+
+  const prev = (e: any) => {
+    e.stopPropagation();
+    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const download = () => {
+    const link = document.createElement("a");
+    link.href = images[current];
+    link.download = `image-${current + 1}.jpg`;
+    link.click();
+  };
+
   return (
-    <>
-      <SmoothScroll>
-        {/* Section */}
-        <div className="container">
-          <section className=" text-center mb-10">
-            <p
-              className="text-[var(--color-secondary)]
- text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
-            >
-              <span
-                className="w-8 h-px bg-[var(--color-secondary)]
-"
-              />
-              Gallery
-              <span
-                className="w-8 h-px bg-[var(--color-secondary)]
-"
-              />
-            </p>
-            <h1 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-              Some Of Our{" "}
-              <span className="text-[var(--color-primary)]">
-                Photo Galleries
-              </span>
-            </h1>
-          </section>
+    <div
+      className="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center"
+      onClick={onClose}
+    >
+      {/* Close */}
+      <button
+        onClick={onClose}
+        className="absolute top-6 right-6 text-white text-2xl"
+      >
+        <FaTimes />
+      </button>
 
-          {/* Mosaic Grid */}
-          <section className="">
-            <div
-              className="
-  grid space-y-2 sm:gap-3
-  grid-cols-1
-  sm:grid-cols-2
-  md:grid-cols-3
-  lg:grid-cols-4
-  auto-rows-[180px]
-  sm:auto-rows-[200px]
-  md:auto-rows-[220px]
-  lg:auto-rows-[270px]
-"
-              style={{
-                gridTemplateColumns: "lg:repeat(4, 1fr) flex-warp",
-                gridAutoRows: "",
-              }}
-            >
-              {galleryItems.map((item, index) => {
-                const pattern = mosaicPattern[index % mosaicPattern.length];
-                return (
-                  <div
-                    key={index}
-                    className={`relative overflow-hidden rounded-lg group cursor-pointer lg:${pattern.colSpan} ${pattern.rowSpan}`}
-                    data-aos="fade-up"
-                  >
-                    {/* Image */}
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+      {/* Download */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          download();
+        }}
+        className="absolute top-6 right-16 text-white text-2xl"
+      >
+        <FaDownload />
+      </button>
 
-                    {/* Hover overlay with title */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-all duration-400 flex items-end">
-                      <div className="w-full translate-y-full group-hover:translate-y-0 transition-transform duration-400 p-3">
-                        <p className="text-white text-sm sm:text-base font-semibold leading-snug drop-shadow">
-                          {item.title}
-                        </p>
-                      </div>
-                    </div>
+      {/* Prev */}
+      <button onClick={prev} className="absolute left-6 text-white text-3xl">
+        ‹
+      </button>
+
+      {/* Next */}
+      <button onClick={next} className="absolute right-6 text-white text-3xl">
+        ›
+      </button>
+
+      {/* Image */}
+      <div
+        className="relative w-[90vw] h-[80vh]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Image
+          src={images[current]}
+          alt="preview"
+          fill
+          className="object-contain"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ─── PAGE ─── */
+export default function Photos() {
+  const [lightbox, setLightbox] = useState<{
+    images: string[];
+    index: number;
+  } | null>(null);
+
+  const imageList = galleryItems.map((item) => item.img);
+
+  return (
+    <SmoothScroll>
+      <div className="container">
+        {/* Header */}
+        <section className="text-center mb-10">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="h-px w-8 bg-[var(--color-secondary)]" />
+            <span className="text-[var(--color-secondary)] text-xs font-bold tracking-[0.22em] uppercase">
+             Gallery
+            </span>
+            <div className="h-px w-8 bg-[var(--color-secondary)]" />
+          </div>
+          <h1 className="text-black text-4xl sm:text-5xl font-bold">
+            Some Of Our{" "}
+            <span className="text-[var(--color-primary)]">Photo Galleries</span>
+          </h1>
+        </section>
+
+        {/* GRID FIXED */}
+        <div
+          className="
+          grid
+          gap-2 sm:gap-3
+          grid-cols-1
+          sm:grid-cols-2
+          md:grid-cols-3
+          lg:grid-cols-4
+          auto-rows-[180px]
+          sm:auto-rows-[200px]
+          md:auto-rows-[220px]
+          lg:auto-rows-[270px]
+        "
+        >
+          {galleryItems.map((item, index) => {
+            const pattern = mosaicPattern[index % mosaicPattern.length];
+
+            return (
+              <div
+                key={index}
+                onClick={() => setLightbox({ images: imageList, index })}
+                className={`relative overflow-hidden rounded-lg group cursor-pointer ${pattern}`}
+              >
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition flex items-end">
+                  <div className="p-3 translate-y-full group-hover:translate-y-0 transition">
+                    <p className="text-white text-sm font-semibold">
+                      {item.title}
+                    </p>
                   </div>
-                );
-              })}
-            </div>
-          </section>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </SmoothScroll>
-    </>
+
+        {/* LIGHTBOX */}
+        {lightbox && (
+          <Lightbox
+            images={lightbox.images}
+            startIndex={lightbox.index}
+            onClose={() => setLightbox(null)}
+          />
+        )}
+      </div>
+    </SmoothScroll>
   );
 }

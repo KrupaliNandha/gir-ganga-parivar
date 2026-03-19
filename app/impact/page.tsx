@@ -99,10 +99,10 @@ function StatCard({
 }
 
 /* ─── Impact Card ─────────────────────────────────── */
-function ImpactCard({ title, items }: { title: string; items: string[] }) {
+function ImpactCard({ title, items }: { title: string;  items: string[] }) {
   return (
     <div
-      className="relative bg-white rounded-3xl p-8 overflow-hidden group border border-gray-100
+      className="relative bg-white rounded-3xl p-4 lg:p-8 overflow-hidden group border border-gray-100
       hover:shadow-2xl transition-all duration-400"
     >
       {/* gradient sweep on hover */}
@@ -148,7 +148,7 @@ export default function JalMandirSection() {
       <SmoothScroll>
         {/* ── 1. IMPACT DASHBOARD ─────────────────────────── */}
         <section className="container bg-[var(--color-tertiary)]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-16">
               <Eyebrow text="By the Numbers" />
@@ -190,7 +190,7 @@ export default function JalMandirSection() {
 
         {/* ── 2. WATER CONSERVATION INSIGHTS ─────────────── */}
         <section className="container bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
             {/* Header */}
             <div className="text-center mb-14">
               <Eyebrow text="District Overview" />
@@ -230,12 +230,14 @@ export default function JalMandirSection() {
                     </h3>
                   </div>
                   <div className="px-4 pb-6">
-                    <img
+                    <Image
                       src={card.src}
                       alt={card.title}
+                      width={600}
+                      height={400}
                       className="w-full h-auto object-contain rounded-xl"
                     />
-                  </div>
+                  </div>  
                 </div>
               ))}
             </div>
@@ -244,7 +246,7 @@ export default function JalMandirSection() {
 
         {/* ── 3. IMPACT DETAILS ───────────────────────────── */}
         <section className="container bg-[var(--color-tertiary)]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14">
               <Eyebrow text="What We've Achieved" />
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
@@ -277,7 +279,7 @@ export default function JalMandirSection() {
 
         {/* ── 4. IMPACT STORY ─────────────────────────────── */}
         <section className="container bg-white">
-          <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+          <div className=" mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-stretch">
               {/* Left — Story */}
               <div className="max-w-4xl">

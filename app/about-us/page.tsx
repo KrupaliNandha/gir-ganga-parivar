@@ -448,12 +448,12 @@ export default function AboutPage() {
                   {/* inner ring */}
                   <div className="absolute w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] rounded-full border border-emerald-100" />
 
-                  {/* main circle image */}
                   <div className="relative w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden shadow-2xl shadow-emerald-900/20 border-4 border-white z-10">
-                    <img
-                      src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80"
+                    <Image
+                      src="/image/home/Slide2.png"
                       alt="Water conservation work"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
 

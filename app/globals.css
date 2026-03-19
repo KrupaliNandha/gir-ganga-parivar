@@ -9,7 +9,7 @@
 
 @media (max-width: 640px) {
   .container {
-    padding: 30px;
+    padding: 18px;
   }
 }
 
@@ -181,9 +181,12 @@ body {
   }
 }
 
-/* <span className="btn-secondary-overlay"></span> 
+/* Add these to your globals.css for custom Swiper pagination dots */
 
-      blue patch
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 md:w-[700px] w-[200px] h-56 bg-[var(--color-primary)]/10
-     rounded-full blur-3xl pointer-events-none" />
-     */
+.custom-pagination .swiper-pagination-bullet {
+  @apply w-1.5 h-1.5 rounded-full bg-white/40 opacity-100 transition-all duration-300;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  @apply bg-white w-5;
+}

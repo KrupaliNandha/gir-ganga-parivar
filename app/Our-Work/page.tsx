@@ -686,7 +686,7 @@ export default function OurWorkPage() {
 
               {/* Right — big active card */}
               <div
-                className="relative bg-[var(--color-primary)] rounded-3xl overflow-hidden p-10 flex flex-col justify-between min-h-[340px]"
+                className="relative bg-[var(--color-primary)] rounded-3xl overflow-hidden p-5 md:p-10 flex flex-col justify-between min-h-[340px]"
                 style={{
                   opacity: inView ? 1 : 0,
                   transform: inView ? "translateX(0)" : "translateX(24px)",
@@ -770,7 +770,6 @@ export default function OurWorkPage() {
                   </span>
                 </p>
               </div>
-           
 
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -905,7 +904,7 @@ export default function OurWorkPage() {
         {/* ══════════════════════════════════════════════
                   SECTION 4 — IMPACT HIGHLIGHTS + GUJARAT MAP
               ══════════════════════════════════════════════ */}
-        <section className="bg-white container"> 
+        <section className="bg-white container">
           <div className="max-w-7xl justify-self-center">
             <motion.div className="text-center mb-12">
               <div className="flex items-center justify-center gap-3 mb-3">
@@ -930,10 +929,12 @@ export default function OurWorkPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Image Instead of Map */}
               <motion.div>
-                <img
+                <Image
                   src="/image/home/Our Approach.png"
                   alt="Gujarat Impact Map"
-                  className="w-full max-w-full mx-auto object-contain"
+                  width={800}
+                  height={500}
+                  className="w-full h-auto object-contain mx-auto"
                 />
               </motion.div>
 

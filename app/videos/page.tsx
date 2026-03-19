@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Play, Youtube, ArrowRight, X } from "lucide-react";
+import Image from "next/image";
 
 /* ─────────────────────────────────────
    Animations
@@ -156,11 +157,8 @@ function VideoCard({ video, onPlay }: { video: Video; onPlay: () => void }) {
       <div className="relative w-full sm:w-48 md:w-56 flex-shrink-0 order-first sm:order-last">
         {/* Fixed-height on mobile so card doesn't collapse */}
         <div className="relative h-44 sm:h-full min-h-[160px]">
-          <img
-            src={thumb}
-            className="absolute inset-0 w-full h-full object-cover"
-            alt={video.title}
-          />
+          <Image src={thumb} alt={video.title} fill className="object-cover" />
+
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="bg-[var(--color-primary)] w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg">
               <Play size={18} />
@@ -201,7 +199,6 @@ export default function VideosPage() {
 
   return (
     <div className="bg-white min-h-screen text-gray-900">
-
       {/* ── HERO ── */}
       <section className="relative py-12 sm:py-16 bg-[var(--bg-tersery)]">
         <div className="containers px-4 sm:px-6 text-center">
@@ -279,7 +276,8 @@ export default function VideosPage() {
           </h3>
 
           <p className="text-gray-600 text-sm sm:text-base max-w-md mx-auto mb-6 sm:mb-8">
-            Watch our complete journey of water conservation and community impact.
+            Watch our complete journey of water conservation and community
+            impact.
           </p>
 
           <motion.a

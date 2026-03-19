@@ -5,6 +5,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import Image from "next/image";
+
 
 const PRESET_AMOUNTS = [100, 200, 500];
 
@@ -181,7 +183,7 @@ export default function Donate() {
           </div>
 
           {/* Main Card */}
-          <div className="border border-[var(--color-primary)] rounded-3xl p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
+          <div className="border border-[var(--color-primary)] rounded-3xl p-5 md:p-12 grid md:grid-cols-2 gap-10 items-center">
             {/* LEFT: Amount Display */}
             <div>
               {/* Live amount display */}
@@ -193,7 +195,7 @@ export default function Donate() {
                   <span className="text-[var(--color-primary)] text-3xl font-black mt-1">
                     ₹
                   </span>
-                  <span className="text-5xl font-black text-black leading-none tracking-tight">
+                  <span className="text-5xl font-black text-black tracking-tight">
                     {isCustom
                       ? customAmount || <span className="text-zinc-700"></span>
                       : amount.toLocaleString("en-IN")}
@@ -498,8 +500,8 @@ export default function Donate() {
       </section>
 
       {/* Section - 4 */}
-      <section className="container py-16">
-        <div className="p-3 sm:p-6 space-y-10">
+      <section className="container">
+        <div className=" space-y-10">
           {/* Header */}
           <div className="text-center">
             <p className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.35em] uppercase flex items-center justify-center gap-3 mb-3">
@@ -523,9 +525,10 @@ export default function Donate() {
               >
                 {/* Image */}
                 <div className="relative overflow-hidden h-48">
-                  <img
+                  <Image
                     src={item.img}
                     alt={item.title}
+                    fill
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Overlay gradient */}
@@ -619,7 +622,7 @@ export default function Donate() {
               {/* Top accent bar */}
               <div className="w-full bg-gradient-to-r from-primary via-primary to-primary" />
 
-              <div className="p-8 md:p-10 space-y-0 divide-y divide-gray-100">
+              <div className=" md:p-10 space-y-0 divide-y divide-gray-100">
                 {bankDetails.map((item, index) => (
                   <div
                     key={index}

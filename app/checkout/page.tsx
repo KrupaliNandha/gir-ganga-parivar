@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type CartItem = {
   id: string;
@@ -89,8 +90,8 @@ export default function DonationCheckout() {
   return (
     <div className="min-h-screen bg-[var(--color-tertiary)]">
       {/* ── Progress Bar ── */}
-     
-      <div className="bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-8">
+
+      <div className="bg-white border-b border-[var(--color-dark)] container">
         <div className="max-w-6xl mx-auto">
           <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center justify-center lg:justify-start gap-2 mb-2">
             <span className="w-5 h-px bg-[var(--color-secondary)]" />
@@ -105,7 +106,7 @@ export default function DonationCheckout() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 px-6 py-10">
+      <div className="container max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 px-6 py-10">
         {/* ── LEFT FORM ── */}
         <div className="lg:col-span-3 space-y-6">
           {/* Personal Info */}
@@ -124,7 +125,7 @@ export default function DonationCheckout() {
               </div>
             </div>
 
-            <div className="px-7 py-7 space-y-5">
+            <div className="px-3 lg:px-7 py-7 space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
                 <div>
                   <label className={labelBase}>
@@ -213,7 +214,7 @@ export default function DonationCheckout() {
               </div>
             </div>
 
-            <div className="px-7 py-7 space-y-5">
+            <div className="px-3 lg:px-7 py-7 space-y-5">
               <div>
                 <label className={labelBase}>
                   Country / Region{" "}
@@ -298,14 +299,16 @@ export default function DonationCheckout() {
                 </h3>
               </div>
 
-              <div className="p-6">
+              <div className="px-3 lg:px-7  p-6">
                 {/* Item row */}
                 <div className="flex items-center gap-4 pb-5 border-b border-[var(--color-dark)]">
                   <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
-                    <img
+                    <Image
                       src={cartItem.img}
                       alt={cartItem.title}
-                      className="w-full h-full object-cover"
+                      width={100}
+                      height={100}
+                      className="object-cover rounded-2xl h-14"
                     />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -344,7 +347,7 @@ export default function DonationCheckout() {
             </div>
 
             {/* Payment Method */}
-            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-6 py-5">
+            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-3 lg:px-7 py-5">
               <p className={labelBase}>Payment Method</p>
               <div className="flex items-center gap-3 bg-[var(--color-tertiary)] rounded-2xl px-4 py-3.5 border border-[var(--color-dark)] mt-2">
                 <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -363,7 +366,7 @@ export default function DonationCheckout() {
             </div>
 
             {/* Checkboxes */}
-            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-6 py-5 space-y-4">
+            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-3 lg:px-7  py-5 space-y-4">
               {[
                 {
                   checked: agreedTerms,
@@ -416,7 +419,6 @@ export default function DonationCheckout() {
             </div>
 
             {/* CTA */}
-            
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
