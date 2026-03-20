@@ -50,7 +50,7 @@ const CountUp = ({ end, duration = 2000, suffix = "" }: CountUpProps) => {
 /* ─── Eyebrow Label ───────────────────────────────── */
 function Eyebrow({ text }: { text: string }) {
   return (
-    <p className="inline-flex items-center gap-3 text-[10px] font-bold tracking-[0.35em] uppercase text-[var(--color-secondary)] mb-4">
+    <p className="inline-flex items-center justify-center gap-3 text-[10px] font-bold tracking-[0.35em] uppercase text-[var(--color-secondary)] mb-4">
       <span className="w-8 h-px bg-[var(--color-secondary)]" />
       {text}
       <span className="w-8 h-px bg-[var(--color-secondary)]" />
@@ -99,7 +99,7 @@ function StatCard({
 }
 
 /* ─── Impact Card ─────────────────────────────────── */
-function ImpactCard({ title, items }: { title: string;  items: string[] }) {
+function ImpactCard({ title, items }: { title: string; items: string[] }) {
   return (
     <div
       className="relative bg-white rounded-3xl p-4 lg:p-8 overflow-hidden group border border-gray-100
@@ -237,7 +237,7 @@ export default function JalMandirSection() {
                       height={400}
                       className="w-full h-auto object-contain rounded-xl"
                     />
-                  </div>  
+                  </div>
                 </div>
               ))}
             </div>
@@ -279,20 +279,22 @@ export default function JalMandirSection() {
 
         {/* ── 4. IMPACT STORY ─────────────────────────────── */}
         <section className="container bg-white">
-          <div className=" mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-stretch">
+          <div className="mx-auto">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
               {/* Left — Story */}
               <div className="max-w-4xl">
-                <Eyebrow text="Impact Story" />
+                <div className="text-center mb-8">
+                  <Eyebrow text="Impact Story" />
 
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-6 leading-tight">
-                  Restoring Hope{" "}
-                  <span className="text-[var(--color-primary)]">
-                    Through Water
-                  </span>
-                </h2>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight leading-tight text-center lg:text-start">
+                    Restoring Hope{" "}
+                    <span className="text-[var(--color-primary)]">
+                      Through Water
+                    </span>
+                  </h2>
+                </div>
 
-                <div className="space-y-4 text-gray-500 text-sm leading-7">
+                <div className="space-y-4 text-gray-500 text-sm leading-7 text-center lg:text-start">
                   <p>
                     GGPT’s Check-Dam Revival in Bhavnagar For over 14 years,
                     villages in Sihor taluka of Bhavnagar—Todi, Kharachiya,
@@ -319,7 +321,7 @@ export default function JalMandirSection() {
                   </p>
                 </div>
 
-                <p className="text-gray-400 text-sm leading-7 mb-4">
+                <p className="text-gray-400 text-sm leading-7 mb-4 text-center lg:text-start">
                   A farmer shared,{" "}
                   <span className="text-gray-600 italic">
                     &quot;For years, 700 feet gave us nothing. Today, water
@@ -327,20 +329,22 @@ export default function JalMandirSection() {
                   </span>
                 </p>
 
-                <p className="text-gray-400 text-sm leading-7 mb-8">
+                <p className="text-gray-400 text-sm leading-7 mb-8 text-center lg:text-start">
                   More than water, GGPT restored dignity, confidence, and hope—
                   creating a replicable model.
                 </p>
 
                 {/* CTA */}
-                <div className="inline-flex items-center gap-3">
-                  <span className="w-8 h-px bg-[var(--color-primary)]" />
-                  <p className="font-bold text-base text-gray-900">
-                    This is not just water conservation.{" "}
-                    <span className="text-[var(--color-primary)]">
-                      It is rural revival.
-                    </span>
-                  </p>
+                <div className="justify-self-center lg:justify-self-start text-center lg:text-start">
+                  <div className="inline-flex items-center gap-3">
+                    <span className="w-8 h-px md:bg-[var(--color-primary)]" />
+                    <p className="font-bold text-base text-gray-900">
+                      This is not just water conservation.{" "}
+                      <span className="text-[var(--color-primary)]">
+                        It is rural revival.
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </div>
 

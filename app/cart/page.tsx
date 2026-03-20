@@ -81,17 +81,9 @@ export default function CartPage() {
       </div>
 
       {/* ── Main Layout ── */}
-      <div className="max-w-7xl mx-auto  mt-10 flex flex-col justify-self-center lg:flex-row gap-8">
+      <div className="max-w-7xl mx-auto mt-10 flex flex-col justify-self-center lg:flex-row gap-8">
         {/* ── LEFT: Cart Item ── */}
-        <div className="flex-1  space-y-4">
-          {/* Column headers — desktop */}
-          <div className="hidden md:grid grid-cols-[1fr_150px_100px _140px] px-6 pb-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.25em]">
-            <span>Donation</span>
-            <span className="text-center">Amount</span>
-            <span className="text-center">Quantity</span>
-            <span className="text-right">Total</span>
-          </div>
-
+        <div className="flex-1 space-y-4">
           {/* Item Card */}
           <div
             className={`bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm p-6 flex flex-col md:grid md:grid-cols-[1fr_110px_130px_110px] items-center gap-5 relative transition-all duration-300 ${
@@ -219,7 +211,7 @@ export default function CartPage() {
               <div className="h-px bg-[var(--color-tertiary)]" />
 
               {/* Total */}
-              <div className="bg-[var(--color-tertiary)] border border-[var(--color-dark)] rounded-2xl px-5 py-4 flex justify-between items-center">
+              <div className="bg-[var(--color-tertiary)] border border-[var(--color-dark)] rounded-2xl px-5 py-4 flex justify-between gap-5 items-center">
                 <span className="text-sm font-black text-gray-700 uppercase tracking-wider">
                   Total
                 </span>

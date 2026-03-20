@@ -21,6 +21,11 @@ const stagger: Variants = {
   show: { transition: { staggerChildren: 0.15 } },
 };
 
+const slideIn: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 /* ─── Icons ───────────────────────────────────────── */
 
 function MapPinIcon({ filled = false }) {
@@ -30,7 +35,7 @@ function MapPinIcon({ filled = false }) {
       fill={filled ? "currentColor" : "none"}
       stroke="currentColor"
       strokeWidth={1.8}
-      className="w-7 h-7"
+      className="w-6 h-6"
     >
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
       <circle
@@ -50,7 +55,7 @@ const PhoneIcon = () => (
     fill="none"
     stroke="currentColor"
     strokeWidth={1.8}
-    className="w-7 h-7"
+    className="w-6 h-6"
   >
     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
   </svg>
@@ -62,7 +67,7 @@ const MailIcon = () => (
     fill="none"
     stroke="currentColor"
     strokeWidth={1.8}
-    className="w-7 h-7"
+    className="w-6 h-6"
   >
     <rect x="2" y="4" width="20" height="16" rx="2" />
     <path d="M2 8l10 6 10-6" />
@@ -98,13 +103,13 @@ function ContactCards() {
       icon: <PhoneIcon />,
       label: "Contact",
       lines: ["+91 94084 14568", "+91 94096 92693"],
-      href: "tel:+919408414568",
+      href: "#",
     },
     {
       icon: <MailIcon />,
       label: "Email",
       lines: ["csr@girgangaparivartrust.com"],
-      href: "mailto:csr@girgangaparivartrust.com",
+      href: "#",
     },
   ];
 
@@ -114,7 +119,7 @@ function ContactCards() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10"
+      className="container grid grid-cols-1 md:grid-cols-3 gap-4"
     >
       {cards.map((card, i) => (
         <motion.a
@@ -123,18 +128,54 @@ function ContactCards() {
           href={card.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl p-7 flex flex-col items-center text-center gap-3 
-          bg-[var(--color-primary)] text-white
-          hover:bg-[var(--color-secondary)] hover:text-black shadow-sm"
+          className="container group relative overflow-hidden rounded-2xl border border-[var(--color-primary)] bg-[var(--color-tertiary)]
+           hover:bg-[var(--color-primary)] transition-all duration-500
+            p-6 flex flex-col gap-3 shadow-sm"
         >
-          <div className="text-black">{card.icon}</div>
-          <p className="font-bold text-lg tracking-wide">{card.label}</p>
+          {/* Icon */}
+          <div
+            className="w-11 h-11 rounded-xl bg-[var(--color-primary)]/10 group-hover:bg-white/20
+              flex items-center justify-center text-[var(--color-primary)] group-hover:text-white transition-all duration-500"
+          >
+            {card.icon}
+          </div>
 
-          {card.lines.map((line, j) => (
-            <p key={j} className="text-xs sm:text-sm opacity-80">
-              {line}
-            </p>
-          ))}
+          {/* Label */}
+          <p
+            className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-primary)]/60
+              group-hover:text-white/70 transition-colors duration-500"
+          >
+            {card.label}
+          </p>
+
+          {/* Lines */}
+          <div className="space-y-1">
+            {card.lines.map((line, j) => (
+              <p
+                key={j}
+                className="text-sm text-gray-700 group-hover:text-white leading-relaxed transition-colors duration-500"
+              >
+                {line}
+              </p>
+            ))}
+          </div>
+
+          {/* Arrow */}
+          <div
+            className="mt-auto self-end w-8 h-8 rounded-full border border-[var(--color-primary)]/30
+              group-hover:border-white/40 flex items-center justify-center
+              text-[var(--color-primary)] group-hover:text-white transition-all duration-500"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="w-3.5 h-3.5"
+            >
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg>
+          </div>
         </motion.a>
       ))}
     </motion.div>
@@ -144,7 +185,26 @@ function ContactCards() {
 /* ─── Input Style ───────────────────────────────── */
 
 const inputClass =
-  "w-full px-5 py-3 rounded-xl border border-gray-200 text-gray-700 text-sm placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition bg-white";
+  "w-full px-4 py-3 rounded-lg border-0 border-b-2 border-gray-200 bg-transparent text-gray-800 text-sm placeholder-gray-400 focus:outline-none focus:border-[var(--color-primary)] transition-all duration-300";
+
+/* ─── Label Input Wrapper ───────────────────────── */
+
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="relative">
+      <label className="block text-[10px] font-bold tracking-[0.18em] uppercase text-gray-400 mb-1 ml-1">
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
 
 /* ─── Contact Form ───────────────────────────────── */
 
@@ -155,44 +215,65 @@ function ContactForm() {
       initial="hidden"
       animate="show"
       exit="hidden"
-      className="space-y-4"
+      className="space-y-5 container"
     >
-      <input required placeholder="Name" className={inputClass} />
-      <input required type="email" placeholder="Email" className={inputClass} />
-      <input required placeholder="Phone Number" className={inputClass} />
-      <input placeholder="Subject" className={inputClass} />
-
-      <textarea
-        rows={4}
-        placeholder="Message"
-        className={inputClass + " resize-none"}
-      />
+      <div className="grid grid-cols-2 gap-4">
+        <Field label="Name">
+          <input required placeholder="Your name" className={inputClass} />
+        </Field>
+        <Field label="Email">
+          <input
+            required
+            type="email"
+            placeholder="your@email.com"
+            className={inputClass}
+          />
+        </Field>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <Field label="Phone">
+          <input
+            required
+            placeholder="+91 00000 00000"
+            className={inputClass}
+          />
+        </Field>
+        <Field label="Subject">
+          <input placeholder="Topic" className={inputClass} />
+        </Field>
+      </div>
+      <Field label="Message">
+        <textarea
+          rows={4}
+          placeholder="Write your message..."
+          className={inputClass + " resize-none pt-2"}
+        />
+      </Field>
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9 }}
-        className="flex flex-wrap gap-6 justify-center"
       >
         <button
           type="submit"
           className="btn-secondary w-full group relative inline-flex items-center justify-center gap-2
-    font-semibold text-base px-10 py-4 cursor-pointer
-    bg-[var(--color-secondary)] text-[var(--color-primary)]
-    hover:text-[var(--color-secondary)] overflow-hidden"
+            font-semibold text-sm px-8 py-4 cursor-pointer rounded-xl
+            bg-[var(--color-secondary)] text-[var(--color-primary)]
+            hover:text-[var(--color-secondary)] overflow-hidden tracking-wide"
         >
           <span className="relative z-10 flex gap-2 items-center">
-            Send <SendIcon />
+            Send Message <SendIcon />
           </span>
-
-          <span className="btn-secondary-overlay"></span>
+          <span className="btn-secondary-overlay" />
         </button>
       </motion.div>
     </motion.form>
   );
 }
 
-/* ─── Volunteer Form ───────────────────────────────── */
+/* ─── Chevron Icon ───────────────────────────────── */
+
 const ChevronIcon = ({ open }: { open: boolean }) => (
   <motion.svg
     animate={{ rotate: open ? 180 : 0 }}
@@ -206,6 +287,8 @@ const ChevronIcon = ({ open }: { open: boolean }) => (
     <path d="M6 9l6 6 6-6" />
   </motion.svg>
 );
+
+/* ─── Volunteer Form ───────────────────────────────── */
 
 function VolunteerForm() {
   const [open, setOpen] = useState(false);
@@ -223,67 +306,85 @@ function VolunteerForm() {
       initial="hidden"
       animate="show"
       exit="hidden"
-      className="space-y-4"
+      className="space-y-5"
     >
-      <input required placeholder="Full Name" className={inputClass} />
-      <input required type="email" placeholder="Email" className={inputClass} />
-      <input required placeholder="Phone Number" className={inputClass} />
-      <input placeholder="City" className={inputClass} />
-
-      {/* Custom Dropdown */}
-      <div className="relative">
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className={`${inputClass} flex items-center justify-between`}
-        >
-          <span className={selected ? "text-gray-700" : "text-gray-400"}>
-            {selected || "Select Interest"}
-          </span>
-
-          <ChevronIcon open={open} />
-        </button>
-
-        {open && (
-          <ul className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-sm">
-            {options.map((opt) => (
-              <li
-                key={opt}
-                onClick={() => {
-                  setSelected(opt);
-                  setOpen(false);
-                }}
-                className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-50"
-              >
-                {opt}
-              </li>
-            ))}
-          </ul>
-        )}
+      <div className="grid grid-cols-2 gap-4">
+        <Field label="Full Name">
+          <input required placeholder="Your full name" className={inputClass} />
+        </Field>
+        <Field label="Email">
+          <input
+            required
+            type="email"
+            placeholder="your@email.com"
+            className={inputClass}
+          />
+        </Field>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <Field label="Phone">
+          <input
+            required
+            placeholder="+91 00000 00000"
+            className={inputClass}
+          />
+        </Field>
+        <Field label="City">
+          <input placeholder="Your city" className={inputClass} />
+        </Field>
       </div>
 
-      <textarea
-        rows={4}
-        placeholder="Why do you want to volunteer?"
-        className={inputClass}
-      />
+      <Field label="Area of Interest">
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className={`${inputClass} flex items-center justify-between w-full text-left`}
+          >
+            <span className={selected ? "text-gray-800" : "text-gray-400"}>
+              {selected || "Select Interest"}
+            </span>
+            <ChevronIcon open={open} />
+          </button>
+          {open && (
+            <ul className="absolute z-50 w-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden">
+              {options.map((opt) => (
+                <li
+                  key={opt}
+                  onClick={() => {
+                    setSelected(opt);
+                    setOpen(false);
+                  }}
+                  className="px-4 py-3 text-sm cursor-pointer hover:bg-[var(--color-primary)]/5 transition-colors"
+                >
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </Field>
 
-      {/* Overlay Button */}
-      <motion.div className="flex justify-center">
-        <button
-          type="submit"
-          className="btn-secondary w-full group relative inline-flex items-center justify-center gap-2
-          font-semibold text-base px-10 py-4 cursor-pointer
+      <Field label="Why Volunteer?">
+        <textarea
+          rows={4}
+          placeholder="Tell us your motivation..."
+          className={inputClass + " resize-none pt-2"}
+        />
+      </Field>
+
+      <button
+        type="submit"
+        className="btn-secondary w-full group relative inline-flex items-center justify-center gap-2
+          font-semibold text-sm px-8 py-4 cursor-pointer rounded-xl
           bg-[var(--color-secondary)] text-[var(--color-primary)]
-          hover:text-[var(--color-secondary)] overflow-hidden"
-        >
-          <span className="relative z-10 flex gap-2 items-center">
-            Submit Volunteer Application
-          </span>
-
-          <span className="btn-secondary-overlay"></span>
-        </button>
-      </motion.div>
+          hover:text-[var(--color-secondary)] overflow-hidden tracking-wide"
+      >
+        <span className="relative z-10 flex gap-2 items-center">
+          Submit Volunteer Application
+        </span>
+        <span className="btn-secondary-overlay" />
+      </button>
     </motion.form>
   );
 }
@@ -307,67 +408,89 @@ function PartnershipForm() {
       initial="hidden"
       animate="show"
       exit="hidden"
-      className="space-y-4"
+      className="space-y-5"
     >
-      <input required placeholder="Name" className={inputClass} />
-      <input required placeholder="Organization Name" className={inputClass} />
-      <input required type="email" placeholder="Email" className={inputClass} />
-      <input required placeholder="Phone Number" className={inputClass} />
-
-      {/* Custom Dropdown */}
-      <div className="relative">
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className={`${inputClass} flex items-center justify-between`}
-        >
-          <span className={selected ? "text-gray-700" : "text-gray-400"}>
-            {selected || "Partnership Type"}
-          </span>
-
-          <ChevronIcon open={open} />
-        </button>
-
-        {open && (
-          <ul className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-sm">
-            {options.map((opt) => (
-              <li
-                key={opt}
-                onClick={() => {
-                  setSelected(opt);
-                  setOpen(false);
-                }}
-                className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-50"
-              >
-                {opt}
-              </li>
-            ))}
-          </ul>
-        )}
+      <div className="grid grid-cols-2 gap-4">
+        <Field label="Name">
+          <input required placeholder="Your name" className={inputClass} />
+        </Field>
+        <Field label="Organization">
+          <input
+            required
+            placeholder="Company / Trust"
+            className={inputClass}
+          />
+        </Field>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <Field label="Email">
+          <input
+            required
+            type="email"
+            placeholder="your@email.com"
+            className={inputClass}
+          />
+        </Field>
+        <Field label="Phone">
+          <input
+            required
+            placeholder="+91 00000 00000"
+            className={inputClass}
+          />
+        </Field>
       </div>
 
-      <textarea
-        rows={4}
-        placeholder="Describe your partnership proposal"
-        className={inputClass}
-      />
+      <Field label="Partnership Type">
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className={`${inputClass} flex items-center justify-between w-full text-left`}
+          >
+            <span className={selected ? "text-gray-800" : "text-gray-400"}>
+              {selected || "Select Partnership Type"}
+            </span>
+            <ChevronIcon open={open} />
+          </button>
+          {open && (
+            <ul className="absolute z-50 w-full mt-1 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden">
+              {options.map((opt) => (
+                <li
+                  key={opt}
+                  onClick={() => {
+                    setSelected(opt);
+                    setOpen(false);
+                  }}
+                  className="px-4 py-3 text-sm cursor-pointer hover:bg-[var(--color-primary)]/5 transition-colors"
+                >
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </Field>
 
-      {/* Overlay Button */}
-      <motion.div className="flex justify-center">
-        <button
-          type="submit"
-          className="btn-secondary w-full group relative inline-flex items-center justify-center gap-2
-          font-semibold text-base px-10 py-4 cursor-pointer
+      <Field label="Proposal Details">
+        <textarea
+          rows={4}
+          placeholder="Describe your partnership proposal..."
+          className={inputClass + " resize-none pt-2"}
+        />
+      </Field>
+
+      <button
+        type="submit"
+        className="btn-secondary w-full group relative inline-flex items-center justify-center gap-2
+          font-semibold text-sm px-8 py-4 cursor-pointer rounded-xl
           bg-[var(--color-secondary)] text-[var(--color-primary)]
-          hover:text-[var(--color-secondary)] overflow-hidden"
-        >
-          <span className="relative z-10 flex gap-2 items-center">
-            Submit Partnership Request
-          </span>
-
-          <span className="btn-secondary-overlay"></span>
-        </button>
-      </motion.div>
+          hover:text-[var(--color-secondary)] overflow-hidden tracking-wide"
+      >
+        <span className="relative z-10 flex gap-2 items-center">
+          Submit Partnership Request
+        </span>
+        <span className="btn-secondary-overlay" />
+      </button>
     </motion.form>
   );
 }
@@ -377,59 +500,76 @@ function PartnershipForm() {
 export default function Contact() {
   const [formType, setFormType] = useState("contact");
 
+  const tabs = [
+    { key: "contact", label: "Contact Us" },
+    { key: "volunteer", label: "Volunteer" },
+    { key: "partnership", label: "Partnership" },
+  ];
+
   return (
     <>
       <SmoothScroll>
-        {/* Heading */}
+        {/* ── Hero Header ── */}
+        <div className="container relative overflow-hidden">
+          {/* Decorative geometric lines */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-8 left-[8%] w-px h-32 bg-[var(--color-primary)]/15" />
+            <div className="absolute top-8 right-[8%] w-px h-32 bg-[var(--color-primary)]/15" />
+            <div className="absolute top-8 left-[8%] w-24 h-px bg-[var(--color-primary)]/15" />
+            <div className="absolute top-8 right-[8%] w-24 h-px bg-[var(--color-primary)]/15" />
+          </div>
 
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={stagger}
-          className="pt-16 pb-6 text-center container space-y-5"
-        >
-          <motion.p
-            variants={fadeUp}
-            className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.3em] uppercase mb-3 flex items-center justify-center gap-3"
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={stagger}
+            className="container text-center space-y-6 relative"
           >
-            <span className="w-8 h-px bg-[var(--color-secondary)]" />
-            CONTACT FORM
-            <span className="w-8 h-px bg-[var(--color-secondary)]" />
-          </motion.p>
+            <motion.p
+              variants={fadeUp}
+              className="text-[var(--color-secondary)] text-[10px] font-black tracking-[0.35em] uppercase flex items-center justify-center gap-3"
+            >
+              <span className="w-10 h-px bg-[var(--color-secondary)]" />
+              Form <span className="w-10 h-px bg-[var(--color-secondary)]" />
+            </motion.p>
 
-          <motion.h1 variants={fadeUp} className="text-5xl font-bold">
-            <span className="text-[var(--color-primary)]">Get In Touch</span>
-          </motion.h1>
+            <motion.h1
+              variants={fadeUp}
+              className="text-5xl md:text-6xl font-black leading-tight"
+            >
+              <span className="text-[var(--color-primary)]">
+                Contact US
+              </span>{" "}
+            </motion.h1>
 
-          <motion.p
-            variants={fadeUp}
-            className="text-gray-500 text-sm mt-5 max-w-xl mx-auto"
-          >
-            Feel free to contact us. Submit your queries here and we will get
-            back to you soon.
-          </motion.p>
+            <motion.p
+              variants={fadeUp}
+              className="text-gray-500 text-sm max-w-md mx-auto leading-relaxed"
+            >
+              Submit your queries here and we will get back to you soon. We'd
+              love to hear from you.
+            </motion.p>
 
-          {/* Socials */}
-          <motion.div className="flex gap-2.5 justify-center" variants={fadeUp}>
-            <div className="flex gap-3">
+            {/* Social Icons */}
+            <motion.div variants={fadeUp} className="flex gap-3 justify-center">
               {[
                 {
-                  icon: <FaFacebookF size={13} />,
+                  icon: <FaFacebookF size={12} />,
                   href: "https://www.facebook.com/profile.php?id=100083921712230",
                   label: "Facebook",
                 },
                 {
-                  icon: <FaLinkedinIn size={13} />,
+                  icon: <FaLinkedinIn size={12} />,
                   href: "https://in.linkedin.com/in/girganga-parivar-trust-450354287",
                   label: "LinkedIn",
                 },
                 {
-                  icon: <FaInstagram size={13} />,
+                  icon: <FaInstagram size={12} />,
                   href: "https://www.instagram.com/girgangaparivartrust/",
                   label: "Instagram",
                 },
                 {
-                  icon: <FaYoutube size={13} />,
+                  icon: <FaYoutube size={12} />,
                   href: "https://www.youtube.com/@girgangaparivartrust",
                   label: "YouTube",
                 },
@@ -440,100 +580,122 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group"
                 >
                   <span
-                    className="w-9 h-9 rounded-lg bg-[var(--color-tertiary)] border-2 border-[var(--color-primary)]
-          backdrop-blur-sm flex items-center justify-center text-[var(--color-primary)]
-          hover:bg-[var(--color-primary)] hover:text-white transition"
+                    className="w-9 h-9 rounded-lg bg-[var(--color-tertiary)] border border-[var(--color-primary)]/30
+                      flex items-center justify-center text-[var(--color-primary)]
+                      hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
                   >
                     {icon}
                   </span>
                 </a>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
+        </div>
 
-          <motion.div
-            variants={fadeUp}
-            className="w-16 h-0.5 bg-[var(--color-primary)] mx-auto mt-10 rounded-full"
-          />
-        </motion.div>
-
-        {/* Contact Section */}
-
+        {/* ── Contact Section ── */}
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="max-w-6xl mx-auto bg-[var(--color-tertiary)] rounded-3xl shadow-md border p-8 md:p-12"
+            className="max-w-6xl mx-auto"
           >
+            {/* Info Cards */}
             <ContactCards />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Map */}
+            {/* Main Card */}
+            <div className="rounded-3xl border border-gray-100 shadow-xl overflow-hidden bg-white">
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                {/* Left — Map */}
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                  className="relative min-h-[500px]"
+                >
+                  <iframe
+                    src="https://www.google.com/maps?q=GirGanga+Parivar+Trust+Rajkot&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: "500px", display: "block" }}
+                    loading="lazy"
+                  />
 
-              <motion.div
-                initial={{ opacity: 0, x: -60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="rounded-2xl overflow-hidden border shadow-sm min-h-[440px]"
-              >
-                <iframe
-                  src="https://www.google.com/maps?q=GirGanga+Parivar+Trust+Rajkot&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, minHeight: "440px" }}
-                  loading="lazy"
-                />
-              </motion.div>
+                  {/* Overlay label */}
+                  <div className="absolute bottom-5 left-5 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-md">
+                    <p className="text-[10px] font-black tracking-widest uppercase text-[var(--color-primary)]/60 mb-0.5">
+                      Location
+                    </p>
+                    <p className="text-xs font-bold text-gray-800">
+                      GirGanga Parivar Trust, Rajkot
+                    </p>
+                  </div>
+                </motion.div>
 
-              {/* Forms */}
+                {/* Right — Forms */}
+                <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
+                  className="container flex flex-col bg-[var(--color-tertiary)]"
+                >
+                  {/* Tab switcher */}
+                  <div className="flex flex-wrap  gap-1 mb-8 p-1 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    {tabs.map((tab) => (
+                      <button
+                        key={tab.key}
+                        onClick={() => setFormType(tab.key)}
+                        className={`relative flex-1 px-3 py-2.5 border border-[var(--color-primary)] rounded-lg text-xs md:text-base font-bold tracking-wide transition-all duration-300 ${
+                          formType === tab.key
+                            ? "bg-[var(--color-primary)] text-white shadow-sm"
+                            : "text-gray-500 hover:text-gray-700"
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-              >
-                {/* Form Switch Buttons */}
+                  {/* Form title */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={formType + "-header"}
+                      variants={slideIn}
+                      initial="hidden"
+                      animate="show"
+                      exit="hidden"
+                      className="mb-6 flex"
+                    >
+                      <h2 className="text-xl font-black text-gray-800">
+                        {formType === "contact" && "Send us a Message"}
+                        {formType === "volunteer" && "Join as a Volunteer"}
+                        {formType === "partnership" && "Propose a Partnership"}
+                      </h2>
+                      <p className="text-xs text-gray-400 mt-1">
+                        {formType === "contact" &&
+                          "We'll respond within 24 hours."}
+                        {formType === "volunteer" && "Be part of the change."}
+                        {formType === "partnership" && "Let's grow together."}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
 
-                <div className="flex gap-3 mb-6 flex-wrap">
-                  <button
-                    onClick={() => setFormType("contact")}
-                    className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "contact" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
-                  >
-                    Contact
-                  </button>
-
-                  <button
-                    onClick={() => setFormType("volunteer")}
-                    className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "volunteer" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
-                  >
-                    Volunteer
-                  </button>
-
-                  <button
-                    onClick={() => setFormType("partnership")}
-                    className={`px-5 py-2 rounded-lg text-sm font-semibold ${formType === "partnership" ? "bg-[var(--color-primary)] text-white" : "bg-white border"}`}
-                  >
-                    Partnership
-                  </button>
-                </div>
-
-                <AnimatePresence mode="wait">
-                  {formType === "contact" && <ContactForm key="contact" />}
-                  {formType === "volunteer" && (
-                    <VolunteerForm key="volunteer" />
-                  )}
-                  {formType === "partnership" && (
-                    <PartnershipForm key="partnership" />
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                  <AnimatePresence mode="wait">
+                    {formType === "contact" && <ContactForm key="contact" />}
+                    {formType === "volunteer" && (
+                      <VolunteerForm key="volunteer" />
+                    )}
+                    {formType === "partnership" && (
+                      <PartnershipForm key="partnership" />
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>

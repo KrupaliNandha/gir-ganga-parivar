@@ -161,129 +161,83 @@ export default function HomePage() {
         {/* ══════════════════════════════════════════════
           SECTION 1 — HERO
       ══════════════════════════════════════════════ */}
-        <section className="relative w-full min-h-screen flex items-center overflow-hidden">
+        <section className="w-full min-h-screen flex items-center overflow-hidden pb-45 ">
           {/* Background Image */}
           <Image
             src="/image/home/Donation For Biggest Checkdam.png"
             alt="Water Conservation"
             fill
-            priority
             className="object-cover"
           />
 
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60"></div>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/60" />
 
-          {/* Decorative wave bottom */}
+          {/* Wave */}
           <div className="absolute bottom-0 left-0 right-0 z-[2]">
-            <svg
-              viewBox="0 0 1440 80"
-              className="w-full"
-              fill="white"
-              preserveAspectRatio="none"
-            >
+            <svg viewBox="0 0 1440 80" className="w-full" fill="white">
               <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" />
             </svg>
           </div>
 
-          {/* Floating accent orbs */}
-          <div className="absolute top-20 right-[15%] w-64 h-64 rounded-full bg-[var(--color-primary)]/10 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-32 left-[10%] w-48 h-48 rounded-full bg-[var(--color-secondary)]/15 blur-3xl pointer-events-none" />
-
-          <div className="container relative z-[3]">
-            <div className="">
-              {/* Eyebrow */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex items-center gap-3 mb-6 justify-center"
-              >
-                <div className="h-px w-10 bg-[var(--color-secondary)] " />
-                <span className="text-[var(--color-secondary)] text-xs font-bold text-center tracking-[0.25em] uppercase">
-                  Girganga Parivar Trust
-                </span>
-                <div className="h-px w-10 bg-[var(--color-secondary)]" />
-              </motion.div>
-
-              {/* Heading */}
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.35 }}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.08] mb-6 text-center max-w-7xl justify-self-center"
-              >
-                Building a{" "}
-                <span className="relative inline-block text-[var(--color-secondary)]">
-                  Water-Secure
-                  <span className="md:block hidden absolute -bottom-1 left-0 right-0 h-1 bg-[var(--color-secondary)]/40 rounded-full" />
-                </span>{" "}
-                Future for Rural India.
-              </motion.h1>
-
-              {/* Subtitle */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.55 }}
-                className="text-white/80 text-base sm:text-lg lg:text-xl font-semibold leading-relaxed mb-10 text-center"
-              >
-                Reviving groundwater, strengthening agriculture, and empowering
-                rural communities through decentralized water conservation.
-              </motion.p>
+          {/* Content */}
+          <div className="container relative  flex flex-col items-center justify-self-center text-center ">
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <div className="h-px w-8 sm:w-10 bg-[var(--color-secondary)]" />
+              <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] text-[var(--color-secondary)] uppercase">
+                Girganga Parivar Trust
+              </span>
+              <div className="h-px w-8 sm:w-10 bg-[var(--color-secondary)]" />
             </div>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex flex-wrap gap-6 justify-center"
+
+            {/* Heading */}
+            <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 max-w-5xl">
+              Building a{" "}
+              <span className="text-[var(--color-secondary)]">
+                Water-Secure
+              </span>{" "}
+              Future for Rural India.
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-white/80 text-xs sm:text-sm md:text-lg lg:text-xl font-medium mb-8 sm:mb-10 max-w-2xl">
+              Reviving groundwater, strengthening agriculture, and empowering
+              rural communities through decentralized water conservation.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
+              {/* Button 1 */}
+              <a
+                href="/partner-with-us-csr"
+                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3
+        text-xs sm:text-sm lg:text-base font-semibold
+        bg-[var(--color-secondary)] text-[var(--color-primary)]
+        hover:text-[var(--color-secondary)] transition"
               >
-                {/* Secondary Button */}
-                <a
-                  href="/partner-with-us-csr"
-                  className="btn-secondary groupinline-flex items-center gap-2  font-semibold text-sm lg:text-base
-    px-10 py-4 bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-[var(--color-secondary)]"
-                >
-                  <span className="relative z-10">Partner With Us (CSR) </span>
-                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-                  <span className="btn-secondary-overlay"></span>
-                </a>
+                Partner With Us →
+              </a>
 
-                {/* Outline Button */}
-                <a
-                  href="/support-a-structure"
-                  className="btn-secondary-outline group text-sm lg:text-base"
-                >
-                  <span className="relative z-10">Support A Structure</span>
+              {/* Button 2 */}
+              <a
+                href="/support-a-structure"
+                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3
+        text-xs sm:text-sm lg:text-base font-semibold
+        border border-[var(--color-secondary)] text-white"
+              >
+                Support A Structure →
+              </a>
 
-                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-
-                  <span className="btn-secondary-outline-overlay"></span>
-                </a>
-
-                {/* Outline Button */}
-                <a
-                  href="/contact"
-                  className="btn-secondary-outline group text-sm lg:text-base"
-                >
-                  <span className="relative z-10">
-                    {" "}
-                    <span className="relative z-10">Contact Us</span>
-                  </span>
-
-                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
-
-                  <span className="btn-secondary-outline-overlay"></span>
-                </a>
-              </motion.div>
+              {/* Button 3 */}
+              <a
+                href="/contact"
+                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3
+        text-xs sm:text-sm lg:text-base font-semibold
+        border border-[var(--color-secondary)] text-white"
+              >
+                Contact Us →
+              </a>
             </div>
           </div>
         </section>
@@ -562,7 +516,7 @@ export default function HomePage() {
                     {/* Outline Button */}
                     <a
                       href="/partner-with-us-csr"
-                      className="btn-secondary-outline group text-xs lg:text-base"
+                      className="btn-secondary-outline group text-xs w-[290px] lg:text-base justify-center"
                     >
                       <span className="relative z-10">
                         Partner With Us (CSR)
@@ -578,7 +532,7 @@ export default function HomePage() {
                     {/* Outline Button */}
                     <a
                       href="/support-a-structure"
-                      className="btn-secondary-outline group text-sm lg:text-base"
+                      className="btn-secondary-outline group text-sm w-[290px] lg:text-base justify-center"
                     >
                       <span className="relative z-10">Support A Structure</span>
 
@@ -592,7 +546,7 @@ export default function HomePage() {
                     {/* Outline Button */}
                     <a
                       href="/contact"
-                      className="btn-secondary-outline group text-sm lg:text-base"
+                      className="btn-secondary-outline group text-sm w-[290px] lg:text-base justify-center"
                     >
                       <span className="relative z-10">
                         {" "}

@@ -47,7 +47,7 @@ function SectionHeader({
   subtitle?: string;
 }) {
   return (
-    <div className="text-center mb-16 space-y-5">
+    <div className="text-center mb-10 space-y-5">
       <Eyebrow>{eyebrow}</Eyebrow>
       <h2 className="font-[var(--font)] text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.15] text-gray-900 mb-4">
         {title} <span className="text-[var(--color-primary)]">{highlight}</span>

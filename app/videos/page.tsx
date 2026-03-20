@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Play, Youtube, ArrowRight, X } from "lucide-react";
 import Image from "next/image";
+import SmoothScroll from "../../Component/SmothScrolling";
 
 /* ─────────────────────────────────────
    Animations
@@ -198,111 +199,118 @@ export default function VideosPage() {
   const [activeVideo, setActiveVideo] = useState<Video | null>(null);
 
   return (
-    <div className="bg-white min-h-screen text-gray-900">
-      {/* ── HERO ── */}
-      <section className="relative py-12 sm:py-16 bg-[var(--bg-tersery)]">
-        <div className="containers px-4 sm:px-6 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-4 leading-tight"
+    <>
+      <SmoothScroll>
+        <div className="bg-white min-h-screen text-gray-900">
+          {/* ── HERO ── */}
+          <section className="relative py-12 sm:py-16 bg-[var(--bg-tersery)]">
+            <div className="containers px-4 sm:px-6 text-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 sm:mb-4 leading-tight"
+              >
+                Water{" "}
+                <span className="text-[var(--color-primary)]">Revolution</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto px-4"
+              >
+                Stories of water conservation, community support and check dam
+                restoration across Gujarat.
+              </motion.p>
+            </div>
+          </section>
+
+          {/* ── SECTION TITLE ── */}
+          <div className="containers px-4 sm:px-6 mb-6 sm:mb-10 flex justify-between items-center border-b border-gray-200 pb-4">
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-6 bg-[var(--color-secondary)] rounded-full" />
+              <h2 className="text-lg sm:text-xl font-bold">Latest Videos</h2>
+            </div>
+
+            <a
+              href="https://www.youtube.com/@girgangaparivartrust"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 hover:text-[var(--color-primary)] transition"
+            >
+              View All <ArrowRight size={14} />
+            </a>
+          </div>
+
+          {/* ── VIDEO GRID ── */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="containers px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pb-16 sm:pb-20"
           >
-            Water{" "}
-            <span className="text-[var(--color-primary)]">Revolution</span>
-          </motion.h1>
+            {videoData.map((video, i) => (
+              <VideoCard
+                key={i}
+                video={video}
+                onPlay={() => setActiveVideo(video)}
+              />
+            ))}
+          </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-gray-600 text-sm sm:text-base max-w-xl mx-auto px-4"
+          {/* ── CTA ── */}
+          <motion.section
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="containers px-4 sm:px-6 pb-16 sm:pb-24"
           >
-            Stories of water conservation, community support and check dam
-            restoration across Gujarat.
-          </motion.p>
-        </div>
-      </section>
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-2xl sm:rounded-3xl text-center py-12 sm:py-16 px-6 sm:px-8">
+              <p className="text-xs uppercase text-gray-500 mb-3 tracking-widest">
+                Gir Ganga Parivar Trust
+              </p>
 
-      {/* ── SECTION TITLE ── */}
-      <div className="containers px-4 sm:px-6 mb-6 sm:mb-10 flex justify-between items-center border-b border-gray-200 pb-4">
-        <div className="flex items-center gap-3">
-          <span className="w-1 h-6 bg-[var(--color-secondary)] rounded-full" />
-          <h2 className="text-lg sm:text-xl font-bold">Latest Videos</h2>
-        </div>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+                Water Means Life
+              </h3>
 
-        <a
-          href="https://www.youtube.com/@girgangaparivartrust"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 hover:text-[var(--color-primary)] transition"
-        >
-          View All <ArrowRight size={14} />
-        </a>
-      </div>
+              <p className="text-gray-600 text-sm sm:text-base max-w-md mx-auto mb-6 sm:mb-8">
+                Watch our complete journey of water conservation and community
+                impact.
+              </p>
 
-      {/* ── VIDEO GRID ── */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        className="containers px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pb-16 sm:pb-20"
-      >
-        {videoData.map((video, i) => (
-          <VideoCard
-            key={i}
-            video={video}
-            onPlay={() => setActiveVideo(video)}
-          />
-        ))}
-      </motion.div>
-
-      {/* ── CTA ── */}
-      <motion.section
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="containers px-4 sm:px-6 pb-16 sm:pb-24"
-      >
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-2xl sm:rounded-3xl text-center py-12 sm:py-16 px-6 sm:px-8">
-          <p className="text-xs uppercase text-gray-500 mb-3 tracking-widest">
-            Gir Ganga Parivar Trust
-          </p>
-
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
-            Water Means Life
-          </h3>
-
-          <p className="text-gray-600 text-sm sm:text-base max-w-md mx-auto mb-6 sm:mb-8">
-            Watch our complete journey of water conservation and community
-            impact.
-          </p>
-
-          <motion.a
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.95 }}
-            href="https://www.youtube.com/@girgangaparivartrust"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2
+              <motion.a
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.95 }}
+                href="https://www.youtube.com/@girgangaparivartrust"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2
               bg-red-600 hover:bg-red-700 text-white
               text-sm sm:text-base
               px-5 sm:px-8 py-3
               rounded-xl sm:font-semibold
               transition cursor-pointer"
-          >
-            <Youtube size={18} />
-            <span>Visit YouTube Channel</span>
-          </motion.a>
-        </div>
-      </motion.section>
+              >
+                <Youtube size={18} />
+                <span>Visit YouTube Channel</span>
+              </motion.a>
+            </div>
+          </motion.section>
 
-      {/* ── LIGHTBOX ── */}
-      {activeVideo && (
-        <Lightbox video={activeVideo} onClose={() => setActiveVideo(null)} />
-      )}
-    </div>
+          {/* ── LIGHTBOX ── */}
+          {activeVideo && (
+            <Lightbox
+              video={activeVideo}
+              onClose={() => setActiveVideo(null)}
+            />
+          )}
+        </div>
+      </SmoothScroll>
+    </>
   );
 }

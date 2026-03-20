@@ -188,29 +188,22 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex flex-col items-center py-3 flex-shrink-0"
+            className="flex flex-col items-center py-3 "
           >
             <Image
               src="/image/logo.png"
               alt="Gir Ganga Parivar Trust"
-              width={scrolled ? 50 : 66}
-              height={scrolled ? 50 : 66}
-              className="transition-all duration-300 object-contain"
+              width={66}
+              height={66}
+              className="object-contain"
               priority
             />
-            <div
-              className={`flex items-center gap-1.5 mt-1 transition-all duration-300 ${
-                scrolled
-                  ? "opacity-0 max-h-0 overflow-hidden"
-                  : "opacity-100 max-h-6"
-              }`}
-            >
+           
               <span className="block h-px w-4 bg-slate-300" />
               <span className="text-[8px] font-black tracking-[0.28em] uppercase text-slate-400 whitespace-nowrap">
                 Parivar Trust
               </span>
               <span className="block h-px w-4 bg-slate-300" />
-            </div>
           </Link>
 
           {/* Desktop Nav links */}
@@ -232,7 +225,7 @@ export default function Navbar() {
             </li>
 
             {/* OUR WORK ▾ — ✅ uses desktopWorkOpen */}
-            <li
+            {/* <li
               className="relative"
               ref={workRef}
               onMouseEnter={() => setDesktopWorkOpen(true)}
@@ -273,6 +266,13 @@ export default function Navbar() {
                   ),
                 )}
               </div>
+            </li> */}
+
+            <li className="relative group">
+              <Link href="/Our-Work" className={linkCls("/Our-Work")}>
+                Our Work
+                <span className={underline(isActive("/Our-Work"))} />
+              </Link>
             </li>
 
             {/* IMPACT */}
@@ -564,68 +564,17 @@ export default function Navbar() {
 
           {/* Our Work — ✅ uses mobileWorkOpen ONLY */}
           <li>
-            <div className="flex flex-col border-b border-slate-50">
-              <div className="flex items-center justify-between w-full py-3.5">
-                <Link
-                  href="/Our-Work"
-                  onClick={() => {
-                    setMobileMediaOpen(false);
-                    setMenuOpen(false);
-                    setMobileWorkOpen(false);
-                  }}
-                  className={`text-lg font-bold tracking-wide flex-1 ${
-                    isWorkActive
-                      ? "text-[var(--color-primary)]"
-                      : "text-slate-800"
-                  }`}
-                >
-                  Our Work
-                </Link>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileWorkOpen((prev) => !prev);
-                    setMobileMediaOpen(false);
-                  }}
-                  className="pl-4 py-1"
-                >
-                  <FiChevronDown
-                    className={`text-xl transition-transform duration-300 
-                      ${mobileWorkOpen ? "rotate-180" : "rotate-0"} 
-                      ${mobileWorkOpen ? "text-[var(--color-primary)]" : "text-slate-400"}`}
-                  />
-                </button>
-              </div>
-
-              {/* Dropdown Content */}
-              <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  mobileWorkOpen
-                    ? "max-h-40 opacity-100 pb-4"
-                    : "max-h-0 opacity-0"
-                }`}
-              >
-                <ul className="pl-5 space-y-4 border-l-2 border-[var(--color-primary)] ml-1 mt-1">
-                  <li>
-                    <Link
-                      href="/impact"
-                      onClick={() => {
-                        setMenuOpen(false);
-                        setMobileWorkOpen(false);
-                      }}
-                      className={`text-[15px] font-semibold block transition-colors ${
-                        isActive("/impact")
-                          ? "text-[var(--color-primary)]"
-                          : "text-slate-500 hover:text-slate-800"
-                      }`}
-                    >
-                      Impact
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <Link
+              href="/Our-Work"
+              onClick={() => setMenuOpen(false)}
+              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
+                isActive("/Our-Work")
+                  ? "text-[var(--color-primary)]"
+                  : "text-slate-800"
+              }`}
+            >
+              Our Work{" "}
+            </Link>
           </li>
 
           {/* Impact */}

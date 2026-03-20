@@ -58,7 +58,7 @@ export default function Slider() {
         </p>
         <div
           ref={sliderRef}
-          className="flex gap-40 overflow-x-hidden whitespace-nowrap pt-10"
+          className="flex gap-10 md:gap-20 lg:gap-30 xl:gap-40 overflow-x-hidden whitespace-nowrap pt-10"
         >
           {/* duplicate images for seamless loop */}
           {[...sliders, ...sliders, ...sliders].map((src, index) => (

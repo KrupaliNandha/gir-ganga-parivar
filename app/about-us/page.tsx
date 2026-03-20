@@ -573,13 +573,13 @@ export default function AboutPage() {
                     <div className="h-px w-8 bg-[var(--color-secondary)]" />
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight text-center lg:text-start">
                     A Grassroots Movement <br />
                     <span className="text-[var(--color-primary)]">
                       Born in 2017
                     </span>
                   </h2>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                     Girganga Parivar Trust was established in 2017 as a
                     grassroots initiative focused on Gau Seva (cattle welfare)
                     and strengthening rural livelihoods in Gujarat. The
@@ -588,7 +588,7 @@ export default function AboutPage() {
                     supporting rural communities through livestock care and
                     community service.
                   </p>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                     The movement was led by Mr. Dilipbhai Sakhiya, a respected
                     farmer leader, social worker, and former President of the
                     District Kisan Sangh in Rajkot. Through his grassroots
@@ -597,7 +597,7 @@ export default function AboutPage() {
                     organizations, and industry supporters to build a
                     community-driven platform for rural development.
                   </p>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6 text-center lg:text-start">
                     As the initiative progressed, the organization witnessed the
                     severe challenges faced by farmers due to water scarcity,
                     declining groundwater levels, and recurring droughts across
@@ -607,13 +607,13 @@ export default function AboutPage() {
                     conservation and groundwater recharge initiatives.
                   </p>
 
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6 text-center lg:text-start">
                     What began with the cleaning and rejuvenation of a few
                     silted check dams soon evolved into a large-scale grassroots
                     movement for decentralized water conservation and watershed
                     restoration.
                   </p>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6 text-center lg:text-start">
                     Today, GGPT has grown into one of Gujarat’s impactful
                     community-driven initiatives for water conservation,
                     groundwater recharge, and rural climate resilience, working
@@ -950,7 +950,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* ✅ NEW ADDED CONTENT */}
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                   The work of Girganga Parivar Trust is guided by a committed
                   Board of Trustees with experience in agriculture, rural
                   development, community mobilization, and financial management.
@@ -959,16 +959,16 @@ export default function AboutPage() {
                   the organization’s mission.
                 </p>
 
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-primary)]">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-primary)] text-center lg:text-start">
                   Founder & President
                 </h3>
 
-                <p className="font-semibold text-lg text-gray-900 mb-4">
+                <p className="font-semibold text-lg text-gray-900 mb-4 text-center lg:text-start">
                   Mr. DILIPBHAI SAKHIYA
                 </p>
 
                 {/* Existing content */}
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                   A veteran grassroots leader and water conservation advocate
                   with more than two decades of community engagement, he
                   initiated the <strong>“1,11,111 Jal Sanchay Sankalp”</strong>,
@@ -977,7 +977,7 @@ export default function AboutPage() {
                   development.
                 </p>
 
-                <p className="text-gray-500 text-sm leading-relaxed">
+                <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start">
                   Under his leadership, the organization has mobilized farmers,
                   village institutions, youth volunteers, and development
                   partners to collectively work toward strengthening water
