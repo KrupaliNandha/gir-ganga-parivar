@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import SmoothScroll from "../../Component/SmothScrolling";
+import { MdExpandLess } from "react-icons/md";
 
 type CartItem = {
   id: string;
@@ -48,6 +50,8 @@ export default function DonationCheckout() {
   const [mounted, setMounted] = useState(false);
   const [agreedTerms, setAgreedTerms] = useState(false);
   const [hideLeaderboard, setHideLeaderboard] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [stateOpen, setStateOpen] = useState(false);
 
   useEffect(() => {
     const saved = sessionStorage.getItem("cartItem");
@@ -88,93 +92,242 @@ export default function DonationCheckout() {
     "block text-[10px] font-black text-gray-400 uppercase tracking-[0.25em] mb-1.5";
 
   return (
-    <div className="min-h-screen bg-[var(--color-tertiary)]">
-      {/* ── Progress Bar ── */}
+    <SmoothScroll>
+      <div className=" min-h-screen bg-[var(--color-tertiary)]">
+        {/* ── Progress Bar ── */}
 
-      <div className="bg-white border-b border-[var(--color-dark)] container">
-        <div className="max-w-6xl mx-auto">
-          <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center justify-center lg:justify-start gap-2 mb-2">
-            <span className="w-5 h-px bg-[var(--color-secondary)]" />
-            Donation Check Out
-            <span className="w-5 h-px bg-[var(--color-secondary)]" />
-          </p>
-          <div className="flex items-baseline justify-center lg:justify-start gap-3">
-            <h1 className="text-3xl md:text-4xl font-black text-gray-900  tracking-tight">
-              Check Out
-            </h1>
+        <div className="container bg-white border-b border-[var(--color-dark)] container">
+          <div className="mx-auto justify-self-center items-center">
+            <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center justify-center gap-2 mb-2">
+              <span className="w-5 h-px bg-[var(--color-secondary)]" />
+              Donation Check Out
+              <span className="w-5 h-px bg-[var(--color-secondary)]" />
+            </p>
+            <div className="flex items-baseline justify-center  gap-3">
+              <h1 className="text-3xl md:text-4xl font-black text-gray-900  tracking-tight">
+                Check Out
+              </h1>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="container max-w-6xl mx-auto grid lg:grid-cols-5 gap-8 px-6 py-10">
-        {/* ── LEFT FORM ── */}
-        <div className="lg:col-span-3 space-y-6">
-          {/* Personal Info */}
-          <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
-            <div className="bg-[var(--color-primary)] px-7 py-5 flex items-center gap-3">
-              <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center">
-                <span className="text-white text-lg">👤</span>
+        <div className=" max-w-6xl mx-auto grid lg:grid-cols-5">
+          {/* ── LEFT FORM ── */}
+          <div className="lg:col-span-3 space-y-6 container">
+            {/* Personal Info */}
+            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
+              <div className="bg-[var(--color-primary)] px-7 py-5 flex items-center gap-3">
+                <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center">
+                  <span className="text-white text-lg">👤</span>
+                </div>
+                <div>
+                  <h2 className="text-white font-black text-base">
+                    Personal Information
+                  </h2>
+                  <p className="text-white/70 text-xs mt-0.5">
+                    Fill in your details below
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-white font-black text-base">
-                  Personal Information
-                </h2>
-                <p className="text-white/70 text-xs mt-0.5">
-                  Fill in your details below
-                </p>
+
+              <div className="px-3 lg:px-7 py-7 space-y-5">
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div>
+                    <label className={labelBase}>
+                      First Name{" "}
+                      <span className="text-red-400 normal-case tracking-normal">
+                        *
+                      </span>
+                    </label>
+                    <input className={inputBase} />
+                  </div>
+                  <div>
+                    <label className={labelBase}>
+                      Last Name{" "}
+                      <span className="text-red-400 normal-case tracking-normal">
+                        *
+                      </span>
+                    </label>
+                    <input className={inputBase} />
+                  </div>
+                </div>
+
+                <div>
+                  <label className={labelBase}>
+                    Company Name{" "}
+                    <span className="text-gray-300 normal-case tracking-normal font-normal">
+                      (optional)
+                    </span>
+                  </label>
+                  <input className={inputBase} />
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-5">
+                  <div>
+                    <label className={labelBase}>
+                      Phone{" "}
+                      <span className="text-red-400 normal-case tracking-normal">
+                        *
+                      </span>
+                    </label>
+
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">
+                        +91
+                      </span>
+
+                      <input
+                        type="text"
+                        className={`${inputBase} pl-12`}
+                        maxLength={10}
+                        inputMode="numeric"
+                        onInput={(e) => {
+                          e.currentTarget.value = e.currentTarget.value.replace(
+                            /[^0-9]/g,
+                            "",
+                          );
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className={labelBase}>
+                      Email Address{" "}
+                      <span className="text-red-400 normal-case tracking-normal">
+                        *
+                      </span>
+                    </label>
+                    <input className={inputBase} type="email" />
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="px-3 lg:px-7 py-7 space-y-5">
-              <div className="grid md:grid-cols-2 gap-5">
-                <div>
-                  <label className={labelBase}>
-                    First Name{" "}
-                    <span className="text-red-400 normal-case tracking-normal">
-                      *
-                    </span>
-                  </label>
-                  <input className={inputBase} />
+            {/* Billing Address */}
+            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
+              <div className="bg-[var(--color-primary)] px-7 py-5 flex items-center gap-3">
+                <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center">
+                  <span className="text-white text-lg">📍</span>
                 </div>
                 <div>
-                  <label className={labelBase}>
-                    Last Name{" "}
-                    <span className="text-red-400 normal-case tracking-normal">
-                      *
-                    </span>
-                  </label>
-                  <input className={inputBase} />
+                  <h2 className="text-white font-black text-base">
+                    Billing Address
+                  </h2>
+                  <p className="text-white/70 text-xs mt-0.5">
+                    Required for donation receipt
+                  </p>
                 </div>
               </div>
-
-              <div>
-                <label className={labelBase}>
-                  Company Name{" "}
-                  <span className="text-gray-300 normal-case tracking-normal font-normal">
-                    (optional)
+              <div className="w-full px-3 lg:px-7 py-7 space-y-5">
+                <label className={`${labelBase} block mb-1`}>
+                  Country / Region{" "}
+                  <span className="text-red-400 normal-case tracking-normal">
+                    *
                   </span>
                 </label>
-                <input className={inputBase} />
-              </div>
 
-              <div className="grid md:grid-cols-2 gap-5">
+                <div className="relative">
+                  <select
+                    className={`
+      ${inputBase}
+      w-full
+      appearance-none
+      pr-10
+      h-12
+      leading-tight
+      focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]
+    `}
+                    defaultValue="India"
+                    onMouseDown={() => setOpen((prev) => !prev)}
+                    onBlur={() => setOpen(false)}
+                    onChange={() => setOpen(false)}
+                  >
+                    <option value="India">India</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Iceland">Iceland</option>
+                    <option value="Indonesia">Indonesia</option>
+                  </select>
+
+                  {/* Animated Arrow */}
+                  <div
+                    className={`
+      pointer-events-none absolute inset-y-0 right-3 flex items-center 
+      text-gray-500 text-sm transition-transform duration-200
+      ${open ? "rotate-180" : "rotate-0"}
+    `}
+                  >
+                    <MdExpandLess className="h-5 w-5" />
+                  </div>
+                </div>
+
                 <div>
                   <label className={labelBase}>
-                    Phone{" "}
+                    Street Address{" "}
                     <span className="text-red-400 normal-case tracking-normal">
                       *
                     </span>
                   </label>
+                  <input className={inputBase} />
+                  <input className={`${inputBase} mt-3`} />
+                </div>
 
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">
-                      +91
-                    </span>
+                <div className="grid md:grid-cols-3 gap-5">
+                  <div>
+                    <label className={labelBase}>
+                      City{" "}
+                      <span className="text-red-400 normal-case tracking-normal">
+                        *
+                      </span>
+                    </label>
+                    <input className={inputBase} />
+                  </div>
+                  <div className="w-full">
+                    <label className={labelBase}>
+                      State{" "}
+                      <span className="text-red-400 normal-case tracking-normal">
+                        *
+                      </span>
+                    </label>
+
+                    <div className="relative">
+                      <select
+                        className={`${inputBase} appearance-none pr-10`}
+                        defaultValue="Gujarat"
+                        onMouseDown={() => setStateOpen((prev) => !prev)}
+                        onBlur={() => setStateOpen(false)}
+                        onChange={() => setStateOpen(false)}
+                      >
+                        {INDIAN_STATES.map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+
+                      {/* Animated Arrow */}
+                      <div
+                        className={`
+        pointer-events-none absolute inset-y-0 right-3 flex items-center
+        text-gray-500 text-sm transition-transform duration-200
+        ${stateOpen ? "rotate-180" : "rotate-0"}
+      `}
+                      >
+                        <MdExpandLess />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label className={labelBase}>
+                      PIN Code{" "}
+                      <span className="text-red-400 normal-case tracking-normal">
+                        *
+                      </span>
+                    </label>
 
                     <input
                       type="text"
-                      className={`${inputBase} pl-12`}
-                      maxLength={10}
+                      className={inputBase}
+                      maxLength={6}
                       inputMode="numeric"
                       onInput={(e) => {
                         e.currentTarget.value = e.currentTarget.value.replace(
@@ -185,284 +338,187 @@ export default function DonationCheckout() {
                     />
                   </div>
                 </div>
-                <div>
-                  <label className={labelBase}>
-                    Email Address{" "}
-                    <span className="text-red-400 normal-case tracking-normal">
-                      *
-                    </span>
-                  </label>
-                  <input className={inputBase} type="email" />
-                </div>
               </div>
             </div>
           </div>
 
-          {/* Billing Address */}
-          <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
-            <div className="bg-[var(--color-primary)] px-7 py-5 flex items-center gap-3">
-              <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center">
-                <span className="text-white text-lg">📍</span>
-              </div>
-              <div>
-                <h2 className="text-white font-black text-base">
-                  Billing Address
-                </h2>
-                <p className="text-white/70 text-xs mt-0.5">
-                  Required for donation receipt
-                </p>
-              </div>
-            </div>
-
-            <div className="px-3 lg:px-7 py-7 space-y-5">
-              <div>
-                <label className={labelBase}>
-                  Country / Region{" "}
-                  <span className="text-red-400 normal-case tracking-normal">
-                    *
-                  </span>
-                </label>
-                <select className={inputBase}>
-                  <option>India</option>
-                </select>
-              </div>
-
-              <div>
-                <label className={labelBase}>
-                  Street Address{" "}
-                  <span className="text-red-400 normal-case tracking-normal">
-                    *
-                  </span>
-                </label>
-                <input className={inputBase} />
-                <input className={`${inputBase} mt-3`} />
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-5">
-                <div>
-                  <label className={labelBase}>
-                    City{" "}
-                    <span className="text-red-400 normal-case tracking-normal">
-                      *
-                    </span>
-                  </label>
-                  <input className={inputBase} />
+          {/* ── RIGHT SUMMARY ── */}
+          <div className="lg:col-span-2 container">
+            <div className="sticky top-6 space-y-4">
+              {/* Donation Summary */}
+              <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
+                <div className="bg-[var(--color-primary)] px-6 py-4 flex items-center gap-2">
+                  <div className="w-1 h-5 bg-white/50 rounded-full" />
+                  <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">
+                    Donation Summary
+                  </h3>
                 </div>
-                <div>
-                  <label className={labelBase}>
-                    State{" "}
-                    <span className="text-red-400 normal-case tracking-normal">
-                      *
+
+                <div className="px-3 lg:px-7  p-6">
+                  {/* Item row */}
+                  <div className="flex items-center gap-4 pb-5 border-b border-[var(--color-dark)]">
+                    <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
+                      <Image
+                        src={cartItem.img}
+                        alt={cartItem.title}
+                        width={100}
+                        height={100}
+                        className="object-cover rounded-2xl h-14"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-black text-gray-900 leading-snug line-clamp-2">
+                        {cartItem.title}
+                      </p>
+                      <p className="text-[10px] text-gray-400 mt-1">
+                        One-time donation
+                      </p>
+                    </div>
+                    <span className="text-sm font-black text-[var(--color-primary)] flex-shrink-0">
+                      {formatted(rawAmount)}
                     </span>
-                  </label>
-                  <select className={inputBase} defaultValue="Gujarat">
-                    {INDIAN_STATES.map((s) => (
-                      <option key={s}>{s}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className={labelBase}>
-                    PIN Code{" "}
-                    <span className="text-red-400 normal-case tracking-normal">
-                      *
-                    </span>
-                  </label>
-
-                  <input
-                    type="text"
-                    className={inputBase}
-                    maxLength={6}
-                    inputMode="numeric"
-                    onInput={(e) => {
-                      e.currentTarget.value = e.currentTarget.value.replace(
-                        /[^0-9]/g,
-                        "",
-                      );
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ── RIGHT SUMMARY ── */}
-        <div className="lg:col-span-2">
-          <div className="sticky top-6 space-y-4">
-            {/* Donation Summary */}
-            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm overflow-hidden">
-              <div className="bg-[var(--color-primary)] px-6 py-4 flex items-center gap-2">
-                <div className="w-1 h-5 bg-white/50 rounded-full" />
-                <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">
-                  Donation Summary
-                </h3>
-              </div>
-
-              <div className="px-3 lg:px-7  p-6">
-                {/* Item row */}
-                <div className="flex items-center gap-4 pb-5 border-b border-[var(--color-dark)]">
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
-                    <Image
-                      src={cartItem.img}
-                      alt={cartItem.title}
-                      width={100}
-                      height={100}
-                      className="object-cover rounded-2xl h-14"
-                    />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-black text-gray-900 leading-snug line-clamp-2">
-                      {cartItem.title}
-                    </p>
-                    <p className="text-[10px] text-gray-400 mt-1">
-                      One-time donation
-                    </p>
-                  </div>
-                  <span className="text-sm font-black text-[var(--color-primary)] flex-shrink-0">
-                    {formatted(rawAmount)}
-                  </span>
-                </div>
 
-                {/* Breakdown */}
-                <div className="pt-4 space-y-3">
-                  <div className="flex justify-between text-sm text-gray-500">
-                    <span>Subtotal</span>
-                    <span className="font-bold text-gray-700">
+                  {/* Breakdown */}
+                  <div className="pt-4 space-y-3">
+                    <div className="flex justify-between text-sm text-gray-500">
+                      <span>Subtotal</span>
+                      <span className="font-bold text-gray-700">
+                        {formatted(rawAmount)}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Total */}
+                  <div className="mt-4 bg-[var(--color-tertiary)] border border-[var(--color-dark)] rounded-2xl px-5 py-4 flex justify-between items-center">
+                    <span className="text-sm font-black text-gray-700 uppercase tracking-wider">
+                      Total
+                    </span>
+                    <span className="text-2xl font-black text-[var(--color-primary)] tabular-nums">
                       {formatted(rawAmount)}
                     </span>
                   </div>
                 </div>
-
-                {/* Total */}
-                <div className="mt-4 bg-[var(--color-tertiary)] border border-[var(--color-dark)] rounded-2xl px-5 py-4 flex justify-between items-center">
-                  <span className="text-sm font-black text-gray-700 uppercase tracking-wider">
-                    Total
-                  </span>
-                  <span className="text-2xl font-black text-[var(--color-primary)] tabular-nums">
-                    {formatted(rawAmount)}
-                  </span>
-                </div>
               </div>
-            </div>
 
-            {/* Payment Method */}
-            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-3 lg:px-7 py-5">
-              <p className={labelBase}>Payment Method</p>
-              <div className="flex items-center gap-3 bg-[var(--color-tertiary)] rounded-2xl px-4 py-3.5 border border-[var(--color-dark)] mt-2">
-                <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <span className="text-white text-base">💳</span>
-                </div>
-                <div>
-                  <p className="text-sm font-black text-gray-800">
-                    Easebuzz Gateway
-                  </p>
-                  <p className="text-[10px] text-gray-400 mt-0.5">
-                    Card · UPI · Net Banking · Wallet
-                  </p>
-                </div>
-                <div className="ml-auto w-2.5 h-2.5 bg-[var(--color-accent)] rounded-full" />
-              </div>
-            </div>
-
-            {/* Checkboxes */}
-            <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-3 lg:px-7  py-5 space-y-4">
-              {[
-                {
-                  checked: agreedTerms,
-                  toggle: () => setAgreedTerms(!agreedTerms),
-                  label: (
-                    <>
-                      I agree to the{" "}
-                      <span className="text-[var(--color-primary)] font-bold underline underline-offset-2 cursor-pointer">
-                        terms and conditions
-                      </span>
-                    </>
-                  ),
-                },
-                {
-                  checked: hideLeaderboard,
-                  toggle: () => setHideLeaderboard(!hideLeaderboard),
-                  label: (
-                    <>
-                      Hide my name from the leaderboard{" "}
-                      <span className="text-gray-400 text-[10px]">
-                        (optional)
-                      </span>
-                    </>
-                  ),
-                },
-              ].map((item, i) => (
-                <label
-                  key={i}
-                  className="flex items-start gap-3 cursor-pointer group"
-                >
-                  <div
-                    onClick={item.toggle}
-                    className={`w-5 h-5 rounded-lg border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-all cursor-pointer ${
-                      item.checked
-                        ? "bg-[var(--color-primary)] border-[var(--color-primary)]"
-                        : "border-[var(--color-dark)] group-hover:border-[var(--color-primary)]"
-                    }`}
-                  >
-                    {item.checked && (
-                      <span className="text-white text-[10px] font-black">
-                        ✓
-                      </span>
-                    )}
+              {/* Payment Method */}
+              <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-3 lg:px-7 py-5">
+                <p className={labelBase}>Payment Method</p>
+                <div className="flex items-center gap-3 bg-[var(--color-tertiary)] rounded-2xl px-4 py-3.5 border border-[var(--color-dark)] mt-2">
+                  <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-base">💳</span>
                   </div>
-                  <span className="text-sm text-gray-600 leading-relaxed">
-                    {item.label}
-                  </span>
-                </label>
-              ))}
-            </div>
+                  <div>
+                    <p className="text-sm font-black text-gray-800">
+                      Easebuzz Gateway
+                    </p>
+                    <p className="text-[10px] text-gray-400 mt-0.5">
+                      Card · UPI · Net Banking · Wallet
+                    </p>
+                  </div>
+                  <div className="ml-auto w-2.5 h-2.5 bg-[var(--color-accent)] rounded-full" />
+                </div>
+              </div>
 
-            {/* CTA */}
+              {/* Checkboxes */}
+              <div className="bg-white rounded-3xl border border-[var(--color-dark)] shadow-sm px-3 lg:px-7  py-5 space-y-4">
+                {[
+                  {
+                    checked: agreedTerms,
+                    toggle: () => setAgreedTerms(!agreedTerms),
+                    label: (
+                      <>
+                        I agree to the{" "}
+                        <span className="text-[var(--color-primary)] font-bold underline underline-offset-2 cursor-pointer">
+                          terms and conditions
+                        </span>
+                      </>
+                    ),
+                  },
+                  {
+                    checked: hideLeaderboard,
+                    toggle: () => setHideLeaderboard(!hideLeaderboard),
+                    label: (
+                      <>
+                        Hide my name from the leaderboard{" "}
+                        <span className="text-gray-400 text-[10px]">
+                          (optional)
+                        </span>
+                      </>
+                    ),
+                  },
+                ].map((item, i) => (
+                  <label
+                    key={i}
+                    className="flex items-start gap-3 cursor-pointer group"
+                  >
+                    <div
+                      onClick={item.toggle}
+                      className={`w-5 h-5 rounded-lg border-2 flex-shrink-0 mt-0.5 flex items-center justify-center transition-all cursor-pointer ${
+                        item.checked
+                          ? "bg-[var(--color-primary)] border-[var(--color-primary)]"
+                          : "border-[var(--color-dark)] group-hover:border-[var(--color-primary)]"
+                      }`}
+                    >
+                      {item.checked && (
+                        <span className="text-white text-[10px] font-black">
+                          ✓
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-sm text-gray-600 leading-relaxed">
+                      {item.label}
+                    </span>
+                  </label>
+                ))}
+              </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="w-full"
-            >
-              <button
-                type="submit"
-                className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
+              {/* CTA */}
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="w-full"
+              >
+                <button
+                  type="submit"
+                  className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
       font-semibold text-base px-10 py-4 cursor-pointer
       bg-[var(--color-primary)] text-[var(--color-secondary)]
       hover:text-[var(--color-primary)] overflow-hidden"
-              >
-                <span className="relative z-10 flex gap-2 items-center">
-                  Donate {formatted(rawAmount)} Now
-                </span>
-
-                <span className="btn-primary-overlay"></span>
-              </button>
-            </motion.div>
-
-            {/* Trust badges */}
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { icon: "🔒", label: "SSL Secure" },
-                { icon: "📋", label: "80G Tax Benefit" },
-                { icon: "✅", label: "Trusted NGO" },
-              ].map((b) => (
-                <div
-                  key={b.label}
-                  className="flex flex-col items-center gap-1.5 bg-white border border-[var(--color-dark)] rounded-2xl py-3 px-2 text-center"
                 >
-                  <span className="text-lg">{b.icon}</span>
-                  <span className="text-[9px] font-black text-gray-400 uppercase tracking-wide leading-tight">
-                    {b.label}
+                  <span className="relative z-10 flex gap-2 items-center">
+                    Donate {formatted(rawAmount)} Now
                   </span>
-                </div>
-              ))}
+
+                  <span className="btn-primary-overlay"></span>
+                </button>
+              </motion.div>
+
+              {/* Trust badges */}
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { icon: "🔒", label: "SSL Secure" },
+                  { icon: "📋", label: "80G Tax Benefit" },
+                  { icon: "✅", label: "Trusted NGO" },
+                ].map((b) => (
+                  <div
+                    key={b.label}
+                    className="flex flex-col items-center gap-1.5 bg-white border border-[var(--color-dark)] rounded-2xl py-3 px-2 text-center"
+                  >
+                    <span className="text-lg">{b.icon}</span>
+                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-wide leading-tight">
+                      {b.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </SmoothScroll>
   );
 }

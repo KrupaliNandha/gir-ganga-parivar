@@ -119,23 +119,20 @@ function ContactCards() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="container grid grid-cols-1 md:grid-cols-3 gap-4"
+      className=" grid grid-cols-1 md:grid-cols-3 gap-4 py-10"
     >
       {cards.map((card, i) => (
-        <motion.a
+        <motion.div
           variants={fadeUp}
           key={i}
-          href={card.href}
-          target="_blank"
-          rel="noopener noreferrer"
           className="container group relative overflow-hidden rounded-2xl border border-[var(--color-primary)] bg-[var(--color-tertiary)]
-           hover:bg-[var(--color-primary)] transition-all duration-500
-            p-6 flex flex-col gap-3 shadow-sm"
+      hover:bg-[var(--color-primary)] transition-all duration-500
+      p-6 flex flex-col gap-3 shadow-sm"
         >
           {/* Icon */}
           <div
             className="w-11 h-11 rounded-xl bg-[var(--color-primary)]/10 group-hover:bg-white/20
-              flex items-center justify-center text-[var(--color-primary)] group-hover:text-white transition-all duration-500"
+        flex items-center justify-center text-[var(--color-primary)] group-hover:text-white transition-all duration-500"
           >
             {card.icon}
           </div>
@@ -143,7 +140,7 @@ function ContactCards() {
           {/* Label */}
           <p
             className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-primary)]/60
-              group-hover:text-white/70 transition-colors duration-500"
+        group-hover:text-white/70 transition-colors duration-500"
           >
             {card.label}
           </p>
@@ -160,11 +157,14 @@ function ContactCards() {
             ))}
           </div>
 
-          {/* Arrow */}
-          <div
-            className="mt-auto self-end w-8 h-8 rounded-full border border-[var(--color-primary)]/30
-              group-hover:border-white/40 flex items-center justify-center
-              text-[var(--color-primary)] group-hover:text-white transition-all duration-500"
+          {/* Arrow (ONLY clickable) */}
+          <a
+            href={card.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto self-end w-8 h-8 rounded-full border border-[var(--color-primary)
+        group-hover:border-white/40 flex items-center justify-center
+        text-[var(--color-primary)] group-hover:text-white transition-all duration-500"
           >
             <svg
               viewBox="0 0 24 24"
@@ -175,8 +175,8 @@ function ContactCards() {
             >
               <path d="M7 17L17 7M17 7H7M17 7v10" />
             </svg>
-          </div>
-        </motion.a>
+          </a>
+        </motion.div>
       ))}
     </motion.div>
   );
@@ -185,7 +185,7 @@ function ContactCards() {
 /* ─── Input Style ───────────────────────────────── */
 
 const inputClass =
-  "w-full px-4 py-3 rounded-lg border-0 border-b-2 border-gray-200 bg-transparent text-gray-800 text-sm placeholder-gray-400 focus:outline-none focus:border-[var(--color-primary)] transition-all duration-300";
+  "w-full px-4 py-3 rounded-lg border-0 border-b-2 border-[var(--color-primary)] bg-[var(--color-tertiary)] text-gray-800 text-sm placeholder-gray-400  focus:outline-none transition-all duration-300";
 
 /* ─── Label Input Wrapper ───────────────────────── */
 
@@ -198,7 +198,7 @@ function Field({
 }) {
   return (
     <div className="relative">
-      <label className="block text-[10px] font-bold tracking-[0.18em] uppercase text-gray-400 mb-1 ml-1">
+      <label className="block text-[10px] font-bold tracking-[0.18em] uppercase text-[var(--color-primary)] mb-1 ml-1">
         {label}
       </label>
       {children}
@@ -221,21 +221,33 @@ function ContactForm() {
         <Field label="Name">
           <input required placeholder="Your name" className={inputClass} />
         </Field>
-        <Field label="Email">
-          <input
-            required
-            type="email"
-            placeholder="your@email.com"
-            className={inputClass}
-          />
-        </Field>
+        <input
+          required
+          type="email"
+          placeholder="your@email.com"
+          className={inputClass}
+          pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+          onInvalid={(e) =>
+            e.currentTarget.setCustomValidity(
+              "Please enter a valid email address",
+            )
+          }
+          onInput={(e) => e.currentTarget.setCustomValidity("")}
+        />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <Field label="Phone">
           <input
+            type="tel"
             required
-            placeholder="+91 00000 00000"
+            placeholder="Enter 10 digit number"
             className={inputClass}
+            maxLength={10}
+            pattern="[0-9]{10}"
+            onInput={(e) => {
+              const input = e.currentTarget;
+              input.value = input.value.replace(/\D/g, "").slice(0, 10);
+            }}
           />
         </Field>
         <Field label="Subject">
@@ -312,21 +324,33 @@ function VolunteerForm() {
         <Field label="Full Name">
           <input required placeholder="Your full name" className={inputClass} />
         </Field>
-        <Field label="Email">
-          <input
-            required
-            type="email"
-            placeholder="your@email.com"
-            className={inputClass}
-          />
-        </Field>
+        <input
+          required
+          type="email"
+          placeholder="your@email.com"
+          className={inputClass}
+          pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+          onInvalid={(e) =>
+            e.currentTarget.setCustomValidity(
+              "Please enter a valid email address",
+            )
+          }
+          onInput={(e) => e.currentTarget.setCustomValidity("")}
+        />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <Field label="Phone">
           <input
+            type="tel"
             required
-            placeholder="+91 00000 00000"
+            placeholder="Enter 10 digit number"
             className={inputClass}
+            maxLength={10}
+            pattern="[0-9]{10}"
+            onInput={(e) => {
+              const input = e.currentTarget;
+              input.value = input.value.replace(/\D/g, "").slice(0, 10);
+            }}
           />
         </Field>
         <Field label="City">
@@ -423,19 +447,31 @@ function PartnershipForm() {
         </Field>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <Field label="Email">
-          <input
-            required
-            type="email"
-            placeholder="your@email.com"
-            className={inputClass}
-          />
-        </Field>
+        <input
+          required
+          type="email"
+          placeholder="your@email.com"
+          className={inputClass}
+          pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+          onInvalid={(e) =>
+            e.currentTarget.setCustomValidity(
+              "Please enter a valid email address",
+            )
+          }
+          onInput={(e) => e.currentTarget.setCustomValidity("")}
+        />
         <Field label="Phone">
           <input
+            type="tel"
             required
-            placeholder="+91 00000 00000"
+            placeholder="Enter 10 digit number"
             className={inputClass}
+            maxLength={10}
+            pattern="[0-9]{10}"
+            onInput={(e) => {
+              const input = e.currentTarget;
+              input.value = input.value.replace(/\D/g, "").slice(0, 10);
+            }}
           />
         </Field>
       </div>
@@ -512,18 +548,12 @@ export default function Contact() {
         {/* ── Hero Header ── */}
         <div className="container relative overflow-hidden">
           {/* Decorative geometric lines */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-8 left-[8%] w-px h-32 bg-[var(--color-primary)]/15" />
-            <div className="absolute top-8 right-[8%] w-px h-32 bg-[var(--color-primary)]/15" />
-            <div className="absolute top-8 left-[8%] w-24 h-px bg-[var(--color-primary)]/15" />
-            <div className="absolute top-8 right-[8%] w-24 h-px bg-[var(--color-primary)]/15" />
-          </div>
 
           <motion.div
             initial="hidden"
             animate="show"
             variants={stagger}
-            className="container text-center space-y-6 relative"
+            className=" text-center space-y-6 relative"
           >
             <motion.p
               variants={fadeUp}
@@ -537,8 +567,8 @@ export default function Contact() {
               variants={fadeUp}
               className="text-5xl md:text-6xl font-black leading-tight"
             >
-              <span className="text-[var(--color-primary)]">
-                Contact US
+              <span className="">
+                Contact <span className="text-[var(--color-primary)]">US</span>
               </span>{" "}
             </motion.h1>
 
@@ -645,12 +675,12 @@ export default function Contact() {
                   className="container flex flex-col bg-[var(--color-tertiary)]"
                 >
                   {/* Tab switcher */}
-                  <div className="flex flex-wrap  gap-1 mb-8 p-1 bg-white rounded-xl border border-gray-100 shadow-sm">
+                  <div className="flex flex-wrap  gap-1 mb-8 p-1 bg-white rounded-xl border border-[var(--color-primary)] shadow-sm">
                     {tabs.map((tab) => (
                       <button
                         key={tab.key}
                         onClick={() => setFormType(tab.key)}
-                        className={`relative flex-1 px-3 py-2.5 border border-[var(--color-primary)] rounded-lg text-xs md:text-base font-bold tracking-wide transition-all duration-300 ${
+                        className={`relative flex-1 px-3 py-2.5 border border-[var(--color-primary)] rounded-lg text-xs md:text-base font-bold tracking-wide transition-all duration-300 cursor-pointer ${
                           formType === tab.key
                             ? "bg-[var(--color-primary)] text-white shadow-sm"
                             : "text-gray-500 hover:text-gray-700"
@@ -669,7 +699,7 @@ export default function Contact() {
                       initial="hidden"
                       animate="show"
                       exit="hidden"
-                      className="mb-6 flex"
+                      className="mb-6 gap-5 flex"
                     >
                       <h2 className="text-xl font-black text-gray-800">
                         {formType === "contact" && "Send us a Message"}
@@ -677,10 +707,9 @@ export default function Contact() {
                         {formType === "partnership" && "Propose a Partnership"}
                       </h2>
                       <p className="text-xs text-gray-400 mt-1">
-                        {formType === "contact" &&
-                          "We'll respond within 24 hours."}
-                        {formType === "volunteer" && "Be part of the change."}
-                        {formType === "partnership" && "Let's grow together."}
+                        {formType === "contact"}
+                        {formType === "volunteer"}
+                        {formType === "partnership"}
                       </p>
                     </motion.div>
                   </AnimatePresence>

@@ -516,7 +516,7 @@ export default function HomePage() {
                     {/* Outline Button */}
                     <a
                       href="/partner-with-us-csr"
-                      className="btn-secondary-outline group text-xs w-[290px] lg:text-base justify-center"
+                      className="btn-secondary-outline group text-xs w-[250px] md:w-[290px] lg:text-base justify-center"
                     >
                       <span className="relative z-10">
                         Partner With Us (CSR)
@@ -532,7 +532,7 @@ export default function HomePage() {
                     {/* Outline Button */}
                     <a
                       href="/support-a-structure"
-                      className="btn-secondary-outline group text-sm w-[290px] lg:text-base justify-center"
+                      className="btn-secondary-outline group text-sm w-[250px] md:w-[290px] lg:text-base justify-center"
                     >
                       <span className="relative z-10">Support A Structure</span>
 
@@ -546,7 +546,7 @@ export default function HomePage() {
                     {/* Outline Button */}
                     <a
                       href="/contact"
-                      className="btn-secondary-outline group text-sm w-[290px] lg:text-base justify-center"
+                      className="btn-secondary-outline group text-sm w-[250px] md:w-[290px] lg:text-base justify-center"
                     >
                       <span className="relative z-10">
                         {" "}
