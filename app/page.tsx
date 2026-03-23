@@ -5,6 +5,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import Slider from "../Component/Slider";
 import Image from "next/image";
 import SmoothScroll from "../Component/SmothScrolling";
+import Link from "next/link";
 
 /* ─────────────────────────────────────────────
    COUNT UP
@@ -33,28 +34,6 @@ const CountUp = ({ value, suffix = "" }: CountUpProps) => {
 
   return <motion.span>{rounded}</motion.span>;
 };
-
-/* ─────────────────────────────────────────────
-   PARTNER LOGOS DATA
-───────────────────────────────────────────── */
-const partners = [
-  "Ministry of Jal Shakti, Govt. of India",
-  "Paschim Gujarat Vij Company Ltd.",
-  "Uttar Gujarat Vij Company Ltd.",
-  "Gujarat Energy Transmission Corporation Ltd.",
-  "TATA Hitachi Construction Machinery",
-  "Rolex Rings Pvt. Ltd.",
-  "Balaji Wafers Pvt. Ltd.",
-  "Balaji Multiflex Pvt. Ltd.",
-  "Associate Allied Chemicals Pvt. Ltd.",
-  "Dil Exim Commodities Pvt. Ltd.",
-  "Legacy Commodities Pvt. Ltd.",
-  "RTL Enterprise Pvt. Ltd.",
-  "Rajan Technocast Pvt. Ltd.",
-  "Orbit Bearings Pvt. Ltd.",
-  "Vitrag Foundation",
-  "Patoliya & Family",
-];
 
 const impactStats = [
   { num: 8357, label: "Water Structures", suffix: "", icon: "💧" },
@@ -161,13 +140,14 @@ export default function HomePage() {
         {/* ══════════════════════════════════════════════
           SECTION 1 — HERO
       ══════════════════════════════════════════════ */}
-        <section className="w-full min-h-screen flex items-center overflow-hidden pb-45 ">
+
+        <section className="relative w-full min-h-screen flex items-center pb-45 overflow-hidden">
           {/* Background Image */}
           <Image
             src="/image/home/Donation For Biggest Checkdam.png"
             alt="Water Conservation"
             fill
-            className="object-cover"
+            className="object-cover absolute"
           />
 
           {/* Overlay */}
@@ -181,7 +161,7 @@ export default function HomePage() {
           </div>
 
           {/* Content */}
-          <div className="container relative  flex flex-col items-center justify-self-center text-center ">
+          <div className="container relative z-[1] flex flex-col items-center justify-self-center text-center">
             {/* Eyebrow */}
             <div className="flex items-center gap-3 mb-4 sm:mb-6">
               <div className="h-px w-8 sm:w-10 bg-[var(--color-secondary)]" />
@@ -208,36 +188,26 @@ export default function HomePage() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
-              {/* Button 1 */}
-              <a
+              <Link
                 href="/partner-with-us-csr"
-                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3
-        text-xs sm:text-sm lg:text-base font-semibold
-        bg-[var(--color-secondary)] text-[var(--color-primary)]
-        hover:text-[var(--color-secondary)] transition"
+                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition"
               >
-                Partner With Us →
-              </a>
+                Partner With Us &#8594;
+              </Link>
 
-              {/* Button 2 */}
-              <a
+              <Link
                 href="/support-a-structure"
-                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3
-        text-xs sm:text-sm lg:text-base font-semibold
-        border border-[var(--color-secondary)] text-white"
+                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold border border-[var(--color-secondary)] text-white"
               >
-                Support A Structure →
-              </a>
+                Support A Structure &#8594;
+              </Link>
 
-              {/* Button 3 */}
-              <a
+              <Link
                 href="/contact"
-                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3
-        text-xs sm:text-sm lg:text-base font-semibold
-        border border-[var(--color-secondary)] text-white"
+                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold border border-[var(--color-secondary)] text-white"
               >
-                Contact Us →
-              </a>
+                Contact Us &#8594;
+              </Link>
             </div>
           </div>
         </section>
@@ -245,7 +215,7 @@ export default function HomePage() {
         {/* ══════════════════════════════════════════════
           SECTION 2 — IMPACT STATS
       ══════════════════════════════════════════════ */}
-        <section ref={statsRef} className="bg-white py-0">
+        <section ref={statsRef} className=" bg-white py-0">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
