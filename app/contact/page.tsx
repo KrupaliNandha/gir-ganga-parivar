@@ -108,7 +108,7 @@ function ContactCards() {
     {
       icon: <MailIcon />,
       label: "Email",
-      lines: ["csr@girgangaparivartrust.com"],
+      lines: ["info@girgangaparivartrust.com"],
       href: "#",
     },
   ];
