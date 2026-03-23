@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedin, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedin,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 
 export default function Footer() {
@@ -48,8 +54,10 @@ export default function Footer() {
               </Link>
 
               <p className="text-black text-sm leading-relaxed mb-6">
-                Transforming Saurashtra through water conservation — building a
-                sustainable future for generations to come.
+                Transforming{" "}
+                <span className="text-red-700 font-semibold">GUJARAT</span>{" "}
+                through water conservation — building a sustainable future for
+                generations to come.
               </p>
 
               {/* Socials */}
@@ -207,7 +215,7 @@ export default function Footer() {
                     size={13}
                     className="text-[var(--color-primary)] flex-shrink-0"
                   />
-                  csr@girgangaparivartrust.com 
+                  info@girgangaparivartrust.com
                 </a>
                 <a href="/Our-Work">
                   <div className="flex items-start gap-2.5 text-black text-sm cursor-pointer select-none">
@@ -215,8 +223,10 @@ export default function Footer() {
                       size={13}
                       className="text-[var(--color-primary)] flex-shrink-0 mt-0.5"
                     />
-                    <span>Decora Capital, 5th Floor, Nr. McDonalds, Above HDFC Bank, Kalawad Road, 
-                      Rajkot - 360005, Gujarat </span>
+                    <span>
+                      Decora Capital, 5th Floor, Nr. McDonalds, Above HDFC Bank,
+                      Kalawad Road, Rajkot - 360005, Gujarat{" "}
+                    </span>
                   </div>
                 </a>
               </div>

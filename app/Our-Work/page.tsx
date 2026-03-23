@@ -209,19 +209,25 @@ export default function OurWorkPage() {
           "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
       });
 
-      const makeFlagIcon = (color: string) =>
+      const makeWaterDropIcon = (color: string) =>
         L.divIcon({
-          html: `<svg width="24" height="32" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="0" width="3" height="32" fill="${color}" rx="1.5"/>
-            <polygon points="5,2 22,9 5,16" fill="${color}"/>
-          </svg>`,
-          iconSize: [24, 32],
-          iconAnchor: [2, 32],
+          html: `
+      <svg width="30" height="40" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg">
+        <path 
+          d="M12 0C12 0 3 12 3 19a9 9 0 0 0 18 0C21 12 12 0 12 0z" 
+          fill="${color}" 
+          stroke="white"
+          stroke-width="2"
+        />
+      </svg>
+    `,
+          iconSize: [30, 40],
+          iconAnchor: [15, 40],
           className: "",
         });
 
-      const LAKE_ICON = makeFlagIcon("#009dc4");
-      const DAM_ICON = makeFlagIcon("#009dc7");
+      const LAKE_ICON = makeWaterDropIcon("#009dc4"); // Blue for lakes
+      const DAM_ICON = makeWaterDropIcon("#059669"); // Green for dams
 
       const map = L.map(mapContainerRef.current!).setView([22.35, 70.65], 10);
       mapInstanceRef.current = map;
@@ -565,7 +571,7 @@ export default function OurWorkPage() {
               </h1>
 
               <div className="mt-8">
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -587,7 +593,26 @@ export default function OurWorkPage() {
                       <span className="btn-secondary-overlay"></span>
                     </button>
                   </Link>
-                </motion.div>
+                </motion.div> */}
+
+                <div className="w-full flex justify-center ">
+                  <Link
+                    href="/donate"
+                    className="group relative overflow-hidden inline-flex items-center justify-center gap-2 
+    text-white font-semibold text-sm w-[250px] lg:text-base px-5 py-3 rounded-lg
+    bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
+                  >
+                    <span className="relative z-10 text-center">
+                      Explore Our Impact
+                    </span>
+
+                    <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+
+                    <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -771,7 +796,7 @@ export default function OurWorkPage() {
                 </p>
               </div>
 
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -793,7 +818,21 @@ export default function OurWorkPage() {
                     <span className="btn-primary-overlay"></span>
                   </button>
                 </Link>
-              </motion.div>
+              </motion.div> */}
+              <Link
+                href="/donate"
+                className="group relative overflow-hidden flex items-center justify-center  gap-2 
+  text-white font-semibold text-sm w-[200px] md:w-[220px] lg:text-base px-5 py-3 rounded-lg
+  bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
+              >
+                <span className="relative z-10"> Contribute Now </span>
+
+                <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
+
+                <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
+              </Link>
             </div>
           </div>
         </section>

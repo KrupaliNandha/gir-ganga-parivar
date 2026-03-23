@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Variants } from "framer-motion";
 import { FaCow } from "react-icons/fa6";
+import { Target, Eye } from "lucide-react";
 import {
   FaChartBar,
   FaGlobeAsia,
@@ -325,7 +326,7 @@ export default function AboutPage() {
                 foundation for sustainable development.
               </motion.p>
 
-              <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              {/* <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <Link
                   href="/donate"
                   className="btn-primary group inline-flex items-center gap-2 font-semibold text-base px-9 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)]"
@@ -337,7 +338,23 @@ export default function AboutPage() {
                   />
                   <span className="btn-primary-overlay" />
                 </Link>
-              </motion.div>
+              </motion.div> */}
+              <div className="w-full flex justify-center lg:justify-start">
+                <Link
+                  href="/donate"
+                  className="group relative overflow-hidden inline-flex items-center justify-center gap-2 
+    text-white font-semibold text-sm w-[250px] lg:text-base px-5 py-3 rounded-lg
+    bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
+                >
+                  <span className="relative z-10">Support Us</span>
+
+                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+
+                  <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
+                </Link>
+              </div>
             </motion.div>
 
             {/* RIGHT — image collage */}
@@ -430,130 +447,6 @@ export default function AboutPage() {
         {/* ══════════════════════════════════════════
             2. OUR ORIGIN
         ══════════════════════════════════════════ */}
-        <section className="bg-[var(--color-tertiary)]/50 overflow-hidden">
-          <div className="container">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                {/* LEFT — circular image */}
-                <motion.div
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  className="relative flex items-center justify-center mx-auto w-full max-w-[420px] lg:max-w-none"
-                  style={{ minHeight: 320 }}
-                >
-                  {/* outer dashed ring */}
-                  <div className="absolute w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border-2 border-dashed border-emerald-200 animate-[spin_30s_linear_infinite]" />
-                  {/* inner ring */}
-                  <div className="absolute w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] rounded-full border border-emerald-100" />
-
-                  <div className="relative w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden shadow-2xl shadow-emerald-900/20 border-4 border-white z-10">
-                    <Image
-                      src="/image/home/Slide2.png"
-                      alt="Water conservation work"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  {/* Stat badge — top right */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
-                    className="absolute top-2 right-2 sm:top-6 sm:right-4 md:top-8 md:right-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-primary)] text-white flex flex-col items-center justify-center shadow-xl shadow-emerald-600/30"
-                  >
-                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
-                      90%
-                    </span>
-                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
-                      Water
-                      <br />
-                      Restored
-                    </span>
-                  </motion.div>
-
-                  {/* Stat badge — bottom left */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.55, type: "spring" }}
-                    className="absolute bottom-2 left-2 sm:bottom-6 sm:left-4 md:bottom-8 md:left-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] flex flex-col items-center justify-center shadow-xl shadow-yellow-500/30"
-                  >
-                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
-                      580+
-                    </span>
-                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
-                      Villages
-                      <br />
-                      Covered
-                    </span>
-                  </motion.div>
-                </motion.div>
-
-                {/* RIGHT — content */}
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  className="space-y-5 sm:space-y-6 text-center lg:text-start"
-                >
-                  {/* Heading */}
-                  <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                    Mission &amp; Vision <br />
-                    <span className="text-[var(--color-primary)]">
-                      For Gujarat
-                    </span>
-                  </h2>
-
-                  <div className="w-full h-px bg-gray-100" />
-
-                  {/* Mission + Vision cards */}
-                  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6">
-                    <div className="bg-emerald-50 rounded-2xl p-4 sm:p-5 border border-emerald-100">
-                      <div className="w-10 h-10 bg-[var(--color-primary)] rounded-lg flex items-center justify-center text-white font-playfair font-bold text-lg mb-3">
-                        M
-                      </div>
-                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
-                        Our Mission
-                      </h4>
-                      <p className="text-gray-500 text-sm leading-relaxed">
-                        To strengthen rural water security through community-led
-                        water conservation, groundwater recharge, and watershed
-                        development initiatives that enhance agricultural
-                        productivity, support rural livelihoods, and build
-                        resilience to climate variability.
-                      </p>
-                    </div>
-                    <div className="bg-yellow-50 rounded-2xl p-4 sm:p-5 border border-yellow-100">
-                      <div className="w-10 h-10 bg-[var(--color-secondary)] rounded-lg flex items-center justify-center text-[var(--color-primary)] font-playfair font-bold text-lg mb-3">
-                        V
-                      </div>
-                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
-                        Our Vision
-                      </h4>
-                      <p className="text-gray-500 text-sm leading-relaxed">
-                        A water-secure and climate-resilient rural India where
-                        communities sustainably manage and protect their natural
-                        water resources, ensuring long-term agricultural
-                        prosperity, ecological balance, and improved quality of
-                        life for future generations.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════
-            3. OUR ORIGIN
-        ══════════════════════════════════════════ */}
         <section className="bg-[var(--color-tertiary)]">
           <div className="container">
             <div className="max-w-7xl mx-auto">
@@ -564,6 +457,7 @@ export default function AboutPage() {
                 variants={stagger}
                 className="grid lg:grid-cols-2 gap-12 items-center"
               >
+                {/* LEFT CONTENT */}
                 <motion.div>
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                     <div className="h-px w-8 bg-[var(--color-secondary)]" />
@@ -579,6 +473,7 @@ export default function AboutPage() {
                       Born in 2017
                     </span>
                   </h2>
+
                   <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                     Girganga Parivar Trust was established in 2017 as a
                     grassroots initiative focused on Gau Seva (cattle welfare)
@@ -588,6 +483,7 @@ export default function AboutPage() {
                     supporting rural communities through livestock care and
                     community service.
                   </p>
+
                   <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                     The movement was led by Mr. Dilipbhai Sakhiya, a respected
                     farmer leader, social worker, and former President of the
@@ -597,6 +493,7 @@ export default function AboutPage() {
                     organizations, and industry supporters to build a
                     community-driven platform for rural development.
                   </p>
+
                   <p className="text-gray-500 text-sm leading-relaxed mb-6 text-center lg:text-start">
                     As the initiative progressed, the organization witnessed the
                     severe challenges faced by farmers due to water scarcity,
@@ -613,6 +510,7 @@ export default function AboutPage() {
                     movement for decentralized water conservation and watershed
                     restoration.
                   </p>
+
                   <p className="text-gray-500 text-sm leading-relaxed mb-6 text-center lg:text-start">
                     Today, GGPT has grown into one of Gujarat’s impactful
                     community-driven initiatives for water conservation,
@@ -620,34 +518,9 @@ export default function AboutPage() {
                     closely with villages to strengthen long-term water
                     security.
                   </p>
-
-                  {/* Founder quote */}
-                  <div className="bg-[var(--color-primary)] rounded-2xl p-6 relative overflow-hidden">
-                    <div className="absolute top-3 right-4 text-6xl font-black text-white/10 font-serif select-none">
-                      &quot;
-                    </div>
-                    <p className="text-white font-semibold text-base leading-relaxed relative z-10 mb-4">
-                      &quot;Leadership at GGPT is not about hierarchy; it is
-                      about working with communities — structure by structure,
-                      village by village.&quot;
-                    </p>
-                    <div className="flex items-center gap-3 relative z-10">
-                      <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-white text-xs font-bold">
-                        DS
-                      </div>
-                      <div>
-                        <p className="text-white font-semibold text-sm">
-                          Shri Dilipbhai Sakhiya
-                        </p>
-                        <p className="text-white/60 text-xs">
-                          Founder & President, GGPT
-                        </p>
-                      </div>
-                      <div className="ml-auto w-3 h-3 rounded-full bg-[var(--color-secondary)]" />
-                    </div>
-                  </div>
                 </motion.div>
 
+                {/* RIGHT CONTENT */}
                 <motion.div className="space-y-4">
                   <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
                     <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
@@ -658,9 +531,10 @@ export default function AboutPage() {
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
                       Began with cattle welfare and rural livelihood support,
-                      building community trust across Gujarat&apos;s villages.
+                      building community trust across Gujarat's villages.
                     </p>
                   </div>
+
                   <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
                     <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
                       <span className="w-7 h-7 rounded-lg bg-[var(--color-tertiary)] flex items-center justify-center text-sm">
@@ -674,6 +548,7 @@ export default function AboutPage() {
                       accordingly.
                     </p>
                   </div>
+
                   <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
                     <h4 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
                       <span className="w-7 h-7 rounded-lg bg-[var(--color-tertiary)] flex items-center justify-center text-sm">
@@ -682,25 +557,43 @@ export default function AboutPage() {
                       Today&apos;s Scale
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
-                      One of Gujarat&apos;s most impactful community-driven
+                      One of Gujarat's most impactful community-driven
                       initiatives for water conservation, groundwater recharge,
                       and rural climate resilience — working across 8 districts
                       and 619 villages.
                     </p>
                   </div>
-                  {/* SDG alignment */}
-                  <div className="flex gap-3 flex-wrap">
+
+                  {/* SDG */}
+                  {/* SDG */}
+                  <div className="flex gap-4 flex-wrap items-center justify-center lg:justify-start mt-2">
                     {[
-                      "SDG 6 · Clean Water",
-                      "SDG 13 · Climate Action",
-                      "SDG 15 · Life on Land",
+                      {
+                        label: "SDG 6 · Clean Water",
+                        img: "/image/partner-with-us-csr/csr-1.jpg",
+                      },
+                      {
+                        label: "SDG 13 · Climate Action",
+                        img: "/image/partner-with-us-csr/csr-2.png",
+                      },
+                      {
+                        label: "SDG 15 · Life on Land",
+                        img: "/image/partner-with-us-csr/csr-3.jpg",
+                      },
                     ].map((sdg) => (
-                      <span
-                        key={sdg}
-                        className="text-[11px] font-semibold px-3 py-1.5 rounded-full border border-[var(--color-primary)]/25 text-[var(--color-primary)] bg-[var(--color-tertiary)]"
+                      <div
+                        key={sdg.label}
+                        className="flex  items-center gap-2 px-4 py-2 rounded-2xl border border-[var(--color-primary)]/30 bg-white shadow-sm hover:shadow-md transition"
                       >
-                        {sdg}
-                      </span>
+                        <img
+                          src={sdg.img}
+                          alt={sdg.label}
+                          className="w-15 h-15 rounded-xl object-contain"
+                        />
+                        <span className="text-sm md:text-base font-semibold text-[var(--color-primary)]">
+                          {sdg.label}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </motion.div>
@@ -710,7 +603,7 @@ export default function AboutPage() {
         </section>
 
         {/* ══════════════════════════════════════════
-            4. TIMELINE — OUR JOURNEY
+            3. TIMELINE — OUR JOURNEY
         ══════════════════════════════════════════ */}
         <section className="bg-white">
           <div className="container">
@@ -809,13 +702,17 @@ export default function AboutPage() {
                 variants={fadeUp}
                 className="mt-16 rounded-3xl overflow-hidden bg-[var(--color-primary)] p-8 lg:p-12 relative"
               >
+                {/* Background circles */}
                 <div className="absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--color-secondary)]/10" />
                 <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[var(--color-secondary)]/10" />
+
                 <div className="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+                  {/* LEFT CONTENT */}
                   <div>
                     <span className="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-white/80 text-xs font-bold uppercase tracking-widest mb-4">
                       🌍 Global Recognition 2026
                     </span>
+
                     <h3
                       className="text-white text-2xl lg:text-3xl font-bold mb-3 leading-tight"
                       style={{ fontFamily: "Poppins, sans-serif" }}
@@ -825,22 +722,36 @@ export default function AboutPage() {
                         World Record Initiative
                       </span>
                     </h3>
+
                     <p className="text-white/75 text-sm leading-relaxed">
                       In 2026, GGPT organized Jal Katha – Apne Apne Shyam Ki, a
                       unique public awareness initiative focused on promoting
                       water conservation and responsible water use.
                     </p>
+
                     <p className="text-white/75 text-sm leading-relaxed">
                       The event created a historic moment where thousands of
                       people collectively took an oath to conserve water, making
                       it the world’s first mass public water conservation pledge
                       through a Jal Katha event.
                     </p>
+
+                    {/* ✅ Certificate Image */}
+                    {/* <div className="mt-5">
+                      <img
+                        src="/image/certificate/world-record.png" // 👈 your image path
+                        alt="World Record Certificate"
+                        className="w-32 md:w-40 rounded-lg shadow-md border border-white/20"
+                      />
+                    </div> */}
                   </div>
+
+                  {/* RIGHT LIST */}
                   <div className="space-y-3">
                     <p className="text-[var(--color-secondary)] text-xs font-bold uppercase tracking-widest mb-3">
                       5 International World Record Recognitions
                     </p>
+
                     {jalKathaRecords.map((rec, i) => (
                       <div
                         key={rec}
@@ -862,7 +773,7 @@ export default function AboutPage() {
         </section>
 
         {/* ══════════════════════════════════════════
-            5. Vision for the Future
+            4. Vision for the Future
         ══════════════════════════════════════════ */}
         <section className="container py-20">
           <div className="max-w-7xl mx-auto space-y-20">
@@ -901,7 +812,12 @@ export default function AboutPage() {
             {/* Timeline */}
             <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
               {[
-                { year: "2017", icon: FaCow, theme: "Foundation – Gau Seva" },
+                {
+                  year: "2017",
+                  type: "image",
+                  src: "/image/About page/Deshi-Cow-removebg-preview.png",
+                  theme: "Foundation – Gau Seva",
+                },
                 {
                   year: "2019",
                   icon: FaTint,
@@ -916,30 +832,39 @@ export default function AboutPage() {
                   theme: "Vision 1,11,111 Structures",
                 },
               ].map((item, i) => {
-                const Icon = item.icon; // 👈 important
+                const Icon = item.icon;
 
                 return (
                   <div
                     key={i}
-                    className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition"
+                    className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg transition text-center"
                   >
-                    <Icon
-                      className="text-5xl mb-3 text-[var(--color-primary)] bg-[var(--color-tertiary)] p-3 rounded-full
-                    
-                    mx-auto"
-                    />
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[var(--color-tertiary)] flex items-center justify-center">
+                      {item.type === "image" ? (
+                        <img
+                          src={item.src}
+                          alt="icon"
+                          className="w-12 h-12 object-contain"
+                        />
+                      ) : (
+                        Icon && (
+                          <Icon className="text-4xl text-[var(--color-primary)]" />
+                        )
+                      )}
+                    </div>
 
                     <p className="font-bold text-sm text-[var(--color-primary)]">
                       {item.year}
                     </p>
-
                     <p className="text-xs text-gray-500 mt-1">{item.theme}</p>
                   </div>
                 );
               })}
             </div>
+
             {/* Leadership */}
             <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* LEFT CONTENT */}
               <div>
                 <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                   <div className="h-px w-8 bg-[var(--color-secondary)]" />
@@ -949,7 +874,6 @@ export default function AboutPage() {
                   <div className="h-px w-8 bg-[var(--color-secondary)]" />
                 </div>
 
-                {/* ✅ NEW ADDED CONTENT */}
                 <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                   The work of Girganga Parivar Trust is guided by a committed
                   Board of Trustees with experience in agriculture, rural
@@ -967,14 +891,13 @@ export default function AboutPage() {
                   Mr. DILIPBHAI SAKHIYA
                 </p>
 
-                {/* Existing content */}
                 <p className="text-gray-500 text-sm leading-relaxed mb-4 text-center lg:text-start">
                   A veteran grassroots leader and water conservation advocate
                   with more than two decades of community engagement, he
                   initiated the <strong>“1,11,111 Jal Sanchay Sankalp”</strong>,
                   a people-driven movement aimed at restoring water systems
                   through community participation and decentralized watershed
-                  development.
+                  development.{" "}
                 </p>
 
                 <p className="text-gray-500 text-sm leading-relaxed text-center lg:text-start">
@@ -984,7 +907,6 @@ export default function AboutPage() {
                   security across rural regions.
                 </p>
 
-                {/* Quote */}
                 <div className="mt-6 border-l-4 border-[var(--color-primary)] pl-4 italic text-gray-600 text-sm">
                   “Leadership at GGPT is not about hierarchy; it is about
                   working with communities—structure by structure, village by
@@ -992,27 +914,18 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Founder card */}
-              <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-[var(--color-primary)] text-white flex items-center justify-center font-bold">
-                    DS
-                  </div>
-                  <div>
-                    <p className="font-bold text-sm">Dilipbhai Sakhiya</p>
-                    <p className="text-xs text-gray-400">
-                      Founder & President · GGPT
-                    </p>
-                  </div>
+              {/* RIGHT IMAGE (REPLACED CARD) */}
+              <div className="flex justify-center lg:justify-end">
+                <div className="relative w-48 h-48 md:w-100 md:h-100 rounded-full bg-[var(--color-primary)] p-2 shadow-2xl ">
+                  {/* Profile Image */}
+                  <img
+                    src="/image/About page/SNI_7828.JPG"
+                    alt="Dilipbhai Sakhiya"
+                    className="w-full h-full object-cover rounded-full border-4 border-white"
+                  />
                 </div>
-
-                <p className="text-sm text-gray-500 mt-5 leading-relaxed">
-                  Leading the movement of community-driven water conservation
-                  and rural resilience across drought-prone regions of Gujarat.
-                </p>
               </div>
             </div>
-
             {/* Core Values */}
             <div>
               <div className="text-center mb-12">
@@ -1036,35 +949,179 @@ export default function AboutPage() {
                 {[
                   {
                     title: "Sustainability",
+                    img: "/image/About page/Sustainability.jpeg",
                     desc: "GGPT is committed to promoting environmentally sustainable water management practices that restore natural water systems and ensure long-term availability of water resources for agriculture, ecosystems, and rural communities.",
                   },
                   {
                     title: "Community Ownership",
-                    desc: "We believe that lasting change happens when communities actively participate in planning, implementing, and maintaining water conservation initiatives. GGPT works closely with local farmers and village institutions to foster collective responsibility and ownership.",
+                    img: "/image/About page/Community.jpeg",
+                    desc: "We believe that lasting change happens when communities actively participate in planning, implementing, and maintaining water conservation initiatives.",
                   },
                   {
                     title: "Transparency & Accountability",
-                    desc: "GGPT maintains high standards of transparency, ethical governance, and accountability in all its programs, partnerships, and use of resources to build trust with communities, partners, and supporters.",
+                    img: "/image/About page/Transparency.jpeg",
+                    desc: "GGPT maintains high standards of transparency, ethical governance, and accountability in all its programs.",
                   },
                   {
                     title: "Collaboration",
-                    desc: "Addressing water challenges requires collective effort. GGPT collaborates with communities, government institutions, CSR partners, and development organizations to scale effective water conservation solutions.",
+                    img: "/image/About page/Collaboration.jpeg",
+                    desc: "GGPT collaborates with communities, government institutions, CSR partners, and organizations.",
                   },
                   {
                     title: "Innovation & Learning",
-                    desc: "GGPT continuously explores innovative approaches and integrates practical knowledge with field experience to improve watershed management and strengthen rural resilience to climate variability.",
+                    img: "/image/About page/Innovation.jpeg",
+                    desc: "GGPT continuously explores innovative approaches and integrates practical knowledge with field experience.",
                   },
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="bg-white border border-gray-100 rounded-2xl p-7 shadow-sm hover:shadow-xl transition hover:text-[var(--color-primary)]"
+                    className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition"
                   >
-                    <h4 className="font-bold text-lg mb-2">{item.title}</h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {item.desc}
-                    </p>
+                    {/* Image */}
+                    <div className="relative h-auto overflow-hidden">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6">
+                      <h4 className="font-bold text-lg mb-2 group-hover:text-[var(--color-primary)] transition">
+                        {item.title}
+                      </h4>
+
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════
+            5. OUR ORIGIN
+        ══════════════════════════════════════════ */}
+        <section className="overflow-hidden">
+          <div className="container">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                {/* LEFT — circular image */}
+                <motion.div
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="relative flex items-center justify-center mx-auto w-full max-w-[420px] lg:max-w-none"
+                  style={{ minHeight: 320 }}
+                >
+                  {/* outer dashed ring */}
+                  <div className="absolute w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border-2 border-dashed border-[var(--color-primary)] animate-[spin_30s_linear_infinite]" />
+                  {/* inner ring */}
+                  <div className="absolute w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] rounded-full border border-[var(--color-primary)]/50" />
+
+                  <div className="relative w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden shadow-2xl shadow-emerald-900/20 border-4 border-white z-10">
+                    <Image
+                      src="/image/About page/mission (1).jpeg"
+                      alt="Water conservation work"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* Stat badge — top right */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
+                    className="absolute top-2 right-2 sm:top-6 sm:right-4 md:top-8 md:right-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-primary)] text-white flex flex-col items-center justify-center shadow-xl shadow-emerald-600/30"
+                  >
+                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
+                      90%
+                    </span>
+                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
+                      Water
+                      <br />
+                      Restored
+                    </span>
+                  </motion.div>
+
+                  {/* Stat badge — bottom left */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.55, type: "spring" }}
+                    className="absolute bottom-2 left-2 sm:bottom-6 sm:left-4 md:bottom-8 md:left-8 z-20 w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px] rounded-full bg-[var(--color-secondary)] text-[var(--color-primary)] flex flex-col items-center justify-center shadow-xl shadow-yellow-500/30"
+                  >
+                    <span className="font-playfair text-lg sm:text-xl md:text-2xl font-bold leading-none">
+                      580+
+                    </span>
+                    <span className="text-[8px] sm:text-[9px] font-semibold tracking-wide text-center leading-tight mt-0.5 px-1">
+                      Villages
+                      <br />
+                      Covered
+                    </span>
+                  </motion.div>
+                </motion.div>
+
+                {/* RIGHT — content */}
+                <motion.div
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="space-y-5 sm:space-y-6 text-center lg:text-start"
+                >
+                  {/* Heading */}
+                  <h2 className="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                    Mission &amp; Vision <br />
+                    <span className="text-[var(--color-primary)]">
+                      For Gujarat
+                    </span>
+                  </h2>
+
+                  <div className="w-full h-px bg-gray-100" />
+
+                  {/* Mission + Vision cards */}
+                  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="bg-emerald-50 rounded-2xl p-4 sm:p-5 border border-emerald-100">
+                      <div className="w-10 h-10 bg-[var(--color-primary)] rounded-lg flex items-center justify-center text-white mb-3">
+                        <Target size={20} strokeWidth={2.5} />
+                      </div>
+                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
+                        Our Mission
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        To strengthen rural water security through community-led
+                        water conservation, groundwater recharge, and watershed
+                        development initiatives that enhance agricultural
+                        productivity, support rural livelihoods, and build
+                        resilience to climate variability.
+                      </p>
+                    </div>
+                    <div className="bg-yellow-50 rounded-2xl p-4 sm:p-5 border border-yellow-100">
+                      <div className="w-10 h-10 bg-[var(--color-secondary)] rounded-lg flex items-center justify-center text-[var(--color-primary)] mb-3">
+                        <Eye size={20} strokeWidth={2.5} />
+                      </div>
+                      <h4 className="font-bold text-gray-800 mb-2 text-sm">
+                        Our Vision
+                      </h4>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        A water-secure and climate-resilient rural India where
+                        communities sustainably manage and protect their natural
+                        water resources, ensuring long-term agricultural
+                        prosperity, ecological balance, and improved quality of
+                        life for future generations.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </div>

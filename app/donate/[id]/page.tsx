@@ -156,8 +156,7 @@ function DetailLayout({
                 </div>
 
                 {/* Donate Button */}
-
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -178,7 +177,25 @@ function DetailLayout({
 
                     <span className="btn-primary-overlay"></span>
                   </button>
-                </motion.div>
+                </motion.div> */}
+
+                <div className="w-full flex justify-center items-center">
+                  <button
+                    type="submit"
+                    onClick={onDonate}
+                    className="group relative overflow-hidden inline-flex items-center justify-center gap-2 
+    text-white font-semibold text-sm w-full lg:text-base px-5 py-3 rounded-lg
+    bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
+                  >
+                    <span className="relative z-10">Donate</span>
+
+                    <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+
+                    <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
+                  </button>
+                </div>
 
                 {/* Trust badges */}
                 <div className="grid grid-cols-3 gap-3">

@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-
 const PRESET_AMOUNTS = [100, 200, 500];
 
 const donateData = [
@@ -258,8 +257,8 @@ export default function Donate() {
                   onClick={handleDonate}
                   className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
                   font-semibold text-xs sm:text-base px-10 py-4 cursor-pointer
-                  bg-[var(--color-primary)] text-[var(--color-secondary)]
-                  hover:text-[var(--color-primary)] overflow-hidden "
+                 bg-[url('/image/button/button-bg.jpeg')] text-white bg-center font-semibold
+                  overflow-hidden "
                 >
                   <span className="relative z-10 flex gap-2 items-center">
                     Donate ₹
@@ -269,7 +268,7 @@ export default function Donate() {
                     Now
                   </span>
 
-                  <span className="btn-primary-overlay"></span>
+                  <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
                 </button>
               </motion.div>
             </div>
@@ -367,7 +366,7 @@ export default function Donate() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="flex flex-wrap gap-6 justify-center md:justify-start"
                 >
-                  <Link href={`/donate/${item.id}`}>
+                  {/* <Link href={`/donate/${item.id}`}>
                     <button
                       type="submit"
                       className="btn-primary w-full group relative inline-flex items-center justify-center gap-2
@@ -381,6 +380,21 @@ export default function Donate() {
 
                       <span className="btn-primary-overlay"></span>
                     </button>
+                  </Link> */}
+
+                  <Link
+                    href={`/donate/${item.id}`}
+                    className="group relative overflow-hidden flex items-center justify-center gap-2 
+  text-white font-semibold text-sm w-[250px] md:w-[250px] lg:text-base px-5 py-3 rounded-lg
+  bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
+                  >
+                    <span className="relative z-10"> Donate </span>
+
+                    <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                      →
+                    </span>
+
+                    <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
                   </Link>
                 </motion.div>
 
@@ -450,7 +464,7 @@ export default function Donate() {
                   </div>
 
                   {/* CTA */}
-                  <motion.div
+                  {/* <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -472,7 +486,24 @@ export default function Donate() {
                         <span className="btn-primary-overlay"></span>
                       </button>
                     </Link>
-                  </motion.div>
+                  </motion.div> */}
+
+                  <div className="w-full flex justify-center items-center">
+                    <Link
+                      href={`/donate/${item.id}`}
+                      className="group relative overflow-hidden inline-flex items-center justify-center gap-2 
+    text-white font-semibold text-sm w-[250px] lg:text-base px-5 py-3 rounded-lg
+    bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
+                    >
+                      <span className="relative z-10">Donate</span>
+
+                      <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+
+                      <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -554,7 +585,7 @@ export default function Donate() {
                     {item.desc}
                   </p>
 
-                  <motion.div
+                  {/* <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -576,7 +607,24 @@ export default function Donate() {
                         <span className="btn-primary-overlay"></span>
                       </button>
                     </Link>
-                  </motion.div>
+                  </motion.div> */}
+
+                  <div className="w-full flex justify-center items-center">
+                    <Link
+                      href={`/donate/${item.id}`}
+                      className="group relative overflow-hidden inline-flex items-center justify-center gap-2 
+    text-white font-semibold text-sm w-[250px] lg:text-base px-5 py-3 rounded-lg
+    bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
+                    >
+                      <span className="relative z-10">Donate</span>
+
+                      <span className="relative z-10 group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+
+                      <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

@@ -6,6 +6,7 @@ import Slider from "../Component/Slider";
 import Image from "next/image";
 import SmoothScroll from "../Component/SmothScrolling";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 /* ─────────────────────────────────────────────
    COUNT UP
@@ -187,27 +188,45 @@ export default function HomePage() {
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
-              <Link
-                href="/partner-with-us-csr"
-                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold bg-[var(--color-secondary)] text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition"
-              >
-                Partner With Us &#8594;
-              </Link>
+            <div className="flex flex-col  sm:flex-row gap-3 sm:gap-4 items-center">
+              <motion.div className="flex  flex-wrap gap-4 justify-center lg:justify-start">
+                <Link
+                  href="/partner-with-us-csr"
+                  className="btn-secondary-outline w-70 justify-center group inline-flex items-center gap-2 font-semibold text-base px-9 py-4 bg-transparent hover:text-[var(--color-primary)] text-[var(--color-secondary)]"
+                >
+                  <span className="relative z-10">
+                    {" "}
+                    Partner With Us &#8594;
+                  </span>
 
-              <Link
-                href="/support-a-structure"
-                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold border border-[var(--color-secondary)] text-white"
-              >
-                Support A Structure &#8594;
-              </Link>
+                  <span className="btn-secondary-outline-overlay" />
+                </Link>
+              </motion.div>
 
-              <Link
-                href="/contact"
-                className="w-[180px] sm:w-auto text-center px-5 py-2.5 sm:px-8 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold border border-[var(--color-secondary)] text-white"
-              >
-                Contact Us &#8594;
-              </Link>
+              <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <Link
+                  href="/support-a-structure"
+                  className="btn-secondary-outline w-70 justify-center group inline-flex items-center gap-2 font-semibold text-base px-9 py-4 bg-transparent hover:text-[var(--color-primary)] text-[var(--color-secondary)]"
+                >
+                  <span className="relative z-10">
+                    {" "}
+                    Support A Structure &#8594;
+                  </span>
+
+                  <span className="btn-secondary-outline-overlay" />
+                </Link>
+              </motion.div>
+
+              <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <Link
+                  href="/contact"
+                  className="btn-secondary-outline w-70 justify-center group inline-flex items-center gap-2 font-semibold text-base px-9 py-4 bg-transparent hover:text-[var(--color-primary)] text-[var(--color-secondary)]"
+                >
+                  <span className="relative z-10"> Contact Us &#8594;</span>
+
+                  <span className="btn-secondary-outline-overlay" />
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -481,12 +500,12 @@ export default function HomePage() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="flex flex-wrap gap-6 justify-center"
                   >
-                    {/* Secondary Button */}
-
                     {/* Outline Button */}
                     <a
                       href="/partner-with-us-csr"
-                      className="btn-secondary-outline group text-xs w-[250px] md:w-[290px] lg:text-base justify-center"
+                      className="group relative overflow-hidden flex items-center justify-center gap-2 
+  text-white font-semibold text-xs w-[250px] md:w-[290px] lg:text-base px-5 py-3 rounded-lg
+  bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
                     >
                       <span className="relative z-10">
                         Partner With Us (CSR)
@@ -496,13 +515,15 @@ export default function HomePage() {
                         →
                       </span>
 
-                      <span className="btn-secondary-outline-overlay"></span>
+                      {/* overlay */}
+                      <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
                     </a>
 
-                    {/* Outline Button */}
                     <a
                       href="/support-a-structure"
-                      className="btn-secondary-outline group text-sm w-[250px] md:w-[290px] lg:text-base justify-center"
+                      className="group relative overflow-hidden flex items-center justify-center gap-2 
+  text-white font-semibold text-sm w-[250px] md:w-[290px] lg:text-base px-5 py-3 rounded-lg
+  bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
                     >
                       <span className="relative z-10">Support A Structure</span>
 
@@ -510,24 +531,22 @@ export default function HomePage() {
                         →
                       </span>
 
-                      <span className="btn-secondary-outline-overlay"></span>
+                      <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
                     </a>
-
                     {/* Outline Button */}
                     <a
                       href="/contact"
-                      className="btn-secondary-outline group text-sm w-[250px] md:w-[290px] lg:text-base justify-center"
+                      className="group relative overflow-hidden flex items-center justify-center gap-2 
+  text-white font-semibold text-sm w-[250px] md:w-[290px] lg:text-base px-5 py-3 rounded-lg
+  bg-[url('/image/button/button-bg.jpeg')] bg-cover bg-center"
                     >
-                      <span className="relative z-10">
-                        {" "}
-                        <span className="relative z-10">Contact Us</span>
-                      </span>
+                      <span className="relative z-10">Contact Us</span>
 
                       <span className="relative z-10 group-hover:translate-x-1 transition-transform">
                         →
                       </span>
 
-                      <span className="btn-secondary-outline-overlay"></span>
+                      <span className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></span>
                     </a>
                   </motion.div>
                 </div>
