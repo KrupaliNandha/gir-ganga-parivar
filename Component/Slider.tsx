@@ -12,7 +12,7 @@ export default function Slider() {
     "/logos/BALAJI_WAFERS.png",
     "/logos/Dil Exim Commodities_logo.png",
     "/logos/getco_geb_logo.png",
-    "/logos/images.png",
+    "/logos/tata hitachi.jpeg",
     "/logos/Ministry Of Jal Shakti.png",
     "/logos/Orbit Bearings_logo.jpg",
     "/logos/PGVCL.png",
@@ -53,16 +53,14 @@ export default function Slider() {
         <h1 className="text-4xl md:text-5xl font-bold text-center text-[var(--color-primary)] mb-4">
           Our Partners
         </h1>
-        <p className="text-xl font-semibold text-center">
-          List of corporate partners who joined our mission
-        </p>
+      
         <div
           ref={sliderRef}
           className="flex gap-10 md:gap-20 lg:gap-30 xl:gap-40 overflow-x-hidden whitespace-nowrap pt-10"
         >
           {/* duplicate images for seamless loop */}
           {[...sliders, ...sliders, ...sliders].map((src, index) => (
-            <div key={index} className="min-w-[200px] flex justify-center">
+            <div key={index} className="min-w-[220px] flex justify-center">
               <Image
                 src={src}
                 alt="brand logo"

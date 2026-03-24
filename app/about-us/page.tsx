@@ -1091,7 +1091,7 @@ export default function AboutPage() {
                   {/* Mission + Vision cards */}
                   <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div className="bg-emerald-50 rounded-2xl p-4 sm:p-5 border border-emerald-100">
-                      <div className="w-10 h-10 bg-[var(--color-primary)] rounded-lg flex items-center justify-center text-white mb-3">
+                      <div className="w-10 h-10 bg-[var(--color-primary)] mx-auto lg:mx-0 rounded-lg flex items-center justify-center  text-white mb-3">
                         <Target size={20} strokeWidth={2.5} />
                       </div>
                       <h4 className="font-bold text-gray-800 mb-2 text-sm">
@@ -1106,7 +1106,7 @@ export default function AboutPage() {
                       </p>
                     </div>
                     <div className="bg-yellow-50 rounded-2xl p-4 sm:p-5 border border-yellow-100">
-                      <div className="w-10 h-10 bg-[var(--color-secondary)] rounded-lg flex items-center justify-center text-[var(--color-primary)] mb-3">
+                      <div className="w-10 h-10 bg-[var(--color-secondary)] rounded-lg flex items-center mx-auto lg:mx-0 justify-center text-[var(--color-primary)] mb-3">
                         <Eye size={20} strokeWidth={2.5} />
                       </div>
                       <h4 className="font-bold text-gray-800 mb-2 text-sm">

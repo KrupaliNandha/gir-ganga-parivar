@@ -47,39 +47,34 @@ const awardImages = [
 ];
 
 /* ─── Awards Data ─── */
-const awards = [
-  {
-    sr: 1,
-    year: "2026",
-    title: "Best NGO Award 2025 (JSJB 1.0)",
-    agency: "Ministry of Jal Shakti, Government of India",
-  },
-  { sr: 2, year: "2025", title: "Indian CSR Award", agency: "Brand Honchos" },
-  {
-    sr: 3,
-    year: "2025",
-    title: "Global CSR & ESG Awards 2025",
-    agency: "Narayan Seva Sansthan",
-  },
-  {
-    sr: 4,
-    year: "2025",
-    title: "Jal shancay & Jan Bhagidari Award",
-    agency: "Jal shancay & Jan Bhagidari Award",
-  },
-  {
-    sr: 5,
-    year: "2024",
-    title: "Mayor Award",
-    agency: "Rajkot Municipal Corporation, Rajkot",
-  },
-  {
-    sr: 6,
-    year: "2023",
-    title: "Jal Prahari",
-    agency: "Ministry of Jal Shakti, Government of India and UNOPS",
-  },
-];
+// const awards = [
+//   {
+//     sr: 1,
+//     year: "2026",
+//     title: "Best NGO Award 2025 (JSJB 1.0)",
+//     agency: "Ministry of Jal Shakti, Government of India",
+//   },
+//   { sr: 2, year: "2025", title: "Indian CSR Award", agency: "Brand Honchos" },
+//   {
+//     sr: 3,
+//     year: "2025",
+//     title: "Global CSR & ESG Awards 2025",
+//     agency: "Narayan Seva Sansthan",
+//   },
+
+//   {
+//     sr: 5,
+//     year: "2024",
+//     title: "Mayor Award",
+//     agency: "Rajkot Municipal Corporation, Rajkot",
+//   },
+//   {
+//     sr: 6,
+//     year: "2023",
+//     title: "Jal Prahari",
+//     agency: "Ministry of Jal Shakti, Government of India and UNOPS",
+//   },
+// ];
 
 /* ─── Event Photos ─── */
 const eventPhotos = [
@@ -304,7 +299,7 @@ export default function Media() {
             Media & News
             <span className="w-8 h-px bg-[var(--color-secondary)]" />
           </p>
-          <h1 className="text-gray-900 text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+          <h1 className="text-gray-900 text-4xl md:text-5xl font-black leading-tight">
             Recognition,{" "}
             <span className="text-[var(--color-primary)]">
               Stories & Impact
@@ -314,113 +309,24 @@ export default function Media() {
         </div>
       </section>
 
-      {/* ── AWARDS ── */}
-      <section className="container" ref={awardsRef}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* LEFT: Award List */}
-          <div className="space-y-3">
-            <div className="mb-10 text-center lg:text-left">
-              <SectionLabel label="Honours Received" />
-              <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black leading-tight">
-                Awards &{" "}
+      {/* ── PRESS COVERAGE ── */}
+      
+      <section className="container bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
+          {/* LEFT: Heading + small grid */}
+          <div>
+            <div className="mb-8">
+              <SectionLabel label="Event In The Spotlight" />
+              <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-center lg:text-start">
+                Press{" "}
                 <span className="text-[var(--color-primary)]">
-                  Recognitions
+                  Coverage <br /> GALLERY
                 </span>
               </h2>
             </div>
 
-            {awards.map((award, i) => (
-              <motion.div
-                key={award.sr}
-                initial={{ opacity: 0, x: -32 }}
-                animate={visibleAwards ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                onClick={() => {
-                  setAwardImgDir(i > activeAward ? 1 : -1);
-                  setActiveAward(i);
-                }}
-                className={`group flex items-start gap-4 rounded-2xl border px-5 py-4 cursor-pointer transition-all duration-300 ${
-                  i === activeAward
-                    ? "bg-[var(--color-primary)] border-[var(--color-primary)] shadow-lg"
-                    : "bg-white border-gray-200"
-                }`}
-              >
-                <div
-                  className={`flex-shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center font-black ${i === activeAward ? "bg-white/20 text-white" : "bg-gray-50 text-[var(--color-primary)]"}`}
-                >
-                  <span className="text-[10px] opacity-70 uppercase">Year</span>
-                  <span className="text-base">{award.year}</span>
-                </div>
-                <div className="flex-1">
-                  <p
-                    className={`font-black text-base ${i === activeAward ? "text-white" : "text-gray-900"}`}
-                  >
-                    {award.title}
-                  </p>
-                  <p
-                    className={`text-xs ${i === activeAward ? "text-white/70" : "text-gray-500"}`}
-                  >
-                    {award.agency}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* RIGHT: Award Image */}
-          <div
-            className="relative rounded-3xl overflow-hidden border-2 border-gray-100 shadow-xl"
-            style={{ aspectRatio: "4/3" }}
-            onMouseEnter={() => setIsAwardHovered(true)}
-            onMouseLeave={() => setIsAwardHovered(false)}
-          >
-            <AnimatePresence initial={false} custom={awardImgDir}>
-              <motion.div
-                key={activeAward}
-                custom={awardImgDir}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.6 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={awardImages[activeAward].src}
-                  alt="Award"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <p className="text-lg font-bold leading-tight">
-                    {awardImages[activeAward].caption}
-                  </p>
-                  <span className="text-xs text-[var(--color-primary)] font-bold">
-                    {awardImages[activeAward].year}
-                  </span>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
-
-      {/* ── PRESS COVERAGE ── */}
-      <section className="container bg-white">
-        <div className="mb-8">  
-          <SectionLabel label="Event In The Spotlight" />
-          <h2 className="text-black text-3xl sm:text-4xl lg:text-5xl font-black uppercase text-center lg:text-start">
-            Press{" "}
-            <span className="text-[var(--color-primary)]">
-              Coverage <br /> GALLERY
-            </span>
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
-          {/* LEFT: Heading + small grid */}
-          <div className="order-2 lg:order-1">
             {/* Small thumbnails — 5 columns */}
-            <div className="grid grid-cols-4 gap-3  ">
+            <div className="grid grid-cols-4 gap-3 ">
               {galleryItems.slice(1).map((item, index) => {
                 const realIndex = index + 1;
                 const isActive = featuredIndex === realIndex;
@@ -468,7 +374,7 @@ export default function Media() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35 }}
-              className="relative group cursor-pointer rounded-2xl overflow-hidden bg-gray-100 h-[350px] sm:h-[480px] lg:h-[760px] border p-5 order-1 lg:order-2"
+              className="relative group cursor-pointer rounded-2xl overflow-hidden bg-gray-100 h-[400px] sm:h-[480px] lg:h-[760px] border p-5"
               onClick={() =>
                 setLightbox({ images: pressImages, index: featuredIndex })
               }
