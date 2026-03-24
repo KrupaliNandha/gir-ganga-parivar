@@ -173,7 +173,7 @@ export default function HomePage() {
             </div>
 
             {/* Heading */}
-            <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 max-w-5xl">
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 max-w-5xl">
               Building a{" "}
               <span className="text-[var(--color-secondary)]">
                 Water-Secure
@@ -182,14 +182,14 @@ export default function HomePage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-white/80 text-xs sm:text-sm md:text-lg lg:text-xl font-medium mb-8 sm:mb-10 max-w-2xl">
+            <p className="text-white/80 text-sm md:text-lg lg:text-xl font-medium mb-8 sm:mb-10 max-w-2xl">
               Reviving groundwater, strengthening agriculture, and empowering
               rural communities through decentralized water conservation.
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col  sm:flex-row gap-3 sm:gap-4 items-center">
-              <motion.div className="flex  flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="flex flex-wrap gap-3 sm:gap-4 items-center justify-center">
+              <motion.div className="flex  gap-4 justify-center ">
                 <Link
                   href="/partner-with-us-csr"
                   className="btn-secondary-outline w-70 justify-center group inline-flex items-center gap-2 font-semibold text-base px-9 py-4 bg-transparent hover:text-[var(--color-primary)] text-[var(--color-secondary)]"
@@ -318,7 +318,7 @@ export default function HomePage() {
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {approaches.map((ap, i) => (
                 <motion.div
                   key={ap.title}

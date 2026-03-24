@@ -1009,7 +1009,7 @@ export default function AboutPage() {
         <section className="overflow-hidden">
           <div className="container">
             <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-10 lg:pt-0">
                 {/* LEFT — circular image */}
                 <motion.div
                   initial={{ opacity: 0, x: -40 }}

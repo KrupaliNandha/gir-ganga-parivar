@@ -66,10 +66,10 @@ export default function CartPage() {
   return (
     <>
       <SmoothScroll>
-        <div className=" min-h-screen bg-[var(--color-tertiary)] pb-20">
+        <div className="min-h-screen bg-[var(--color-tertiary)] mx-auto pb-20">
           {/* ── Page Header ── */}
-          <div className=" container bg-white border-b border-[var(--color-dark)] px-6 md:px-12 py-4">
-            <div className="max-w-6xl mx-auto">
+          <div className="container bg-white border-b border-[var(--color-dark)] ">
+            <div className=" mx-auto">
               <p className="text-[var(--color-secondary)] text-[10px] font-black uppercase tracking-[0.35em] flex items-center justify-center lg:justify-start gap-2 mb-2">
                 <span className="w-5 h-px bg-[var(--color-secondary)]" />
                 Donation Cart
@@ -84,7 +84,7 @@ export default function CartPage() {
           </div>
 
           {/* ── Main Layout ── */}
-          <div className="max-w-7xl mx-auto mt-10 flex flex-col justify-self-center lg:flex-row gap-8">
+          <div className="container max-w-7xl mt-10 flex flex-col justify-self-center lg:flex-row gap-8">
             {/* ── LEFT: Cart Item ── */}
             <div className="flex-1 space-y-4">
               {/* Item Card */}

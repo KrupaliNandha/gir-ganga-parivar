@@ -776,7 +776,7 @@ export default function OurWorkPage() {
 
             {/* ── Bottom featured strip ── */}
             <div
-              className="mt-6  border border-[var(--color-primary)] rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center gap-6 justify-between transition-all duration-700"
+              className="mt-6  border border-[var(--color-primary)] rounded-2xl px-8 py-6 flex flex-col lg:flex-row items-center gap-6 justify-between transition-all duration-700"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "translateY(0)" : "translateY(20px)",

@@ -74,7 +74,7 @@ function StatCard({
     <div
       className="group relative flex flex-col items-center justify-center text-center
       bg-white border border-gray-100 rounded-2xl p-6 
-      hover:border-[var(--color-primary)] hover:shadow-xl hover:-translate-y-1
+       hover:shadow-xl hover:-translate-y-1
       transition-all duration-300"
     >
       {/* top accent bar */}
@@ -180,7 +180,7 @@ export default function JalMandirSection() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {stats.map((s, i) => (
                 <StatCard key={i} index={i} {...s} />
               ))}

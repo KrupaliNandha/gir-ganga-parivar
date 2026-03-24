@@ -119,24 +119,26 @@ function ContactCards() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className=" grid grid-cols-1 md:grid-cols-3 gap-4 py-10"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-10 "
     >
       {cards.map((card, i) => (
         <motion.div
           variants={fadeUp}
           key={i}
-          className="container group relative overflow-hidden rounded-2xl border border-[var(--color-primary)] bg-[var(--color-tertiary)]
+          className="group relative overflow-hidden rounded-2xl border border-[var(--color-primary)] bg-[var(--color-tertiary)]
       hover:bg-[var(--color-primary)] transition-all duration-500
-      p-6 flex flex-col gap-3 shadow-sm"
+      p-6 flex flex-col gap-3 shadow-sm text-center"
         >
           {/* Icon */}
           <div
-            className="w-11 h-11 rounded-xl bg-[var(--color-primary)]/10 group-hover:bg-white/20
-        flex items-center justify-center text-[var(--color-primary)] group-hover:text-white transition-all duration-500"
+            className="w-16 h-16 rounded-full
+  flex items-center justify-center mx-auto
+  bg-[var(--color-primary)]/10 group-hover:bg-white/20 
+  text-[var(--color-primary)] group-hover:text-white 
+  transition-all duration-500"
           >
             {card.icon}
           </div>
-
           {/* Label */}
           <p
             className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--color-primary)]/60
@@ -215,7 +217,7 @@ function ContactForm() {
       initial="hidden"
       animate="show"
       exit="hidden"
-      className="space-y-5 container"
+      className="space-y-5 "
     >
       <div className="grid grid-cols-2 gap-4">
         <Field label="Name">
@@ -631,14 +633,14 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
           >
             {/* Info Cards */}
             <ContactCards />
 
             {/* Main Card */}
             <div className="rounded-3xl border border-gray-100 shadow-xl overflow-hidden bg-white">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="grid grid-cols-1 md:grid-cols-2">
                 {/* Left — Map */}
                 <motion.div
                   initial={{ opacity: 0, x: -40 }}
@@ -656,7 +658,7 @@ export default function Contact() {
                   />
 
                   {/* Overlay label */}
-                  <div className="absolute bottom-5 left-5 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-md">
+                  <div className="absolute bottom-5 left-5 bg-white/90 backdrop-blur-sm rounded-xl px-4  py-2.5 shadow-md">
                     <p className="text-[10px] font-black tracking-widest uppercase text-[var(--color-primary)]/60 mb-0.5">
                       Location
                     </p>

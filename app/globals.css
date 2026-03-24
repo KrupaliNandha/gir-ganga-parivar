@@ -4,24 +4,41 @@
 .container {
   max-width: 1880px;
   margin: 0 auto;
-  padding: 60px;
+  padding: 18px; /* mobile */
 }
 
-@media (max-width: 640px) {
+/* sm */
+@media (min-width: 640px) {
   .container {
-    padding: 18px;
+    padding: 24px;
   }
 }
 
+/* md */
+@media (min-width: 768px) {
+  .container {
+    padding: 32px;
+  }
+}
+
+/* lg */
 @media (min-width: 1024px) {
   .container {
-    padding: 30px;
+    padding: 50px;
   }
 }
 
-@media (min-width: 1524px) {
+/* xl */
+@media (min-width: 1280px) {
   .container {
-    padding: 30px;
+    padding: 60px;
+  }
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+  .container {
+    padding: 60px;
   }
 }
 
