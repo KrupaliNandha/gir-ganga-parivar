@@ -46,35 +46,6 @@ const awardImages = [
   },
 ];
 
-/* ─── Awards Data ─── */
-// const awards = [
-//   {
-//     sr: 1,
-//     year: "2026",
-//     title: "Best NGO Award 2025 (JSJB 1.0)",
-//     agency: "Ministry of Jal Shakti, Government of India",
-//   },
-//   { sr: 2, year: "2025", title: "Indian CSR Award", agency: "Brand Honchos" },
-//   {
-//     sr: 3,
-//     year: "2025",
-//     title: "Global CSR & ESG Awards 2025",
-//     agency: "Narayan Seva Sansthan",
-//   },
-
-//   {
-//     sr: 5,
-//     year: "2024",
-//     title: "Mayor Award",
-//     agency: "Rajkot Municipal Corporation, Rajkot",
-//   },
-//   {
-//     sr: 6,
-//     year: "2023",
-//     title: "Jal Prahari",
-//     agency: "Ministry of Jal Shakti, Government of India and UNOPS",
-//   },
-// ];
 
 /* ─── Event Photos ─── */
 const eventPhotos = [
@@ -327,7 +298,7 @@ export default function Media() {
 
             {/* Small thumbnails — 5 columns */}
             <div className="grid grid-cols-4 gap-3 ">
-              {galleryItems.slice(1).map((item, index) => {
+              {galleryItems.slice(0).map((item, index) => {
                 const realIndex = index + 1;
                 const isActive = featuredIndex === realIndex;
                 return (
@@ -478,7 +449,7 @@ export default function Media() {
 
             {/* Small thumbnails — 5 columns */}
             <div className="grid grid-cols-4 gap-3 ">
-              {galleryItems.slice(1).map((item, index) => {
+              {galleryItems.slice(0).map((item, index) => {
                 const realIndex = index + 1;
                 const isActive = featuredIndex === realIndex;
                 return (

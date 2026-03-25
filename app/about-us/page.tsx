@@ -565,7 +565,6 @@ export default function AboutPage() {
                   </div>
 
                   {/* SDG */}
-                  {/* SDG */}
                   <div className="flex gap-4 flex-wrap items-center justify-center lg:justify-start mt-2">
                     {[
                       {
@@ -583,7 +582,7 @@ export default function AboutPage() {
                     ].map((sdg) => (
                       <div
                         key={sdg.label}
-                        className="flex  items-center gap-2 px-4 py-2 rounded-2xl border border-[var(--color-primary)]/30 bg-white shadow-sm hover:shadow-md transition"
+                        className="flex  items-center w-70 gap-2 px-2 py-2  rounded-2xl border border-[var(--color-primary)]/30 bg-white shadow-sm hover:shadow-md transition"
                       >
                         <img
                           src={sdg.img}
@@ -916,7 +915,7 @@ export default function AboutPage() {
 
               {/* RIGHT IMAGE (REPLACED CARD) */}
               <div className="flex justify-center lg:justify-end">
-                <div className="relative w-48 h-48 md:w-100 md:h-100 rounded-full bg-[var(--color-primary)] p-2 shadow-2xl ">
+                <div className="relative w-60 h-60 md:w-100 md:h-100 rounded-full bg-[var(--color-primary)] p-2 shadow-2xl ">
                   {/* Profile Image */}
                   <img
                     src="/image/About page/SNI_7828.JPG"

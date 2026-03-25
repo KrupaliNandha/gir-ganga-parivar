@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SmoothScroll from "../../Component/SmothScrolling";
+import Link from "next/link";
 
 /* ─── CountUp ─────────────────────────────────────── */
 interface CountUpProps {
@@ -57,6 +58,183 @@ function Eyebrow({ text }: { text: string }) {
     </p>
   );
 }
+
+/* ── Before/After hover image ── */
+interface BeforeAfterProps {
+  before: string;
+  after: string;
+  useNextImage?: boolean;
+}
+const BeforeAfterImage = ({
+  before,
+  after,
+  useNextImage = false,
+}: BeforeAfterProps) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="relative w-full h-full cursor-pointer select-none"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onTouchStart={() => setHovered(true)}
+      onTouchEnd={() => setHovered(false)}
+    >
+      {/* BEFORE */}
+      <div
+        className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+        style={{ opacity: hovered ? 0 : 1 }}
+      >
+        {useNextImage ? (
+          <Image src={before} alt="Before" fill className="object-cover" />
+        ) : (
+          <img
+            src={before}
+            alt="Before"
+            className="w-full h-full object-cover"
+          />
+        )}
+      </div>
+
+      {/* AFTER */}
+      <div
+        className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+        style={{ opacity: hovered ? 1 : 0 }}
+      >
+        {useNextImage ? (
+          <Image src={after} alt="After" fill className="object-cover" />
+        ) : (
+          <img src={after} alt="After" className="w-full h-full object-cover" />
+        )}
+      </div>
+
+      {/* Label pill */}
+      <div className="absolute bottom-4 left-4 z-10 p-4">
+        <span
+          className="px-6 py-3 rounded-full text-xs font-semibold tracking-wide transition-all duration-500"
+          style={{
+            background: hovered ? "#009dc4" : "rgba(0,0,0,0.45)",
+            color: "#ffff",
+          }}
+        >
+          {hovered ? "After" : "Before"}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+interface SectionBlockProps {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  body: string;
+  before: string;
+  after: string;
+  reverse?: boolean;
+  dark?: boolean;
+  useNextImage?: boolean;
+}
+const SectionBlock = ({
+  before,
+  after,
+  reverse = false,
+  useNextImage = false,
+}: SectionBlockProps) => (
+  <section className="bg-[var(--color-tertiary)]">
+    <div className=" mx-auto">
+      <div className="container">
+        <div
+          className={`flex flex-col ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-center`}
+        >
+          {/* Text side */}
+          <div className="w-full lg:w-[42%] space-y-5">
+            {/* eyebrow */}
+            <div className="flex items-center justify-center lg:justify-start gap-3">
+              <span className="w-8 h-px bg-[var(--color-secondary)]" />
+              <span className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.25em] uppercase ">
+                Impact Story
+              </span>
+            </div>
+
+            <h2 className="text-[var(--color-primary)] text-3xl sm:text-4xl font-bold leading-snug text-center lg:text-start">
+              Todi Check-dam{" "}
+            </h2>
+
+            <p className="text-gray-500 text-sm font-medium text-center lg:text-start">
+              Restoring Hope Through Water: GGPT’s Check-Dam Revival in
+              Bhavnagar For over 14 years, villages in Sihor taluka of
+              Bhavnagar—Todi, Kharachiya, Ratanpar, and Jilvana—struggled with
+              severe water scarcity. Borewells failed even at 700 feet, tankers
+              became the only source of drinking water, and agriculture and
+              livestock steadily declined.
+            </p>
+
+            <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
+              In 2024, Girganga Parivar Trust (GGPT), in collaboration with
+              Dangardi Vipassana Kendra and Dhamkheda Seva Trust, revived silted
+              check dams through timely deepening and desilting just before the
+              monsoon.
+            </p>
+
+            <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
+              The impact was immediate. With the first rains, check dams filled
+              to capacity, groundwater levels rose sharply, and borewells began
+              yielding water at just 20 feet. Tankers were eliminated, abandoned
+              wells revived, and villages regained 24×7 access to drinking
+              water—many for the first time in over a decade.
+            </p>
+
+            <p className="text-gray-400 text-sm leading-7 mb-4 text-center lg:text-start">
+              A farmer shared,{" "}
+              <span className="text-gray-600 italic">
+                &quot;For years, 700 feet gave us nothing. Today, water comes at
+                20 feet. This work has brought life back to our village.&quot;
+              </span>
+            </p>
+
+            <p className="text-gray-400 text-sm leading-7 mb-8 text-center lg:text-start">
+              More than water, GGPT restored dignity, confidence, and
+              hope—creating a replicable, community-led model for drought-prone
+              regions of Gujarat.
+            </p>
+
+            <div className="justify-self-center lg:justify-self-start text-center lg:text-start">
+              <div className="md:inline-flex items-center md:gap-3">
+                <span className="w-8 h-px md:bg-[var(--color-primary)]" />
+                <p className="font-bold text-base text-gray-900">
+                  This is not just water conservation.{" "}
+                  <span className="text-[var(--color-primary)]">
+                    It is rural revival.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Image side */}
+          <div className="w-full lg:w-[58%]">
+            <div
+              className={`relative overflow-hidden shadow-2xl shadow-black/50 ${reverse ? "rounded-tl-[4rem] rounded-br-[4rem]" : "rounded-tr-[4rem] rounded-bl-[4rem]"}`}
+              style={{ aspectRatio: "16/10" }}
+            >
+              <BeforeAfterImage
+                before={before}
+                after={after}
+                useNextImage={useNextImage}
+              />
+            </div>
+
+            {/* "Hover to see transformation" hint */}
+            <p className="text-gray-600 text-[10px] tracking-widest uppercase text-right mt-2 pr-2">
+              Hover image to see transformation
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 /* ─── Stat Card ───────────────────────────────────── */
 function StatCard({
@@ -278,92 +456,18 @@ export default function JalMandirSection() {
         </section>
 
         {/* ── 4. IMPACT STORY ─────────────────────────────── */}
-        <section className="container bg-white">
-          <div className="mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
-              {/* Left — Story */}
-              <div className="max-w-4xl">
-                <div className="text-center mb-8">
-                  <Eyebrow text="Impact Story" />
-
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight leading-tight text-center lg:text-start">
-                    Restoring Hope{" "}
-                    <span className="text-[var(--color-primary)]">
-                      Through Water
-                    </span>
-                  </h2>
-                </div>
-
-                <div className="space-y-4 text-gray-500 text-sm leading-7 text-center lg:text-start">
-                  <p>
-                    GGPT’s Check-Dam Revival in Bhavnagar For over 14 years,
-                    villages in Sihor taluka of Bhavnagar—Todi, Kharachiya,
-                    Ratanpar, and Jilvana—struggled with severe water scarcity.
-                    Borewells failed even at 700 feet, tankers became the only
-                    source of drinking water, and agriculture and livestock
-                    steadily declined.
-                  </p>
-
-                  <p>
-                    In 2024, Girganga Parivar Trust (GGPT), in collaboration
-                    with Dangardi Vipassana Kendra and Dhamkheda Seva Trust,
-                    revived silted check dams through timely deepening and
-                    desilting just before the monsoon.
-                  </p>
-                </div>
-
-                {/* Quote */}
-                <div className="my-7 relative pl-6 border-l-4 border-[var(--color-secondary)]">
-                  <p className="text-gray-600 text-sm leading-7 italic">
-                    The impact was immediate. With the first rains, check dams
-                    filled to capacity, groundwater levels rose sharply, and
-                    borewells began yielding water at just 20 feet.
-                  </p>
-                </div>
-
-                <p className="text-gray-400 text-sm leading-7 mb-4 text-center lg:text-start">
-                  A farmer shared,{" "}
-                  <span className="text-gray-600 italic">
-                    &quot;For years, 700 feet gave us nothing. Today, water
-                    comes at 20 feet.&quot;
-                  </span>
-                </p>
-
-                <p className="text-gray-400 text-sm leading-7 mb-8 text-center lg:text-start">
-                  More than water, GGPT restored dignity, confidence, and hope—
-                  creating a replicable model.
-                </p>
-
-                {/* CTA */}
-                <div className="justify-self-center lg:justify-self-start text-center lg:text-start">
-                  <div className="inline-flex items-center gap-3">
-                    <span className="w-8 h-px md:bg-[var(--color-primary)]" />
-                    <p className="font-bold text-base text-gray-900">
-                      This is not just water conservation.{" "}
-                      <span className="text-[var(--color-primary)]">
-                        It is rural revival.
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right — Image */}
-              <div className="flex justify-center h-full">
-                <div className="relative w-full h-[400px] sm:h-[300px] lg:h-full">
-                  {/* decorative frame */}
-                  <div className="absolute -bottom-4 -right-4 w-full h-full rounded-3xl border-2 border-[var(--color-secondary)]/30" />
-
-                  <Image
-                    src="/image/Impact/Donation%20For%20Biggest%20Checkdam%20(1).png"
-                    alt="Check Dam Revival"
-                    fill
-                    className="rounded-3xl shadow-2xl object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+        <section className=" bg-white">
+          <SectionBlock
+            eyebrow="Impact Story"
+            title=""
+            subtitle=""
+            body=""
+            before="/image/Impact/todi-checkdam-before.jpeg"
+            after="/image/Impact/todi-checkdam-after.jpeg"
+            reverse={false}
+            dark={false}
+            useNextImage={true}
+          />
         </section>
       </SmoothScroll>
     </>

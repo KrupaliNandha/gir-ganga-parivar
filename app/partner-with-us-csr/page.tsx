@@ -472,7 +472,7 @@ export default function Support() {
                 {sdgData.map((item, index) => (
                   <div
                     key={index}
-                    className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition"
+                    className="bg-white rounded-2xl shadow-md p-3 mg:p-6 hover:shadow-lg transition"
                   >
                     <Image
                       src={item.image}
