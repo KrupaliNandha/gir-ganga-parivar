@@ -44,7 +44,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <p className="text-black font-black text-base leading-tight">
-                      Girganga
+                      GirGanga
                     </p>
                     <p className="text-[var(--color-primary)]  font-bold text-sm">
                       Parivar Trust
@@ -245,7 +245,7 @@ export default function Footer() {
               for Water Conservation ·{" "}
               <Link href="/">
                 <span className="text-[var(--color-primary)] ">
-                  Girganga Parivar Trust © 2026
+                  GirGanga Parivar Trust © 2026
                 </span>
               </Link>
             </p>

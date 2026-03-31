@@ -116,7 +116,7 @@ export default function Navbar() {
           {/* Left: welcome + socials */}
           <div className="flex items-center gap-5">
             <span className="hidden sm:block text-[12px] text-slate-500 font-medium tracking-wide">
-              Welcome to Gir Ganga Parivar Trust
+              Welcome to GirGanga Parivar Trust
             </span>
             <div className="flex items-center gap-3 text-slate-500">
               {[

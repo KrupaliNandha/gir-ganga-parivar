@@ -368,7 +368,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-3 lg:hidden">
                 <motion.div className="relative h-44 rounded-2xl overflow-hidden shadow-lg col-span-2">
                   <Image
-                    src="/image/home/Slide1.png"
+                    src="/image/About page/hiraba after.png"
                     alt="Water conservation"
                     fill
                     className="object-cover"
@@ -382,7 +382,7 @@ export default function AboutPage() {
                 </motion.div>
                 <motion.div className="relative h-50 rounded-2xl overflow-hidden shadow-md">
                   <Image
-                    src="/image/home/Slide2.png"
+                    src="/image/About page/jibiyaa after.png"
                     alt="Check dam"
                     fill
                     className="object-cover"
@@ -390,7 +390,7 @@ export default function AboutPage() {
                 </motion.div>
                 <motion.div className="relative h-50 rounded-2xl overflow-hidden shadow-md">
                   <Image
-                    src="/image/home/Slide3.png"
+                    src="/image/About page/pavitram after.png"
                     alt="Farmers"
                     fill
                     className="object-cover"
@@ -402,7 +402,7 @@ export default function AboutPage() {
               <div className="relative h-[620px] hidden lg:block">
                 <motion.div className="absolute right-0 top-0 w-[75%] h-[55%] rounded-3xl overflow-hidden shadow-xl">
                   <Image
-                    src="/image/home/Slide2.png"
+                    src="/image/About page/hiraba after.png"
                     alt="Check dam"
                     fill
                     className="object-cover"
@@ -410,7 +410,7 @@ export default function AboutPage() {
                 </motion.div>
                 <motion.div className="absolute left-0 bottom-0 w-[72%] h-[62%] rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/image/home/Slide1.png"
+                    src="/image/About page/jibiyaa after.png"
                     alt="Water conservation"
                     fill
                     className="object-cover"
@@ -422,7 +422,7 @@ export default function AboutPage() {
                   className="absolute right-2 bottom-[18%] w-[32%] h-[28%] rounded-2xl overflow-hidden shadow-xl border-2 border-white"
                 >
                   <Image
-                    src="/image/home/Slide3.png"
+                    src="/image/About page/pavitram after.png"
                     alt="Farmers"
                     fill
                     className="object-cover"

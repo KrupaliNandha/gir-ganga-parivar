@@ -124,6 +124,7 @@ const BeforeAfterImage = ({
   );
 };
 
+/* ── Section block (alternating layout) ── */
 interface SectionBlockProps {
   eyebrow: string;
   title: string;
@@ -136,104 +137,69 @@ interface SectionBlockProps {
   useNextImage?: boolean;
 }
 const SectionBlock = ({
+  eyebrow,
+  title,
+  subtitle,
+  body,
   before,
   after,
   reverse = false,
+  dark = false,
   useNextImage = false,
 }: SectionBlockProps) => (
-  <section className="bg-[var(--color-tertiary)]">
-    <div className=" mx-auto">
-      <div className="container">
-        <div
-          className={`flex flex-col ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-center`}
-        >
-          {/* Text side */}
-          <div className="w-full lg:w-[42%] space-y-5">
-            {/* eyebrow */}
-            <div className="flex items-center justify-center lg:justify-start gap-3">
-              <span className="w-8 h-px bg-[var(--color-secondary)]" />
-              <span className="text-[var(--color-secondary)] text-[10px] font-bold tracking-[0.25em] uppercase ">
-                Impact Story
-              </span>
-            </div>
+  <>
+    <section className="bg-[var(--color-tertiary)]">
+      <div className="mx-auto">
+        <div className="container">
+          <div
+            className={`flex flex-col ${reverse ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-20 items-center`}
+          >
+            {/* Text side */}
+            <div className="w-full lg:w-[42%] space-y-5">
+              {/* eyebrow */}
+              <div className="flex items-center justify-center lg:justify-start gap-3">
+                <span className="w-8 h-px bg-[var(--color-secondary)]" />
+                <span className="text-[var(--color-primary)] text-[10px] font-bold tracking-[0.25em] uppercase ">
+                  {eyebrow}
+                </span>
+              </div>
 
-            <h2 className="text-[var(--color-primary)] text-3xl sm:text-4xl font-bold leading-snug text-center lg:text-start">
-              Todi Check-dam{" "}
-            </h2>
+              <h2 className="text-black text-3xl sm:text-4xl font-bold leading-snug text-center lg:text-start">
+                {title}
+              </h2>
 
-            <p className="text-gray-500 text-sm font-medium text-center lg:text-start">
-              Restoring Hope Through Water: GGPT’s Check-Dam Revival in
-              Bhavnagar For over 14 years, villages in Sihor taluka of
-              Bhavnagar—Todi, Kharachiya, Ratanpar, and Jilvana—struggled with
-              severe water scarcity. Borewells failed even at 700 feet, tankers
-              became the only source of drinking water, and agriculture and
-              livestock steadily declined.
-            </p>
+              <p className="text-[var(--color-primary)] text-sm font-medium text-center lg:text-start">
+                {subtitle}
+              </p>
 
-            <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
-              In 2024, Girganga Parivar Trust (GGPT), in collaboration with
-              Dangardi Vipassana Kendra and Dhamkheda Seva Trust, revived silted
-              check dams through timely deepening and desilting just before the
-              monsoon.
-            </p>
-
-            <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
-              The impact was immediate. With the first rains, check dams filled
-              to capacity, groundwater levels rose sharply, and borewells began
-              yielding water at just 20 feet. Tankers were eliminated, abandoned
-              wells revived, and villages regained 24×7 access to drinking
-              water—many for the first time in over a decade.
-            </p>
-
-            <p className="text-gray-400 text-sm leading-7 mb-4 text-center lg:text-start">
-              A farmer shared,{" "}
-              <span className="text-gray-600 italic">
-                &quot;For years, 700 feet gave us nothing. Today, water comes at
-                20 feet. This work has brought life back to our village.&quot;
-              </span>
-            </p>
-
-            <p className="text-gray-400 text-sm leading-7 mb-8 text-center lg:text-start">
-              More than water, GGPT restored dignity, confidence, and
-              hope—creating a replicable, community-led model for drought-prone
-              regions of Gujarat.
-            </p>
-
-            <div className="justify-self-center lg:justify-self-start text-center lg:text-start">
-              <div className="md:inline-flex items-center md:gap-3">
-                <span className="w-8 h-px md:bg-[var(--color-primary)]" />
-                <p className="font-bold text-base text-gray-900">
-                  This is not just water conservation.{" "}
-                  <span className="text-[var(--color-primary)]">
-                    It is rural revival.
-                  </span>
-                </p>
+              <div className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
+                {body}
               </div>
             </div>
-          </div>
 
-          {/* Image side */}
-          <div className="w-full lg:w-[58%]">
-            <div
-              className={`relative overflow-hidden shadow-2xl shadow-black/50 ${reverse ? "rounded-tl-[4rem] rounded-br-[4rem]" : "rounded-tr-[4rem] rounded-bl-[4rem]"}`}
-              style={{ aspectRatio: "16/10" }}
-            >
-              <BeforeAfterImage
-                before={before}
-                after={after}
-                useNextImage={useNextImage}
-              />
+            {/* Image side */}
+            <div className="w-full lg:w-[58%]">
+              <div
+                className={`relative overflow-hidden shadow-2xl shadow-black/50 ${reverse ? "rounded-tl-[4rem] rounded-br-[4rem]" : "rounded-tr-[4rem] rounded-bl-[4rem]"}`}
+                style={{ aspectRatio: "16/10" }}
+              >
+                <BeforeAfterImage
+                  before={before}
+                  after={after}
+                  useNextImage={useNextImage}
+                />
+              </div>
+
+              {/* "Hover to see transformation" hint */}
+              <p className="text-gray-600 text-[10px] tracking-widest uppercase text-right mt-2 pr-2">
+                Hover image to see transformation
+              </p>
             </div>
-
-            {/* "Hover to see transformation" hint */}
-            <p className="text-gray-600 text-[10px] tracking-widest uppercase text-right mt-2 pr-2">
-              Hover image to see transformation
-            </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </>
 );
 
 /* ─── Stat Card ───────────────────────────────────── */
@@ -456,19 +422,93 @@ export default function JalMandirSection() {
         </section>
 
         {/* ── 4. IMPACT STORY ─────────────────────────────── */}
-        <section className=" bg-white">
-          <SectionBlock
-            eyebrow="Impact Story"
-            title=""
-            subtitle=""
-            body=""
-            before="/image/Impact/todi-checkdam-before.jpeg"
-            after="/image/Impact/todi-checkdam-after.jpeg"
-            reverse={false}
-            dark={false}
-            useNextImage={true}
-          />
-        </section>
+
+        {/* ── SECTION 1 — GEBEA Jal Mandir ── */}
+        <SectionBlock
+          eyebrow="Impact Story"
+          title="Todi Check-dam"
+          subtitle=" Restoring Hope Through Water: GGPT’s Check-Dam Revival in
+                Bhavnagar For over 14 years, villages in Sihor taluka of
+                Bhavnagar—Todi, Kharachiya, Ratanpar, and Jilvana—struggled with
+                severe water scarcity. Borewells failed even at 700 feet,
+                tankers became the only source of drinking water, and
+                agriculture and livestock steadily declined."
+          body={
+            <>
+              <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
+                In 2024, Girganga Parivar Trust (GGPT), in collaboration with
+                Dangardi Vipassana Kendra and Dhamkheda Seva Trust, revived
+                silted check dams through timely deepening and desilting just
+                before the monsoon.
+              </p>
+
+              <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-start">
+                The impact was immediate. With the first rains, check dams
+                filled to capacity, groundwater levels rose sharply, and
+                borewells began yielding water at just 20 feet. Tankers were
+                eliminated, abandoned wells revived, and villages regained 24×7
+                access to drinking water—many for the first time in over a
+                decade.
+              </p>
+
+              <p className="text-gray-400 text-sm leading-7 mb-4 text-center lg:text-start">
+                A farmer shared,{" "}
+                <span className="text-gray-600 italic">
+                  &quot;For years, 700 feet gave us nothing. Today, water comes
+                  at 20 feet. This work has brought life back to our
+                  village.&quot;
+                </span>
+              </p>
+
+              <p className="text-gray-400 text-sm leading-7 mb-8 text-center lg:text-start">
+                More than water, GGPT restored dignity, confidence, and
+                hope—creating a replicable, community-led model for
+                drought-prone regions of Gujarat.
+              </p>
+
+              <div className="justify-self-center lg:justify-self-start text-center lg:text-start">
+                <div className="md:inline-flex items-center md:gap-3">
+                  <span className="w-8 h-px md:bg-[var(--color-primary)]" />
+                  <p className="font-bold text-base text-gray-900">
+                    This is not just water conservation.{" "}
+                    <span className="text-[var(--color-primary)]">
+                      It is rural revival.
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </>
+          }
+          before="/image/Impact/todi-checkdam-before.jpeg"
+          after="/image/Impact/todi-checkdam-after.jpeg"
+          reverse={false}
+          dark={false}
+          useNextImage={true}
+        />
+
+        {/* ── SECTION 2 — Bambhania Sarovar ── */}
+        <SectionBlock
+          eyebrow="Amreli District · Groundwater Recharge"
+          title="Bambhania Sarovar"
+          subtitle="For Farmers, Villagers, and Livestock Owners"
+          body="The Girganga Parivar Trust has launched a groundwater recharge project in Bambhania, Amreli district. This initiative aims to increase water levels for farmers, villagers, and livestock owners. The 'Nava Neer Na Vadhamna' (Welcoming New Waters) event was attended by MLA Bharatbhai Sutariya and Deputy Chief Whip Kaushikbhai Vekariya, highlighting the importance of this endeavor for local water security."
+          before="/image/Impact/bambhabiya-befor-1.png"
+          after="/image/Impact/bambhaniya-after-1.png"
+          reverse={true}
+          dark={true}
+        />
+
+        <SectionBlock
+          eyebrow="Rajkot · Water Conservation"
+          title="GEBEA Jal Mandir Sarovar"
+          subtitle="A Gift of Water Security in Rajkot"
+          body="In Rajkot, the GEBEA Jal Mandir Sarovar was inaugurated by former Home Minister Shri Gordhanbhai Zadaphia, who also serves as the President of the GEB Engineers' Association. This reservoir, a retirement gift in honor of Shri B.M. Shah Saheb, Secretary General of the GEB Engineers' Association, significantly aids water conservation. It ensures clean rainwater availability for surrounding societies, improving residents' health and boosting local groundwater levels."
+          before="/image/Impact/Jibiyaa-Before-1.png"
+          after="/image/Impact/Jibiya-After-1.png"
+          reverse={false}
+          dark={false}
+          useNextImage={true}
+        />
       </SmoothScroll>
     </>
   );
