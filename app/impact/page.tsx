@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SmoothScroll from "../../Component/SmothScrolling";
 import Link from "next/link";
@@ -129,13 +129,14 @@ interface SectionBlockProps {
   eyebrow: string;
   title: string;
   subtitle: string;
-  body: string;
+  body: ReactNode; 
   before: string;
   after: string;
   reverse?: boolean;
   dark?: boolean;
   useNextImage?: boolean;
 }
+
 const SectionBlock = ({
   eyebrow,
   title,

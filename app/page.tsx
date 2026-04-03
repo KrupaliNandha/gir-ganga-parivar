@@ -173,7 +173,7 @@ export default function HomePage() {
             </div>
 
             {/* Heading */}
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 max-w-5xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 max-w-5xl">
               Building a{" "}
               <span className="text-[var(--color-secondary)]">
                 Water-Secure
