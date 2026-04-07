@@ -30,7 +30,8 @@ export default function Navbar() {
 
   const isActive = (path: string) => pathname === path;
   const isWorkActive = pathname.startsWith("/Our-Work");
-  const isMediaActive = pathname.startsWith("/media");
+  const isMediaActive =
+    pathname.startsWith("/media") || pathname.startsWith("/certificates");
 
   /* close dropdowns on outside click */
   useEffect(() => {
@@ -338,6 +339,7 @@ export default function Navbar() {
                   { label: "Photos", href: "/photos" },
                   { label: "Press Release", href: "/press-release" },
                   { label: "Videos", href: "/videos" },
+                  { label: "Certificates", href: "/certificates" },
                 ].map(({ label, href }) => (
                   <Link
                     key={href}
@@ -701,6 +703,19 @@ export default function Navbar() {
                     className="text-[15px] font-semibold text-slate-500"
                   >
                     Videos
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/certificates"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMobileMediaOpen(false);
+                    }}
+                    className="text-[15px] font-semibold text-slate-500"
+                  >
+                    Certificates
                   </Link>
                 </li>
               </ul>
