@@ -288,6 +288,25 @@ export default function JalMandirSection() {
     { value: 74, label: "Billion Litres Recharged", suffix: "B" },
   ];
 
+  const additionalTransformations = [
+    {
+      before: "/image/Impact/pavitram  befor.png",
+      after: "/image/Impact/pavitram after.png",
+    },
+    {
+      before: "/image/Impact/sau. uni  befor.png",
+      after: "/image/Impact/sau.uni after.png",
+    },
+    {
+      before: "/image/Impact/virveeru befor.png",
+      after: "/image/Impact/virveeru  after.png",
+    },
+    {
+      before: "/image/Impact/pam  befor.png",
+      after: "/image/Impact/pam after.png",
+    },
+  ];
+
   return (
     <>
       <SmoothScroll>
@@ -510,6 +529,42 @@ export default function JalMandirSection() {
           dark={false}
           useNextImage={true}
         />
+
+        <section className="container bg-[var(--color-tertiary)] py-16">
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-14">
+              <Eyebrow text="Visual Evidence" />
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                Stories of{" "}
+                <span className="text-[var(--color-primary)]">Transformation</span>
+              </h2>
+              <p className="text-gray-400 mt-4 max-w-lg mx-auto text-sm leading-relaxed">
+                See the real difference community-driven water conservation makes on the ground.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {additionalTransformations.map((item, i) => (
+                <div key={i}>
+                  <div
+                    className="relative overflow-hidden shadow-2xl shadow-black/40 rounded-[2rem]"
+                    style={{ aspectRatio: "16/10" }}
+                  >
+                    <BeforeAfterImage
+                      before={item.before}
+                      after={item.after}
+                      useNextImage={true}
+                    />
+                  </div>
+                  <p className="text-gray-600 text-[10px] tracking-widest uppercase text-center mt-3">
+                    Hover image to see transformation
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </SmoothScroll>
     </>
   );
