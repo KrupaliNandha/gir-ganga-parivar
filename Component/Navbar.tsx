@@ -225,50 +225,6 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* OUR WORK ▾ — ✅ uses desktopWorkOpen */}
-            {/* <li
-              className="relative"
-              ref={workRef}
-              onMouseEnter={() => setDesktopWorkOpen(true)}
-              onMouseLeave={() => setDesktopWorkOpen(false)}
-            >
-              <Link
-                href="/Our-Work"
-                onClick={() => {
-                  setDesktopWorkOpen(!desktopWorkOpen);
-                  setDesktopMediaOpen(false);
-                }}
-                className={`${linkCls(isWorkActive ? "/Our-Work" : "")} gap-1 flex items-center`}
-              >
-                Our Work
-                <FiChevronDown
-                  size={11}
-                  className={`mt-px transition-transform duration-200 ${
-                    desktopWorkOpen ? "rotate-180" : ""
-                  }`}
-                />
-                <span
-                  className={underline(isWorkActive || desktopWorkOpen, false)}
-                />
-              </Link>
-
-              <div className={dropPanel(desktopWorkOpen)}>
-                <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
-                {[{ label: "Impact", href: "/impact" }].map(
-                  ({ label, href }) => (
-                    <Link
-                      key={href}
-                      href={href}
-                      onClick={() => setDesktopWorkOpen(false)}
-                      className={dropCls(href)}
-                    >
-                      {label}
-                    </Link>
-                  ),
-                )}
-              </div>
-            </li> */}
-
             <li className="relative group">
               <Link href="/Our-Work" className={linkCls("/Our-Work")}>
                 Our Work
@@ -593,19 +549,6 @@ export default function Navbar() {
               Impact
             </Link>
           </li>
-
-          {/* Reports & Publications
-          <li>
-            <Link
-              href="/reports-publications"
-              onClick={() => setMenuOpen(false)}
-              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
-                isActive("/reports-publications") ? "text-[var(--color-primary)]" : "text-slate-800"
-              }`}
-            >
-              REPORTS & PUBLICATIONS
-            </Link>
-          </li> */}
 
           {/* Partners / CSR */}
           <li>
