@@ -144,12 +144,10 @@ export default function HomePage() {
 
         <section className="relative w-full min-h-screen flex items-center pb-45 overflow-hidden">
           {/* Background Image */}
-          <Image
-            src="/image/home/Donation For Biggest Checkdam.png"
+          <Image src="/image/home/Donation For Biggest Checkdam.png"
             alt="Water Conservation"
             fill
-            className="object-cover absolute"
-          />
+            className="object-cover absolute" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
 
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/60" />
@@ -373,13 +371,11 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Image Instead of Map */}
               <motion.div>
-                <Image
-                  src="/image/home/Our Approach.png"
+                <Image src="/image/home/Our Approach.png"
                   alt="Gujarat Impact Map"
                   width={800}
                   height={500}
-                  className="w-full h-auto object-contain mx-auto"
-                />
+                  className="w-full h-auto object-contain mx-auto" quality={75} />
               </motion.div>
 
               {/* Highlights */}

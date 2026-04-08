@@ -185,12 +185,10 @@ function Lightbox({
         className="relative w-full max-w-5xl h-[82vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        <Image
-          src={images[index]}
+        <Image src={images[index]}
           alt="preview"
           fill
-          className="object-contain rounded-2xl"
-        />
+          className="object-contain rounded-2xl" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
       </div>
 
       {/* Counter */}
@@ -316,12 +314,10 @@ export default function Media() {
                     onClick={() => setFeaturedIndex(realIndex)}
                   >
                     <div className="relative w-full h-[60px] sm:h-[110px]">
-                      <Image
-                        src={item.img}
+                      <Image src={item.img}
                         alt={`Press ${realIndex + 1}`}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
+                        className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                       {/* Active tint */}
                       {isActive && (
                         <div className="absolute inset-0 bg-[var(--color-primary)]/25" />
@@ -350,12 +346,10 @@ export default function Media() {
                 setLightbox({ images: pressImages, index: featuredIndex })
               }
             >
-              <Image
-                src={galleryItems[featuredIndex].img}
+              <Image src={galleryItems[featuredIndex].img}
                 alt="Press coverage featured"
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+                className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
 
               {/* Zoom on hover */}
               <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
@@ -414,12 +408,10 @@ export default function Media() {
                   });
                 }}
               >
-                <Image
-                  src={photo.src}
+                <Image src={photo.src}
                   alt={`Event photo ${i}`}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                  className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-70 group-hover:opacity-90" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40">
@@ -467,12 +459,10 @@ export default function Media() {
                     onClick={() => setFeaturedIndex(realIndex)}
                   >
                     <div className="relative w-full h-[60px] sm:h-[110px]">
-                      <Image
-                        src={item.img}
+                      <Image src={item.img}
                         alt={`Press ${realIndex + 1}`}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
+                        className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                       {/* Active tint */}
                       {isActive && (
                         <div className="absolute inset-0 bg-[var(--color-primary)]/25" />
@@ -501,12 +491,10 @@ export default function Media() {
                 setLightbox({ images: pressImages, index: featuredIndex })
               }
             >
-              <Image
-                src={galleryItems[featuredIndex].img}
+              <Image src={galleryItems[featuredIndex].img}
                 alt="Press coverage featured"
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+                className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
 
               {/* Zoom on hover */}
               <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">

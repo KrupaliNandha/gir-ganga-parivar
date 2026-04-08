@@ -12,27 +12,6 @@ import { motion } from "framer-motion";
 import data from "@/data/water-data.json";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
-// const LAKES = [
-//   { id: 1, lat: 22.32, lng: 70.68, name: "Aji Dam Lake" },
-//   { id: 2, lat: 22.48, lng: 70.62, name: "Nyari Lake" },
-//   { id: 3, lat: 22.55, lng: 70.55, name: "Paddhari Lake" },
-//   { id: 4, lat: 22.45, lng: 70.42, name: "Jamnagar Road Lake" },
-//   { id: 5, lat: 22.38, lng: 70.48, name: "Kalavad Lake" },
-//   { id: 6, lat: 22.28, lng: 70.52, name: "Lodhika Lake" },
-//   { id: 7, lat: 22.25, lng: 70.45, name: "SH323 Lake 1" },
-//   { id: 8, lat: 22.24, lng: 70.47, name: "SH323 Lake 2" },
-//   { id: 9, lat: 22.3, lng: 70.82, name: "East Lake 1" },
-//   { id: 10, lat: 22.31, lng: 70.8, name: "East Lake 2" },
-//   { id: 11, lat: 22.33, lng: 70.83, name: "Cholaa Lake" },
-// ];
-
-// const CHECK_DAMS = [
-//   { id: 1, lat: 22.305, lng: 70.78, name: "Check Dam 1" },
-//   { id: 2, lat: 22.315, lng: 70.79, name: "Check Dam 2" },
-//   { id: 3, lat: 22.295, lng: 70.785, name: "Check Dam 3" },
-//   { id: 4, lat: 22.32, lng: 70.77, name: "Check Dam 4" },
-// ];
-
 // ── Stats data ────────────────────────────────────────────────────────────────
 const STATS = [
   {
@@ -81,11 +60,7 @@ const STATS = [
   },
 ];
 
-// ── Typed marker extension ────────────────────────────────────────────────────
-type GGPTMarker = LeafletMarker & {
-  _ggptType: "lake" | "dam";
-  _ggptName: string;
-};
+
 
 // ── Count-up hook ─────────────────────────────────────────────────────────────
 function useCountUp(target: number, duration = 2000, start = false) {
@@ -183,15 +158,22 @@ export default function OurWorkPage() {
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<LeafletMap | null>(null);
-  const markersRef = useRef<GGPTMarker[]>([]);
-
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  type MapMarkerData = {
+    marker: LeafletMarker;
+    type: "lake" | "dam";
+    name: string;
+  };
+  const markersRef = useRef<MapMarkerData[]>([]);
+
   type RawItem = {
+    NO?: number;
     "Type of dam"?: string;
-    "Gratitude Latitude"?: string;
     VILLAGE?: string;
-    [key: string]: string | number | undefined;
+    TALUKO?: string;
+    DISTRICT?: string;
+    "Gratitude Latitude"?: string;
   };
 
   type SheetData = {
@@ -215,7 +197,10 @@ export default function OurWorkPage() {
     return { lat, lng };
   };
 
-  const raw: RawItem[] = [...(data.Sheet1 || []), ...(data.Sheet2 || [])];
+  const raw: RawItem[] = [
+    ...((data.Sheet1 as unknown as RawItem[]) || []),
+    ...((data.Sheet2 as unknown as RawItem[]) || []),
+  ];
 
   // ✅ LAKES
   const LAKES: MapPoint[] = raw
@@ -317,10 +302,11 @@ export default function OurWorkPage() {
         `,
           )
           .addTo(map);
-        const ggptMarker = marker as GGPTMarker;
-        ggptMarker._ggptType = "lake";
-        ggptMarker._ggptName = lake.name.toLowerCase();
-        markersRef.current.push(ggptMarker);
+        markersRef.current.push({
+          marker,
+          type: "lake",
+          name: lake.name.toLowerCase(),
+        });
       });
 
       CHECK_DAMS.forEach((dam: MapPoint) => {
@@ -334,10 +320,11 @@ export default function OurWorkPage() {
         `,
           )
           .addTo(map);
-        const ggptMarker = marker as GGPTMarker;
-        ggptMarker._ggptType = "dam";
-        ggptMarker._ggptName = dam.name.toLowerCase();
-        markersRef.current.push(ggptMarker);
+        markersRef.current.push({
+          marker,
+          type: "dam",
+          name: dam.name.toLowerCase(),
+        });
       });
     })();
 
@@ -353,13 +340,12 @@ export default function OurWorkPage() {
     const map = mapInstanceRef.current;
     if (!map) return;
 
-    markersRef.current.forEach((marker) => {
+    markersRef.current.forEach(({ marker, type, name }) => {
       const matchesSearch =
-        !searchQuery || marker._ggptName.includes(searchQuery.toLowerCase());
+        !searchQuery || name.includes(searchQuery.toLowerCase());
       const shouldShow =
         matchesSearch &&
-        ((marker._ggptType === "lake" && showLakes) ||
-          (marker._ggptType === "dam" && showDams));
+        ((type === "lake" && showLakes) || (type === "dam" && showDams));
 
       if (shouldShow) {
         if (!map.hasLayer(marker)) marker.addTo(map);
@@ -384,9 +370,8 @@ export default function OurWorkPage() {
   const filteredCount = mounted
     ? markersRef.current.filter(
         (m) =>
-          m._ggptName.includes(searchQuery.toLowerCase()) &&
-          ((m._ggptType === "lake" && showLakes) ||
-            (m._ggptType === "dam" && showDams)),
+          m.name.includes(searchQuery.toLowerCase()) &&
+          ((m.type === "lake" && showLakes) || (m.type === "dam" && showDams)),
       ).length
     : 0;
 
@@ -640,29 +625,7 @@ export default function OurWorkPage() {
               </h1>
 
               <div className="mt-8">
-                {/* <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className=""
-                >
-                  <Link href="/impact">
-                    <button
-                      type="submit"
-                      className="btn-secondary  group relative inline-flex items-center justify-center gap-2
-      font-semibold text-base px-10 py-4 cursor-pointer
-      bg-[var(--color-secondary)] text-[var(--color-primary)]
-      hover:text-[var(--color-secondary)] overflow-hidden"
-                    >
-                      <span className="relative z-10 flex gap-2 items-center">
-                        Explore Our Impact <ArrowUpRight size={15} />
-                      </span>
 
-                      <span className="btn-secondary-overlay"></span>
-                    </button>
-                  </Link>
-                </motion.div> */}
 
                 <div className="w-full flex justify-center ">
                   <Link
@@ -959,12 +922,10 @@ export default function OurWorkPage() {
                   >
                     {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={img}
+                      <Image src={img}
                         alt={label}
                         fill
-                        className="object-cover h-auto group-hover:scale-105 transition-transform duration-500 brightness-75"
-                      />
+                        className="object-cover h-auto group-hover:scale-105 transition-transform duration-500 brightness-75" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}
@@ -1037,13 +998,11 @@ export default function OurWorkPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Image Instead of Map */}
               <motion.div>
-                <Image
-                  src="/image/home/Our Approach.png"
+                <Image src="/image/home/Our Approach.png"
                   alt="Gujarat Impact Map"
                   width={800}
                   height={500}
-                  className="w-full h-auto object-contain mx-auto"
-                />
+                  className="w-full h-auto object-contain mx-auto" quality={75} />
               </motion.div>
 
               {/* Highlights */}

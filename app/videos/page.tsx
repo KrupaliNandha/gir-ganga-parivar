@@ -158,7 +158,7 @@ function VideoCard({ video, onPlay }: { video: Video; onPlay: () => void }) {
       <div className="relative w-full sm:w-48 md:w-56 flex-shrink-0 order-first sm:order-last">
         {/* Fixed-height on mobile so card doesn't collapse */}
         <div className="relative h-44 sm:h-full min-h-[160px]">
-          <Image src={thumb} alt={video.title} fill className="object-cover" />
+          <Image src={thumb} alt={video.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="bg-[var(--color-primary)] w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg">

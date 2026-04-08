@@ -75,8 +75,7 @@ function DetailLayout({
                 {/* Main Image */}
                 <div className="relative rounded-3xl overflow-hidden aspect-square bg-[var(--color-tertiary)] shadow-xl border-2 border-[var(--color-dark)]">
                   {activeImg ? (
-                    <img
-                      src={activeImg}
+                    <img loading="lazy" src={activeImg}
                       alt={title}
                       className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                     />
@@ -108,8 +107,7 @@ function DetailLayout({
                             : "border-[var(--color-dark)] hover:border-[var(--color-primary)] opacity-60 hover:opacity-100"
                         }`}
                       >
-                        <img
-                          src={src}
+                        <img loading="lazy" src={src}
                           alt=""
                           className="w-full h-full object-cover"
                         />
@@ -305,8 +303,7 @@ function DetailLayout({
                     {/* Image or placeholder */}
                     <div className="relative  overflow-hidden bg-[#E6F7FB]">
                       {item.img ? (
-                        <img
-                          src={item.img}
+                        <img loading="lazy" src={item.img}
                           alt={item.title}
                           className="w-full  object-cover group-hover:scale-105 transition-transform duration-500"
                         />

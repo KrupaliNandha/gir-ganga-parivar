@@ -34,13 +34,11 @@ export default function Footer() {
               <Link href="/">
                 <div className="flex items-center  mb-5 cursor-pointer">
                   <div className="rounded-xl p-1 flex-shrink-0 backdrop-blur-sm">
-                    <Image
-                      src="/image/logo.png"
+                    <Image src="/image/logo.png"
                       alt="Girganga Parivar Trust"
                       width={66}
                       height={66}
-                      className="object-contain"
-                    />
+                      className="object-contain" quality={75} />
                   </div>
                   <div>
                     <p className="text-black font-black text-base leading-tight">

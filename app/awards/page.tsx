@@ -113,13 +113,11 @@ function AwardCard({
     >
       {/* Image Container with Hover Overlay & Plus Sign */}
       <div className="relative w-full h-72 overflow-hidden">
-        <Image
-          src={award.image}
+        <Image src={award.image}
           alt={award.title}
           fill
           
-          className="object-cover transition-transform duration-300"
-        />
+          className="object-cover transition-transform duration-300" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
 
         {/* Hover Overlay with Plus Sign */}
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -265,13 +263,11 @@ export default function AwardsSection() {
               className="relative max-w-7xl w-full h-[80vh] flex items-center justify-center"
               onClick={(e) => e.stopPropagation()} 
             >
-              <Image
-                src={selectedImg}
+              <Image src={selectedImg}
                 alt="Award Zoom"
                 fill
                 className="object-contain rounded-2xl"
-                priority
-              />
+                priority sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
             </motion.div>
           </motion.div>
         )}

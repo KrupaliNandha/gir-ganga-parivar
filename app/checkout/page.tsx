@@ -358,13 +358,11 @@ export default function DonationCheckout() {
                   {/* Item row */}
                   <div className="flex items-center gap-4 pb-5 border-b border-[var(--color-dark)]">
                     <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
-                      <Image
-                        src={cartItem.img}
+                      <Image src={cartItem.img}
                         alt={cartItem.title}
                         width={100}
                         height={100}
-                        className="object-cover rounded-2xl h-14"
-                      />
+                        className="object-cover rounded-2xl h-14" quality={75} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-black text-gray-900 leading-snug line-clamp-2">

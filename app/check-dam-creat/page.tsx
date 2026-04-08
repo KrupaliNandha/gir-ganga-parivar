@@ -99,12 +99,10 @@ function HeroSlider() {
           transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
           className="absolute inset-0"
         >
-          <Image
-            src={images[current].src}
+          <Image src={images[current].src}
             alt={images[current].title}
             fill
-            className="w-full h-full object-cover"
-          />
+            className="w-full h-full object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
@@ -174,13 +172,11 @@ function GalleryCard({ img, i }: { img: { src: string; title: string; tag: strin
       className={`group relative overflow-hidden rounded-2xl cursor-pointer ${isTall ? "sm:row-span-2" : ""}`}
       
     >
-      <Image
-        src={img.src}
+      <Image src={img.src}
         alt={img.title}
         fill
         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-        style={{ position: "absolute", inset: 0 }}
-      />
+        style={{ position: "absolute", inset: 0 }} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
 
       {/* Dark layer */}
       <div className="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-stone-900/10 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-400" />
@@ -262,12 +258,10 @@ export default function Media() {
                 transition={{ duration: 0.45, delay: (i % 2) * 0.08 }}
                 className="group relative overflow-hidden rounded-2xl h-56 cursor-pointer"
               >
-                <Image
-                  src={img.src}
+                <Image src={img.src}
                   alt={img.title}
                   fill
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 absolute inset-0"
-                />
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 absolute inset-0" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <h3 className="text-white text-sm font-semibold leading-tight">
@@ -319,12 +313,10 @@ export default function Media() {
               className="relative"
             >
               <div className="group relative h-[420px] rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/image/check-dam-creat/Location.jpg"
+                <Image src="/image/check-dam-creat/Location.jpg"
                   alt="Check Dam Location"
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                  className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 via-transparent to-transparent" />
 
                 {/* Floating label */}

@@ -474,13 +474,11 @@ export default function Support() {
                     key={index}
                     className="bg-white rounded-2xl shadow-md p-3 mg:p-6 hover:shadow-lg transition"
                   >
-                    <Image
-                      src={item.image}
+                    <Image src={item.image}
                       alt={item.title}
                       width={600}
                       height={400}
-                      className="w-full h-auto object-contain mb-4 rounded-2xl"
-                    />
+                      className="w-full h-auto object-contain mb-4 rounded-2xl" quality={75} />
 
                     <h3 className="text-xl font-semibold mb-2 text-[var(--color-primary)]">
                       {item.title}

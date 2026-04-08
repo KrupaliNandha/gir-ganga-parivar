@@ -6,23 +6,22 @@ export default function CountUp({
   end,
   duration = 1000,
 }: {
-  end: number | string;
+  end: number;
   duration?: number;
 }) {
-  const target = Number(end); // 👈 force number
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (isNaN(target)) return; // 👈 stop if invalid
+    if (isNaN(end)) return;
 
     let start = 0;
-    const increment = target / (duration / 16);
+    const increment = end / (duration / 16);
 
     const timer = setInterval(() => {
       start += increment;
 
-      if (start >= target) {
-        setCount(target);
+      if (start >= end) {
+        setCount(end);
         clearInterval(timer);
       } else {
         setCount(Math.floor(start));
@@ -30,7 +29,7 @@ export default function CountUp({
     }, 16);
 
     return () => clearInterval(timer);
-  }, [target, duration]);
+  }, [end, duration]);
 
   return <>{count}</>;
 }

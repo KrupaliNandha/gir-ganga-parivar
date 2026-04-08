@@ -101,13 +101,11 @@ export default function Products() {
                 className="relative w-full group"
               >
                 {/* Image */}
-                <Image
-                  src={item.img}
+                <Image src={item.img}
                   alt={item.img || "Project image"}
                   width={500}
                   height={500}
-                  className="w-full h-full object-cover border p-3 shadow-lg rounded-xl"
-                />
+                  className="w-full h-full object-cover border p-3 shadow-lg rounded-xl" quality={75} />
               </div>
             ))}
           </section>

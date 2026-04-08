@@ -18,14 +18,11 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // ✅ FIX: Separate states for desktop and mobile
-  const [desktopWorkOpen, setDesktopWorkOpen] = useState(false);
   const [desktopMediaOpen, setDesktopMediaOpen] = useState(false);
-  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
   const [mobileMediaOpen, setMobileMediaOpen] = useState(false);
 
   const [scrolled, setScrolled] = useState(false);
 
-  const workRef = useRef<HTMLLIElement>(null);
   const mediaRef = useRef<HTMLLIElement>(null);
 
   const isActive = (path: string) => pathname === path;
@@ -36,8 +33,6 @@ export default function Navbar() {
   /* close dropdowns on outside click */
   useEffect(() => {
     const handle = (e: MouseEvent) => {
-      if (workRef.current && !workRef.current.contains(e.target as Node))
-        setDesktopWorkOpen(false);
       if (mediaRef.current && !mediaRef.current.contains(e.target as Node))
         setDesktopMediaOpen(false);
     };
@@ -59,7 +54,6 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = "auto";
       // ✅ Reset mobile dropdowns when menu closes
-      setMobileWorkOpen(false);
       setMobileMediaOpen(false);
     }
     return () => {
@@ -191,14 +185,12 @@ export default function Navbar() {
             href="/"
             className="flex flex-col items-center py-3 "
           >
-            <Image
-              src="/image/logo.png"
+            <Image src="/image/logo.png"
               alt="Gir Ganga Parivar Trust"
               width={66}
               height={66}
               className="object-contain"
-              priority
-            />
+              priority quality={75} />
            
               <span className="block h-px w-4 bg-slate-300" />
               <span className="text-[8px] font-black tracking-[0.28em] uppercase text-slate-400 whitespace-nowrap">
@@ -270,7 +262,6 @@ export default function Navbar() {
                 href="/media"
                 onClick={() => {
                   setDesktopMediaOpen(!desktopMediaOpen);
-                  setDesktopWorkOpen(false);
                 }}
                 className={`${linkCls(isMediaActive ? "/media" : "")} gap-1 flex items-center`}
               >
@@ -450,13 +441,11 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
             className="flex flex-col items-center"
           >
-            <Image
-              src="/image/logo.png"
+            <Image src="/image/logo.png"
               alt="Gir Ganga Parivar Trust"
               width={66}
               height={66}
-              className="object-contain"
-            />
+              className="object-contain" quality={75} />
             <div className="flex items-center gap-1.5 mt-1">
               <span className="h-px w-4 bg-slate-300 block" />
               <span className="text-[8px] font-black tracking-[0.28em] uppercase text-slate-400">
@@ -520,7 +509,7 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Our Work — ✅ uses mobileWorkOpen ONLY */}
+          {/* Our Work */}
           <li>
             <Link
               href="/Our-Work"
@@ -574,7 +563,6 @@ export default function Navbar() {
                 onClick={() => {
                   setMenuOpen(false);
                   setMobileMediaOpen(false);
-                  setMobileWorkOpen(false);
                 }}
                 className={`text-lg font-bold tracking-wide flex-1 ${
                   isMediaActive
@@ -591,7 +579,6 @@ export default function Navbar() {
                 onClick={(e) => {
                   e.stopPropagation(); // 👈 important
                   setMobileMediaOpen((prev) => !prev);
-                  setMobileWorkOpen(false);
                 }}
                 className="pl-4 py-1"
               >

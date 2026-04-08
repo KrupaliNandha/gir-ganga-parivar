@@ -326,19 +326,7 @@ export default function AboutPage() {
                 foundation for sustainable development.
               </motion.p>
 
-              {/* <motion.div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <Link
-                  href="/donate"
-                  className="btn-primary group inline-flex items-center gap-2 font-semibold text-base px-9 py-4 bg-[var(--color-primary)] text-[var(--color-secondary)] hover:text-[var(--color-primary)]"
-                >
-                  <span className="relative z-10">Support Us</span>
-                  <ArrowRight
-                    size={16}
-                    className="relative z-10 group-hover:translate-x-1 transition-transform"
-                  />
-                  <span className="btn-primary-overlay" />
-                </Link>
-              </motion.div> */}
+
               <div className="w-full flex justify-center lg:justify-start">
                 <Link
                   href="/donate"
@@ -367,12 +355,10 @@ export default function AboutPage() {
               {/* Mobile */}
               <div className="grid grid-cols-2 gap-3 lg:hidden">
                 <motion.div className="relative h-44 rounded-2xl overflow-hidden shadow-lg col-span-2">
-                  <Image
-                    src="/image/About page/hiraba after.png"
+                  <Image src="/image/About page/hiraba after.png"
                     alt="Water conservation"
                     fill
-                    className="object-cover"
-                  />
+                    className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute bottom-3 left-3 bg-white rounded-xl shadow px-3 py-2">
                     <p className="text-[10px] font-bold text-[var(--color-primary)]">
@@ -381,52 +367,42 @@ export default function AboutPage() {
                   </div>
                 </motion.div>
                 <motion.div className="relative h-50 rounded-2xl overflow-hidden shadow-md">
-                  <Image
-                    src="/image/About page/jibiyaa after.png"
+                  <Image src="/image/About page/jibiyaa after.png"
                     alt="Check dam"
                     fill
-                    className="object-cover"
-                  />
+                    className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                 </motion.div>
                 <motion.div className="relative h-50 rounded-2xl overflow-hidden shadow-md">
-                  <Image
-                    src="/image/About page/pavitram after.png"
+                  <Image src="/image/About page/pavitram after.png"
                     alt="Farmers"
                     fill
-                    className="object-cover"
-                  />
+                    className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                 </motion.div>
               </div>
 
               {/* Desktop collage */}
               <div className="relative h-[620px] hidden lg:block">
                 <motion.div className="absolute right-0 top-0 w-[75%] h-[55%] rounded-3xl overflow-hidden shadow-xl">
-                  <Image
-                    src="/image/About page/hiraba after.png"
+                  <Image src="/image/About page/hiraba after.png"
                     alt="Check dam"
                     fill
-                    className="object-cover"
-                  />
+                    className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                 </motion.div>
                 <motion.div className="absolute left-0 bottom-0 w-[72%] h-[62%] rounded-3xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="/image/About page/jibiyaa after.png"
+                  <Image src="/image/About page/jibiyaa after.png"
                     alt="Water conservation"
                     fill
-                    className="object-cover"
-                  />
+                    className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </motion.div>
                 <motion.div
                   transition={{ delay: 0.3 }}
                   className="absolute right-2 bottom-[18%] w-[32%] h-[28%] rounded-2xl overflow-hidden shadow-xl border-2 border-white"
                 >
-                  <Image
-                    src="/image/About page/pavitram after.png"
+                  <Image src="/image/About page/pavitram after.png"
                     alt="Farmers"
                     fill
-                    className="object-cover"
-                  />
+                    className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 12, scale: 0.9 }}
@@ -584,8 +560,7 @@ export default function AboutPage() {
                         key={sdg.label}
                         className="flex  items-center w-70 gap-2 px-2 py-2  rounded-2xl border border-[var(--color-primary)]/30 bg-white shadow-sm hover:shadow-md transition"
                       >
-                        <img
-                          src={sdg.img}
+                        <img loading="lazy" src={sdg.img}
                           alt={sdg.label}
                           className="w-15 h-15 rounded-xl object-contain"
                         />
@@ -734,15 +709,6 @@ export default function AboutPage() {
                       it the world’s first mass public water conservation pledge
                       through a Jal Katha event.
                     </p>
-
-                    {/* ✅ Certificate Image */}
-                    {/* <div className="mt-5">
-                      <img
-                        src="/image/certificate/world-record.png" // 👈 your image path
-                        alt="World Record Certificate"
-                        className="w-32 md:w-40 rounded-lg shadow-md border border-white/20"
-                      />
-                    </div> */}
                   </div>
 
                   {/* RIGHT LIST */}
@@ -840,8 +806,7 @@ export default function AboutPage() {
                   >
                     <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[var(--color-tertiary)] flex items-center justify-center">
                       {item.type === "image" ? (
-                        <img
-                          src={item.src}
+                        <img loading="lazy" src={item.src}
                           alt="icon"
                           className="w-12 h-12 object-contain"
                         />
@@ -917,8 +882,7 @@ export default function AboutPage() {
               <div className="flex justify-center lg:justify-end">
                 <div className="relative w-60 h-60 md:w-100 md:h-100 rounded-full bg-[var(--color-primary)] p-2 shadow-2xl ">
                   {/* Profile Image */}
-                  <img
-                    src="/image/About page/SNI_7828.JPG"
+                  <img loading="lazy" src="/image/About page/SNI_7828.JPG"
                     alt="Dilipbhai Sakhiya"
                     className="w-full h-full object-cover rounded-full border-4 border-white"
                   />
@@ -978,8 +942,7 @@ export default function AboutPage() {
                   >
                     {/* Image */}
                     <div className="relative h-auto overflow-hidden">
-                      <img
-                        src={item.img}
+                      <img loading="lazy" src={item.img}
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                       />
@@ -1024,12 +987,10 @@ export default function AboutPage() {
                   <div className="absolute w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] md:w-[360px] md:h-[360px] rounded-full border border-[var(--color-primary)]/50" />
 
                   <div className="relative w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden shadow-2xl shadow-emerald-900/20 border-4 border-white z-10">
-                    <Image
-                      src="/image/About page/mission (1).jpeg"
+                    <Image src="/image/About page/mission (1).jpeg"
                       alt="Water conservation work"
                       fill
-                      className="object-cover"
-                    />
+                      className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                   </div>
 
                   {/* Stat badge — top right */}

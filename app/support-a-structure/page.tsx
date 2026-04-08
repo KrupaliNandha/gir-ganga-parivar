@@ -196,12 +196,10 @@ export default function SupportAStructure() {
             </div>
 
             <div className="relative rounded-3xl overflow-hidden shadow-md aspect-[5/2]">
-              <Image
-                src="/image/Suport-image.png"
+              <Image src="/image/Suport-image.png"
                 alt="Water Conservation Structures"
                 fill
-                className="object-cover w-full h-auto"
-              />
+                className="object-cover w-full h-auto" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
               <div className="absolute bottom-6 left-6 bg-[var(--color-secondary)] backdrop-blur-sm text-black text-sm font-medium px-5 py-2 rounded-full border border-white/20">
                 GGPT Field Operations — Gujarat, India
               </div>
@@ -233,13 +231,11 @@ export default function SupportAStructure() {
                     {s.number}
                   </span>
                   <div className="w-14 h-14 bg-[var(--color-primary)] border border-[var(--color-primary)]/20 rounded-2xl flex items-center justify-center group-hover:bg-[var(--color-primary)]/20 ">
-                    <Image
-                      src={s.icon}
+                    <Image src={s.icon}
                       alt={s.alt}
                       width={45}
                       height={32}
-                      className="object-contain w-10 h-8"
-                    />
+                      className="object-contain w-10 h-8" quality={75} />
                   </div>
                   <div>
                     <h3 className="text-[var(--color-primary)] text-xl font-bold leading-snug mb-2">
@@ -521,13 +517,11 @@ ${
                 className="relative flex justify-center"
               >
                 {/* IMAGE */}
-                <Image
-                  src="/image/support-a-structure/water-structure.png"
+                <Image src="/image/support-a-structure/water-structure.png"
                   alt="Water Structure"
                   width={700}
                   height={200}
-                  className="w-full h-auto lg:h-150  object-cover rounded-2xl shadow-xl"
-                />
+                  className="w-full h-auto lg:h-150  object-cover rounded-2xl shadow-xl" quality={75} />
 
                 {/* IMPACT CARD */}
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[var(--color-secondary)] text-white px-6 py-4 rounded-2xl shadow-lg text-center hidden md:block">
@@ -597,13 +591,11 @@ ${
                 <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-xl border border-[var(--color-primary)]/20 flex flex-col md:flex-row">
                   {/* LEFT IMAGE */}
                   <div className="md:w-2/5 relative">
-                    <Image
-                      src="/image/partner-with-us-csr/CSRform.png"
+                    <Image src="/image/partner-with-us-csr/CSRform.png"
                       alt="Water structure construction"
                       width={800}
                       height={315}
-                      className="w-full h-auto object-cover"
-                    />
+                      className="w-full h-auto object-cover" quality={75} />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/60 to-transparent" />
 
@@ -819,12 +811,10 @@ ${
                   >
                     {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={img}
+                      <Image src={img}
                         alt={label}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-75"
-                      />
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-75" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111815] via-transparent to-transparent" />
 
                       {/* Icon badge */}

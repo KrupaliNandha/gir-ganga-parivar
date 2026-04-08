@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Slider() {
-  const sliderRef = useRef<HTMLDivElement>(null);
-
   const sliders = [
     "/logos/Associate Allied Chemicals_logo.png",
     "/logos/Balaji Multiflex_logo.jpg",
@@ -22,54 +20,36 @@ export default function Slider() {
     "/logos/Vitrag Foundation_logos.png"
   ];
 
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-
-    let animationId: number;
-
-    const scroll = () => {
-      slider.scrollLeft += 1;
-
-      // Reset when end reached
-      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-        slider.scrollLeft = 0;
-      }
-
-      animationId = requestAnimationFrame(scroll);
-    };
-
-    animationId = requestAnimationFrame(scroll);
-
-    return () => cancelAnimationFrame(animationId);
-  }, []);
-
   return (
-    <div
-      
-      className="container section-padding w-full overflow-hidden "
-    >
+    <div className="container section-padding w-full overflow-hidden">
       <div>
         <h1 className="text-4xl md:text-5xl font-bold text-center text-[var(--color-primary)] mb-4">
           Our Partners
         </h1>
       
-        <div
-          ref={sliderRef}
-          className="flex gap-10 md:gap-20 lg:gap-30 xl:gap-40 overflow-x-hidden whitespace-nowrap pt-10"
-        >
-          {/* duplicate images for seamless loop */}
-          {[...sliders, ...sliders, ...sliders].map((src, index) => (
-            <div key={index} className="min-w-[220px] flex justify-center">
-              <Image
-                src={src}
-                alt="brand logo"
-                width={120}
-                height={100}
-                className="object-contain"
-              />
-            </div>
-          ))}
+        <div className="flex pt-10">
+          <motion.div
+            className="flex gap-10 md:gap-20 lg:gap-30 xl:gap-40"
+            animate={{ x: ["0%", "-33.33%"] }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 30, // Smooth scrolling speed
+              ease: "linear",
+            }}
+            style={{ width: "max-content" }}
+          >
+            {/* duplicate images for seamless CSS-based loop without React state thrashing */}
+            {[...sliders, ...sliders, ...sliders].map((src, index) => (
+              <div key={index} className="min-w-[220px] shrink-0 flex justify-center">
+                <Image src={src}
+                  alt="brand logo"
+                  width={120}
+                  height={100}
+                  className="object-contain" quality={75} />
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     

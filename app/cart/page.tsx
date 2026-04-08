@@ -106,13 +106,11 @@ export default function CartPage() {
                 {/* Product Info */}
                 <div className="flex flex-col lg:flex-row items-center gap-4 w-full min-w-0">
                   <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-[var(--color-dark)] flex-shrink-0 bg-[var(--color-tertiary)]">
-                    <Image
-                      src={cartItem.img}
+                    <Image src={cartItem.img}
                       alt={cartItem.title}
                       width={100}
                       height={100}
-                      className="object-cover rounded-2xl h-20 w-20"
-                    />
+                      className="object-cover rounded-2xl h-20 w-20" quality={75} />
                   </div>
                   <div className="min-w-0">
                     <div className="justify-self-center lg:justify-self-start">

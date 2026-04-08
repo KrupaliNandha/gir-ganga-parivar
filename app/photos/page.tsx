@@ -162,12 +162,10 @@ function Lightbox({
         className="relative w-[90vw] h-[80vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        <Image
-          src={images[current]}
+        <Image src={images[current]}
           alt="preview"
           fill
-          className="object-contain"
-        />
+          className="object-contain" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
       </div>
     </div>
   );
@@ -224,12 +222,10 @@ export default function Photos() {
                 onClick={() => setLightbox({ images: imageList, index })}
                 className={`relative overflow-hidden rounded-lg group cursor-pointer ${pattern}`}
               >
-                <Image
-                  src={item.img}
+                <Image src={item.img}
                   alt={item.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                  className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition flex items-end">
