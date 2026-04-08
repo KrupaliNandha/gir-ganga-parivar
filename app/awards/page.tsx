@@ -60,8 +60,8 @@ const awards: Award[] = [
     id: 6,
     title: "Jal Sanchay & Jan Bhagidari Award",
     image: "/image/Award/jan bhagidari award.png",
-    dic: "Jal Shanay & Jan Bhagidari Award",
-    badge: "Jal Shanay & Jan Bhagidari Award",
+    dic: "Jal Sanchay & Jan Bhagidari Award",
+    badge: "Jal Sanchay & Jan Bhagidari Award",
     year: "2025",
   },
 ];
