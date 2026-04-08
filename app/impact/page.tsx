@@ -86,12 +86,21 @@ const BeforeAfterImage = ({
         style={{ opacity: hovered ? 0 : 1 }}
       >
         {useNextImage ? (
-          <Image src={before} alt="Before" fill className="object-cover" />
+          <Image
+            src={before}
+            alt="Before"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={75}
+            loading="lazy"
+          />
         ) : (
           <img
             src={before}
             alt="Before"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
         )}
       </div>
@@ -102,9 +111,22 @@ const BeforeAfterImage = ({
         style={{ opacity: hovered ? 1 : 0 }}
       >
         {useNextImage ? (
-          <Image src={after} alt="After" fill className="object-cover" />
+          <Image
+            src={after}
+            alt="After"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={75}
+            loading="lazy"
+          />
         ) : (
-          <img src={after} alt="After" className="w-full h-full object-cover" />
+          <img 
+            src={after} 
+            alt="After" 
+            className="w-full h-full object-cover" 
+            loading="lazy"
+          />
         )}
       </div>
 
