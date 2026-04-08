@@ -115,7 +115,7 @@ const approaches = [
 ───────────────────────────────────────────── */
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
-  const statsRef = useRef(null);
+  const statsRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
