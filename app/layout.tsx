@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "GirGanga parivar Trust",
+    default: "Girganga parivar Trust",
     template: "%s - Gir Ganga parivar Trust",
   },
   description: "Gir Ganga parivar Trust official website",

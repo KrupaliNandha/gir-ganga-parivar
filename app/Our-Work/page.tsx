@@ -9,28 +9,29 @@ import { Droplets, Sprout, Users, Building2, ArrowUpRight } from "lucide-react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import SmoothScroll from "../../Component/SmothScrolling";
 import { motion } from "framer-motion";
+import data from "@/data/water-data.json";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
-const LAKES = [
-  { id: 1, lat: 22.32, lng: 70.68, name: "Aji Dam Lake" },
-  { id: 2, lat: 22.48, lng: 70.62, name: "Nyari Lake" },
-  { id: 3, lat: 22.55, lng: 70.55, name: "Paddhari Lake" },
-  { id: 4, lat: 22.45, lng: 70.42, name: "Jamnagar Road Lake" },
-  { id: 5, lat: 22.38, lng: 70.48, name: "Kalavad Lake" },
-  { id: 6, lat: 22.28, lng: 70.52, name: "Lodhika Lake" },
-  { id: 7, lat: 22.25, lng: 70.45, name: "SH323 Lake 1" },
-  { id: 8, lat: 22.24, lng: 70.47, name: "SH323 Lake 2" },
-  { id: 9, lat: 22.3, lng: 70.82, name: "East Lake 1" },
-  { id: 10, lat: 22.31, lng: 70.8, name: "East Lake 2" },
-  { id: 11, lat: 22.33, lng: 70.83, name: "Cholaa Lake" },
-];
+// const LAKES = [
+//   { id: 1, lat: 22.32, lng: 70.68, name: "Aji Dam Lake" },
+//   { id: 2, lat: 22.48, lng: 70.62, name: "Nyari Lake" },
+//   { id: 3, lat: 22.55, lng: 70.55, name: "Paddhari Lake" },
+//   { id: 4, lat: 22.45, lng: 70.42, name: "Jamnagar Road Lake" },
+//   { id: 5, lat: 22.38, lng: 70.48, name: "Kalavad Lake" },
+//   { id: 6, lat: 22.28, lng: 70.52, name: "Lodhika Lake" },
+//   { id: 7, lat: 22.25, lng: 70.45, name: "SH323 Lake 1" },
+//   { id: 8, lat: 22.24, lng: 70.47, name: "SH323 Lake 2" },
+//   { id: 9, lat: 22.3, lng: 70.82, name: "East Lake 1" },
+//   { id: 10, lat: 22.31, lng: 70.8, name: "East Lake 2" },
+//   { id: 11, lat: 22.33, lng: 70.83, name: "Cholaa Lake" },
+// ];
 
-const CHECK_DAMS = [
-  { id: 1, lat: 22.305, lng: 70.78, name: "Check Dam 1" },
-  { id: 2, lat: 22.315, lng: 70.79, name: "Check Dam 2" },
-  { id: 3, lat: 22.295, lng: 70.785, name: "Check Dam 3" },
-  { id: 4, lat: 22.32, lng: 70.77, name: "Check Dam 4" },
-];
+// const CHECK_DAMS = [
+//   { id: 1, lat: 22.305, lng: 70.78, name: "Check Dam 1" },
+//   { id: 2, lat: 22.315, lng: 70.79, name: "Check Dam 2" },
+//   { id: 3, lat: 22.295, lng: 70.785, name: "Check Dam 3" },
+//   { id: 4, lat: 22.32, lng: 70.77, name: "Check Dam 4" },
+// ];
 
 // ── Stats data ────────────────────────────────────────────────────────────────
 const STATS = [
@@ -186,6 +187,74 @@ export default function OurWorkPage() {
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  type RawItem = {
+    "Type of dam"?: string;
+    "Gratitude Latitude"?: string;
+    VILLAGE?: string;
+    [key: string]: string | number | undefined;
+  };
+
+  type SheetData = {
+    Sheet1?: RawItem[];
+    Sheet2?: RawItem[];
+  };
+
+  type MapPoint = {
+    id: number;
+    lat: number;
+    lng: number;
+    name: string;
+  };
+
+  const parseLatLng = (str: string) => {
+    if (!str) return null;
+
+    const [lat, lng] = str.split(",").map(Number);
+    if (!lat || !lng) return null;
+
+    return { lat, lng };
+  };
+
+  const raw: RawItem[] = [...(data.Sheet1 || []), ...(data.Sheet2 || [])];
+
+  // ✅ LAKES
+  const LAKES: MapPoint[] = raw
+    .filter(
+      (item: RawItem) =>
+        (item["Type of dam"] || "").toLowerCase().includes("lake") ||
+        (item["Type of dam"] || "").toLowerCase().includes("sarovar"),
+    )
+    .map((item: RawItem, i: number) => {
+      const coords = parseLatLng(item["Gratitude Latitude"] || "");
+      if (!coords) return null;
+
+      return {
+        id: i + 1,
+        lat: coords.lat,
+        lng: coords.lng,
+        name: item.VILLAGE || "Lake",
+      };
+    })
+    .filter((item): item is MapPoint => item !== null);
+
+  // ✅ CHECK DAMS
+  const CHECK_DAMS: MapPoint[] = raw
+    .filter((item: RawItem) =>
+      (item["Type of dam"] || "").toLowerCase().includes("check"),
+    )
+    .map((item: RawItem, i: number) => {
+      const coords = parseLatLng(item["Gratitude Latitude"] || "");
+      if (!coords) return null;
+
+      return {
+        id: i + 1,
+        lat: coords.lat,
+        lng: coords.lng,
+        name: item.VILLAGE || "Check Dam",
+      };
+    })
+    .filter((item): item is MapPoint => item !== null);
+
   // Step 1: mark client ready
   useEffect(() => {
     setMounted(true);
@@ -237,7 +306,7 @@ export default function OurWorkPage() {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
 
-      LAKES.forEach((lake) => {
+      LAKES.forEach((lake: MapPoint) => {
         const marker = L.marker([lake.lat, lake.lng], { icon: LAKE_ICON })
           .bindPopup(
             `
@@ -254,7 +323,7 @@ export default function OurWorkPage() {
         markersRef.current.push(ggptMarker);
       });
 
-      CHECK_DAMS.forEach((dam) => {
+      CHECK_DAMS.forEach((dam: MapPoint) => {
         const marker = L.marker([dam.lat, dam.lng], { icon: DAM_ICON })
           .bindPopup(
             `

@@ -663,7 +663,7 @@ export default function Contact() {
                       Location
                     </p>
                     <p className="text-xs font-bold text-gray-800">
-                      GirGanga Parivar Trust, Rajkot
+                      Girganga Parivar Trust, Rajkot
                     </p>
                   </div>
                 </motion.div>
