@@ -75,10 +75,15 @@ const BeforeAfterImage = ({
   return (
     <div
       className="relative w-full h-full cursor-pointer select-none"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onTouchStart={() => setHovered(true)}
-      onTouchEnd={() => setHovered(false)}
+      onPointerEnter={(e) => {
+        if (e.pointerType === "mouse") setHovered(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") setHovered(false);
+      }}
+      onClick={() => {
+        setHovered(!hovered);
+      }}
     >
       {/* BEFORE */}
       <div
