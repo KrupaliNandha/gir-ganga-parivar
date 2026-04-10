@@ -359,7 +359,7 @@ export default function JalMandirSection() {
               <div className="relative">
                 {/* glow behind image */}
                 <div className="absolute -inset-4 rounded-3xl bg-[var(--color-primary)]/10 blur-2xl" />
-                <Image src="/image/Impact/impact-dashboard.png"
+                <Image src="/image/home/GUJRAT MAP MAIN.jpg"
                   alt="Impact Dashboard"
                   width={680}
                   height={680}

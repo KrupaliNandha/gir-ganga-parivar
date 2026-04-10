@@ -371,7 +371,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Image Instead of Map */}
               <motion.div>
-                <Image src="/image/home/Our Approach.png"
+                <Image src="/image/home/GUJRAT MAP MAIN.jpg"
                   alt="Gujarat Impact Map"
                   width={800}
                   height={500}
