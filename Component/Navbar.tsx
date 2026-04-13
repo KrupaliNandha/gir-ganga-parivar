@@ -286,7 +286,7 @@ export default function Navbar() {
                   { label: "Photos", href: "/photos" },
                   { label: "Press Release", href: "/press-release" },
                   { label: "Videos", href: "/videos" },
-                  { label: "Certificates", href: "/certificates" },
+                  { label: "Reports", href: "/reports" },
                 ].map(({ label, href }) => (
                   <Link
                     key={href}
