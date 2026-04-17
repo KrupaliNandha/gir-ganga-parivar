@@ -5,30 +5,21 @@ import { motion } from "framer-motion";
 
 export default function Slider() {
   const sliders = [
-    "/logos/BALAJI WAFERS PVT LTD.png",
-    "/logos/BOMBAY SUPER HYBRID SEEDS LTD.jpg",
-    "/logos/DML GROUP.png",
-    "/logos/Decora Group.jpg",
-    "/logos/Emipro Technologies Private Limited.png",
-    "/logos/GOPAL SNACKS LTD.png",
-    "/logos/HI-BOND CEMENT PVT. LTD..avif",
-    "/logos/LADANI ASSOCIATES PVT LTD.png",
-    "/logos/ORBIT BEARING PVT  LTD.jpeg",
-    "/logos/PGVCL.png",
-    "/logos/PRASHANT CASTING PVT LTD.gif",
-    "/logos/RAJAN TECHNOFORGE PVT LTD.avif",
-    "/logos/RAJKOT MUNICIPAL CORPORATIONS.png",
-    "/logos/RAVI TECHNO FORGE PVT LTD.png",
-    "/logos/RBA.jpg",
-    "/logos/ROLEX RINGS LTD.jpg",
-    "/logos/SHAKTIMAN.png",
-    "/logos/SHREE GIRIRAJ HOSPITAL.png",
-    "/logos/TURBO BEARINGS PVT LTD.jpg",
-    "/logos/UGVCL.png",
-    "/logos/UNITY CEMENT PVT. LTD..png",
-    "/logos/VERMORA TILES PVT. LTD.png",
-    "/logos/VERSHIL PUMP PVT LTD.jpeg",
-    "/logos/ravi_technoforge_pvt_ltd_logo.jpeg",
+    "/logos/BALAJI_MULTIFLEX_PVT_LTD.png",
+    "/logos/BALAJI_WAFERS_PVT_LTD.png",
+    "/logos/Bombay_Super_Hybrid_Seeds_Limited.png",
+    "/logos/DML_GROUP.png",
+    "/logos/Emipro_Technologies_Pvt_Ltd.png",
+    "/logos/Four_square.png",
+    "/logos/GETCO.png",
+    "/logos/GOPAL_SNACKS_LTD.png",
+    "/logos/KSP_Auto_Forge_Pvt_Ltd.png",
+    "/logos/LADANI_ASSOCIATES_PVT_LTD.png",
+    "/logos/LEGACY_COMODITIES_PVT_LTD.png",
+    "/logos/MURLIDHAR_FAM.png",
+    "/logos/ORBIT_BEARING_PVT_LTD.png",
+    "/logos/RMC.png",
+    "/logos/ROTECH.png",
   ];
 
   return (
@@ -45,31 +36,26 @@ export default function Slider() {
             transition={{
               repeat: Infinity,
               repeatType: "loop",
-              duration: 30, // Smooth scrolling speed
+              duration: 90,
               ease: "linear",
             }}
             style={{ width: "max-content" }}
           >
-            {[...sliders, ...sliders, ...sliders].map((src, index) => {
-              const needsLargerSize =
-                src.includes("BOMBAY SUPER HYBRID SEEDS") ||
-                src.includes("Decora Group");
-
-              return (
+            {[...sliders, ...sliders, ...sliders].map((src, index) => (
               <div
                 key={index}
-                className="min-w-[220px] shrink-0 flex justify-center items-center"
+                className="relative flex justify-center items-center "
+                style={{ width: 140, height: 90 }}
               >
                 <Image
                   src={src}
                   alt="brand logo"
-                  width={needsLargerSize ? 160 : 120}
-                  height={needsLargerSize ? 140 : 100}
-                  className={`object-contain ${needsLargerSize ? "scale-125" : ""}`}
+                  fill
+                  className="object-contain"
                   quality={75}
                 />
               </div>
-            )})}
+            ))}
           </motion.div>
         </div>
       </div>

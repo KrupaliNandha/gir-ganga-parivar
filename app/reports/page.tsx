@@ -5,12 +5,12 @@ import SmoothScroll from "../../Component/SmothScrolling";
 import { FaFilePdf, FaExternalLinkAlt } from "react-icons/fa";
 
 const certificateFiles = [
-  "8.1 Audit Report_2022-23.pdf",
-  "9.1 Annual Activity Report 2022-23.pdf",
-  "8.2 Audit Report_2023-24.pdf",
-  "9.2 Annual Activity Report 2023-24.pdf",
-  "8.3 Audit Report_2024-25.pdf",
-  "9.3 Annual Activity Report 2024-25.pdf",
+  "Audit Report_2022-23.pdf",
+  "Annual Activity Report 2022-23.pdf",
+  "Audit Report_2023-24.pdf",
+  "Annual Activity Report 2023-24.pdf",
+  "Audit Report_2024-25.pdf",
+  "Annual Activity Report 2024-25.pdf",
 ];
 
 const toTitle = (fileName: string) =>
