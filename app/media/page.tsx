@@ -295,10 +295,9 @@ export default function Media() {
             </div>
 
             {/* Small thumbnails — 5 columns */}
-            <div className="grid grid-cols-4 gap-3 ">
-              {galleryItems.slice(0).map((item, index) => {
-                const realIndex = index + 1;
-                const isActive = featuredIndex === realIndex;
+            <div className="grid grid-cols-4 gap-3">
+              {galleryItems.map((item, index) => {
+                const isActive = featuredIndex === index;
                 return (
                   <motion.div
                     key={index}
@@ -311,11 +310,11 @@ export default function Media() {
                         ? "ring-2 ring-[var(--color-primary)] ring-offset-2 scale-[0.96]"
                         : "hover:scale-[0.96] hover:ring-1 hover:ring-gray-300 hover:ring-offset-1"
                     }`}
-                    onClick={() => setFeaturedIndex(realIndex)}
+                    onClick={() => setFeaturedIndex(index)}
                   >
                     <div className="relative w-full h-[60px] sm:h-[110px]">
                       <Image src={item.img}
-                        alt={`Press ${realIndex + 1}`}
+                        alt={`Press ${index + 1}`}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                       {/* Active tint */}
@@ -441,9 +440,8 @@ export default function Media() {
 
             {/* Small thumbnails — 5 columns */}
             <div className="grid grid-cols-4 gap-3 ">
-              {galleryItems.slice(0).map((item, index) => {
-                const realIndex = index + 1;
-                const isActive = featuredIndex === realIndex;
+              {galleryItems.map((item, index) => {
+                const isActive = featuredIndex === index;
                 return (
                   <motion.div
                     key={index}
@@ -456,11 +454,11 @@ export default function Media() {
                         ? "ring-2 ring-[var(--color-primary)] ring-offset-2 scale-[0.96]"
                         : "hover:scale-[0.96] hover:ring-1 hover:ring-gray-300 hover:ring-offset-1"
                     }`}
-                    onClick={() => setFeaturedIndex(realIndex)}
+                    onClick={() => setFeaturedIndex(index)}
                   >
                     <div className="relative w-full h-[60px] sm:h-[110px]">
                       <Image src={item.img}
-                        alt={`Press ${realIndex + 1}`}
+                        alt={`Press ${index + 1}`}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={75} />
                       {/* Active tint */}
