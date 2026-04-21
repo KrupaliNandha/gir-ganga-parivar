@@ -11,6 +11,7 @@ export default function Slider() {
     "/logos/DML_GROUP.png",
     "/logos/Emipro_Technologies_Pvt_Ltd.png",
     "/logos/Four_square.png",
+    "/logos/PGVCL.png",
     "/logos/GETCO.png",
     "/logos/GOPAL_SNACKS_LTD.png",
     "/logos/KSP_Auto_Forge_Pvt_Ltd.png",
@@ -20,10 +21,21 @@ export default function Slider() {
     "/logos/ORBIT_BEARING_PVT_LTD.png",
     "/logos/RMC.png",
     "/logos/ROTECH.png",
+    "/logos/UGVCL.png",
+    "/logos/RAJAN_TECHNOFORGE_PVT_LTD.png",
+    "/logos/RAVI_TECHNO_FORGE_PVT_LTD.png",
+    "/logos/RBA.png",
+    "/logos/ROLEX_RINGS_LTD.png",
+    "/logos/SHAKTIMAN.png",
+    "/logos/SHREE_GIRIRAJ_HOSPITAL.png",
+    "/logos/TURBO_BEARINGS_PVT_LTD.png",
+    "/logos/UNITY_CEMENT_PVT_LTD.png",
+    "/logos/VERSHIL_PUMP_PVT_LTD.png",
+    "/logos/DECORA_GROUP.png",
   ];
 
   return (
-    <div className="container section-padding w-full overflow-hidden">
+    <div className=" section-padding w-full overflow-hidden bg-[var(--color-tertiary)] py-20">
       <div>
         <h1 className="text-4xl md:text-5xl font-bold text-center text-[var(--color-primary)] mb-4">
           Our Partners

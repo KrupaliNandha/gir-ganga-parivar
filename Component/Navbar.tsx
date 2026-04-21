@@ -17,13 +17,17 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // ✅ FIX: Separate states for desktop and mobile
   const [desktopMediaOpen, setDesktopMediaOpen] = useState(false);
   const [mobileMediaOpen, setMobileMediaOpen] = useState(false);
+
+  // ✅ NEW: Separate states for Our Work dropdown
+  const [desktopWorkOpen, setDesktopWorkOpen] = useState(false);
+  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
 
   const [scrolled, setScrolled] = useState(false);
 
   const mediaRef = useRef<HTMLLIElement>(null);
+  const workRef = useRef<HTMLLIElement>(null); // ✅ NEW ref for Our Work
 
   const isActive = (path: string) => pathname === path;
   const isWorkActive = pathname.startsWith("/Our-Work");
@@ -35,6 +39,8 @@ export default function Navbar() {
     const handle = (e: MouseEvent) => {
       if (mediaRef.current && !mediaRef.current.contains(e.target as Node))
         setDesktopMediaOpen(false);
+      if (workRef.current && !workRef.current.contains(e.target as Node))
+        setDesktopWorkOpen(false);
     };
     document.addEventListener("mousedown", handle);
     return () => document.removeEventListener("mousedown", handle);
@@ -53,8 +59,8 @@ export default function Navbar() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
-      // ✅ Reset mobile dropdowns when menu closes
       setMobileMediaOpen(false);
+      setMobileWorkOpen(false); // ✅ Reset on close
     }
     return () => {
       document.body.style.overflow = "auto";
@@ -181,22 +187,21 @@ export default function Navbar() {
       >
         <div className="max-w-full mx-auto px-6 lg:px-12 flex items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex flex-col items-center py-3 "
-          >
-            <Image src="/image/logo.png"
+          <Link href="/" className="flex flex-col items-center py-3">
+            <Image
+              src="/image/logo.png"
               alt="Gir Ganga Parivar Trust"
               width={66}
               height={66}
               className="object-contain"
-              priority quality={75} />
-           
-              <span className="block h-px w-4 bg-slate-300" />
-              <span className="text-[8px] font-black tracking-[0.28em] uppercase text-slate-400 whitespace-nowrap">
-                Parivar Trust
-              </span>
-              <span className="block h-px w-4 bg-slate-300" />
+              priority
+              quality={75}
+            />
+            <span className="block h-px w-4 bg-slate-300" />
+            <span className="text-[8px] font-black tracking-[0.28em] uppercase text-slate-400 whitespace-nowrap">
+              Parivar Trust
+            </span>
+            <span className="block h-px w-4 bg-slate-300" />
           </Link>
 
           {/* Desktop Nav links */}
@@ -217,11 +222,50 @@ export default function Navbar() {
               </Link>
             </li>
 
-            <li className="relative group">
-              <Link href="/Our-Work" className={linkCls("/Our-Work")}>
+            {/* ✅ OUR WORK with dropdown */}
+            <li
+              className="relative"
+              ref={workRef}
+              onMouseEnter={() => setDesktopWorkOpen(true)}
+              onMouseLeave={() => setDesktopWorkOpen(false)}
+            >
+              <Link
+                href="/Our-Work"
+                onClick={() => setDesktopWorkOpen(!desktopWorkOpen)}
+                className={`${linkCls(isWorkActive ? "/Our-Work" : "")} gap-1 flex items-center`}
+              >
                 Our Work
-                <span className={underline(isActive("/Our-Work"))} />
+                <FiChevronDown
+                  size={11}
+                  className={`mt-px transition-transform duration-200 ${
+                    desktopWorkOpen ? "rotate-180" : ""
+                  }`}
+                />
+                <span
+                  className={underline(
+                    isWorkActive || desktopWorkOpen,
+                    false,
+                  )}
+                />
               </Link>
+
+              <div className={dropPanel(desktopWorkOpen)}>
+                <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45" />
+                {[
+                  { label: "Our Work", href: "/Our-Work" },
+                  { label: "Checkdam", href: "/check-dam-creat" },
+                  { label: "Borewell Recharge", href: "/borewell-recharge" },
+                ].map(({ label, href }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setDesktopWorkOpen(false)}
+                    className={dropCls(href)}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
             </li>
 
             {/* IMPACT */}
@@ -231,14 +275,6 @@ export default function Navbar() {
                 <span className={underline(isActive("/impact"))} />
               </Link>
             </li>
-
-            {/* REPORTS & PUBLICATIONS
-            <li className="relative group">
-              <Link href="/reports-publications" className={linkCls("/reports-publications")}>
-                REPORTS/PUBLICATIONS
-                <span className={underline(isActive("/reports-publications"))} />
-              </Link>
-            </li> */}
 
             {/* PARTNERS / CSR COLLABORATION */}
             <li className="relative group">
@@ -251,7 +287,7 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* MEDIA ▾ — ✅ uses desktopMediaOpen */}
+            {/* MEDIA ▾ */}
             <li
               className="relative"
               ref={mediaRef}
@@ -260,9 +296,7 @@ export default function Navbar() {
             >
               <Link
                 href="/media"
-                onClick={() => {
-                  setDesktopMediaOpen(!desktopMediaOpen);
-                }}
+                onClick={() => setDesktopMediaOpen(!desktopMediaOpen)}
                 className={`${linkCls(isMediaActive ? "/media" : "")} gap-1 flex items-center`}
               >
                 Media/News
@@ -441,11 +475,14 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
             className="flex flex-col items-center"
           >
-            <Image src="/image/logo.png"
+            <Image
+              src="/image/logo.png"
               alt="Gir Ganga Parivar Trust"
               width={66}
               height={66}
-              className="object-contain" quality={75} />
+              className="object-contain"
+              quality={75}
+            />
             <div className="flex items-center gap-1.5 mt-1">
               <span className="h-px w-4 bg-slate-300 block" />
               <span className="text-[8px] font-black tracking-[0.28em] uppercase text-slate-400">
@@ -509,19 +546,84 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Our Work */}
-          <li>
-            <Link
-              href="/Our-Work"
-              onClick={() => setMenuOpen(false)}
-              className={`block py-3.5 font-bold border-b border-slate-50 tracking-wide ${
-                isActive("/Our-Work")
-                  ? "text-[var(--color-primary)]"
-                  : "text-slate-800"
+          {/* ✅ Our Work with mobile dropdown */}
+          <li className="relative">
+            <div className="flex items-center justify-between w-full py-3.5 border-b border-slate-50">
+              <Link
+                href="/Our-Work"
+                onClick={() => {
+                  setMenuOpen(false);
+                  setMobileWorkOpen(false);
+                }}
+                className={`text-lg font-bold tracking-wide flex-1 ${
+                  isWorkActive
+                    ? "text-[var(--color-primary)]"
+                    : "text-slate-800"
+                }`}
+              >
+                Our Work
+              </Link>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setMobileWorkOpen((prev) => !prev);
+                }}
+                className="pl-4 py-1"
+              >
+                <FiChevronDown
+                  className={`transition-transform duration-300 ${
+                    mobileWorkOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Our Work Dropdown */}
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                mobileWorkOpen ? "max-h-40 py-2" : "max-h-0"
               }`}
             >
-              Our Work{" "}
-            </Link>
+              <ul className="pl-5 space-y-3 border-l-2 border-[var(--color-primary)] mt-1">
+                 <li>
+                  <Link
+                    href="/Our-Work"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMobileWorkOpen(false);
+                    }}
+                    className="text-[15px] font-semibold text-slate-500"
+                  >
+                    Our Work
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/check-dam-creat"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMobileWorkOpen(false);
+                    }}
+                    className="text-[15px] font-semibold text-slate-500"
+                  >
+                    Checkdam
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/borewell-recharge"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setMobileWorkOpen(false);
+                    }}
+                    className="text-[15px] font-semibold text-slate-500"
+                  >
+                    Borewell Recharge
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </li>
 
           {/* Impact */}
@@ -554,12 +656,11 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Media/News — ✅ uses mobileMediaOpen ONLY */}
+          {/* Media/News — uses mobileMediaOpen ONLY */}
           <li className="relative">
             <div className="flex items-center justify-between w-full py-3.5 border-b border-slate-50">
-              {/* ✅ Link for page navigation */}
               <Link
-                href="/media" // 👈 your main page route
+                href="/media"
                 onClick={() => {
                   setMenuOpen(false);
                   setMobileMediaOpen(false);
@@ -572,12 +673,10 @@ export default function Navbar() {
               >
                 Media/News
               </Link>
-
-              {/* ✅ Button for dropdown */}
               <button
                 type="button"
                 onClick={(e) => {
-                  e.stopPropagation(); // 👈 important
+                  e.stopPropagation();
                   setMobileMediaOpen((prev) => !prev);
                 }}
                 className="pl-4 py-1"
@@ -609,7 +708,6 @@ export default function Navbar() {
                     Photos
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="/press-release"
@@ -622,7 +720,6 @@ export default function Navbar() {
                     Press Release
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="/videos"
@@ -635,7 +732,6 @@ export default function Navbar() {
                     Videos
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="/certificates"
